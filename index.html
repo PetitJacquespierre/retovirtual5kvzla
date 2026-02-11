@@ -215,14 +215,14 @@
                         
                         <div class="absolute inset-0 bg-gray-200 flex items-center justify-center">
                             <img id="user-photo" src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?q=80&w=600" 
-                                 class="w-full h-full object-cover opacity-90" alt="Sube tu foto" crossOrigin="anonymous">
+                                 class="w-full h-full object-cover opacity-90" alt="Sube tu foto" crossorigin="anonymous">
                         </div>
 
                         <div class="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-blue-900/90 to-transparent z-10"></div>
 
                         <div class="absolute top-4 left-4 z-20">
-                            <div class="absolute -inset-4 bg-blue-900/90 shadow-sm transform -rotate-12 scale-50 z-0 origin-center" 
-                                 style="border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;"></div>
+                            <div class="absolute inset-0 bg-blue-900/90 shadow-sm transform -rotate-12 scale-75 rounded-full blur-sm z-0" 
+                                 style="width: 120%; height: 120%; top: -10%; left: -10%;"></div>
                             <div class="relative z-10 w-28 drop-shadow-sm">
                                 <img src="image_0.png" class="w-full object-contain filter brightness-110" alt="Logo">
                             </div>
@@ -239,9 +239,11 @@
                             <input type="file" accept="image/*" class="hidden" onchange="loadFile(event)">
                         </label>
                         <button onclick="downloadStory()" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition text-center animate-pulse">
-                            <i class="fa-solid fa-download mr-2"></i> 2. Descargar Historia
+                            <i class="fa-solid fa-download mr-2"></i> 2. Descargar Imagen
                         </button>
-                        <p class="text-xs text-blue-200 text-center mt-1 opacity-70">*Si no descarga, haz Capture de Pantalla.</p>
+                        <p class="text-[10px] text-blue-200 text-center mt-1 opacity-80">
+                            💡 Si no descarga, toma una <strong>Captura de Pantalla</strong>.
+                        </p>
                     </div>
                 </div>
 
@@ -272,29 +274,35 @@
     </section>
 
     <script>
+        // 1. CARGAR FOTO (MÉTODO FileReader - EL SECRETO)
         var loadFile = function(event) { 
-            var output = document.getElementById('user-photo'); 
-            output.src = URL.createObjectURL(event.target.files[0]); 
-            output.onload = function() { URL.revokeObjectURL(output.src) } 
+            var reader = new FileReader();
+            reader.onload = function(){
+                var output = document.getElementById('user-photo');
+                output.src = reader.result; // Esto convierte la imagen a código interno
+            };
+            reader.readAsDataURL(event.target.files[0]);
         };
 
+        // 2. DESCARGAR
         function downloadStory() {
             const element = document.getElementById("photo-frame");
-            // Configuración para evitar errores de seguridad
+            
+            // Opciones especiales para saltar seguridad
             html2canvas(element, { 
-                scale: 2, // Mejor calidad
-                useCORS: true, // Permitir imágenes externas (si el servidor lo permite)
-                allowTaint: false, // NO permitir taint para que toDataURL funcione
-                backgroundColor: null 
+                scale: 2, 
+                useCORS: true, // Permitir cruce de dominios
+                allowTaint: true, // Permitir "manchar" el canvas
+                backgroundColor: null,
+                logging: false
             }).then(canvas => {
                 const link = document.createElement('a'); 
                 link.download = 'mi-historia-reto5k.png'; 
                 link.href = canvas.toDataURL("image/png"); 
                 link.click();
             }).catch(err => { 
-                // Mensaje amigable si falla por seguridad del navegador local
-                alert("⚠️ Para descargar, la página debe estar online.\n\nPor ahora, haz una Captura de Pantalla (Screenshot) que queda igual de bien. 📸"); 
-                console.error(err); 
+                console.error(err);
+                alert("⚠️ Tu navegador protegió la imagen por privacidad.\n\n¡No te preocupes! Haz una CAPTURA DE PANTALLA (Screenshot) y recórtala. Queda perfecta para Instagram. 📸");
             });
         }
     </script>
