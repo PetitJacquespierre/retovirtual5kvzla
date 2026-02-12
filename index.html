@@ -42,7 +42,7 @@
                 <div class="flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
                     <img src="reto virtual 5k logo.jpg" alt="Logo" class="h-16 w-auto object-contain hidden md:block" onerror="this.style.display='none'; document.getElementById('fallback-logo').classList.remove('hidden');">
                     <i id="fallback-logo" class="fa-solid fa-person-running text-3xl text-blue-900 border-2 border-yellow-400 rounded-full p-2 md:hidden"></i>
-                    <span class="font-heading font-extrabold text-xl md:text-2xl text-blue-900 tracking-tight">RETO 5K <span class="text-yellow-500">VENEZUELA</span></span>
+                    <span class="font-heading font-extrabold text-xl md:text-2xl text-blue-900 tracking-tight">RETO VIRTUAL 5K <span class="text-yellow-500">VENEZUELA</span></span>
                 </div>
                 
                 <div class="hidden md:flex space-x-8">
@@ -490,31 +490,31 @@
                 <div class="md:w-2/3 p-8">
                     <form id="registroForm" onsubmit="procesarRegistro(event)">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                            <div><label class="text-xs font-bold text-gray-700">Nombre Completo</label><input type="text" name="nombre" class="w-full border rounded p-2 bg-gray-50" required></div>
-                            <div><label class="text-xs font-bold text-gray-700">Cédula</label><input type="text" name="cedula" class="w-full border rounded p-2 bg-gray-50" required></div>
+                            <div><label class="text-xs font-bold text-gray-700">Nombre Completo</label><input type="text" name="nombre" class="w-full border rounded p-2 bg-gray-50 text-gray-900" required></div>
+                            <div><label class="text-xs font-bold text-gray-700">Cédula</label><input type="text" name="cedula" class="w-full border rounded p-2 bg-gray-50 text-gray-900" required></div>
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                             <div>
                                 <label class="text-xs font-bold text-gray-700">Género</label>
-                                <select name="genero" class="w-full border rounded p-2 bg-gray-50">
+                                <select name="genero" class="w-full border rounded p-2 bg-gray-50 text-gray-900">
                                     <option value="Femenino">Femenino</option>
                                     <option value="Masculino">Masculino</option>
                                 </select>
                             </div>
-                            <div><label class="text-xs font-bold text-gray-700">Estado</label><select id="estado" name="estado" class="w-full border rounded p-2 bg-gray-50" onchange="cargarCiudades()"><option>Selecciona...</option></select></div>
+                            <div><label class="text-xs font-bold text-gray-700">Estado</label><select id="estado" name="estado" class="w-full border rounded p-2 bg-gray-50 text-gray-900" onchange="cargarCiudades()"><option>Selecciona...</option></select></div>
                         </div>
-                        <div class="mb-4"><label class="text-xs font-bold text-gray-700">Ciudad</label><select id="ciudad" name="ciudad" class="w-full border rounded p-2 bg-gray-50" disabled><option>...</option></select></div>
-                        <div class="mb-4"><label class="text-xs font-bold text-gray-700">Dirección Exacta</label><textarea name="direccion" class="w-full border rounded p-2 bg-gray-50 h-20" placeholder="Ej: Av. Bolívar, Casa 5..."></textarea></div>
-                        <div class="mb-4"><label class="text-xs font-bold text-gray-700">Entrega</label><select name="entrega" class="w-full border rounded p-2 bg-gray-50" required><option value="Retiro en Punto Fijo (Falcón)">Retiro en Punto Fijo (Falcón)</option><option value="Envio Nacional (Mrw, Zoom, Tealca)">Envío Nacional (Cobro Destino)</option></select></div>
+                        <div class="mb-4"><label class="text-xs font-bold text-gray-700">Ciudad</label><select id="ciudad" name="ciudad" class="w-full border rounded p-2 bg-gray-50 text-gray-900" disabled><option>...</option></select></div>
+                        <div class="mb-4"><label class="text-xs font-bold text-gray-700">Dirección Exacta</label><textarea name="direccion" class="w-full border rounded p-2 bg-gray-50 h-20 text-gray-900" placeholder="Ej: Av. Bolívar, Casa 5..."></textarea></div>
+                        <div class="mb-4"><label class="text-xs font-bold text-gray-700">Entrega</label><select name="entrega" class="w-full border rounded p-2 bg-gray-50 text-gray-900" required><option value="Retiro en Punto Fijo (Falcón)">Retiro en Punto Fijo (Falcón)</option><option value="Envio Nacional (Mrw, Zoom, Tealca)">Envío Nacional (Cobro Destino)</option></select></div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                            <div><label class="text-xs font-bold text-gray-700">Correo</label><input type="email" name="email" class="w-full border rounded p-2 bg-gray-50" required></div>
-                            <div><label class="text-xs font-bold text-gray-700">WhatsApp</label><input type="tel" name="telefono" class="w-full border rounded p-2 bg-gray-50" required></div>
+                            <div><label class="text-xs font-bold text-gray-700">Correo</label><input type="email" name="email" class="w-full border rounded p-2 bg-gray-50 text-gray-900" required></div>
+                            <div><label class="text-xs font-bold text-gray-700">WhatsApp</label><input type="tel" name="telefono" class="w-full border rounded p-2 bg-gray-50 text-gray-900" required></div>
                         </div>
                         <h4 class="font-bold text-gray-800 border-b pb-2 mb-4 mt-6">Datos de Pago</h4>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                            <div><label class="text-xs font-bold text-gray-700">Fecha</label><input type="date" name="fecha_pago" class="w-full border rounded p-2 bg-gray-50" required></div>
-                            <div><label class="text-xs font-bold text-gray-700">Referencia</label><input type="text" name="referencia" class="w-full border rounded p-2 bg-gray-50" required placeholder="Últimos dígitos"></div>
-                            <div><label class="text-xs font-bold text-gray-700">Monto</label><select name="monto" class="w-full border rounded p-2 bg-gray-50"><option value="8 USD">8 USD (Preventa)</option><option value="10 USD">10 USD</option></select></div>
+                            <div><label class="text-xs font-bold text-gray-700">Fecha</label><input type="date" name="fecha_pago" class="w-full border rounded p-2 bg-gray-50 text-gray-900" required></div>
+                            <div><label class="text-xs font-bold text-gray-700">Referencia</label><input type="text" name="referencia" class="w-full border rounded p-2 bg-gray-50 text-gray-900" required placeholder="Últimos dígitos"></div>
+                            <div><label class="text-xs font-bold text-gray-700">Monto</label><select name="monto" class="w-full border rounded p-2 bg-gray-50 text-gray-900"><option value="8 USD">8 USD (Preventa)</option><option value="10 USD">10 USD</option></select></div>
                         </div>
                         <div class="mb-6 flex items-start gap-2">
                             <input type="checkbox" required class="mt-1" id="terms">
