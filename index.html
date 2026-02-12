@@ -196,6 +196,8 @@
 
     <section class="py-16 bg-blue-600 relative overflow-hidden text-white" id="experiencia-digital">
         <div class="absolute top-0 left-0 w-full h-full opacity-10" style="background-image: url('https://www.transparenttextures.com/patterns/cubes.png');"></div>
+        <section class="py-16 bg-blue-600 relative overflow-hidden text-white" id="experiencia-digital">
+        <div class="absolute top-0 left-0 w-full h-full opacity-10" style="background-image: url('https://www.transparenttextures.com/patterns/cubes.png');"></div>
         <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Merriweather:wght@900&display=swap" rel="stylesheet">
 
         <div class="max-w-7xl mx-auto px-4 relative z-10">
@@ -220,7 +222,7 @@
 
                         <div class="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-blue-900/90 to-transparent z-10"></div>
 
-                        <div class="absolute top-4 left-4 z-20">
+                        <div class="absolute top-2 left-2 z-20 opacity-70">
                             <div class="absolute inset-1 bg-blue-900/95 shadow-sm transform -rotate-12 scale-90 rounded-full z-0"></div>
                             <div class="relative z-10 w-28 drop-shadow-sm">
                                 <img src="image_0.png" class="w-full object-contain filter brightness-110" alt="Logo">
@@ -308,7 +310,6 @@
 
         // 2. FUNCIÓN LIMPIAR PANTALLA
         function cleanScreen() {
-            // Ocultar todos los elementos con clase 'control-element' y el header
             const controls = document.querySelectorAll('.control-element');
             const header = document.getElementById('header-text');
             const hint = document.getElementById('screenshot-hint');
@@ -316,11 +317,9 @@
             header.style.opacity = '0';
             controls.forEach(el => el.style.opacity = '0');
 
-            // Mostrar aviso rápido de "Haz capture" y quitarlo
             hint.classList.remove('hidden');
             setTimeout(() => { hint.classList.add('hidden'); }, 1000);
 
-            // Restaurar todo después de 5 segundos
             setTimeout(() => {
                 header.style.opacity = '1';
                 controls.forEach(el => el.style.opacity = '1');
