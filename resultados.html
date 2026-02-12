@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados Oficiales - Reto 5K Venezuela</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body { font-family: 'Open Sans', sans-serif; background-color: #f3f4f6; }
+        h1, .font-heading { font-family: 'Montserrat', sans-serif; }
+        /* Barra tricolor superior */
+        .venezuela-gradient { background: linear-gradient(90deg, #FCD116 0%, #003893 50%, #CE1126 100%); height: 6px; width: 100%; position: fixed; top: 0; z-index: 60; }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="venezuela-gradient"></div>
+
+    <nav class="bg-blue-900 shadow-md fixed w-full top-0 z-50 mt-1">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html" class="flex items-center gap-2 text-white hover:text-yellow-400 transition">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span class="font-bold text-sm md:text-base">Volver al Inicio</span>
+                </a>
+                <span class="text-white font-heading font-black tracking-wider text-sm md:text-lg">RESULTADOS <span class="text-yellow-400">2026</span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="pt-28 pb-10 bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h1 class="text-3xl md:text-4xl font-black text-blue-900 mb-2">Tabla de Posiciones 🏆</h1>
+            <p class="text-gray-600 mb-8 max-w-2xl mx-auto">Consulta tus tiempos oficiales. Escribe tu nombre o número de dorsal para encontrarte rápido.</p>
+
+            <div class="max-w-xl mx-auto relative group">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <i class="fa-solid fa-magnifying-glass text-gray-400 group-focus-within:text-blue-600 transition"></i>
+                </div>
+                <input type="text" id="searchInput" onkeyup="filtrarResultados()" 
+                       class="block w-full pl-11 pr-4 py-4 border-2 border-gray-200 rounded-full leading-5 bg-gray-50 placeholder-gray-400 focus:outline-none focus:ring-0 focus:border-blue-600 transition shadow-sm text-lg" 
+                       placeholder="Buscar por Nombre, Dorsal o Ciudad...">
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-2 md:px-4 py-8">
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Pos</th>
+                            <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Dorsal</th>
+                            <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Corredor</th>
+                            <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider hidden md:table-cell">Ubicación</th>
+                            <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider hidden sm:table-cell">Categoría</th>
+                            <th scope="col" class="px-6 py-4 text-right text-xs font-bold text-gray-500 uppercase tracking-wider">Tiempo</th>
+                            <th scope="col" class="px-6 py-4 text-right text-xs font-bold text-gray-500 uppercase tracking-wider hidden md:table-cell">Ritmo</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-100" id="tabla-cuerpo">
+                        </tbody>
+                </table>
+            </div>
+            
+            <div id="no-results" class="hidden text-center py-16 text-gray-400">
+                <i class="fa-regular fa-face-frown-open text-5xl mb-3 opacity-50"></i>
+                <p class="text-lg">No encontramos a ese corredor.</p>
+                <button onclick="document.getElementById('searchInput').value=''; filtrarResultados();" class="mt-4 text-blue-600 font-bold hover:underline">Ver todos</button>
+            </div>
+        </div>
+        
+        <div class="text-center mt-8 text-xs text-gray-400">
+            * Los tiempos son verificados manualmente por el comité organizador.<br>
+            Última actualización: 15 de Marzo, 2026.
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // 1. BASE DE DATOS (AQUÍ PEGAREMOS TU EXCEL)
+        // ==========================================
+        const corredores = [
+            // EJEMPLOS DE PRUEBA:
+            { pos: 1,  bib: "020", nombre: "Carlos Pérez",    ciudad: "Caracas",    cat: "M 20-29", tiempo: "18:45", ritmo: "3:45/km" },
+            { pos: 2,  bib: "104", nombre: "María Rodriguez", ciudad: "Maracaibo",  cat: "F 30-39", tiempo: "19:10", ritmo: "3:50/km" },
+            { pos: 3,  bib: "055", nombre: "Pedro Castillo",  ciudad: "Valencia",   cat: "M 40-49", tiempo: "20:05", ritmo: "4:01/km" },
+            { pos: 4,  bib: "089", nombre: "Ana Gómez",       ciudad: "Barquisimeto", cat: "F 20-29", tiempo: "21:30", ritmo: "4:18/km" },
+            { pos: 5,  bib: "012", nombre: "Luis Silva",      ciudad: "Punto Fijo", cat: "M 30-39", tiempo: "22:15", ritmo: "4:27/km" },
+            { pos: 6,  bib: "110", nombre: "Elena Torres",    ciudad: "Mérida",     cat: "F 40-49", tiempo: "23:00", ritmo: "4:36/km" },
+            { pos: 7,  bib: "005", nombre: "José Gregorio",   ciudad: "Coro",       cat: "M 50+",   tiempo: "24:10", ritmo: "4:50/km" },
+            { pos: 8,  bib: "033", nombre: "Tu Nombre",       ciudad: "Caracas",    cat: "M 30-39", tiempo: "25:45", ritmo: "5:09/km" },
+        ];
+
+        // ==========================================
+        // 2. FUNCIÓN PARA DIBUJAR LA TABLA
+        // ==========================================
+        const tbody = document.getElementById('tabla-cuerpo');
+
+        function renderizarTabla(data) {
+            tbody.innerHTML = '';
+            
+            if(data.length === 0) {
+                document.getElementById('no-results').classList.remove('hidden');
+                return;
+            } else {
+                document.getElementById('no-results').classList.add('hidden');
+            }
+
+            data.forEach(c => {
+                // Lógica para Medallas (Oro, Plata, Bronce)
+                let rankDisplay = `<span class="font-bold text-gray-600 w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full text-xs">${c.pos}</span>`;
+                
+                if(c.pos === 1) rankDisplay = `<span class="w-8 h-8 flex items-center justify-center bg-yellow-100 text-yellow-700 rounded-full text-lg shadow-sm">🥇</span>`;
+                if(c.pos === 2) rankDisplay = `<span class="w-8 h-8 flex items-center justify-center bg-gray-200 text-gray-700 rounded-full text-lg shadow-sm">🥈</span>`;
+                if(c.pos === 3) rankDisplay = `<span class="w-8 h-8 flex items-center justify-center bg-orange-100 text-orange-800 rounded-full text-lg shadow-sm">🥉</span>`;
+
+                // Construcción de la fila
+                const row = `
+                    <tr class="hover:bg-blue-50 transition border-b border-gray-100 group">
+                        <td class="px-6 py-4 whitespace-nowrap">${rankDisplay}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-mono group-hover:text-blue-600 font-bold">#${c.bib}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm font-bold text-gray-900 group-hover:text-blue-800">${c.nombre}</div>
+                            <div class="text-xs text-gray-400 md:hidden">${c.ciudad}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 hidden md:table-cell"><i class="fa-solid fa-location-dot text-gray-300 mr-1"></i> ${c.ciudad}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 hidden sm:table-cell"><span class="bg-gray-100 px-2 py-1 rounded text-xs font-bold text-gray-600">${c.cat}</span></td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-black text-blue-900 text-right group-hover:text-blue-600">${c.tiempo}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-right font-mono hidden md:table-cell">${c.ritmo}</td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            });
+        }
+
+        // ==========================================
+        // 3. FUNCIÓN DE BÚSQUEDA (FILTRO)
+        // ==========================================
+        function filtrarResultados() {
+            const texto = document.getElementById('searchInput').value.toLowerCase();
+            const filtrados = corredores.filter(c => 
+                c.nombre.toLowerCase().includes(texto) || 
+                c.bib.includes(texto) ||
+                c.ciudad.toLowerCase().includes(texto)
+            );
+            renderizarTabla(filtrados);
+        }
+
+        // Carga inicial
+        renderizarTabla(corredores);
+    </script>
+</body>
+</html>
