@@ -36,47 +36,38 @@
 
     <div class="venezuela-gradient"></div>
 
-    <nav class="bg-white shadow-md fixed w-full top-0 z-50 mt-1 transition-all duration-300" id="navbar">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <div class="flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
-                    <img src="Logo positivo.png" alt="Logo" class="h-16 w-auto object-contain hidden md:block" onerror="this.style.display='none'; document.getElementById('fallback-logo').classList.remove('hidden');">
-                    <i id="fallback-logo" class="fa-solid fa-person-running text-3xl text-blue-900 border-2 border-yellow-400 rounded-full p-2 md:hidden"></i>
-                    <span class="font-heading font-extrabold text-xl md:text-2xl text-blue-900 tracking-tight">RETO VIRTUAL 5K <span class="text-yellow-500">VENEZUELA</span></span>
-                </div>
-                
-                <div class="hidden md:flex space-x-8 items-center">
-                    <a href="#info" class="text-gray-700 hover:text-red-600 font-semibold transition">El Reto</a>
-                    <a href="#preparacion-ia" class="text-purple-600 font-bold hover:opacity-80 transition">Preparación IA ✨</a>
-                    
-                    <a href="#" onclick="alert('🚫 ¡Aún no es hora!\n\nLos Resultados Oficiales estarán disponibles aquí al finalizar el evento (15 de Marzo). \n\n¡Prepárate para correr! 🏃‍♂️💨')" 
-                       class="text-gray-400 font-bold cursor-not-allowed opacity-60 flex items-center gap-1 transition transform -translate-y-0.5">
-                        <i class="fa-solid fa-lock text-xs"></i> Resultados
-                    </a>
+    <nav class="bg-[#003893] shadow-md fixed w-full top-0 z-50 mt-1 transition-all duration-300" id="navbar">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-20">
+      <div class="flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+        <img src="image_0.png" alt="Logo"
+             class="h-24 w-auto object-contain hidden md:block"
+             onerror="this.style.display='none'; document.getElementById('fallback-logo').classList.remove('hidden');">
+        <i id="fallback-logo"
+           class="fa-solid fa-person-running text-3xl text-blue-900 border-2 border-yellow-400 rounded-full p-2 md:hidden"></i>
 
-                    <a href="#precios" class="text-gray-700 hover:text-red-600 font-semibold transition">Precios</a>
-                    <a href="#registro" class="bg-blue-900 text-white px-5 py-2 rounded-full font-bold hover:bg-blue-800 transition shadow-lg transform hover:-translate-y-0.5">Inscribirse</a>
-                </div>
+        <span class="font-heading font-extrabold text-xl md:text-2xl text-white tracking-tight">
+          RETO VIRTUAL 5K <span class="text-yellow-400">VENEZUELA</span>
+        </span>
+      </div>
 
-                <div class="md:hidden">
-                    <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="text-blue-900 focus:outline-none"><i class="fa-solid fa-bars text-2xl"></i></button>
-                </div>
-            </div>
-        </div>
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200 absolute w-full shadow-xl">
-            <a href="#info" class="block py-4 px-6 text-gray-700 hover:bg-gray-50 border-b border-gray-100">El Reto</a>
-            
-            <a href="#preparacion-ia" class="block py-4 px-6 text-purple-600 font-bold hover:bg-gray-50 border-b border-gray-100">Preparación IA ✨</a>
-            
-            <a href="#" onclick="alert('🚫 ¡Aún no es hora!\n\nLos Resultados Oficiales estarán disponibles el 15 de Marzo. 🏁')" 
-   class="block py-4 px-6 text-gray-400 font-bold bg-gray-50 border-b border-gray-100 cursor-not-allowed">
-    <i class="fa-solid fa-lock mr-2"></i> Resultados (Próximamente)
-            </a>
+      <!-- Menú desktop -->
+      <div class="hidden md:flex space-x-8 items-center">
+        <a href="#info" class="text-white hover:text-yellow-300 font-semibold transition">El Reto</a>
+        <a href="#preparacion-ia" class="text-yellow-300 font-bold hover:opacity-80 transition">Preparación IA</a>
+        <a href="#" onclick="alert('Aún no es hora! Resultados Oficiales estarán disponibles aquí al finalizar el evento (15 de Marzo). ¡Prepárate para correr!')"
+           class="text-gray-300 font-bold cursor-not-allowed opacity-60 flex items-center gap-1 transition transform -translate-y-0.5">
+          <i class="fa-solid fa-lock text-xs"></i> Resultados
+        </a>
+        <a href="#precios" class="text-white hover:text-yellow-300 font-semibold transition">Precios</a>
+        <a href="#registro" class="bg-yellow-400 text-blue-900 px-5 py-2 rounded-full font-bold hover:bg-yellow-300 transition shadow-lg transform hover:-translate-y-0.5">
+          Inscribirse
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
 
-            <a href="#precios" class="block py-4 px-6 text-gray-700 hover:bg-gray-50 border-b border-gray-100">Precios</a>
-            <a href="#registro" class="block py-4 px-6 text-red-600 font-bold hover:bg-gray-50">Inscribirse Ahora</a>
-        </div>
-    </nav>
 
     <section id="hero-carousel" class="relative h-screen text-white overflow-hidden">
         <div class="carousel-item absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-100 z-20" style="background: linear-gradient(rgba(0, 30, 80, 0.6), rgba(0, 30, 80, 0.7)), url('https://images.unsplash.com/photo-1552674605-db6ffd4facb5?q=80&w=1920') center/cover no-repeat fixed;">
@@ -360,9 +351,12 @@
                 <div class="md:col-span-1 bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
                     <div id="form-entreno" class="space-y-4">
                         <label class="block font-bold text-gray-700 text-sm">Nivel</label>
-                        <select id="ai-level" class="w-full border rounded p-2 text-sm bg-gray-50"><option>Principiante</option><option>Intermedio</option><option>Avanzado</option></select>
+                        <select id="ai-level"
+  class="w-full border rounded p-2 text-sm bg-white text-gray-900">
+<option>Principiante</option><option>Intermedio</option><option>Avanzado</option></select>
                         <label class="block font-bold text-gray-700 text-sm">Días/Semana</label>
-                        <select id="ai-days" class="w-full border rounded p-2 text-sm bg-gray-50"><option>3 días</option><option>4 días</option><option>5 días</option></select>
+                        <select id="ai-days"
+  			class="w-full border rounded p-2 text-sm bg-white text-gray-900"><option>3 días</option><option>4 días</option><option>5 días</option></select>
                         <button onclick="callAI('entreno')" id="btn-entreno" class="w-full ai-gradient text-white font-bold py-3 rounded-lg mt-4 hover:shadow-lg transition">Generar Plan</button>
                     </div>
                     <div id="form-nutricion" class="space-y-4 hidden">
