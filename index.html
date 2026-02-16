@@ -134,19 +134,34 @@
         </div>
     </section>
 
-    <section class="bg-blue-900 py-8 relative overflow-hidden border-t-4 border-yellow-400">
-        <div class="max-w-7xl mx-auto px-4 relative z-10 flex flex-col md:flex-row items-center justify-center gap-8 text-white">
-            <div class="text-center md:text-left">
-                <h3 class="text-xl font-bold uppercase tracking-widest text-yellow-400">Cierre de Preventa</h3>
-                <p class="text-sm opacity-80">¡Precio especial $8 hasta el 28 de Febrero!</p>
+    <div class="bg-blue-900 py-6 px-4">
+    <div class="max-w-4xl mx-auto text-center text-white">
+        
+        <h3 class="text-2xl font-black text-yellow-400 uppercase tracking-widest mb-2">
+            🚀 INICIO DEL RETO
+        </h3>
+        
+        <p class="text-sm md:text-base text-gray-200 mb-6">
+            Preventa Agotada. <span class="font-bold text-white">¡Quedan solo 30 Medallas!</span>
+        </p>
+
+        <div class="flex justify-center gap-4 text-center">
+            <div class="bg-blue-800/50 border border-blue-700 rounded-lg p-3 w-20 backdrop-blur-sm">
+                <span id="days" class="block text-3xl font-bold font-mono">00</span>
+                <span class="text-[10px] uppercase tracking-wide opacity-75">Días</span>
             </div>
-            <div class="flex gap-4 text-center">
-                <div class="bg-white/10 backdrop-blur-md rounded-lg p-3 w-20 border border-white/20"><span class="block text-2xl font-black font-heading" id="days">00</span><span class="text-xs uppercase">Días</span></div>
-                <div class="bg-white/10 backdrop-blur-md rounded-lg p-3 w-20 border border-white/20"><span class="block text-2xl font-black font-heading" id="hours">00</span><span class="text-xs uppercase">Horas</span></div>
-                <div class="bg-white/10 backdrop-blur-md rounded-lg p-3 w-20 border border-white/20"><span class="block text-2xl font-black font-heading" id="minutes">00</span><span class="text-xs uppercase">Min</span></div>
+            <div class="bg-blue-800/50 border border-blue-700 rounded-lg p-3 w-20 backdrop-blur-sm">
+                <span id="hours" class="block text-3xl font-bold font-mono">00</span>
+                <span class="text-[10px] uppercase tracking-wide opacity-75">Horas</span>
+            </div>
+            <div class="bg-blue-800/50 border border-blue-700 rounded-lg p-3 w-20 backdrop-blur-sm">
+                <span id="minutes" class="block text-3xl font-bold font-mono">00</span>
+                <span class="text-[10px] uppercase tracking-wide opacity-75">Min</span>
             </div>
         </div>
-    </section>
+
+    </div>
+</div>
 
     <section id="info" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -419,32 +434,64 @@
     </section>
 
     <section id="precios" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="font-heading text-3xl font-bold text-gray-900">Planes de Inscripción</h2>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="font-heading text-3xl font-bold text-gray-900">Planes de Inscripción</h2>
+            <p class="mt-2 text-lg text-gray-600">¡La Etapa 1 voló! 🚀 Asegura tu cupo en la Etapa General.</p>
+        </div>
+        
+        <div class="flex flex-col md:flex-row justify-center gap-8 items-center md:items-stretch">
+            
+            <div class="w-full max-w-sm bg-gray-50 rounded-2xl shadow-inner border border-gray-200 p-8 relative opacity-75 grayscale-[0.5] order-2 md:order-1">
+                 <div class="bg-red-600 text-white text-xs font-bold px-4 py-1 absolute top-0 left-1/2 transform -translate-x-1/2 rounded-b-lg uppercase shadow-sm z-10">
+                    🚫 AGOTADA
+                </div>
+                
+                <h3 class="font-bold text-2xl text-gray-500 mt-6">Preventa</h3>
+                <p class="text-gray-400 font-bold text-sm mt-1">Etapa Finalizada</p>
+                
+                <div class="my-6 text-5xl font-black text-gray-400 line-through decoration-red-500 decoration-4">
+                    $8 <span class="text-lg text-gray-400 font-medium no-underline">USD</span>
+                </div>
+                
+                <ul class="space-y-3 text-sm text-gray-500 mb-8">
+                     <li class="flex items-center"><i class="fa-solid fa-check text-gray-400 mr-2"></i>Medalla Física</li>
+                     <li class="flex items-center"><i class="fa-solid fa-check text-gray-400 mr-2"></i>Dorsal + IA Pack</li>
+                </ul>
+                
+                <button disabled class="block w-full py-3 bg-gray-200 text-gray-500 font-bold text-center rounded-lg cursor-not-allowed">
+                    Cupos Agotados
+                </button>
             </div>
-            <div class="flex flex-col md:flex-row justify-center gap-8">
-                <div class="w-full max-w-sm bg-white rounded-2xl shadow-xl border-4 border-blue-500 p-8 relative transition transform hover:-translate-y-1">
-                    <div class="bg-blue-600 text-white text-xs font-bold px-3 py-1 absolute top-0 left-1/2 transform -translate-x-1/2 rounded-b-lg uppercase animate-pulse">¡SOLO QUEDAN 4! 🔥</div>
-                    <h3 class="font-bold text-2xl text-gray-800 mt-4">Preventa Especial</h3>
-                    <p class="text-blue-600 font-bold text-sm mt-1">Precio Promocional</p>
-                    <div class="my-6 text-5xl font-black text-blue-900">$8 <span class="text-lg text-gray-500 font-medium">USD</span></div>
-                    <ul class="space-y-2 text-sm text-gray-600 mb-8">
-                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i>Medalla Física</li>
-                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i>Diploma + Dorsal + IA Pack</li>
-                    </ul>
-                    <a href="#registro" class="block w-full py-3 bg-blue-600 text-white font-bold text-center rounded-lg hover:bg-blue-700 transition">Elegir Preventa</a>
+
+            <div class="w-full max-w-sm bg-white rounded-2xl shadow-2xl border-4 border-blue-600 p-8 relative transition transform hover:-translate-y-2 scale-105 z-20 order-1 md:order-2">
+                <div class="bg-green-600 text-white text-xs font-bold px-6 py-1 absolute top-0 left-1/2 transform -translate-x-1/2 rounded-b-lg uppercase animate-pulse shadow-md">
+                    🔥 ¡ABIERTO AHORA!
                 </div>
 
-                <div class="w-full max-w-sm bg-gray-50 rounded-2xl shadow-md border border-gray-200 p-8 relative opacity-60">
-                    <h3 class="font-bold text-2xl text-gray-400 mt-4 uppercase">General</h3>
-                    <p class="text-gray-400 font-bold text-sm mt-1">Siguiente Fase</p>
-                    <div class="my-6 text-5xl font-black text-gray-300">$10 <span class="text-lg text-gray-300 font-medium">USD</span></div>
-                    <button disabled class="block w-full py-3 bg-gray-200 text-gray-400 font-bold text-center rounded-lg cursor-not-allowed italic">Bloqueado</button>
+                <h3 class="font-bold text-2xl text-gray-900 mt-6">Entrada General</h3>
+                <p class="text-blue-600 font-bold text-sm mt-1">¡Quedan 30 Medallas!</p>
+                
+                <div class="my-6 text-6xl font-black text-blue-900">
+                    $10 <span class="text-xl text-gray-600 font-bold">USD</span>
                 </div>
+                
+                <ul class="space-y-3 text-base text-gray-700 mb-8 font-medium">
+                    <li class="flex items-center"><i class="fa-solid fa-circle-check text-green-500 mr-2"></i>Medalla Física (Asegurada)</li>
+                    <li class="flex items-center"><i class="fa-solid fa-circle-check text-green-500 mr-2"></i>Diploma de Finalista</li>
+                    <li class="flex items-center"><i class="fa-solid fa-circle-check text-green-500 mr-2"></i>Dorsal Digital + IA Pack</li>
+                </ul>
+                
+                <a href="#registro" class="block w-full py-4 bg-blue-600 text-white font-extrabold text-lg text-center rounded-xl hover:bg-blue-700 hover:shadow-lg transition duration-300">
+                    ¡QUIERO MI MEDALLA! 🏅
+                </a>
+                
+                <p class="text-center text-xs text-gray-400 mt-3">Aceptamos Pago Móvil (Tasa BCV) y Zelle</p>
             </div>
+
         </div>
-    </section>
+    </div>
+</section>
 
     <section id="registro" class="py-20 bg-blue-900 relative">
         <div class="max-w-5xl mx-auto px-4 relative z-10">
@@ -664,7 +711,8 @@
         const scriptURL = 'https://script.google.com/macros/s/AKfycbyyhFWu9ncCAj-j-CEWeQJb1Rp3vGcnKkbv1JSCHMDJyOfErE4hY1uwYqsZ2w9YWDUpkA/exec'; 
 
         // 1. COUNTDOWN
-        const countDownDate = new Date("Feb 28, 2026 23:59:59").getTime();
+        // Configura la fecha para el 6 DE MARZO DE 2026 (Inicio del evento)
+const countDownDate = new Date("Mar 6, 2026 00:00:00").getTime();
         setInterval(function() {
             const now = new Date().getTime();
             const distance = countDownDate - now;
