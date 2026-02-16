@@ -470,15 +470,22 @@
                         </div>
                     </div>
                     <div class="bg-blue-50 p-5 rounded-2xl border-2 border-blue-500 shadow-lg transform hover:scale-105 transition duration-300 mb-4 relative overflow-hidden">
-                        <div class="absolute -right-6 -top-2 bg-red-600 text-white text-[10px] font-bold py-1 px-8 rotate-45 shadow-sm animate-pulse">¡SOLO QUEDAN 4!</div>
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="text-xs font-bold text-blue-800 uppercase">Preventa:</span>
-                            <span class="text-2xl font-black text-blue-600">$8 <span class="text-xs font-normal">USD</span></span>
-                        </div>
-                        <div class="flex justify-between items-center opacity-50 border-t border-blue-100 pt-2">
-                            <span class="text-[10px] font-bold text-gray-500 uppercase">Próximo precio:</span>
-                            <span class="text-lg font-bold text-gray-400">$10 USD</span>
-                        </div>
+                        <div class="absolute -right-6 -top-2 bg-orange-600 text-white text-[10px] font-bold py-1 px-8 rotate-45 shadow-sm animate-pulse">
+    ¡ETAPA 2!
+</div>
+
+<div class="flex justify-between items-center mb-2">
+    <div class="flex flex-col">
+        <span class="text-xs font-bold text-blue-800 uppercase">Entrada General:</span>
+        <span class="text-[10px] text-green-600 font-semibold">¡Cupos Disponibles!</span>
+    </div>
+    <span class="text-3xl font-black text-blue-600">$10 <span class="text-xs font-normal">USD</span></span>
+</div>
+
+<div class="flex justify-between items-center opacity-60 border-t border-blue-100 pt-2">
+    <span class="text-[10px] font-bold text-red-500 uppercase">Preventa (Agotada):</span>
+    <span class="text-sm font-bold text-gray-400 line-through decoration-red-500">$8 USD</span>
+</div>
                     </div>
                 </div>
 
@@ -509,7 +516,7 @@
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                             <div><label class="text-xs font-bold text-gray-700">Fecha</label><input type="date" name="fecha_pago" class="w-full border rounded p-2 bg-gray-50 text-gray-900" required></div>
                             <div><label class="text-xs font-bold text-gray-700">Referencia</label><input type="text" name="referencia" class="w-full border rounded p-2 bg-gray-50 text-gray-900" required placeholder="Últimos dígitos"></div>
-                            <div><label class="text-xs font-bold text-gray-700">Monto</label><select name="monto" class="w-full border rounded p-2 bg-gray-50 text-gray-900"><option value="8 USD">8 USD (Preventa)</option><option value="10 USD">10 USD</option></select></div>
+                            <div><label class="text-xs font-bold text-gray-700">Monto</label><select name="monto" class="w-full border rounded p-2 bg-gray-50 text-gray-900"><option value="10 USD">10 USD</option></select></div>
                         </div>
                         <div class="mb-6 flex items-start gap-2">
                             <input type="checkbox" required class="mt-1" id="terms">
