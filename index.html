@@ -30,6 +30,15 @@
         .tab-active { border-bottom: 3px solid #667eea; color: #4c51bf; background-color: #f3f4f6; }
         .tab-inactive { border-bottom: 3px solid transparent; color: #718096; }
         .tab-inactive:hover { color: #4c51bf; }
+
+/* Efecto de Levitación Cyberpunk */
+        @keyframes levitate {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+        .animate-float {
+            animation: levitate 4s ease-in-out infinite;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
@@ -432,16 +441,19 @@
             </div>
             
             <div class="md:w-1/2 flex justify-center relative z-10">
-                <div class="relative w-64 h-64 md:w-80 md:h-80 flex items-center justify-center">
-                    <div class="absolute inset-0 rounded-full border-4 border-dashed border-yellow-400/50 shadow-[0_0_30px_rgba(250,204,21,0.3)] animate-[spin_10s_linear_infinite]"></div>
-                    
-                    <i class="fa-solid fa-puzzle-piece text-7xl md:text-9xl text-yellow-400 opacity-80 animate-pulse drop-shadow-[0_0_15px_rgba(250,204,21,0.8)]"></i>
-                    
-                    <div class="absolute bottom-4 bg-black/80 px-4 py-2 rounded border border-yellow-500 text-xs md:text-sm text-yellow-400 font-mono flex items-center gap-2 shadow-[0_0_10px_rgba(250,204,21,0.5)]">
-                        <i class="fa-solid fa-circle-notch fa-spin"></i> DESENCRIPTANDO DISEÑO...
-                    </div>
-                </div>
-            </div>
+    <div class="relative w-64 h-64 md:w-80 md:h-80 flex items-center justify-center group">
+        
+        <div class="absolute inset-0 bg-yellow-400 rounded-full blur-3xl opacity-40 animate-pulse group-hover:opacity-60 transition-opacity duration-500"></div>
+        
+        <img src="Medalla1web.png" 
+             alt="Medalla Oficial Reto 5K Acrílico" 
+             class="relative z-20 w-4/5 h-4/5 object-contain drop-shadow-[0_15px_25px_rgba(0,0,0,0.6)] animate-float">
+        
+        <div class="absolute -bottom-2 bg-gradient-to-r from-yellow-400 to-yellow-500 text-blue-900 px-6 py-2 rounded-full text-sm font-bold shadow-xl border-2 border-white z-30 font-heading">
+            PIEZA 1 DE 4 - 2026 🧩
+        </div>
+    </div>
+</div>
             
         </div>
     </div>
