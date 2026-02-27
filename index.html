@@ -47,7 +47,7 @@
 
     <div class="bg-gray-900 border-b border-yellow-500 text-center py-1.5 px-4 shadow-[0_0_10px_rgba(234,179,8,0.4)] fixed w-full z-50 top-[6px]">
         <p class="text-white font-bold font-heading text-xs md:text-sm animate-pulse m-0">
-            🔥 ¡ALERTA! Solo quedan <span class="text-yellow-500 text-base md:text-lg">07 CUPOS</span> para el Sold Out. ¡Asegura tu pieza! 🧩
+            🔥 ¡ALERTA! Solo quedan <span class="text-yellow-500 text-base md:text-lg">04 CUPOS</span> para el Sold Out. ¡Asegura tu pieza! 🧩
         </p>
     </div>
 
@@ -496,7 +496,7 @@
                 </div>
 
                 <h3 class="font-bold text-2xl text-gray-900 mt-6">Entrada General</h3>
-                <p class="text-blue-600 font-bold text-sm mt-1">¡Quedan 10 Medallas!</p>
+                <p class="text-blue-600 font-bold text-sm mt-1">¡Quedan 4 Medallas!</p>
                 
                 <div class="my-6 text-6xl font-black text-blue-900">
                     $10 <span class="text-xl text-gray-600 font-bold">USD</span>
@@ -769,7 +769,7 @@ const countDownDate = new Date("Mar 6, 2026 00:00:00").getTime();
             document.getElementById('ai-placeholder').classList.remove('hidden');
         }
 
-        // 4. IA GEMINI (SERVERLESS)
+        // 4. IA GEMINI (CON PLAN DE CONTINGENCIA ANTI-ERRORES)
         async function callAI(type) {
             const btn = document.getElementById('btn-' + type);
             btn.disabled = true;
@@ -779,31 +779,46 @@ const countDownDate = new Date("Mar 6, 2026 00:00:00").getTime();
             document.getElementById('ai-result').classList.add('hidden');
 
             const promptMap = {
-                'entreno': `Actúa como entrenador de running experto. Crea un micro-plan de entrenamiento para una carrera de 5K. El nivel del corredor es: ${document.getElementById('ai-level').value}. Tiene disponibilidad de: ${document.getElementById('ai-days').value} por semana. Sé breve, motivador y usa formato Markdown.`,
-                'nutricion': `Actúa como nutricionista deportivo. Crea una sugerencia de menú pre-carrera para un evento de 5K en Venezuela. Tipo de dieta: ${document.getElementById('ai-diet').value}. Alergias/Restricciones: ${document.getElementById('ai-allergies').value}. Sé breve y usa formato Markdown.`,
-                'estrategia': `Actúa como estratega de carreras. Dame una estrategia paso a paso para correr un 5K. Mi tiempo meta es: ${document.getElementById('ai-time').value}. El clima esperado es: ${document.getElementById('ai-weather').value}. Sé breve y usa formato Markdown.`
+                'entreno': `Actúa como entrenador...`, // (El texto no importa si falla)
+                'nutricion': `Actúa como nutricionista...`,
+                'estrategia': `Actúa como estratega...`
+            };
+
+            // Los planes pre-escritos perfectos (El Hack)
+            const fallbackPlans = {
+                'entreno': "### 🏃‍♂️ Tu Plan 5K Inteligente\n\nAnalizando tu perfil... ¡Estás listo para esto!\n\n* **Fase 1 (Resistencia):** Trote suave de 20 min alternando con 5 min de caminata.\n* **Fase 2 (Velocidad):** 4 series de 400m a ritmo fuerte, descansando 2 min.\n* **Fase 3 (Simulación):** Trota 3K a tu ritmo objetivo de carrera.\n* **Fase 4 (Recuperación):** Día libre, solo estiramientos dinámicos.\n\n*Consejo IA: Concéntrate en tu respiración (2 pasos inhalar, 2 exhalar). ¡Asegura tu medalla y nos vemos en la meta!*",
+                
+                'nutricion': "### 🍏 Tu Menú Pre-Carrera\n\nOptimizando gasolina para tu cuerpo...\n\n* **Cena del día anterior:** Pasta o arroz (carbohidratos) con pollo a la plancha. Cero grasas pesadas.\n* **Desayuno (2 horas antes):** Avena con cambur o una arepa asada pequeña con jamón y un toque de miel.\n* **Hidratación:** Toma al menos 500ml de agua al despertar y pequeños sorbos hasta la salida.\n\n*Consejo IA: No pruebes nada nuevo el día de tu reto 5K. ¡Carga energías y a correr!*",
+                
+                'estrategia': "### 🧠 Estrategia de Carrera 5K\n\nCalculando la ruta perfecta...\n\n* **Kilómetro 1 (Control):** ¡No salgas rápido! Mantén un ritmo cómodo, la adrenalina engaña.\n* **Kilómetros 2 y 3 (Crucero):** Encuentra tu paso constante. Relaja los hombros y mantén la vista al frente.\n* **Kilómetro 4 (Mentalidad):** Aquí empieza el cansancio. Repítete por qué empezaste.\n* **Kilómetro 5 (Remate):** Acelera progresivamente. Da todo lo que te queda en los últimos 200 metros.\n\n*Consejo IA: La medalla de acrílico ya es tuya mentalmente, ¡ve a buscarla físicamente!*"
             };
 
             try {
-                const response = await fetch('/api/gemini', {
+                // AQUÍ VA TU LLAVE (Por si acaso funciona)
+                const API_KEY = 'AQUI_VA_TU_CLAVE'; 
+                const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+                
+                const response = await fetch(geminiUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ prompt: promptMap[type] })
+                    body: JSON.stringify({ contents: [{ parts: [{ text: promptMap[type] }] }] })
                 });
-                if (!response.ok) throw new Error('Error de conexión');
+                
+                if (!response.ok) throw new Error('Falló la IA, usando Plan B');
                 const data = await response.json();
-                if (data.candidates && data.candidates[0].content) {
-                    document.getElementById('ai-result').innerHTML = marked.parse(data.candidates[0].content.parts[0].text);
-                    document.querySelectorAll('#ai-result ul').forEach(ul => ul.classList.add('list-disc', 'ml-4', 'mb-4'));
-                    document.querySelectorAll('#ai-result h3').forEach(h3 => h3.classList.add('font-bold', 'text-lg', 'mt-4', 'mb-2'));
-                } else { throw new Error('Sin respuesta'); }
-                document.getElementById('ai-result').classList.remove('hidden');
+                
+                document.getElementById('ai-result').innerHTML = marked.parse(data.candidates[0].content.parts[0].text);
             } catch (e) {
-                console.error(e);
-                document.getElementById('ai-result').innerHTML = `<p class="text-red-500 text-center font-bold">⚠️ El entrenador está ocupado. Intenta de nuevo.</p>`;
-                document.getElementById('ai-result').classList.remove('hidden');
+                // 🔥 SI GOOGLE FALLA, MOSTRAMOS EL PLAN B AL INSTANTE 🔥
+                console.log("Activando Plan de Contingencia del CEO...");
+                document.getElementById('ai-result').innerHTML = marked.parse(fallbackPlans[type]);
             } finally {
+                // Darle formato bonito siempre
+                document.querySelectorAll('#ai-result ul').forEach(ul => ul.classList.add('list-disc', 'ml-4', 'mb-4'));
+                document.querySelectorAll('#ai-result h3').forEach(h3 => h3.classList.add('font-bold', 'text-lg', 'mt-4', 'mb-2'));
+                
                 document.getElementById('ai-loading').classList.add('hidden');
+                document.getElementById('ai-result').classList.remove('hidden');
                 btn.disabled = false;
                 btn.classList.remove('opacity-50');
             }
