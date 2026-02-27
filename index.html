@@ -769,7 +769,7 @@ const countDownDate = new Date("Mar 6, 2026 00:00:00").getTime();
             document.getElementById('ai-placeholder').classList.remove('hidden');
         }
 
-        // 4. IA GEMINI (CON PLAN DE CONTINGENCIA ANTI-ERRORES)
+        // 4. IA GEMINI (CONEXIÓN REAL DIRECTA + ESCUDO ANTI-COLAPSO)
         async function callAI(type) {
             const btn = document.getElementById('btn-' + type);
             btn.disabled = true;
@@ -779,43 +779,53 @@ const countDownDate = new Date("Mar 6, 2026 00:00:00").getTime();
             document.getElementById('ai-result').classList.add('hidden');
 
             const promptMap = {
-                'entreno': `Actúa como entrenador...`, // (El texto no importa si falla)
-                'nutricion': `Actúa como nutricionista...`,
-                'estrategia': `Actúa como estratega...`
+                'entreno': `Actúa como entrenador de running experto. Crea un micro-plan de entrenamiento para una carrera de 5K. Nivel: ${document.getElementById('ai-level').value}. Días: ${document.getElementById('ai-days').value} por semana. Sé breve (máximo 4 puntos), motivador y usa formato Markdown.`,
+                'nutricion': `Actúa como nutricionista deportivo. Crea menú pre-carrera para 5K en Venezuela. Dieta: ${document.getElementById('ai-diet').value}. Alergias: ${document.getElementById('ai-allergies').value}. Sé breve (máximo 4 puntos) y usa formato Markdown.`,
+                'estrategia': `Actúa como estratega de carreras. Dame estrategia para correr 5K. Tiempo meta: ${document.getElementById('ai-time').value}. Clima: ${document.getElementById('ai-weather').value}. Sé breve (máximo 4 puntos) y usa formato Markdown.`
             };
 
-            // Los planes pre-escritos perfectos (El Hack)
-            const fallbackPlans = {
-                'entreno': "### 🏃‍♂️ Tu Plan 5K Inteligente\n\nAnalizando tu perfil... ¡Estás listo para esto!\n\n* **Fase 1 (Resistencia):** Trote suave de 20 min alternando con 5 min de caminata.\n* **Fase 2 (Velocidad):** 4 series de 400m a ritmo fuerte, descansando 2 min.\n* **Fase 3 (Simulación):** Trota 3K a tu ritmo objetivo de carrera.\n* **Fase 4 (Recuperación):** Día libre, solo estiramientos dinámicos.\n\n*Consejo IA: Concéntrate en tu respiración (2 pasos inhalar, 2 exhalar). ¡Asegura tu medalla y nos vemos en la meta!*",
-                
-                'nutricion': "### 🍏 Tu Menú Pre-Carrera\n\nOptimizando gasolina para tu cuerpo...\n\n* **Cena del día anterior:** Pasta o arroz (carbohidratos) con pollo a la plancha. Cero grasas pesadas.\n* **Desayuno (2 horas antes):** Avena con cambur o una arepa asada pequeña con jamón y un toque de miel.\n* **Hidratación:** Toma al menos 500ml de agua al despertar y pequeños sorbos hasta la salida.\n\n*Consejo IA: No pruebes nada nuevo el día de tu reto 5K. ¡Carga energías y a correr!*",
-                
-                'estrategia': "### 🧠 Estrategia de Carrera 5K\n\nCalculando la ruta perfecta...\n\n* **Kilómetro 1 (Control):** ¡No salgas rápido! Mantén un ritmo cómodo, la adrenalina engaña.\n* **Kilómetros 2 y 3 (Crucero):** Encuentra tu paso constante. Relaja los hombros y mantén la vista al frente.\n* **Kilómetro 4 (Mentalidad):** Aquí empieza el cansancio. Repítete por qué empezaste.\n* **Kilómetro 5 (Remate):** Acelera progresivamente. Da todo lo que te queda en los últimos 200 metros.\n\n*Consejo IA: La medalla de acrílico ya es tuya mentalmente, ¡ve a buscarla físicamente!*"
-            };
+            // 🔥 1. PEGA TU CLAVE DE GEMINI AQUÍ ABAJO ENTRE LAS COMILLAS 🔥
+            const API_KEY = AIzaSyDySGzLlvC0OJ_Z8qnEZUwNy_VBnnOvyes; 
+            
+            const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
             try {
-                // AQUÍ VA TU LLAVE (Por si acaso funciona)
-                const API_KEY = 'AQUI_VA_TU_CLAVE'; 
-                const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
-                
+                // Hacemos la llamada REAL a la Inteligencia Artificial
                 const response = await fetch(geminiUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ contents: [{ parts: [{ text: promptMap[type] }] }] })
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: promptMap[type] }] }],
+                        generationConfig: { maxOutputTokens: 250, temperature: 0.7 } // Hacemos que responda más rápido
+                    })
                 });
                 
-                if (!response.ok) throw new Error('Falló la IA, usando Plan B');
                 const data = await response.json();
+
+                // Si Google nos bloquea por exceso de tráfico (Error 429), saltamos al catch
+                if (!response.ok) {
+                    console.warn("Límite de Google alcanzado o error de API.");
+                    throw new Error('Sobrecarga'); 
+                }
                 
-                document.getElementById('ai-result').innerHTML = marked.parse(data.candidates[0].content.parts[0].text);
-            } catch (e) {
-                // 🔥 SI GOOGLE FALLA, MOSTRAMOS EL PLAN B AL INSTANTE 🔥
-                console.log("Activando Plan de Contingencia del CEO...");
+                // Si todo sale bien, mostramos la IA REAL
+                const iaText = data.candidates[0].content.parts[0].text;
+                document.getElementById('ai-result').innerHTML = marked.parse(iaText);
+
+            } catch (error) {
+                // 🛡️ ESCUDO: Si Google falla por mucho tráfico, el usuario JAMÁS verá un error. Verá esto:
+                console.log("Activando plan de contingencia por alto tráfico...");
+                const fallbackPlans = {
+                    'entreno': "### 🏃‍♂️ Tu Plan 5K Inteligente\n* **Resistencia:** 20 min trote suave.\n* **Velocidad:** 4 series de 400m fuertes.\n* **Simulación:** 3K a ritmo de carrera.\n* **Recuperación:** Estiramientos.\n\n*Nota: Servidor IA saturado, mostrando plan estándar optimizado.*",
+                    'nutricion': "### 🍏 Menú Pre-Carrera\n* **Cena:** Pasta o arroz con pollo a la plancha.\n* **Desayuno:** Avena o arepa pequeña con jamón.\n* **Hidratación:** 500ml de agua al despertar.\n\n*Nota: Servidor IA saturado, mostrando menú estándar optimizado.*",
+                    'estrategia': "### 🧠 Estrategia 5K\n* **Km 1:** Ritmo suave de control.\n* **Km 2-3:** Paso constante.\n* **Km 4:** Mantén la mente fuerte.\n* **Km 5:** ¡Remata con todo!\n\n*Nota: Servidor IA saturado, mostrando estrategia estándar.*"
+                };
                 document.getElementById('ai-result').innerHTML = marked.parse(fallbackPlans[type]);
+
             } finally {
-                // Darle formato bonito siempre
-                document.querySelectorAll('#ai-result ul').forEach(ul => ul.classList.add('list-disc', 'ml-4', 'mb-4'));
-                document.querySelectorAll('#ai-result h3').forEach(h3 => h3.classList.add('font-bold', 'text-lg', 'mt-4', 'mb-2'));
+                // Aplicamos el diseño perfecto de Tailwind a la respuesta (sea real o de respaldo)
+                document.querySelectorAll('#ai-result ul').forEach(ul => ul.classList.add('list-disc', 'ml-4', 'mb-4', 'text-gray-700'));
+                document.querySelectorAll('#ai-result h3').forEach(h3 => h3.classList.add('font-bold', 'text-lg', 'mt-4', 'mb-2', 'text-blue-900'));
                 
                 document.getElementById('ai-loading').classList.add('hidden');
                 document.getElementById('ai-result').classList.remove('hidden');
