@@ -1,15 +1,13 @@
 export default async function handler(req, res) {
-    // 1. Evitamos el bloqueo CORS para que la página pueda hablar con el API
+    // 1. Evitamos el bloqueo CORS
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-    // 2. Si es una petición de pre-vuelo (OPTIONS), respondemos OK rápido
     if (req.method === 'OPTIONS') {
         return res.status(200).end();
     }
 
-    // 3. Solo aceptamos POST reales
     if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Solo se acepta POST' });
     }
@@ -17,15 +15,14 @@ export default async function handler(req, res) {
     try {
         const { prompt } = req.body;
         
-        // 4. Verificamos que Vercel esté leyendo la llave secreta
+        // 2. Leemos tu llave de Vercel
         const apiKey = process.env.GEMINI_API_KEY;
         if (!apiKey) {
-            console.error("CRÍTICO: Vercel no está leyendo la GEMINI_API_KEY");
-            return res.status(500).json({ error: 'Configuración de servidor incompleta (API_KEY missing)' });
+            return res.status(500).json({ error: 'Falta la API Key' });
         }
 
-        // 5. La llamada simplificada a Google
-        const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+        // 3. 🔥 EL CAMBIO MÁGICO: Llamamos a "gemini-pro" que es el modelo estable universal
+        const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`;
         
         const response = await fetch(geminiUrl, {
             method: 'POST',
@@ -42,7 +39,7 @@ export default async function handler(req, res) {
             return res.status(500).json({ error: 'Google rechazó la conexión', detalles: data });
         }
 
-        // 6. Todo salió bien
+        // 4. Todo salió bien
         res.status(200).json(data);
 
     } catch (error) {
