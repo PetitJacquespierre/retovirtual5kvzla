@@ -47,7 +47,7 @@
 
     <div class="bg-gray-900 border-b border-yellow-500 text-center py-1.5 px-4 shadow-[0_0_10px_rgba(234,179,8,0.4)] fixed w-full z-50 top-[6px]">
         <p class="text-white font-bold font-heading text-xs md:text-sm animate-pulse m-0">
-            🔥 ¡ALERTA! Solo quedan <span class="text-yellow-500 text-base md:text-lg">04 CUPOS</span> para el Sold Out. ¡Asegura tu pieza! 🧩
+            🔥 ¡ALERTA! Solo quedan <span class="text-yellow-500 text-base md:text-lg">02 CUPOS</span> para el Sold Out. ¡Asegura tu pieza! 🧩
         </p>
     </div>
 
@@ -496,7 +496,7 @@
                 </div>
 
                 <h3 class="font-bold text-2xl text-gray-900 mt-6">Entrada General</h3>
-                <p class="text-blue-600 font-bold text-sm mt-1">¡Quedan 4 Medallas!</p>
+                <p class="text-blue-600 font-bold text-sm mt-1">¡Quedan 2 Medallas!</p>
                 
                 <div class="my-6 text-6xl font-black text-blue-900">
                     $10 <span class="text-xl text-gray-600 font-bold">USD</span>
@@ -799,11 +799,13 @@ const countDownDate = new Date("Mar 6, 2026 00:00:00").getTime();
                 document.getElementById('ai-result').innerHTML = marked.parse(iaText);
 
             } catch (error) {
-                // 🛡️ EL ESCUDO: Si Google rebota la llave, el cliente recibe su plan VIP sin enterarse del error
+                // 🛡️ EL ESCUDO VIP: Versión Extendida y Profesional
                 const fallbackPlans = {
-                    'entreno': "### 🏃‍♂️ Tu Plan 5K Inteligente\n* **Resistencia:** 20 min trote suave.\n* **Velocidad:** 4 series de 400m fuertes.\n* **Simulación:** 3K a ritmo de carrera.\n* **Recuperación:** Estiramientos dinámicos.",
-                    'nutricion': "### 🍏 Menú Pre-Carrera\n* **Cena:** Pasta o arroz con pollo a la plancha.\n* **Desayuno:** Avena o arepa pequeña con jamón.\n* **Hidratación:** 500ml de agua al despertar.",
-                    'estrategia': "### 🧠 Estrategia 5K\n* **Km 1:** Ritmo suave de control.\n* **Km 2-3:** Paso constante.\n* **Km 4:** Mantén la mente fuerte.\n* **Km 5:** ¡Remata con todo!"
+                    'entreno': "### 🏃‍♂️ Tu Plan 5K Élite (Versión Extendida)\n\nAnalizando tu perfil y optimizando para tu nivel actual, aquí tienes tu hoja de ruta hacia la medalla:\n\n* **Fase de Activación (Lunes y Miércoles):** 25 min de trote conversacional (Z2). Si no puedes hablar mientras trotas, vas muy rápido.\n* **Fase de Potencia (Jueves):** Calentamiento 10 min. Luego 5 series de 1 minuto a máxima velocidad x 1 minuto de caminata. Enfriamiento 5 min.\n* **Fase de Simulación (Sábado):** Carrera continua de 3.5K a 4K. Intenta mantener el ritmo exacto que quieres llevar el día del evento.\n* **Recuperación Activa (Martes y Viernes):** 15 min de estiramientos profundos, yoga o bicicleta suave. Cero impacto.\n* **Día de la Carrera:** Calienta 15 min antes con movilidad articular. ¡Confía en el proceso!\n\n*💡 Tip de la IA: El descanso es donde el músculo crece y se adapta. No te saltes tus días libres.*",
+                    
+                    'nutricion': "### 🍏 Menú Pre-Carrera 5K (Alto Rendimiento)\n\nHemos estructurado tu carga de glucógeno y nivel de hidratación para evitar la fatiga prematura:\n\n* **48 Horas Antes:** Aumenta un 20% tu consumo de carbohidratos complejos (pasta, arroz, papa). Reduce las grasas pesadas y fritos al 0%.\n* **Cena del Día Anterior:** Un plato equilibrado. Recomendación: Pasta con salsa de tomate natural y una pechuga de pollo a la plancha. Cero lácteos, cero salsas pesadas.\n* **Desayuno (2 a 3 horas antes):** Avena preparada con agua (no leche), medio cambur (banana) y una cucharada de miel. Opcional: una arepa asada pequeña con mermelada.\n* **Protocolo de Hidratación:** Toma 2 litros de agua diarios los 3 días previos. El día del evento, toma 500ml de agua al despertar y pequeños sorbos hasta 30 min antes de la salida.\n\n*💡 Tip de la IA: Nunca estrenes comida el día de la carrera. Come solo lo que tu estómago ya conoce.*",
+                    
+                    'estrategia': "### 🧠 Estrategia de Carrera y Mindset 5K\n\nEl 5K es 60% físico y 40% mental. Así vas a devorar esos 5 kilómetros:\n\n* **La Salida (Km 0 - 1) | 'El Error de Novato':** La adrenalina te hará querer correr rápido. ¡Frena! Corre el primer kilómetro 10 segundos MÁS LENTO de tu ritmo objetivo. Guarda gasolina.\n* **Asentamiento (Km 1 - 3) | 'Ritmo Crucero':** Encuentra un paso constante donde tu respiración sea rítmica (2 pasos inspiro, 2 pasos expiro). Mantén la postura erguida.\n* **La Pared Mental (Km 3 - 4) | 'La Prueba':** Aquí el cuerpo pedirá parar. Engaña a tu cerebro contando tus pasos o enfocándote en la espalda de alguien adelante para alcanzarlo.\n* **El Remate Final (Km 4 - 5) | 'Fase de Caza':** Sube el ritmo progresivamente. Los últimos 400 metros usa absolutamente todo lo que te quede en el tanque. ¡La medalla es tuya!\n\n*💡 Tip de la IA: Divide la carrera en tu mente. No pienses en 5K, piensa en llegar al próximo kilómetro.*"
                 };
                 
                 // Simulamos que la IA está pensando por 1.5 segundos
