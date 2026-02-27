@@ -769,7 +769,7 @@ const countDownDate = new Date("Mar 6, 2026 00:00:00").getTime();
             document.getElementById('ai-placeholder').classList.remove('hidden');
         }
 
-        // 4. IA GEMINI (BACKEND SEGURO + ESCUDO)
+        // 4. IA GEMINI (MODO DETECTIVE 🕵️‍♂️)
         async function callAI(type) {
             const btn = document.getElementById('btn-' + type);
             btn.disabled = true;
@@ -785,36 +785,35 @@ const countDownDate = new Date("Mar 6, 2026 00:00:00").getTime();
             };
 
             try {
-                // Hacemos la llamada segura a tu propia carpeta "api"
                 const response = await fetch('/api/gemini', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ prompt: promptMap[type] })
                 });
 
+                // 🔥 AQUÍ ESTÁ EL CHISMOSO 🔥
+                if (!response.ok) {
+                    const errorSecreto = await response.text();
+                    alert("🛑 JEFE, ESTE ES EL ERROR REAL:\n\nCódigo: " + response.status + "\nMensaje: " + errorSecreto);
+                    throw new Error('Servidor ocupado');
+                }
+
                 const data = await response.json();
-
-                if (!response.ok) throw new Error('Servidor ocupado');
-
-                // IA REAL
                 const iaText = data.candidates[0].content.parts[0].text;
                 document.getElementById('ai-result').innerHTML = marked.parse(iaText);
 
             } catch (error) {
-                // ESCUDO DE CONTINGENCIA (Si falla, el usuario recibe esto)
-                console.log("Servidor IA con alto tráfico. Usando plan de respaldo.");
+                console.log("Activando respaldo...");
                 const fallbackPlans = {
-                    'entreno': "### 🏃‍♂️ Tu Plan 5K Inteligente\n* **Resistencia:** 20 min trote suave.\n* **Velocidad:** 4 series de 400m fuertes.\n* **Simulación:** 3K a ritmo de carrera.\n* **Recuperación:** Estiramientos dinámicos.\n\n*Nota: Servidor IA muy concurrido, mostrando plan estándar.*",
-                    'nutricion': "### 🍏 Menú Pre-Carrera\n* **Cena:** Pasta o arroz con pollo a la plancha.\n* **Desayuno:** Avena o arepa pequeña con jamón.\n* **Hidratación:** 500ml de agua al despertar.\n\n*Nota: Servidor IA muy concurrido, mostrando menú estándar.*",
-                    'estrategia': "### 🧠 Estrategia 5K\n* **Km 1:** Ritmo suave de control.\n* **Km 2-3:** Paso constante.\n* **Km 4:** Mantén la mente fuerte.\n* **Km 5:** ¡Remata con todo!\n\n*Nota: Servidor IA muy concurrido, mostrando estrategia estándar.*"
+                    'entreno': "### 🏃‍♂️ Tu Plan 5K Inteligente\n* **Resistencia:** 20 min trote suave.\n* **Velocidad:** 4 series de 400m fuertes.\n* **Simulación:** 3K a ritmo de carrera.\n* **Recuperación:** Estiramientos dinámicos.",
+                    'nutricion': "### 🍏 Menú Pre-Carrera\n* **Cena:** Pasta o arroz con pollo a la plancha.\n* **Desayuno:** Avena o arepa pequeña con jamón.\n* **Hidratación:** 500ml de agua al despertar.",
+                    'estrategia': "### 🧠 Estrategia 5K\n* **Km 1:** Ritmo suave de control.\n* **Km 2-3:** Paso constante.\n* **Km 4:** Mantén la mente fuerte.\n* **Km 5:** ¡Remata con todo!"
                 };
                 document.getElementById('ai-result').innerHTML = marked.parse(fallbackPlans[type]);
 
             } finally {
-                // Formato limpio de Tailwind
                 document.querySelectorAll('#ai-result ul').forEach(ul => ul.classList.add('list-disc', 'ml-4', 'mb-4', 'text-gray-700'));
                 document.querySelectorAll('#ai-result h3').forEach(h3 => h3.classList.add('font-bold', 'text-lg', 'mt-4', 'mb-2', 'text-blue-900'));
-                
                 document.getElementById('ai-loading').classList.add('hidden');
                 document.getElementById('ai-result').classList.remove('hidden');
                 btn.disabled = false;
