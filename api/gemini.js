@@ -22,7 +22,7 @@ export default async function handler(req, res) {
         }
 
         // 3. 🔥 EL CAMBIO MÁGICO: Llamamos a "gemini-pro" que es el modelo estable universal
-        const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`;
+        const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
         
         const response = await fetch(geminiUrl, {
             method: 'POST',
