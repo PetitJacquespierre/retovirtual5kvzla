@@ -3,159 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resultados Oficiales - Reto 5K Venezuela</title>
+    <title>Ranking Oficial - Reto Virtual 5K Venezuela</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        body { font-family: 'Open Sans', sans-serif; background-color: #f3f4f6; }
-        h1, .font-heading { font-family: 'Montserrat', sans-serif; }
-        /* Barra tricolor superior */
+        body { font-family: 'Open Sans', sans-serif; }
+        h1, h2, h3, .font-heading { font-family: 'Montserrat', sans-serif; }
         .venezuela-gradient { background: linear-gradient(90deg, #FCD116 0%, #003893 50%, #CE1126 100%); height: 6px; width: 100%; position: fixed; top: 0; z-index: 60; }
     </style>
 </head>
-<body class="text-gray-800">
+<body class="bg-gray-900 text-white min-h-screen flex flex-col">
 
     <div class="venezuela-gradient"></div>
 
-    <nav class="bg-blue-900 shadow-md fixed w-full top-0 z-50 mt-1">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex justify-between items-center h-16">
-                <a href="index.html" class="flex items-center gap-2 text-white hover:text-yellow-400 transition">
-                    <i class="fa-solid fa-arrow-left"></i>
-                    <span class="font-bold text-sm md:text-base">Volver al Inicio</span>
-                </a>
-                <span class="text-white font-heading font-black tracking-wider text-sm md:text-lg">RESULTADOS <span class="text-yellow-400">2026</span></span>
+    <nav class="bg-[#003893] shadow-md w-full z-40 py-4 mt-[6px]">
+        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <img src="image_0.png" alt="Logo"
+                     class="h-16 md:h-20 w-auto object-contain hidden sm:block"
+                     onerror="this.style.display='none'; document.getElementById('res-fallback-logo').classList.remove('hidden');">
+                
+                <i id="res-fallback-logo"
+                   class="fa-solid fa-person-running text-2xl text-white border border-yellow-400 rounded-full p-1.5 sm:hidden hidden"></i>
+
+                <span class="font-heading font-extrabold text-lg md:text-xl tracking-tight text-white ml-2">
+                    RETO VIRTUAL 5K <span class="text-yellow-400">VENEZUELA</span>
+                </span>
             </div>
+            <a href="index.html" class="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg font-bold transition flex items-center gap-2 text-sm">
+                <i class="fa-solid fa-arrow-left"></i> Volver al Inicio
+            </a>
         </div>
     </nav>
 
-    <div class="pt-28 pb-10 bg-white shadow-sm border-b border-gray-200">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <h1 class="text-3xl md:text-4xl font-black text-blue-900 mb-2">Tabla de Posiciones 🏆</h1>
-            <p class="text-gray-600 mb-8 max-w-2xl mx-auto">Consulta tus tiempos oficiales. Escribe tu nombre o número de dorsal para encontrarte rápido.</p>
+    <header class="py-12 px-4 text-center border-b border-gray-800 bg-black/50 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-yellow-500 rounded-full opacity-5 blur-3xl"></div>
+        <span class="bg-blue-600 text-white font-bold px-4 py-1 rounded-full text-xs uppercase tracking-widest mb-4 inline-block shadow-lg animate-pulse">
+            <i class="fa-solid fa-satellite-dish mr-1"></i> Sistema en Vivo
+        </span>
+        <h1 class="font-heading text-4xl md:text-5xl font-black mb-4 uppercase tracking-wide">
+            Ranking <span class="text-yellow-400">Oficial</span>
+        </h1>
+        <p class="text-gray-400 max-w-2xl mx-auto">
+            Aquí se registrarán los tiempos validados de nuestros 50 Fundadores. 
+        </p>
+    </header>
 
-            <div class="max-w-xl mx-auto relative group">
-                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                    <i class="fa-solid fa-magnifying-glass text-gray-400 group-focus-within:text-blue-600 transition"></i>
-                </div>
-                <input type="text" id="searchInput" onkeyup="filtrarResultados()" 
-                       class="block w-full pl-11 pr-4 py-4 border-2 border-gray-200 rounded-full leading-5 bg-gray-50 placeholder-gray-400 focus:outline-none focus:ring-0 focus:border-blue-600 transition shadow-sm text-lg" 
-                       placeholder="Buscar por Nombre, Dorsal o Ciudad...">
-            </div>
+    <main class="flex-grow max-w-5xl mx-auto px-4 py-12 w-full">
+        
+        <div class="bg-blue-900/30 border border-blue-500/50 rounded-2xl p-6 mb-12 text-center flex flex-col items-center justify-center">
+            <i class="fa-solid fa-stopwatch-20 text-5xl text-blue-400 mb-4 animate-spin-slow"></i>
+            <h2 class="text-2xl font-bold text-white mb-2 font-heading">Fase de Carrera Activa</h2>
+            <p class="text-blue-200">Los corredores están registrando sus tiempos (6 al 15 de Marzo). La tabla de posiciones se actualizará progresivamente.</p>
         </div>
-    </div>
 
-    <div class="max-w-7xl mx-auto px-2 md:px-4 py-8">
-        <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
+        <div class="bg-gray-800 rounded-2xl shadow-2xl overflow-hidden border border-gray-700 mb-12">
+            <div class="bg-gray-700 px-6 py-4 border-b border-gray-600 flex justify-between items-center">
+                <h3 class="font-bold text-lg font-heading"><i class="fa-solid fa-list-ol text-yellow-400 mr-2"></i> Top 50 Élite</h3>
+                <span class="text-xs text-gray-400">Actualización: Pendiente</span>
+            </div>
+            
             <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Pos</th>
-                            <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Dorsal</th>
-                            <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Corredor</th>
-                            <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider hidden md:table-cell">Ubicación</th>
-                            <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider hidden sm:table-cell">Categoría</th>
-                            <th scope="col" class="px-6 py-4 text-right text-xs font-bold text-gray-500 uppercase tracking-wider">Tiempo</th>
-                            <th scope="col" class="px-6 py-4 text-right text-xs font-bold text-gray-500 uppercase tracking-wider hidden md:table-cell">Ritmo</th>
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-gray-800/50 text-gray-400 text-sm uppercase tracking-wider border-b border-gray-700">
+                            <th class="p-4 font-semibold text-center w-16">Pos</th>
+                            <th class="p-4 font-semibold">Corredor</th>
+                            <th class="p-4 font-semibold text-center">Dorsal</th>
+                            <th class="p-4 font-semibold text-right">Tiempo</th>
                         </tr>
                     </thead>
-                    <tbody class="bg-white divide-y divide-gray-100" id="tabla-cuerpo">
+                    <tbody class="text-gray-300 divide-y divide-gray-700">
+                        <tr>
+                            <td colspan="4" class="p-12 text-center text-gray-500">
+                                <i class="fa-solid fa-running text-4xl mb-3 opacity-50"></i>
+                                <p class="text-lg">Recopilando evidencias de carrera...</p>
+                                <p class="text-sm mt-1">Los primeros tiempos aparecerán pronto.</p>
+                            </td>
+                        </tr>
                         </tbody>
                 </table>
             </div>
+        </div>
+
+        <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 border border-gray-700 text-center relative overflow-hidden">
+            <div class="absolute inset-0 bg-black/40 z-10 flex flex-col items-center justify-center backdrop-blur-sm">
+                <i class="fa-solid fa-lock text-4xl text-yellow-500 mb-3"></i>
+                <h3 class="text-xl font-bold text-white">Diplomas Bloqueados</h3>
+                <p class="text-gray-300 text-sm mt-2">Disponibles el 15 de Marzo al cerrar el evento.</p>
+            </div>
             
-            <div id="no-results" class="hidden text-center py-16 text-gray-400">
-                <i class="fa-regular fa-face-frown-open text-5xl mb-3 opacity-50"></i>
-                <p class="text-lg">No encontramos a ese corredor.</p>
-                <button onclick="document.getElementById('searchInput').value=''; filtrarResultados();" class="mt-4 text-blue-600 font-bold hover:underline">Ver todos</button>
+            <div class="relative z-0 opacity-30">
+                <i class="fa-solid fa-certificate text-5xl text-yellow-500 mb-4"></i>
+                <h3 class="text-2xl font-bold mb-2 font-heading">Descarga tu Diploma</h3>
+                <p class="text-gray-400 mb-6">Ingresa tu número de dorsal para obtener tu certificado de finalista.</p>
+                <div class="flex max-w-sm mx-auto gap-2">
+                    <input type="text" placeholder="Ej: 020" disabled class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white">
+                    <button disabled class="bg-yellow-500 text-black font-bold px-6 py-2 rounded-lg"><i class="fa-solid fa-search"></i></button>
+                </div>
             </div>
         </div>
-        
-        <div class="text-center mt-8 text-xs text-gray-400">
-            * Los tiempos son verificados manualmente por el comité organizador.<br>
-            Última actualización: 15 de Marzo, 2026.
-        </div>
-    </div>
 
-    <script>
-        // ==========================================
-        // 1. BASE DE DATOS (AQUÍ PEGAREMOS TU EXCEL)
-        // ==========================================
-        const corredores = [
-            // EJEMPLOS DE PRUEBA:
-            { pos: 1,  bib: "020", nombre: "Carlos Pérez",    ciudad: "Caracas",    cat: "M 20-29", tiempo: "18:45", ritmo: "3:45/km" },
-            { pos: 2,  bib: "104", nombre: "María Rodriguez", ciudad: "Maracaibo",  cat: "F 30-39", tiempo: "19:10", ritmo: "3:50/km" },
-            { pos: 3,  bib: "055", nombre: "Pedro Castillo",  ciudad: "Valencia",   cat: "M 40-49", tiempo: "20:05", ritmo: "4:01/km" },
-            { pos: 4,  bib: "089", nombre: "Ana Gómez",       ciudad: "Barquisimeto", cat: "F 20-29", tiempo: "21:30", ritmo: "4:18/km" },
-            { pos: 5,  bib: "012", nombre: "Luis Silva",      ciudad: "Punto Fijo", cat: "M 30-39", tiempo: "22:15", ritmo: "4:27/km" },
-            { pos: 6,  bib: "110", nombre: "Elena Torres",    ciudad: "Mérida",     cat: "F 40-49", tiempo: "23:00", ritmo: "4:36/km" },
-            { pos: 7,  bib: "005", nombre: "José Gregorio",   ciudad: "Coro",       cat: "M 50+",   tiempo: "24:10", ritmo: "4:50/km" },
-            { pos: 8,  bib: "033", nombre: "Tu Nombre",       ciudad: "Caracas",    cat: "M 30-39", tiempo: "25:45", ritmo: "5:09/km" },
-        ];
+    </main>
 
-        // ==========================================
-        // 2. FUNCIÓN PARA DIBUJAR LA TABLA
-        // ==========================================
-        const tbody = document.getElementById('tabla-cuerpo');
+    <footer class="bg-black py-6 text-center text-gray-500 text-sm border-t border-gray-800">
+        <p>© 2026 Reto Virtual 5K Venezuela.</p>
+    </footer>
 
-        function renderizarTabla(data) {
-            tbody.innerHTML = '';
-            
-            if(data.length === 0) {
-                document.getElementById('no-results').classList.remove('hidden');
-                return;
-            } else {
-                document.getElementById('no-results').classList.add('hidden');
-            }
-
-            data.forEach(c => {
-                // Lógica para Medallas (Oro, Plata, Bronce)
-                let rankDisplay = `<span class="font-bold text-gray-600 w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full text-xs">${c.pos}</span>`;
-                
-                if(c.pos === 1) rankDisplay = `<span class="w-8 h-8 flex items-center justify-center bg-yellow-100 text-yellow-700 rounded-full text-lg shadow-sm">🥇</span>`;
-                if(c.pos === 2) rankDisplay = `<span class="w-8 h-8 flex items-center justify-center bg-gray-200 text-gray-700 rounded-full text-lg shadow-sm">🥈</span>`;
-                if(c.pos === 3) rankDisplay = `<span class="w-8 h-8 flex items-center justify-center bg-orange-100 text-orange-800 rounded-full text-lg shadow-sm">🥉</span>`;
-
-                // Construcción de la fila
-                const row = `
-                    <tr class="hover:bg-blue-50 transition border-b border-gray-100 group">
-                        <td class="px-6 py-4 whitespace-nowrap">${rankDisplay}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-mono group-hover:text-blue-600 font-bold">#${c.bib}</td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm font-bold text-gray-900 group-hover:text-blue-800">${c.nombre}</div>
-                            <div class="text-xs text-gray-400 md:hidden">${c.ciudad}</div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 hidden md:table-cell"><i class="fa-solid fa-location-dot text-gray-300 mr-1"></i> ${c.ciudad}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 hidden sm:table-cell"><span class="bg-gray-100 px-2 py-1 rounded text-xs font-bold text-gray-600">${c.cat}</span></td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-black text-blue-900 text-right group-hover:text-blue-600">${c.tiempo}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-right font-mono hidden md:table-cell">${c.ritmo}</td>
-                    </tr>
-                `;
-                tbody.innerHTML += row;
-            });
-        }
-
-        // ==========================================
-        // 3. FUNCIÓN DE BÚSQUEDA (FILTRO)
-        // ==========================================
-        function filtrarResultados() {
-            const texto = document.getElementById('searchInput').value.toLowerCase();
-            const filtrados = corredores.filter(c => 
-                c.nombre.toLowerCase().includes(texto) || 
-                c.bib.includes(texto) ||
-                c.ciudad.toLowerCase().includes(texto)
-            );
-            renderizarTabla(filtrados);
-        }
-
-        // Carga inicial
-        renderizarTabla(corredores);
-    </script>
 </body>
 </html>
