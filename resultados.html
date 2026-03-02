@@ -173,28 +173,49 @@
     </footer>
 
     <script>
+        // 🗄️ TU BASE DE DATOS (Aquí copiarás los datos del Excel del formulario)
+        const corredores = [
+            { dorsal: "001", nombre: "JACQUESPIERRE PETIT", tiempo: "24:50" },
+            { dorsal: "015", nombre: "CARLOS LOPEZ", tiempo: "26:30" },
+            { dorsal: "042", nombre: "MARIA PEREZ", tiempo: "29:15" }
+            // Cuando termine la carrera, aquí pegarás a los otros 47 corredores...
+        ];
+
         function mostrarCertificado() {
-            const dorsalIngresado = document.getElementById('input-dorsal').value;
+            // Atrapamos el dorsal que escribió la persona y le quitamos los espacios en blanco
+            const dorsalIngresado = document.getElementById('input-dorsal').value.trim();
 
             if(dorsalIngresado === "") {
                 alert("¡Epa campeón! Ingresa un número de dorsal primero.");
                 return;
             }
 
-            // Inyectamos el número
-            document.getElementById('cert-dorsal').innerText = dorsalIngresado;
+            // 🔍 EL BUSCADOR: Busca en la base de datos si el dorsal existe
+            const corredorEncontrado = corredores.find(c => c.dorsal === dorsalIngresado);
 
-            // Mostramos la caja del diploma y el botón de descarga
-            document.getElementById('mi-certificado-objetivo').style.display = 'block';
-            document.getElementById('btn-descargar').classList.remove('hidden');
+            if (corredorEncontrado) {
+                // Si lo encuentra, inyecta TODOS los datos mágicamente
+                document.getElementById('cert-nombre').innerText = corredorEncontrado.nombre;
+                document.getElementById('cert-dorsal').innerText = corredorEncontrado.dorsal;
+                document.getElementById('cert-tiempo').innerText = corredorEncontrado.tiempo;
+
+                // Muestra el diploma y el botón
+                document.getElementById('mi-certificado-objetivo').style.display = 'block';
+                document.getElementById('btn-descargar').classList.remove('hidden');
+            } else {
+                // Si alguien pone un dorsal que no existe o que no ha subido su tiempo
+                alert("⏳ Dorsal no encontrado. Asegúrate de escribirlo bien (Ej: 015) o espera a que validemos tu evidencia de Strava.");
+                
+                // Oculta el diploma por si había otro abierto antes
+                document.getElementById('mi-certificado-objetivo').style.display = 'none';
+                document.getElementById('btn-descargar').classList.add('hidden');
+            }
         }
 
         function descargarCertificado() {
-            // Apuntamos a la caja objetivo
             const certificadoObjetivo = document.getElementById('mi-certificado-objetivo');
-            const numDorsal = document.getElementById('input-dorsal').value;
+            const numDorsal = document.getElementById('input-dorsal').value.trim();
 
-            // html2canvas toma la foto
             html2canvas(certificadoObjetivo, { 
                 scale: 2, 
                 logging: false, 
