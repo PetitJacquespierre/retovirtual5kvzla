@@ -15,53 +15,60 @@
         h1, h2, h3, .font-heading { font-family: 'Montserrat', sans-serif; }
         .venezuela-gradient { background: linear-gradient(90deg, #FCD116 0%, #003893 50%, #CE1126 100%); height: 6px; width: 100%; position: fixed; top: 0; z-index: 60; }
 
-/* --- ESTILOS DEL CERTIFICADO --- */
-        .contenedor-certificado {
+        /* --- ESTILOS DEL CERTIFICADO PULIDOS --- */
+        
+        /* 1. Caja externa: Siempre visible ahora, para poder buscar */
+        #seccion-certificado-externo {
+            display: block; 
+        }
+
+        /* 2. Caja OBJETIVO (Esta es la que el fotógrafo capturará. Estaba oculta por defecto) */
+        .contenedor-certificado-objetivo {
             position: relative;
             width: 100%;
-            max-width: 800px; /* Tamaño máximo */
-            margin: 20px auto;
-            display: none; /* Lo mantenemos oculto hasta que le den al botón */
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 12px;
+            overflow: hidden; 
+            display: none; /* Se oculta hasta que le den a la lupa */
         }
-        .imagen-fondo {
+
+        /* La imagen de fondo */
+        .imagen-fondo-certificado {
             width: 100%;
             height: auto;
             display: block;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
         }
-        /* Ajusta estos porcentajes según tu diseño de Canva */
-        .texto-nombre {
+
+        /* Calibrando el Nombre */
+        .texto-nombre-certificado {
             position: absolute;
-            top: 43%; 
+            top: 35%; /* Sube o baja esto si lo necesitas */
             left: 50%;
             transform: translateX(-50%);
             color: #FFFFFF;
-            font-size: clamp(16px, 4vw, 32px); /* Se adapta a celulares */
+            font-size: clamp(16px, 4.5vw, 36px); 
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 2px;
             margin: 0;
             white-space: nowrap;
+            font-family: 'Montserrat', sans-serif;
         }
-        .texto-dorsal {
+
+        /* Calibrando Dorsal y Tiempo */
+        .texto-dorsal-certificado, .texto-tiempo-certificado {
             position: absolute;
-            bottom: 24%; 
-            left: 25%;  
+            bottom: 25%; /* Sube o baja esto si lo necesitas */
             color: #FFFFFF;
-            font-size: clamp(14px, 3vw, 24px);
-            font-weight: bold;
+            font-size: clamp(14px, 3.5vw, 26px); 
+            font-weight: 800;
             margin: 0;
+            font-family: 'Montserrat', sans-serif;
         }
-        .texto-tiempo {
-            position: absolute;
-            bottom: 24%; 
-            right: 13%; 
-            color: #FFFFFF;
-            font-size: clamp(14px, 3vw, 24px);
-            font-weight: bold;
-            margin: 0;
-        }
+
+        .texto-dorsal-certificado { left: 25%; }
+        .texto-tiempo-certificado { right: 12%; }    
     </style>
 </head>
 <body class="bg-gray-900 text-white min-h-screen flex flex-col">
@@ -71,13 +78,8 @@
     <nav class="bg-[#003893] shadow-md w-full z-40 py-4 mt-[6px]">
         <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
             <div class="flex items-center gap-2">
-                <img src="image_0.png" alt="Logo"
-                     class="h-16 md:h-20 w-auto object-contain hidden sm:block"
-                     onerror="this.style.display='none'; document.getElementById('res-fallback-logo').classList.remove('hidden');">
-                
-                <i id="res-fallback-logo"
-                   class="fa-solid fa-person-running text-2xl text-white border border-yellow-400 rounded-full p-1.5 sm:hidden hidden"></i>
-
+                <img src="image_0.png" alt="Logo" class="h-16 md:h-20 w-auto object-contain hidden sm:block" onerror="this.style.display='none'; document.getElementById('res-fallback-logo').classList.remove('hidden');">
+                <i id="res-fallback-logo" class="fa-solid fa-person-running text-2xl text-white border border-yellow-400 rounded-full p-1.5 sm:hidden hidden"></i>
                 <span class="font-heading font-extrabold text-lg md:text-xl tracking-tight text-white ml-2">
                     RETO VIRTUAL 5K <span class="text-yellow-400">VENEZUELA</span>
                 </span>
@@ -114,7 +116,6 @@
                 <h3 class="font-bold text-lg font-heading"><i class="fa-solid fa-list-ol text-yellow-400 mr-2"></i> Top 50 Élite</h3>
                 <span class="text-xs text-gray-400">Actualización: Pendiente</span>
             </div>
-            
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
                     <thead>
@@ -138,59 +139,74 @@
             </div>
         </div>
 
-        <div class="bg-gradient-to-br from-[#001F54] to-black rounded-2xl p-8 border border-[#00FFFF]/30 text-center relative mt-12 shadow-[0_0_30px_rgba(0,31,84,0.6)]">
+        <div id="seccion-certificado-externo" class="bg-gradient-to-br from-[#001F54] to-black rounded-2xl p-8 border border-[#00FFFF]/30 text-center relative mt-12 shadow-[0_0_30px_rgba(0,31,84,0.6)]">
             
             <i class="fa-solid fa-certificate text-6xl text-[#00FFFF] mb-4"></i>
             <h3 class="text-3xl font-black mb-2 font-heading text-white uppercase tracking-widest">Tu Diploma Oficial</h3>
             <p class="text-gray-400 mb-6 text-sm">Ingresa tu número de Dorsal para generar y descargar tu certificado.</p>
             
-            <div class="flex max-w-sm mx-auto gap-2 mt-6 mb-8">
+            <div class="flex max-w-sm mx-auto gap-2 mt-6 mb-12">
                 <input type="text" id="input-dorsal" placeholder="EJ: 015" class="w-full bg-gray-800 border-2 border-[#00FFFF] rounded-xl px-4 py-3 text-white text-center font-bold focus:outline-none focus:ring-2 focus:ring-[#FF00FF]">
                 <button onclick="mostrarCertificado()" class="bg-gradient-to-r from-[#00FFFF] to-[#FF00FF] text-white font-bold px-6 py-3 rounded-xl hover:scale-105 transition-transform"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
 
-            <div class="contenedor-certificado" id="mi-certificado">
-            <div class="text-center mt-6">
-    <button id="btn-descargar" onclick="descargarCertificado()" class="hidden bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-black px-8 py-3 rounded-xl shadow-[0_0_15px_rgba(252,209,22,0.5)] hover:scale-105 transition-transform uppercase tracking-wider">
-        <i class="fa-solid fa-download mr-2"></i> Descargar mi Certificado
-    </button>
-</div>
-                <img src="fondo-certificado.png" alt="Certificado Reto Virtual" class="imagen-fondo">
+            <div class="contenedor-certificado-objetivo" id="mi-certificado-objetivo">
+                <img src="fondo-certificado.png" alt="Certificado Reto Virtual" class="imagen-fondo-certificado">
                 
-                <h2 class="texto-nombre" id="cert-nombre">JACQUESPIERRE PETIT</h2>
-                <p class="texto-dorsal" id="cert-dorsal">001</p>
-                <p class="texto-tiempo" id="cert-tiempo">24:50</p>
+                <h2 class="texto-nombre-certificado" id="cert-nombre">JACQUESPIERRE PETIT</h2>
+                <p class="texto-dorsal-certificado" id="cert-dorsal">001</p>
+                <p class="texto-tiempo-certificado" id="cert-tiempo">24:50</p>
+            </div>
+
+            <div class="text-center mt-10">
+                <button id="btn-descargar" onclick="descargarCertificado()" class="hidden bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-black px-10 py-4 rounded-xl shadow-[0_0_20px_rgba(252,209,22,0.6)] hover:scale-105 transition-transform uppercase tracking-widest text-lg mx-auto">
+                    <i class="fa-solid fa-download mr-2"></i> Descargar mi Certificado
+                </button>
             </div>
 
         </div>
 
-        <script>
-    function mostrarCertificado() {
-        // Muestra el certificado y el botón de descargar
-        document.getElementById('mi-certificado').style.display = 'block';
-        document.getElementById('btn-descargar').classList.remove('hidden');
-    }
-
-    function descargarCertificado() {
-        // Seleccionamos la caja que tiene la foto y los textos
-        const certificado = document.getElementById('mi-certificado');
-        
-        // El fotógrafo toma la foto con alta calidad (scale: 2)
-        html2canvas(certificado, { scale: 2 }).then(canvas => {
-            // Creamos un link invisible para descargar la foto
-            const enlace = document.createElement('a');
-            enlace.download = 'Certificado-RetoVirtual.png';
-            enlace.href = canvas.toDataURL('image/png');
-            enlace.click(); // Hacemos clic automático
-        });
-    }
-
-</script>>
-
     </main>
- <footer class="bg-black py-6 text-center text-gray-500 text-sm border-t border-gray-800">
+
+    <footer class="bg-black py-6 text-center text-gray-500 text-sm border-t border-gray-800">
         <p>© 2026 Reto Virtual 5K Venezuela.</p>
     </footer>
+
+    <script>
+        function mostrarCertificado() {
+            const dorsalIngresado = document.getElementById('input-dorsal').value;
+
+            if(dorsalIngresado === "") {
+                alert("¡Epa campeón! Ingresa un número de dorsal primero.");
+                return;
+            }
+
+            // Inyectamos el número
+            document.getElementById('cert-dorsal').innerText = dorsalIngresado;
+
+            // Mostramos la caja del diploma y el botón de descarga
+            document.getElementById('mi-certificado-objetivo').style.display = 'block';
+            document.getElementById('btn-descargar').classList.remove('hidden');
+        }
+
+        function descargarCertificado() {
+            // Apuntamos a la caja objetivo
+            const certificadoObjetivo = document.getElementById('mi-certificado-objetivo');
+            const numDorsal = document.getElementById('input-dorsal').value;
+
+            // html2canvas toma la foto
+            html2canvas(certificadoObjetivo, { 
+                scale: 2, 
+                logging: false, 
+                useCORS: true 
+            }).then(canvas => {
+                const enlace = document.createElement('a');
+                enlace.download = 'Certificado-RetoVirtual-' + numDorsal + '.png';
+                enlace.href = canvas.toDataURL('image/png');
+                enlace.click(); 
+            });
+        }
+    </script>
 
 </body>
 </html>
