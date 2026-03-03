@@ -136,7 +136,7 @@
         const urlBaseExcel = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5yMHsenxCWE5kZBDUZ8UcYqDtdAHstfqXcvWkuYZPQ_4n2xSrfs6ptk7k21r1kcMHHLtWjz8SEHwl/pub?gid=1297920374&single=true&output=csv";
         
         let corredores = [];
-        let filtroActual = 'GENERAL'; // Iniciamos siempre en GENERAL
+        let filtroActual = 'GENERAL'; 
 
         async function cargarDatosDesdeExcel() {
             try {
@@ -173,7 +173,7 @@
                     corredores.push({ dorsal: dorsal, nombre: nombreCorto, genero: genero, tiempo: tiempo });
                 }
                 
-                pintarTablaCorredores(); // Pinta apenas termine de leer
+                pintarTablaCorredores(); 
                 
             } catch (error) {
                 console.error("Error leyendo el Excel:", error);
@@ -220,6 +220,17 @@
             } else if(filtroActual === 'FEMENINO') {
                 corredoresFiltrados = corredores.filter(c => c.genero.toUpperCase().trim() === 'F' || c.genero.toUpperCase().trim() === 'FEMENINO');
             }
+
+            // 🏆 ORDENAR POR TIEMPO (De más rápido a más lento)
+            corredoresFiltrados.sort((a, b) => {
+                function tiempoASegundos(t) {
+                    // Si no tiene tiempo o dice Pendiente, le ponemos un número altísimo para mandarlo al final
+                    if (!t || t.toLowerCase() === "pendiente" || !t.includes(":")) return 999999;
+                    let partes = t.split(":");
+                    return parseInt(partes[0]) * 60 + parseInt(partes[1]);
+                }
+                return tiempoASegundos(a.tiempo) - tiempoASegundos(b.tiempo);
+            });
 
             corredoresFiltrados.forEach(c => {
                 let esFemenino = c.genero.toUpperCase().trim() === 'F' || c.genero.toUpperCase().trim() === 'FEMENINO';
@@ -275,7 +286,6 @@
             });
         }
 
-        // Arrancamos el motor al abrir la página
         window.onload = cargarDatosDesdeExcel;
     </script>
 
