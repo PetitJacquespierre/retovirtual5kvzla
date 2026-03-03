@@ -80,7 +80,8 @@
                 <table class="w-full text-left border-collapse">
                     <thead>
                         <tr class="bg-gray-800/50 text-gray-400 text-sm uppercase tracking-wider border-b border-gray-700">
-                            <th class="p-4 font-semibold text-center w-16">Dorsal</th>
+                            <th class="p-4 font-semibold text-center w-16">Pos</th>
+                            <th class="p-4 font-semibold text-center w-20">Dorsal</th>
                             <th class="p-4 font-semibold">Corredor</th>
                             <th class="p-4 font-semibold text-center hidden sm:table-cell" id="col-cat">Cat.</th>
                             <th class="p-4 font-semibold text-center">Tiempo / Estado</th>
@@ -221,10 +222,9 @@
                 corredoresFiltrados = corredores.filter(c => c.genero.toUpperCase().trim() === 'F' || c.genero.toUpperCase().trim() === 'FEMENINO');
             }
 
-            // 🏆 ORDENAR POR TIEMPO (De más rápido a más lento)
+            // ORDENAR POR TIEMPO
             corredoresFiltrados.sort((a, b) => {
                 function tiempoASegundos(t) {
-                    // Si no tiene tiempo o dice Pendiente, le ponemos un número altísimo para mandarlo al final
                     if (!t || t.toLowerCase() === "pendiente" || !t.includes(":")) return 999999;
                     let partes = t.split(":");
                     return parseInt(partes[0]) * 60 + parseInt(partes[1]);
@@ -232,15 +232,27 @@
                 return tiempoASegundos(a.tiempo) - tiempoASegundos(b.tiempo);
             });
 
-            corredoresFiltrados.forEach(c => {
+            // PINTAR CON LA POSICIÓN (Índice)
+            corredoresFiltrados.forEach((c, index) => {
                 let esFemenino = c.genero.toUpperCase().trim() === 'F' || c.genero.toUpperCase().trim() === 'FEMENINO';
                 let iconCat = esFemenino ? '<i class="fa-solid fa-venus text-pink-400" title="Femenino"></i>' : '<i class="fa-solid fa-mars text-blue-400" title="Masculino"></i>';
                 
                 let colCatHtml = filtroActual === 'GENERAL' ? `<td class="p-4 text-center hidden sm:table-cell text-lg">${iconCat}</td>` : '';
                 document.getElementById('col-cat').style.display = filtroActual === 'GENERAL' ? 'table-cell' : 'none';
 
+                // 🏅 LÓGICA DEL PODIO
+                let posHtml = `<span class="text-gray-600">-</span>`; // Por defecto, una raya si no ha corrido
+                if (c.tiempo.toLowerCase() !== "pendiente" && c.tiempo !== "") {
+                    let pos = index + 1; // La posición real
+                    if (pos === 1) posHtml = '<i class="fa-solid fa-trophy text-yellow-400 text-2xl drop-shadow-[0_0_8px_rgba(250,204,21,0.8)] animate-pulse" title="1er Lugar"></i>';
+                    else if (pos === 2) posHtml = '<i class="fa-solid fa-medal text-gray-300 text-2xl drop-shadow-[0_0_5px_rgba(209,213,219,0.8)]" title="2do Lugar"></i>';
+                    else if (pos === 3) posHtml = '<i class="fa-solid fa-medal text-orange-400 text-2xl drop-shadow-[0_0_5px_rgba(251,146,60,0.8)]" title="3er Lugar"></i>';
+                    else posHtml = `<span class="font-bold text-gray-400 text-lg">${pos}</span>`;
+                }
+
                 const fila = `
                     <tr class="hover:bg-gray-700/50 transition-colors border-b border-gray-700">
+                        <td class="p-4 text-center">${posHtml}</td>
                         <td class="p-4 text-center font-bold text-[#00FFFF]">${c.dorsal}</td>
                         <td class="p-4 font-bold uppercase">${c.nombre}</td>
                         ${colCatHtml}
