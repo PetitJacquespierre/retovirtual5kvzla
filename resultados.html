@@ -183,17 +183,19 @@
     </footer>
 
     <script>
-        // 🔗 EL LINK DE TU EXCEL
-        const urlExcel = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5yMHsenxCWE5kZBDUZ8UcYqDtdAHstfqXcvWkuYZPQ_4n2xSrfs6ptk7k21r1kcMHHLtWjz8SEHwl/pub?gid=0&single=true&output=csv";
+        // 🔗 EL LINK DE TU EXCEL (Le agregamos un rompe-caché dinámico abajo)
+        const urlBaseExcel = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5yMHsenxCWE5kZBDUZ8UcYqDtdAHstfqXcvWkuYZPQ_4n2xSrfs6ptk7k21r1kcMHHLtWjz8SEHwl/pub?gid=0&single=true&output=csv";
         
         let corredores = [];
 
         async function cargarDatosDesdeExcel() {
             try {
-                const respuesta = await fetch(urlExcel);
+                // Le pegamos la hora exacta al link para obligar al navegador a bajar la versión más fresca
+                const urlFresca = urlBaseExcel + "&t=" + new Date().getTime();
+                
+                const respuesta = await fetch(urlFresca);
                 const datosCsv = await respuesta.text();
                 
-                // CORRECCIÓN FANTASMA: El /\r?\n/ elimina los saltos de línea invisibles (El error del 050)
                 const filas = datosCsv.split(/\r?\n/);
                 
                 for(let i = 1; i < filas.length; i++) {
@@ -201,27 +203,25 @@
                     
                     const valores = filas[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
                     
-                    // 1. LIMPIEZA DEL DORSAL (Asegura que siempre sean 3 dígitos, ej: "50" -> "050")
-                    let dorsalRaw = valores[0] ? valores[0].trim().replace(/"/g, '') : '';
+                    // 1. LIMPIEZA NUCLEAR DEL DORSAL (Solo deja números, destruye lo demás)
+                    let dorsalRaw = valores[0] ? valores[0].replace(/\D/g, '') : '';
                     if(dorsalRaw.length === 2) dorsalRaw = "0" + dorsalRaw;
                     if(dorsalRaw.length === 1) dorsalRaw = "00" + dorsalRaw;
                     const dorsal = dorsalRaw;
                     
-                    // 2. EL RECORTE DE NOMBRES LARGOS (Estilo Venezuela: 1er Nombre y 1er Apellido)
+                    // 2. EL RECORTE DE NOMBRES LARGOS (1er Nombre y 1er Apellido)
                     const nombreCompleto = valores[2] ? valores[2].trim().replace(/"/g, '') : '';
-                    let partesNombre = nombreCompleto.split(' ').filter(palabra => palabra.length > 0); // filter evita errores si hay espacios dobles
+                    let partesNombre = nombreCompleto.split(' ').filter(p => p.length > 0); 
                     let nombreCorto = nombreCompleto;
                     
                     if (partesNombre.length >= 3) {
-                        // Si tiene 3 o más palabras, toma la Primera [0] y la Penúltima [length - 2]
                         nombreCorto = partesNombre[0] + " " + partesNombre[partesNombre.length - 2];
                     } else if (partesNombre.length === 2) {
-                        // Si tiene 2, las deja normal
                         nombreCorto = partesNombre[0] + " " + partesNombre[1];
                     }
                     
                     // 3. LA COLUMNA P (Tiempo) AUTOMATIZADA
-                    // La columna P es la posición 15. Si hay algo escrito, lo usa. Si está vacía, dice "Pendiente".
+                    // Recuerda: Si acabas de escribir en el Excel, Google puede tardar 2 a 5 minutos en reflejarlo.
                     const tiempoExcel = valores[15] ? valores[15].trim().replace(/"/g, '') : '';
                     const tiempo = tiempoExcel !== "" ? tiempoExcel : "Pendiente";
                     
@@ -256,14 +256,14 @@
         }
 
         function mostrarCertificado() {
-            let dorsalIngresado = document.getElementById('input-dorsal').value.trim();
+            // Limpiamos también lo que escribe el usuario para que coincida exacto
+            let dorsalIngresado = document.getElementById('input-dorsal').value.replace(/\D/g, '');
 
             if(dorsalIngresado === "") {
                 alert("⚠️ ¡Epa campeón! Ingresa un número de dorsal primero.");
                 return;
             }
 
-            // Aseguramos que lo que escriba la persona también tenga 3 dígitos
             if(dorsalIngresado.length === 2) dorsalIngresado = "0" + dorsalIngresado;
             if(dorsalIngresado.length === 1) dorsalIngresado = "00" + dorsalIngresado;
 
@@ -286,7 +286,7 @@
 
         function descargarCertificado() {
             const certificadoObjetivo = document.getElementById('mi-certificado-objetivo');
-            let numDorsal = document.getElementById('input-dorsal').value.trim();
+            let numDorsal = document.getElementById('input-dorsal').value.replace(/\D/g, '');
             if(numDorsal.length === 2) numDorsal = "0" + numDorsal;
             if(numDorsal.length === 1) numDorsal = "00" + numDorsal;
 
