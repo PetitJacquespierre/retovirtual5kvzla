@@ -111,11 +111,45 @@
             <p class="text-blue-200">Los corredores están registrando sus tiempos (6 al 15 de Marzo). La tabla de posiciones se actualizará progresivamente.</p>
         </div>
 
-        <div class="bg-gray-800 rounded-2xl shadow-2xl overflow-hidden border border-gray-700 mb-12">
-            <div class="bg-gray-700 px-6 py-4 border-b border-gray-600 flex justify-between items-center">
-                <h3 class="font-bold text-lg font-heading"><i class="fa-solid fa-list-ol text-yellow-400 mr-2"></i> Top 50 Élite</h3>
-                <span class="text-xs text-gray-400">Actualización: Pendiente</span>
+        <div class="bg-gray-800 rounded-2xl shadow-2xl overflow-hidden border border-blue-500/50 mb-8">
+            <div class="bg-gray-700 px-6 py-4 border-b border-blue-500/30 flex justify-between items-center">
+                <h3 class="font-bold text-lg font-heading text-blue-400"><i class="fa-solid fa-mars mr-2"></i> Top Masculino</h3>
+                <span class="text-xs text-blue-300 font-bold animate-pulse">Pre-Carrera</span>
             </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-gray-800/50 text-gray-400 text-sm uppercase tracking-wider border-b border-gray-700">
+                            <th class="p-4 font-semibold text-center w-16">Dorsal</th>
+                            <th class="p-4 font-semibold">Corredor</th>
+                            <th class="p-4 font-semibold text-center">Tiempo / Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-masculino" class="text-gray-300 divide-y divide-gray-700">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="bg-gray-800 rounded-2xl shadow-2xl overflow-hidden border border-pink-500/50 mb-12">
+            <div class="bg-gray-700 px-6 py-4 border-b border-pink-500/30 flex justify-between items-center">
+                <h3 class="font-bold text-lg font-heading text-pink-400"><i class="fa-solid fa-venus mr-2"></i> Top Femenino</h3>
+                <span class="text-xs text-pink-300 font-bold animate-pulse">Pre-Carrera</span>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-gray-800/50 text-gray-400 text-sm uppercase tracking-wider border-b border-gray-700">
+                            <th class="p-4 font-semibold text-center w-16">Dorsal</th>
+                            <th class="p-4 font-semibold">Corredora</th>
+                            <th class="p-4 font-semibold text-center">Tiempo / Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-femenino" class="text-gray-300 divide-y divide-gray-700">
+                    </tbody>
+                </table>
+            </div>
+        </div>
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
                     <thead>
@@ -221,19 +255,15 @@
                     corredores.push({ dorsal: dorsal, nombre: nombreCorto, genero: genero, tiempo: tiempo });
                 }
                 
-                pintarTablaCorredores();
-                
-            } catch (error) {
-                console.error("Error leyendo el Excel:", error);
-            }
-        }
-
-        function pintarTablaCorredores() {
-            const tbody = document.getElementById('tabla-corredores');
-            if(!tbody) return; 
+                function pintarTablaCorredores() {
+            // Buscamos las dos tablas
+            const tbMasculino = document.getElementById('tabla-masculino');
+            const tbFemenino = document.getElementById('tabla-femenino');
             
-            tbody.innerHTML = ''; 
+            if(tbMasculino) tbMasculino.innerHTML = ''; 
+            if(tbFemenino) tbFemenino.innerHTML = ''; 
             
+            // Recorremos la lista y los separamos
             corredores.forEach(c => {
                 const fila = `
                     <tr class="hover:bg-gray-700/50 transition-colors border-b border-gray-700">
@@ -242,7 +272,17 @@
                         <td class="p-4 text-center text-sm text-yellow-400"><i class="fa-solid fa-clock mr-1"></i> ${c.tiempo}</td>
                     </tr>
                 `;
-                tbody.innerHTML += fila;
+                
+                // Limpiamos el texto del género (por si tiene espacios extra)
+                const generoLimpio = c.genero.toUpperCase().trim();
+                
+                // El Cadenero que decide a qué tabla van
+                if (generoLimpio === 'F' || generoLimpio === 'FEMENINO') {
+                    if(tbFemenino) tbFemenino.innerHTML += fila;
+                } else {
+                    // Si dice 'M', 'MASCULINO', o si alguien dejó la casilla vacía por error, van a Masculino
+                    if(tbMasculino) tbMasculino.innerHTML += fila;
+                }
             });
         }
 
