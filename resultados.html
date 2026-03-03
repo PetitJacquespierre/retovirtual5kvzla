@@ -175,7 +175,8 @@
     </footer>
 
     <script>
-        const urlBaseExcel = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5yMHsenxCWE5kZBDUZ8UcYqDtdAHstfqXcvWkuYZPQ_4n2xSrfs6ptk7k21r1kcMHHLtWjz8SEHwl/pub?gid=0&single=true&output=csv";
+        // 🔗 AQUÍ ESTÁ TU NUEVO LINK CONECTADO
+        const urlBaseExcel = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5yMHsenxCWE5kZBDUZ8UcYqDtdAHstfqXcvWkuYZPQ_4n2xSrfs6ptk7k21r1kcMHHLtWjz8SEHwl/pub?gid=1297920374&single=true&output=csv";
         
         let corredores = [];
 
@@ -187,38 +188,37 @@
                 
                 const filas = datosCsv.split(/\r?\n/);
                 
+                // Empezamos en 1 para saltar los títulos (Dorsal, Nombre, Genero, Tiempo)
                 for(let i = 1; i < filas.length; i++) {
                     if(!filas[i].trim()) continue;
                     
                     const valores = filas[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
                     
-                    // 1. LIMPIEZA NUCLEAR DEL DORSAL
+                    // Columna A (Posición 0): Dorsal
                     let dorsalRaw = valores[0] ? valores[0].replace(/\D/g, '') : '';
-                    
-                    // 🛑 EL CADENERO VIP: Si el dorsal no tiene nada, o si tiene MÁS de 3 números (códigos de Tealca), ¡LO IGNORAMOS!
                     if(dorsalRaw === "" || dorsalRaw.length > 3) continue;
-
-                    // Si pasó el filtro, lo formateamos a 3 dígitos (Ej: 1 -> 001)
                     if(dorsalRaw.length === 2) dorsalRaw = "0" + dorsalRaw;
                     if(dorsalRaw.length === 1) dorsalRaw = "00" + dorsalRaw;
                     const dorsal = dorsalRaw;
                     
-                    // 2. EL RECORTE DE NOMBRES LARGOS
-                    const nombreCompleto = valores[2] ? valores[2].trim().replace(/"/g, '') : '';
+                    // Columna B (Posición 1): Nombre
+                    const nombreCompleto = valores[1] ? valores[1].trim().replace(/"/g, '') : '';
                     let partesNombre = nombreCompleto.split(' ').filter(p => p.length > 0); 
                     let nombreCorto = nombreCompleto;
-                    
                     if (partesNombre.length >= 3) {
                         nombreCorto = partesNombre[0] + " " + partesNombre[partesNombre.length - 2];
                     } else if (partesNombre.length === 2) {
                         nombreCorto = partesNombre[0] + " " + partesNombre[1];
                     }
                     
-                    // 3. LA COLUMNA P (Tiempo)
-                    const tiempoExcel = valores[15] ? valores[15].trim().replace(/"/g, '') : '';
+                    // Columna C (Posición 2): Género 
+                    const genero = valores[2] ? valores[2].trim().replace(/"/g, '') : '';
+
+                    // Columna D (Posición 3): Tiempo
+                    const tiempoExcel = valores[3] ? valores[3].trim().replace(/"/g, '') : '';
                     const tiempo = tiempoExcel !== "" ? tiempoExcel : "Pendiente";
                     
-                    corredores.push({ dorsal: dorsal, nombre: nombreCorto, tiempo: tiempo });
+                    corredores.push({ dorsal: dorsal, nombre: nombreCorto, genero: genero, tiempo: tiempo });
                 }
                 
                 pintarTablaCorredores();
