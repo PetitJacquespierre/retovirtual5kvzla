@@ -186,38 +186,50 @@
         // 🔗 EL LINK DE TU EXCEL
         const urlExcel = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5yMHsenxCWE5kZBDUZ8UcYqDtdAHstfqXcvWkuYZPQ_4n2xSrfs6ptk7k21r1kcMHHLtWjz8SEHwl/pub?gid=0&single=true&output=csv";
         
-        let corredores = []; // Aquí se guardarán los datos mágicamente
+        let corredores = [];
 
-        // 1️⃣ FUNCIÓN QUE LEE EL EXCEL AL ABRIR LA PÁGINA
         async function cargarDatosDesdeExcel() {
             try {
                 const respuesta = await fetch(urlExcel);
                 const datosCsv = await respuesta.text();
                 
-                // Separamos por filas
-                const filas = datosCsv.split('\n');
+                // CORRECCIÓN FANTASMA: El /\r?\n/ elimina los saltos de línea invisibles (El error del 050)
+                const filas = datosCsv.split(/\r?\n/);
                 
-                // Empezamos desde 1 para saltar los títulos (cabeceras) de las columnas
                 for(let i = 1; i < filas.length; i++) {
                     if(!filas[i].trim()) continue;
                     
-                    // Separamos por comas (respetando si hay comillas)
                     const valores = filas[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
                     
-                    // MAPEAMOS TUS COLUMNAS (A=0, B=1, C=2, etc...)
-                    const dorsal = valores[0] ? valores[0].trim().replace(/"/g, '') : '';
-                    const nombre = valores[2] ? valores[2].trim().replace(/"/g, '') : '';
+                    // 1. LIMPIEZA DEL DORSAL (Asegura que siempre sean 3 dígitos, ej: "50" -> "050")
+                    let dorsalRaw = valores[0] ? valores[0].trim().replace(/"/g, '') : '';
+                    if(dorsalRaw.length === 2) dorsalRaw = "0" + dorsalRaw;
+                    if(dorsalRaw.length === 1) dorsalRaw = "00" + dorsalRaw;
+                    const dorsal = dorsalRaw;
                     
-                    // Como no hay columna de tiempo aún, le ponemos un texto provisional
-                    const tiempo = "Pendiente"; 
+                    // 2. EL RECORTE DE NOMBRES LARGOS (Estilo Venezuela: 1er Nombre y 1er Apellido)
+                    const nombreCompleto = valores[2] ? valores[2].trim().replace(/"/g, '') : '';
+                    let partesNombre = nombreCompleto.split(' ').filter(palabra => palabra.length > 0); // filter evita errores si hay espacios dobles
+                    let nombreCorto = nombreCompleto;
                     
-                    // Solo guardamos si el dorsal no está vacío
+                    if (partesNombre.length >= 3) {
+                        // Si tiene 3 o más palabras, toma la Primera [0] y la Penúltima [length - 2]
+                        nombreCorto = partesNombre[0] + " " + partesNombre[partesNombre.length - 2];
+                    } else if (partesNombre.length === 2) {
+                        // Si tiene 2, las deja normal
+                        nombreCorto = partesNombre[0] + " " + partesNombre[1];
+                    }
+                    
+                    // 3. LA COLUMNA P (Tiempo) AUTOMATIZADA
+                    // La columna P es la posición 15. Si hay algo escrito, lo usa. Si está vacía, dice "Pendiente".
+                    const tiempoExcel = valores[15] ? valores[15].trim().replace(/"/g, '') : '';
+                    const tiempo = tiempoExcel !== "" ? tiempoExcel : "Pendiente";
+                    
                     if(dorsal !== "") {
-                        corredores.push({ dorsal: dorsal, nombre: nombre, tiempo: tiempo });
+                        corredores.push({ dorsal: dorsal, nombre: nombreCorto, tiempo: tiempo });
                     }
                 }
                 
-                // Una vez cargados, pintamos la tabla
                 pintarTablaCorredores();
                 
             } catch (error) {
@@ -225,12 +237,11 @@
             }
         }
 
-        // 2️⃣ FUNCIÓN QUE DIBUJA LA TABLA OFICIAL EN LA WEB
         function pintarTablaCorredores() {
             const tbody = document.getElementById('tabla-corredores');
-            if(!tbody) return; // Si no encuentra la tabla, no hace nada
+            if(!tbody) return; 
             
-            tbody.innerHTML = ''; // Limpiamos la tabla
+            tbody.innerHTML = ''; 
             
             corredores.forEach(c => {
                 const fila = `
@@ -244,41 +255,40 @@
             });
         }
 
-        // 3️⃣ EL BUSCADOR (SISTEMA ANTI-TRAMPAS)
         function mostrarCertificado() {
-            const dorsalIngresado = document.getElementById('input-dorsal').value.trim();
+            let dorsalIngresado = document.getElementById('input-dorsal').value.trim();
 
             if(dorsalIngresado === "") {
                 alert("⚠️ ¡Epa campeón! Ingresa un número de dorsal primero.");
                 return;
             }
 
-            // Busca si el dorsal está en el Excel
+            // Aseguramos que lo que escriba la persona también tenga 3 dígitos
+            if(dorsalIngresado.length === 2) dorsalIngresado = "0" + dorsalIngresado;
+            if(dorsalIngresado.length === 1) dorsalIngresado = "00" + dorsalIngresado;
+
             const corredorEncontrado = corredores.find(c => c.dorsal === dorsalIngresado);
 
             if (corredorEncontrado) {
-                // SI EXISTE: Le pone sus datos al diploma
                 document.getElementById('cert-nombre').innerText = corredorEncontrado.nombre;
                 document.getElementById('cert-dorsal').innerText = corredorEncontrado.dorsal;
                 document.getElementById('cert-tiempo').innerText = corredorEncontrado.tiempo;
 
-                // Muestra la caja y el botón
                 document.getElementById('mi-certificado-objetivo').style.display = 'block';
                 document.getElementById('btn-descargar').classList.remove('hidden');
             } else {
-                // SI NO EXISTE: Sistema bloquea y manda alerta (El caso de "Pedrito")
                 alert("🛑 ¡ALTO AHÍ! El dorsal '" + dorsalIngresado + "' no existe en nuestra base de datos o no te has inscrito.");
                 
-                // Oculta el diploma y botón por seguridad
                 document.getElementById('mi-certificado-objetivo').style.display = 'none';
                 document.getElementById('btn-descargar').classList.add('hidden');
             }
         }
 
-        // 4️⃣ FUNCIÓN DEL FOTÓGRAFO (DESCARGA)
         function descargarCertificado() {
             const certificadoObjetivo = document.getElementById('mi-certificado-objetivo');
-            const numDorsal = document.getElementById('input-dorsal').value.trim();
+            let numDorsal = document.getElementById('input-dorsal').value.trim();
+            if(numDorsal.length === 2) numDorsal = "0" + numDorsal;
+            if(numDorsal.length === 1) numDorsal = "00" + numDorsal;
 
             html2canvas(certificadoObjetivo, { 
                 scale: 2, 
@@ -292,7 +302,6 @@
             });
         }
 
-        // ¡ESTO ENCIENDE EL MOTOR AL ABRIR LA PÁGINA!
         window.onload = cargarDatosDesdeExcel;
     </script>
 
