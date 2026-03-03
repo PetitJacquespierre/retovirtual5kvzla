@@ -16,7 +16,6 @@
         .venezuela-gradient { background: linear-gradient(90deg, #FCD116 0%, #003893 50%, #CE1126 100%); height: 6px; width: 100%; position: fixed; top: 0; z-index: 60; }
 
         /* --- ESTILOS DEL CERTIFICADO --- */
-        #seccion-certificado-externo { display: block; }
         .contenedor-certificado-objetivo { position: relative; width: 100%; max-width: 800px; margin: 0 auto; border-radius: 12px; overflow: hidden; display: none; }
         .imagen-fondo-certificado { width: 100%; height: auto; display: block; }
         .texto-nombre-certificado { position: absolute; top: 35%; left: 50%; transform: translateX(-50%); color: #FFFFFF; font-size: clamp(16px, 4.5vw, 36px); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin: 0; white-space: nowrap; font-family: 'Montserrat', sans-serif; }
@@ -241,9 +240,9 @@
                 document.getElementById('col-cat').style.display = filtroActual === 'GENERAL' ? 'table-cell' : 'none';
 
                 // 🏅 LÓGICA DEL PODIO
-                let posHtml = `<span class="text-gray-600">-</span>`; // Por defecto, una raya si no ha corrido
+                let posHtml = `<span class="text-gray-600">-</span>`; 
                 if (c.tiempo.toLowerCase() !== "pendiente" && c.tiempo !== "") {
-                    let pos = index + 1; // La posición real
+                    let pos = index + 1; 
                     if (pos === 1) posHtml = '<i class="fa-solid fa-trophy text-yellow-400 text-2xl drop-shadow-[0_0_8px_rgba(250,204,21,0.8)] animate-pulse" title="1er Lugar"></i>';
                     else if (pos === 2) posHtml = '<i class="fa-solid fa-medal text-gray-300 text-2xl drop-shadow-[0_0_5px_rgba(209,213,219,0.8)]" title="2do Lugar"></i>';
                     else if (pos === 3) posHtml = '<i class="fa-solid fa-medal text-orange-400 text-2xl drop-shadow-[0_0_5px_rgba(251,146,60,0.8)]" title="3er Lugar"></i>';
