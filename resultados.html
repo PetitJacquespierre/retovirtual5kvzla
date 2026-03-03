@@ -183,45 +183,99 @@
     </footer>
 
     <script>
-        // 🗄️ TU BASE DE DATOS (Aquí copiarás los datos del Excel del formulario)
-        const corredores = [
-            { dorsal: "001", nombre: "JACQUESPIERRE PETIT", tiempo: "24:50" },
-            { dorsal: "015", nombre: "CARLOS LOPEZ", tiempo: "26:30" },
-            { dorsal: "042", nombre: "MARIA PEREZ", tiempo: "29:15" }
-            // Cuando termine la carrera, aquí pegarás a los otros 47 corredores...
-        ];
+        // 🔗 EL LINK DE TU EXCEL
+        const urlExcel = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5yMHsenxCWE5kZBDUZ8UcYqDtdAHstfqXcvWkuYZPQ_4n2xSrfs6ptk7k21r1kcMHHLtWjz8SEHwl/pub?gid=0&single=true&output=csv";
+        
+        let corredores = []; // Aquí se guardarán los datos mágicamente
 
+        // 1️⃣ FUNCIÓN QUE LEE EL EXCEL AL ABRIR LA PÁGINA
+        async function cargarDatosDesdeExcel() {
+            try {
+                const respuesta = await fetch(urlExcel);
+                const datosCsv = await respuesta.text();
+                
+                // Separamos por filas
+                const filas = datosCsv.split('\n');
+                
+                // Empezamos desde 1 para saltar los títulos (cabeceras) de las columnas
+                for(let i = 1; i < filas.length; i++) {
+                    if(!filas[i].trim()) continue;
+                    
+                    // Separamos por comas (respetando si hay comillas)
+                    const valores = filas[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+                    
+                    // MAPEAMOS TUS COLUMNAS (A=0, B=1, C=2, etc...)
+                    const dorsal = valores[0] ? valores[0].trim().replace(/"/g, '') : '';
+                    const nombre = valores[2] ? valores[2].trim().replace(/"/g, '') : '';
+                    
+                    // Como no hay columna de tiempo aún, le ponemos un texto provisional
+                    const tiempo = "Pendiente"; 
+                    
+                    // Solo guardamos si el dorsal no está vacío
+                    if(dorsal !== "") {
+                        corredores.push({ dorsal: dorsal, nombre: nombre, tiempo: tiempo });
+                    }
+                }
+                
+                // Una vez cargados, pintamos la tabla
+                pintarTablaCorredores();
+                
+            } catch (error) {
+                console.error("Error leyendo el Excel:", error);
+            }
+        }
+
+        // 2️⃣ FUNCIÓN QUE DIBUJA LA TABLA OFICIAL EN LA WEB
+        function pintarTablaCorredores() {
+            const tbody = document.getElementById('tabla-corredores');
+            if(!tbody) return; // Si no encuentra la tabla, no hace nada
+            
+            tbody.innerHTML = ''; // Limpiamos la tabla
+            
+            corredores.forEach(c => {
+                const fila = `
+                    <tr class="hover:bg-gray-700/50 transition-colors border-b border-gray-700">
+                        <td class="p-4 text-center font-bold text-[#00FFFF]">${c.dorsal}</td>
+                        <td class="p-4 font-bold uppercase">${c.nombre}</td>
+                        <td class="p-4 text-center text-sm text-yellow-400"><i class="fa-solid fa-clock mr-1"></i> ${c.tiempo}</td>
+                    </tr>
+                `;
+                tbody.innerHTML += fila;
+            });
+        }
+
+        // 3️⃣ EL BUSCADOR (SISTEMA ANTI-TRAMPAS)
         function mostrarCertificado() {
-            // Atrapamos el dorsal que escribió la persona y le quitamos los espacios en blanco
             const dorsalIngresado = document.getElementById('input-dorsal').value.trim();
 
             if(dorsalIngresado === "") {
-                alert("¡Epa campeón! Ingresa un número de dorsal primero.");
+                alert("⚠️ ¡Epa campeón! Ingresa un número de dorsal primero.");
                 return;
             }
 
-            // 🔍 EL BUSCADOR: Busca en la base de datos si el dorsal existe
+            // Busca si el dorsal está en el Excel
             const corredorEncontrado = corredores.find(c => c.dorsal === dorsalIngresado);
 
             if (corredorEncontrado) {
-                // Si lo encuentra, inyecta TODOS los datos mágicamente
+                // SI EXISTE: Le pone sus datos al diploma
                 document.getElementById('cert-nombre').innerText = corredorEncontrado.nombre;
                 document.getElementById('cert-dorsal').innerText = corredorEncontrado.dorsal;
                 document.getElementById('cert-tiempo').innerText = corredorEncontrado.tiempo;
 
-                // Muestra el diploma y el botón
+                // Muestra la caja y el botón
                 document.getElementById('mi-certificado-objetivo').style.display = 'block';
                 document.getElementById('btn-descargar').classList.remove('hidden');
             } else {
-                // Si alguien pone un dorsal que no existe o que no ha subido su tiempo
-                alert("⏳ Dorsal no encontrado. Asegúrate de escribirlo bien (Ej: 015) o espera a que validemos tu evidencia de Strava.");
+                // SI NO EXISTE: Sistema bloquea y manda alerta (El caso de "Pedrito")
+                alert("🛑 ¡ALTO AHÍ! El dorsal '" + dorsalIngresado + "' no existe en nuestra base de datos o no te has inscrito.");
                 
-                // Oculta el diploma por si había otro abierto antes
+                // Oculta el diploma y botón por seguridad
                 document.getElementById('mi-certificado-objetivo').style.display = 'none';
                 document.getElementById('btn-descargar').classList.add('hidden');
             }
         }
 
+        // 4️⃣ FUNCIÓN DEL FOTÓGRAFO (DESCARGA)
         function descargarCertificado() {
             const certificadoObjetivo = document.getElementById('mi-certificado-objetivo');
             const numDorsal = document.getElementById('input-dorsal').value.trim();
@@ -237,6 +291,9 @@
                 enlace.click(); 
             });
         }
+
+        // ¡ESTO ENCIENDE EL MOTOR AL ABRIR LA PÁGINA!
+        window.onload = cargarDatosDesdeExcel;
     </script>
 
 </body>
