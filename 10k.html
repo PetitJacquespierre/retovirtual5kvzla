@@ -10,13 +10,12 @@
 
     <style>
         body {
-            background-color: #000; /* Fondo totalmente negro */
+            background-color: #000;
             color: #fff;
             margin: 0;
-            overflow: hidden; /* Evita que la gente pueda hacer scroll */
+            overflow: hidden;
         }
 
-        /* Animación para que los elementos aparezcan como fantasmas */
         .fade-in {
             opacity: 0;
             animation: aparecer 4s ease-in forwards;
@@ -27,13 +26,12 @@
             100% { opacity: 1; filter: blur(0px); }
         }
 
-        /* Tiempos de aparición (Efecto suspenso) */
         .delay-1 { animation-delay: 1s; }
         .delay-2 { animation-delay: 3s; }
         .delay-3 { animation-delay: 5s; }
         .delay-4 { animation-delay: 7s; }
+        .delay-5 { animation-delay: 9s; }
 
-        /* Efecto de ruido/estática de fondo muy sutil */
         .ruido-fondo {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -48,23 +46,32 @@
 
     <div class="ruido-fondo"></div>
 
-    <img src="image_0.png" alt="Logo Oculto" class="h-32 md:h-48 mb-12 opacity-30 grayscale fade-in delay-1" style="filter: brightness(0.4);">
+    <img src="image_0.png" alt="Logo Oculto" class="h-32 md:h-48 mb-6 opacity-30 grayscale fade-in delay-1" style="filter: brightness(0.4);">
 
-    <p class="font-['Courier_Prime'] text-gray-500 tracking-[0.5em] md:tracking-[1em] text-sm md:text-lg mb-6 fade-in delay-2">
+    <p class="font-['Courier_Prime'] text-gray-500 tracking-[0.5em] md:tracking-[1em] text-sm md:text-lg mb-4 fade-in delay-2">
         PRÓXIMAMENTE
     </p>
 
-    <h1 class="font-['Montserrat'] font-black text-5xl md:text-7xl lg:text-8xl tracking-tighter mb-8 fade-in delay-3" style="text-shadow: 0 0 20px rgba(255,255,255,0.1);">
+    <h1 class="font-['Montserrat'] font-black text-5xl md:text-7xl lg:text-8xl tracking-tighter mb-4 fade-in delay-3" style="text-shadow: 0 0 20px rgba(255,255,255,0.1);">
         RETO <span class="text-red-700">10K</span>
     </h1>
 
-    <div class="border border-red-900/50 bg-red-900/10 px-8 py-3 rounded-sm fade-in delay-4">
+    <div class="border border-red-900/50 bg-red-900/10 px-8 py-3 rounded-sm fade-in delay-4 mb-6">
         <p class="font-['Courier_Prime'] text-red-500 tracking-widest text-lg md:text-xl">
             > SOLO 50 CUPOS_
         </p>
     </div>
 
-    <a href="index.html" class="absolute bottom-10 font-['Courier_Prime'] text-gray-700 text-xs hover:text-white transition fade-in" style="animation-delay: 10s;">
+    <div class="fade-in delay-5 flex flex-col items-center gap-4">
+        <p class="font-['Courier_Prime'] text-gray-400 tracking-[0.2em] md:tracking-widest text-sm md:text-base border-b border-gray-800 pb-2">
+            [ ACCESO ESTRICTAMENTE POR LISTA DE ESPERA ]
+        </p>
+        <p class="font-['Courier_Prime'] text-gray-600 tracking-widest text-xs md:text-sm animate-pulse">
+            > PRONTO MÁS INFORMACIÓN_
+        </p>
+    </div>
+
+    <a href="index.html" class="mt-12 font-['Courier_Prime'] text-gray-700 text-xs hover:text-white transition fade-in" style="animation-delay: 12s;">
         [ Regresar al sistema principal ]
     </a>
 
