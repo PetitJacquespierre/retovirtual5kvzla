@@ -95,40 +95,64 @@
     <nav class="bg-[#003893] shadow-md fixed w-full top-[6px] z-40 transition-all duration-300" id="navbar">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-20">
+      
       <div class="flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
-        <img src="image_0.png" alt="Logo"
-             class="h-24 w-auto object-contain hidden md:block"
-             onerror="this.style.display='none'; document.getElementById('fallback-logo').classList.remove('hidden');">
-        <i id="fallback-logo"
-           class="fa-solid fa-person-running text-3xl text-blue-900 border-2 border-yellow-400 rounded-full p-2 md:hidden"></i>
+        <img src="image_0.png" alt="Logo" class="h-16 md:h-24 w-auto object-contain" onerror="this.style.display='none'; document.getElementById('fallback-logo').classList.remove('hidden');">
+        <i id="fallback-logo" class="fa-solid fa-person-running text-3xl text-yellow-400 border-2 border-yellow-400 rounded-full p-2 hidden"></i>
 
-        <span class="font-heading font-extrabold text-xl md:text-2xl text-white tracking-tight">
-          RETO VIRTUAL 5K <span class="text-yellow-400">VENEZUELA</span>
+        <span class="font-heading font-extrabold text-lg md:text-2xl text-white tracking-tight leading-tight">
+          RETO VIRTUAL <br class="md:hidden"><span class="text-yellow-400">VENEZUELA</span>
         </span>
       </div>
 
-      <!-- Menú desktop -->
+      <button id="mobile-menu-btn" class="md:hidden text-white hover:text-yellow-400 focus:outline-none transition">
+        <i class="fa-solid fa-bars text-3xl"></i>
+      </button>
+
       <div class="hidden md:flex space-x-4 lg:space-x-6 items-center">
         <a href="#info" class="text-white hover:text-yellow-300 font-semibold transition whitespace-nowrap">El Reto</a>
         <a href="#experiencia-digital" class="text-white hover:text-yellow-300 font-semibold transition whitespace-nowrap">Kit Digital</a>
         <a href="#preparacion-ia" class="text-yellow-300 font-bold hover:opacity-80 transition whitespace-nowrap">Preparación IA</a>
-        
-      <a href="resultados.html" class="text-white hover:text-yellow-300 font-semibold transition flex items-center gap-1 whitespace-nowrap">
+        <a href="resultados.html" class="text-white hover:text-yellow-300 font-semibold transition flex items-center gap-1 whitespace-nowrap">
             <i class="fa-solid fa-ranking-star"></i> Resultados
         </a>
         
-
         <a href="10k.html" class="glitch-item text-white text-xs cursor-crosshair whitespace-nowrap" title="System Error">
-    <span class="glitch-text">&lt;_Error_10.k&gt;</span>
-</a>
-
+            <span class="glitch-text">&lt;_Error_10.k&gt;</span>
+        </a>
+        
         <a href="#podium-digital" class="bg-yellow-400 text-blue-900 px-6 py-2 rounded-full font-black hover:bg-yellow-300 transition shadow-[0_0_15px_rgba(250,204,21,0.5)] transform hover:-translate-y-0.5 flex items-center gap-2 whitespace-nowrap">
-          <i class="fa-solid fa-cloud-arrow-up"></i> Subir Tiempo
+          <i class="fa-solid fa-cloud-arrow-up"></i> Validar Tiempo
         </a>
       </div>
     </div>
   </div>
+
+  <div id="mobile-menu" class="hidden md:hidden bg-[#003893] w-full absolute top-20 left-0 border-t border-blue-800 shadow-2xl flex flex-col px-4 py-6 space-y-5 text-center transition-all duration-300">
+    <a href="#info" class="text-white hover:text-yellow-300 font-bold text-lg" onclick="toggleMenu()">El Reto</a>
+    <a href="#experiencia-digital" class="text-white hover:text-yellow-300 font-bold text-lg" onclick="toggleMenu()">Kit Digital</a>
+    <a href="#preparacion-ia" class="text-yellow-300 font-bold text-lg" onclick="toggleMenu()">Preparación IA</a>
+    <a href="resultados.html" class="text-white hover:text-yellow-300 font-bold text-lg flex items-center justify-center gap-2" onclick="toggleMenu()">
+        <i class="fa-solid fa-ranking-star"></i> Resultados
+    </a>
+    
+    <a href="10k.html" class="glitch-item text-white text-xs cursor-crosshair mx-auto mt-2" title="System Error">
+        <span class="glitch-text">&lt;_Error_10.k&gt;</span>
+    </a>
+    
+    <a href="#podium-digital" class="bg-yellow-400 text-blue-900 px-6 py-3 rounded-full font-black text-lg mx-auto shadow-lg flex items-center gap-2 mt-4" onclick="toggleMenu()">
+        <i class="fa-solid fa-cloud-arrow-up"></i> Validar Tiempo
+    </a>
+  </div>
 </nav>
+
+<script>
+    function toggleMenu() {
+        const menu = document.getElementById('mobile-menu');
+        menu.classList.toggle('hidden');
+    }
+    document.getElementById('mobile-menu-btn').addEventListener('click', toggleMenu);
+</script>
 
 
     <section id="hero-carousel" class="relative h-screen text-white overflow-hidden">
