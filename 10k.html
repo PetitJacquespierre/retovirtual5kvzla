@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso Restringido</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&family=Courier+Prime&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #000; /* Fondo totalmente negro */
+            color: #fff;
+            margin: 0;
+            overflow: hidden; /* Evita que la gente pueda hacer scroll */
+        }
+
+        /* Animación para que los elementos aparezcan como fantasmas */
+        .fade-in {
+            opacity: 0;
+            animation: aparecer 4s ease-in forwards;
+        }
+
+        @keyframes aparecer {
+            0% { opacity: 0; filter: blur(10px); }
+            100% { opacity: 1; filter: blur(0px); }
+        }
+
+        /* Tiempos de aparición (Efecto suspenso) */
+        .delay-1 { animation-delay: 1s; }
+        .delay-2 { animation-delay: 3s; }
+        .delay-3 { animation-delay: 5s; }
+        .delay-4 { animation-delay: 7s; }
+
+        /* Efecto de ruido/estática de fondo muy sutil */
+        .ruido-fondo {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+            opacity: 0.15;
+            z-index: -1;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="h-screen flex flex-col items-center justify-center text-center px-4 relative">
+
+    <div class="ruido-fondo"></div>
+
+    <img src="image_0.png" alt="Logo Oculto" class="h-32 md:h-48 mb-12 opacity-30 grayscale fade-in delay-1" style="filter: brightness(0.4);">
+
+    <p class="font-['Courier_Prime'] text-gray-500 tracking-[0.5em] md:tracking-[1em] text-sm md:text-lg mb-6 fade-in delay-2">
+        PRÓXIMAMENTE
+    </p>
+
+    <h1 class="font-['Montserrat'] font-black text-5xl md:text-7xl lg:text-8xl tracking-tighter mb-8 fade-in delay-3" style="text-shadow: 0 0 20px rgba(255,255,255,0.1);">
+        RETO <span class="text-red-700">10K</span>
+    </h1>
+
+    <div class="border border-red-900/50 bg-red-900/10 px-8 py-3 rounded-sm fade-in delay-4">
+        <p class="font-['Courier_Prime'] text-red-500 tracking-widest text-lg md:text-xl">
+            > SOLO 50 CUPOS_
+        </p>
+    </div>
+
+    <a href="index.html" class="absolute bottom-10 font-['Courier_Prime'] text-gray-700 text-xs hover:text-white transition fade-in" style="animation-delay: 10s;">
+        [ Regresar al sistema principal ]
+    </a>
+
+</body>
+</html>

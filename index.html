@@ -39,6 +39,52 @@
         .animate-float {
             animation: levitate 4s ease-in-out infinite;
         }
+
+/* --- EFECTO GLITCH 10K OCULTO --- */
+        .glitch-item {
+            position: relative;
+            display: inline-block;
+            font-family: monospace;
+            color: white; /* Forzamos el color blanco */
+            opacity: 0.3; /* Subimos la opacidad temporalmente para que lo encuentres */
+            transition: all 0.3s ease;
+        }
+
+        .glitch-item:hover {
+            opacity: 1;
+            color: #ef4444; /* Rojo alerta */
+            text-shadow: 2px 0 #000, -2px 0 #000;
+        }
+
+        .glitch-text {
+            animation: glitch-anim 4s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0%, 94%, 96%, 98%, 100% {
+                opacity: 0.3;
+                transform: skew(0deg);
+                filter: blur(0px);
+            }
+            95% {
+                opacity: 1;
+                color: #ef4444; /* Rojo */
+                transform: skew(-15deg);
+                filter: blur(1px);
+            }
+            97% {
+                opacity: 1;
+                color: #eab308; /* Amarillo */
+                transform: skew(10deg);
+            }
+            99% {
+                opacity: 1;
+                color: #fff; /* Blanco */
+                transform: skew(-5deg);
+            }
+        }
+        /* -------------------------------- */
+
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
@@ -62,16 +108,21 @@
       </div>
 
       <!-- Menú desktop -->
-      <div class="hidden md:flex space-x-8 items-center">
-        <a href="#info" class="text-white hover:text-yellow-300 font-semibold transition">El Reto</a>
-        <a href="#experiencia-digital" class="text-white hover:text-yellow-300 font-semibold transition">Kit Digital</a>
-        <a href="#preparacion-ia" class="text-yellow-300 font-bold hover:opacity-80 transition">Preparación IA</a>
+      <div class="hidden md:flex space-x-4 lg:space-x-6 items-center">
+        <a href="#info" class="text-white hover:text-yellow-300 font-semibold transition whitespace-nowrap">El Reto</a>
+        <a href="#experiencia-digital" class="text-white hover:text-yellow-300 font-semibold transition whitespace-nowrap">Kit Digital</a>
+        <a href="#preparacion-ia" class="text-yellow-300 font-bold hover:opacity-80 transition whitespace-nowrap">Preparación IA</a>
         
-      <a href="resultados.html" class="text-white hover:text-yellow-300 font-semibold transition flex items-center gap-1">
+      <a href="resultados.html" class="text-white hover:text-yellow-300 font-semibold transition flex items-center gap-1 whitespace-nowrap">
             <i class="fa-solid fa-ranking-star"></i> Resultados
         </a>
         
-        <a href="#podium-digital" class="bg-yellow-400 text-blue-900 px-6 py-2 rounded-full font-black hover:bg-yellow-300 transition shadow-[0_0_15px_rgba(250,204,21,0.5)] transform hover:-translate-y-0.5 flex items-center gap-2">
+
+        <a href="10k.html" class="glitch-item text-white text-xs cursor-crosshair whitespace-nowrap" title="System Error">
+    <span class="glitch-text">&lt;_Error_10.k&gt;</span>
+</a>
+
+        <a href="#podium-digital" class="bg-yellow-400 text-blue-900 px-6 py-2 rounded-full font-black hover:bg-yellow-300 transition shadow-[0_0_15px_rgba(250,204,21,0.5)] transform hover:-translate-y-0.5 flex items-center gap-2 whitespace-nowrap">
           <i class="fa-solid fa-cloud-arrow-up"></i> Subir Tiempo
         </a>
       </div>
