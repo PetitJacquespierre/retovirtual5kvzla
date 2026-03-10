@@ -221,12 +221,20 @@
                 corredoresFiltrados = corredores.filter(c => c.genero.toUpperCase().trim() === 'F' || c.genero.toUpperCase().trim() === 'FEMENINO');
             }
 
-            // ORDENAR POR TIEMPO
+           // ORDENAR POR TIEMPO (AHORA LEE HORAS, MINUTOS Y SEGUNDOS)
             corredoresFiltrados.sort((a, b) => {
                 function tiempoASegundos(t) {
                     if (!t || t.toLowerCase() === "pendiente" || !t.includes(":")) return 999999;
                     let partes = t.split(":");
-                    return parseInt(partes[0]) * 60 + parseInt(partes[1]);
+                    
+                    // Si el tiempo tiene formato 0:00:00 (Horas:Minutos:Segundos)
+                    if (partes.length === 3) {
+                        return (parseInt(partes[0]) * 3600) + (parseInt(partes[1]) * 60) + parseInt(partes[2]);
+                    } 
+                    // Si el tiempo tiene formato 00:00 (Minutos:Segundos)
+                    else {
+                        return (parseInt(partes[0]) * 60) + parseInt(partes[1]);
+                    }
                 }
                 return tiempoASegundos(a.tiempo) - tiempoASegundos(b.tiempo);
             });
