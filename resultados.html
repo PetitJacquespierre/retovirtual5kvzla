@@ -334,6 +334,12 @@
         }
 
         window.onload = cargarDatosDesdeExcel;
+// Escuchar la tecla Enter en el buscador de dorsal
+document.getElementById('input-dorsal').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        mostrarCertificado();
+    }
+});
     </script>
 
 </body>
