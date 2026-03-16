@@ -139,46 +139,52 @@
         let filtroActual = 'GENERAL'; 
 
         async function cargarDatosDesdeExcel() {
-            try {
-                const urlFresca = urlBaseExcel + "&t=" + new Date().getTime();
-                const respuesta = await fetch(urlFresca);
-                const datosCsv = await respuesta.text();
-                
-                const filas = datosCsv.split(/\r?\n/);
-                
-                for(let i = 1; i < filas.length; i++) {
-                    if(!filas[i].trim()) continue;
-                    
-                    const valores = filas[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
-                    
-                    let dorsalRaw = valores[0] ? valores[0].replace(/\D/g, '') : '';
-                    if(dorsalRaw === "" || dorsalRaw.length > 3) continue;
-                    if(dorsalRaw.length === 2) dorsalRaw = "0" + dorsalRaw;
-                    if(dorsalRaw.length === 1) dorsalRaw = "00" + dorsalRaw;
-                    const dorsal = dorsalRaw;
-                    
-                    const nombreCompleto = valores[1] ? valores[1].trim().replace(/"/g, '') : '';
-                    let partesNombre = nombreCompleto.split(' ').filter(p => p.length > 0); 
-                    let nombreCorto = nombreCompleto;
-                    if (partesNombre.length >= 3) {
-                        nombreCorto = partesNombre[0] + " " + partesNombre[partesNombre.length - 2];
-                    } else if (partesNombre.length === 2) {
-                        nombreCorto = partesNombre[0] + " " + partesNombre[1];
-                    }
-                    
-                    const genero = valores[2] ? valores[2].trim().replace(/"/g, '') : '';
-                    const tiempoExcel = valores[3] ? valores[3].trim().replace(/"/g, '') : '';
-                    const tiempo = tiempoExcel !== "" ? tiempoExcel : "Pendiente";
-                    
-                    corredores.push({ dorsal: dorsal, nombre: nombreCorto, genero: genero, tiempo: tiempo });
-                }
-                
-                pintarTablaCorredores(); 
-                
-            } catch (error) {
-                console.error("Error leyendo el Excel:", error);
-            }
+    try {
+        const urlFresca = urlBaseExcel + "&t=" + new Date().getTime();
+        const respuesta = await fetch(urlFresca);
+        const datosCsv = await respuesta.text();
+        
+        const filas = datosCsv.split(/\r?\n/);
+        corredores = []; // Limpiamos para evitar duplicados al recargar
+
+        for(let i = 1; i < filas.length; i++) {
+            if(!filas[i].trim()) continue;
+            
+            const valores = filas[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+            
+            let dorsalRaw = valores[0] ? valores[0].replace(/\D/g, '') : '';
+            if(dorsalRaw === "" || dorsalRaw.length > 3) continue;
+            dorsalRaw = dorsalRaw.padStart(3, '0'); // Esto pone los ceros automáticamente (1 -> 001)
+            
+            const dorsal = dorsalRaw;
+            const nombreCompleto = valores[1] ? valores[1].trim().replace(/"/g, '') : '';
+            
+            // --- LÓGICA DE NOMBRE PARA CERTIFICADO ---
+            let p = nombreCompleto.split(' ').filter(word => word.length > 0);
+            let nCorto = nombreCompleto;
+
+            if (p.length === 2) nCorto = p[0] + " " + p[1];
+            else if (p.length === 3) nCorto = p[0] + " " + p[2];
+            else if (p.length === 4) nCorto = p[0] + " " + p[2];
+            else if (p.length >= 5) nCorto = p[0] + " " + p[3];
+            
+            const genero = valores[2] ? valores[2].trim().replace(/"/g, '') : '';
+            const tiempoExcel = valores[3] ? valores[3].trim().replace(/"/g, '') : '';
+            const tiempo = tiempoExcel !== "" ? tiempoExcel : "Pendiente";
+            
+            corredores.push({ dorsal: dorsal, nombre: nCorto, genero: genero, tiempo: tiempo });
         }
+        
+        pintarTablaCorredores();
+
+        // DESBLOQUEO AUTOMÁTICO (Hoy es 16 de Marzo, ya debería estar libre)
+        document.getElementById('candado-certificado').classList.add('hidden');
+        document.getElementById('seccion-certificado-externo').classList.remove('hidden');
+        
+    } catch (error) {
+        console.error("Error leyendo el Excel:", error);
+    }
+}
 
         function cambiarFiltro(filtro) {
             filtroActual = filtro;
