@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro de Ayuda - Reto Virtual VZLA 2026</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-heading { font-family: 'Montserrat', sans-serif; }
+        .bg-boston-navy { background-color: #001E50; }
+        .text-accent { color: #00D2FF; } 
+        .bg-accent { background-color: #00D2FF; }
+        
+        /* Efecto Acordeón */
+        .faq-answer { max-height: 0; overflow: hidden; transition: all 0.3s ease-out; opacity: 0; }
+        .faq-item.active .faq-answer { max-height: 600px; padding-top: 1.5rem; opacity: 1; }
+        .faq-item.active .chevron-icon { transform: rotate(180deg); }
+        
+        /* Buscador */
+        .search-container input:focus { border-color: #00D2FF; box-shadow: 0 0 15px rgba(0, 210, 255, 0.2); }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen">
+
+    <nav class="bg-boston-navy py-6 shadow-xl sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <div class="flex items-center gap-6">
+                <img src="image_0.png" alt="Logo" class="h-16 md:h-20 w-auto object-contain brightness-125">
+                <div class="h-10 w-[1px] bg-white/20 hidden md:block"></div>
+                <div class="hidden md:flex flex-col">
+                    <span class="text-[8px] text-white/50 font-bold uppercase tracking-widest leading-none mb-1">Presentado por</span>
+                    <span class="text-white font-black text-xl italic tracking-tighter">TEAMFS</span>
+                </div>
+            </div>
+            <a href="index.html" class="bg-white/10 hover:bg-accent hover:text-boston-navy text-white px-8 py-3 rounded-full font-bold transition-all text-xs uppercase tracking-widest border border-white/10">
+                <i class="fa-solid fa-house mr-2"></i> Inicio
+            </a>
+        </div>
+    </nav>
+
+    <header class="py-20 bg-white border-b border-slate-200 text-center relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-accent/5 rounded-full blur-3xl -translate-y-1/2"></div>
+        <div class="max-w-4xl mx-auto px-6 relative z-10">
+            <span class="text-accent font-bold text-[10px] uppercase tracking-[0.5em] mb-4 block">Soporte al Corredor</span>
+            <h1 class="text-[#001E50] text-4xl md:text-6xl font-black uppercase italic tracking-tighter mb-10">Centro de <span class="text-accent">Ayuda</span></h1>
+            
+            <div class="relative search-container max-w-2xl mx-auto">
+                <i class="fa-solid fa-magnifying-glass absolute left-6 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                <input type="text" id="faqSearch" onkeyup="filterFaq()" placeholder="¿En qué podemos ayudarte? (ej: evidencia, envío, medalla...)" 
+                       class="w-full bg-slate-50 border-2 border-slate-200 rounded-2xl py-5 pl-16 pr-6 text-sm font-medium transition-all outline-none">
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-6 py-16">
+        
+        <div class="faq-section mb-16" id="seccion-evidencia">
+            <h2 class="text-boston-navy font-black text-xs uppercase tracking-[0.4em] mb-8 flex items-center gap-3">
+                <i class="fa-solid fa-star text-accent"></i> Guía Crítica
+            </h2>
+            <div class="faq-item bg-white border-2 border-accent rounded-[2rem] p-8 cursor-pointer shadow-lg hover:shadow-xl transition-all active" data-search="evidencia tiempo captura strava garmin subir foto reporte">
+                <div class="flex justify-between items-center" onclick="toggleFaq(this)">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-accent rounded-full flex items-center justify-center text-boston-navy shadow-inner">
+                            <i class="fa-solid fa-cloud-arrow-up text-xl"></i>
+                        </div>
+                        <h3 class="font-black text-base md:text-xl uppercase text-boston-navy tracking-tighter italic">¿Cómo subo mi evidencia de carrera?</h3>
+                    </div>
+                    <i class="fa-solid fa-chevron-down text-accent chevron-icon transition-transform"></i>
+                </div>
+                <div class="faq-answer !opacity-100 !max-h-[800px] !pt-6">
+                    <p class="text-slate-500 text-sm mb-6 leading-relaxed">Para que <b>TeamFS</b> valide tu tiempo oficial, sigue este proceso de 3 pasos:</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 text-center">
+                            <span class="text-accent font-black text-2xl">01</span>
+                            <p class="font-bold text-boston-navy text-[10px] uppercase mt-2">Captura</p>
+                            <p class="text-[11px] text-slate-400 mt-1 leading-tight">Screenshot de tu App (Strava, Nike, etc) con distancia y tiempo.</p>
+                        </div>
+                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 text-center">
+                            <span class="text-accent font-black text-2xl">02</span>
+                            <p class="font-bold text-boston-navy text-[10px] uppercase mt-2">Identifica</p>
+                            <p class="text-[11px] text-slate-400 mt-1 leading-tight">Ten a mano tu número de Dorsal asignado.</p>
+                        </div>
+                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 text-center">
+                            <span class="text-accent font-black text-2xl">03</span>
+                            <p class="font-bold text-boston-navy text-[10px] uppercase mt-2">Envía</p>
+                            <p class="text-[11px] text-slate-400 mt-1 leading-tight">Sube todo al link de registro o envíalo vía WhatsApp oficial.</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-400 italic">Nota: El sistema de resultados se actualiza cada 24 horas después de recibir tu evidencia.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="space-y-4" id="faqList">
+            
+            <div class="faq-item bg-white border border-slate-200 rounded-2xl p-6 cursor-pointer hover:border-accent/30 transition-all shadow-sm" data-search="inscripcion pago cupo zelle transferir">
+                <div class="flex justify-between items-center" onclick="toggleFaq(this)">
+                    <h3 class="font-bold text-sm uppercase text-boston-navy tracking-tight">¿Cómo reservo mi cupo oficial?</h3>
+                    <i class="fa-solid fa-chevron-down text-accent chevron-icon transition-transform"></i>
+                </div>
+                <div class="faq-answer text-slate-500 text-sm leading-relaxed">
+                    Selecciona tu distancia en el inicio, realiza el pago (Pago Móvil, Transferencia o Zelle) y reporta tu pago al WhatsApp de soporte. Recibirás tu dorsal digital de confirmación en menos de 24 horas.
+                </div>
+            </div>
+
+            <div class="faq-item bg-white border border-slate-200 rounded-2xl p-6 cursor-pointer hover:border-accent/30 transition-all shadow-sm" data-search="lugar donde correr ruta parque caminadora ciudad">
+                <div class="flex justify-between items-center" onclick="toggleFaq(this)">
+                    <h3 class="font-bold text-sm uppercase text-boston-navy tracking-tight">¿Puedo correr en cualquier lugar de Venezuela?</h3>
+                    <i class="fa-solid fa-chevron-down text-accent chevron-icon transition-transform"></i>
+                </div>
+                <div class="faq-answer text-slate-500 text-sm leading-relaxed">
+                    ¡Exacto! Esa es la magia del Reto Virtual. Puedes correr en tu ruta favorita, en un parque de tu ciudad o incluso en una caminadora de gimnasio. Solo asegúrate de registrarlo con tu GPS.
+                </div>
+            </div>
+
+            <div class="faq-item bg-white border border-slate-200 rounded-2xl p-6 cursor-pointer hover:border-accent/30 transition-all shadow-sm" data-search="envio medalla zoom mrw fecha recibir fisico entrega">
+                <div class="flex justify-between items-center" onclick="toggleFaq(this)">
+                    <h3 class="font-bold text-sm uppercase text-boston-navy tracking-tight">¿Cuándo y cómo recibo mi medalla física?</h3>
+                    <i class="fa-solid fa-chevron-down text-accent chevron-icon transition-transform"></i>
+                </div>
+                <div class="faq-answer text-slate-500 text-sm leading-relaxed">
+                    Los envíos se procesan por Zoom o MRW una vez finalizada la ventana oficial de carrera (aproximadamente 7-15 días hábiles después). El costo del envío corre por cuenta del atleta (cobro en destino).
+                </div>
+            </div>
+
+            <div class="faq-item bg-white border border-slate-200 rounded-2xl p-6 cursor-pointer hover:border-accent/30 transition-all shadow-sm" data-search="distancia cambiar 5k 10k error inscripcion">
+                <div class="flex justify-between items-center" onclick="toggleFaq(this)">
+                    <h3 class="font-bold text-sm uppercase text-boston-navy tracking-tight">¿Puedo cambiar mi distancia de 5K a 10K?</h3>
+                    <i class="fa-solid fa-chevron-down text-accent chevron-icon transition-transform"></i>
+                </div>
+                <div class="faq-answer text-slate-500 text-sm leading-relaxed">
+                    Sí, siempre y cuando lo notifiques antes de que inicie la fecha oficial de la carrera. Ten en cuenta que si cambias a 10K deberás cancelar la diferencia por la medalla de metal.
+                </div>
+            </div>
+
+            <div class="faq-item bg-white border border-slate-200 rounded-2xl p-6 cursor-pointer hover:border-accent/30 transition-all shadow-sm" data-search="reloj gps falla bateria error captura manual">
+                <div class="flex justify-between items-center" onclick="toggleFaq(this)">
+                    <h3 class="font-bold text-sm uppercase text-boston-navy tracking-tight">¿Qué pasa si mi GPS falla durante la carrera?</h3>
+                    <i class="fa-solid fa-chevron-down text-accent chevron-icon transition-transform"></i>
+                </div>
+                <div class="faq-answer text-slate-500 text-sm leading-relaxed">
+                    Recomendamos usar siempre una segunda App como respaldo. Si el error persiste, comunícate de inmediato con soporte adjuntando cualquier prueba parcial para evaluar tu caso.
+                </div>
+            </div>
+
+        </div>
+
+        <div class="bg-boston-navy rounded-[3rem] p-12 text-center shadow-2xl relative overflow-hidden mt-24">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-accent/10 rounded-full blur-3xl"></div>
+            <h3 class="text-white font-black text-2xl uppercase mb-4 tracking-tighter italic">¿No encontraste respuesta?</h3>
+            <p class="text-white/60 text-xs uppercase tracking-[0.3em] mb-10">Nuestro equipo de soporte está en línea</p>
+            <a href="https://wa.me/584127732710" class="bg-accent text-boston-navy font-black px-12 py-5 rounded-full uppercase text-[10px] tracking-widest hover:scale-105 transition-all inline-block shadow-xl">
+                <i class="fa-brands fa-whatsapp mr-2 text-base"></i> WhatsApp Soporte
+            </a>
+        </div>
+    </main>
+
+    <footer class="bg-boston-navy py-16 text-center border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-12">
+                
+                <div class="text-center md:text-left">
+                    <img src="image_0.png" class="h-12 mx-auto md:mx-0 grayscale brightness-200 opacity-20 mb-4">
+                    <p class="text-white/20 text-[9px] uppercase tracking-[0.5em]">
+                        Reto Virtual VZLA 2026
+                    </p>
+                </div>
+
+                <div class="flex gap-8">
+                    <a href="https://wa.me/584127732710" class="text-white/20 hover:text-accent transition-all text-xl"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="https://www.instagram.com/retovirtual.vzla/" class="text-white/20 hover:text-accent transition-all text-xl"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+
+                <div class="md:text-right">
+                    <h4 class="text-accent font-bold text-[10px] uppercase tracking-[0.3em] mb-2 opacity-80">Desarrollado por</h4>
+                    <a href="https://www.instagram.com/team_fs__/" target="_blank" class="group">
+                        <p class="text-white font-black text-3xl italic tracking-tighter uppercase opacity-80 group-hover:text-accent transition-all">TeamFS</p>
+                        <p class="text-[9px] text-white/20 uppercase tracking-widest mt-1">Socio Tecnológico Oficial</p>
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="mt-16 pt-8 border-t border-white/5">
+                <p class="text-white/10 text-[8px] uppercase tracking-[0.6em]">The Road to Glory | All Rights Reserved</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Función para abrir/cerrar acordeón
+        function toggleFaq(element) {
+            const item = element.parentElement;
+            item.classList.toggle('active');
+        }
+
+        // Buscador Inteligente
+        function filterFaq() {
+            const input = document.getElementById('faqSearch');
+            const filter = input.value.toLowerCase();
+            const faqItems = document.querySelectorAll('.faq-item');
+
+            faqItems.forEach(item => {
+                const searchText = item.getAttribute('data-search') + " " + item.innerText.toLowerCase();
+                if (searchText.includes(filter)) {
+                    item.style.display = "block";
+                } else {
+                    item.style.display = "none";
+                }
+            });
+        }
+    </script>
+</body>
+</html>

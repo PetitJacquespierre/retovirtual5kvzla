@@ -3,919 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reto Virtual 5K Venezuela - 1era Edición 2026</title>
-    
+    <title>Reto Virtual VZLA 2026 — Próximamente</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Merriweather:wght@900&family=Permanent+Marker&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Open Sans', sans-serif; }
-        h1, h2, h3, h4, .font-heading { font-family: 'Montserrat', sans-serif; }
-        .font-marker { font-family: 'Permanent Marker', cursive; }
-        
-        /* Gradiente Venezuela */
-        .venezuela-gradient { background: linear-gradient(90deg, #FCD116 0%, #003893 50%, #CE1126 100%); height: 6px; width: 100%; position: fixed; top: 0; z-index: 60; }
-        
-        .ai-gradient { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-        .nutrition-gradient { background: linear-gradient(135deg, #48bb78 0%, #38a169 100%); }
-        .strategy-gradient { background: linear-gradient(135deg, #3182ce 0%, #2b6cb0 100%); }
-        
-        .loader { border: 4px solid #f3f3f3; border-radius: 50%; border-top: 4px solid #3498db; width: 24px; height: 24px; animation: spin 2s linear infinite; display: inline-block; vertical-align: middle; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        .tab-active { border-bottom: 3px solid #667eea; color: #4c51bf; background-color: #f3f4f6; }
-        .tab-inactive { border-bottom: 3px solid transparent; color: #718096; }
-        .tab-inactive:hover { color: #4c51bf; }
-
-/* Efecto de Levitación Cyberpunk */
-        @keyframes levitate {
+        body { font-family: 'Inter', sans-serif; }
+        .font-heading { font-family: 'Montserrat', sans-serif; }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(0,210,255,0.3); }
+            50% { box-shadow: 0 0 60px rgba(0,210,255,0.8); }
+        }
+        .glow { animation: pulse-glow 2.5s ease-in-out infinite; }
+        @keyframes float {
             0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
+            50% { transform: translateY(-10px); }
         }
-        .animate-float {
-            animation: levitate 4s ease-in-out infinite;
-        }
-
-/* --- EFECTO GLITCH 10K OCULTO --- */
-        .glitch-item {
-            position: relative;
-            display: inline-block;
-            font-family: monospace;
-            color: white; /* Forzamos el color blanco */
-            opacity: 0.3; /* Subimos la opacidad temporalmente para que lo encuentres */
-            transition: all 0.3s ease;
-        }
-
-        .glitch-item:hover {
-            opacity: 1;
-            color: #ef4444; /* Rojo alerta */
-            text-shadow: 2px 0 #000, -2px 0 #000;
-        }
-
-        .glitch-text {
-            animation: glitch-anim 4s infinite linear alternate-reverse;
-        }
-
-        @keyframes glitch-anim {
-            0%, 94%, 96%, 98%, 100% {
-                opacity: 0.3;
-                transform: skew(0deg);
-                filter: blur(0px);
-            }
-            95% {
-                opacity: 1;
-                color: #ef4444; /* Rojo */
-                transform: skew(-15deg);
-                filter: blur(1px);
-            }
-            97% {
-                opacity: 1;
-                color: #eab308; /* Amarillo */
-                transform: skew(10deg);
-            }
-            99% {
-                opacity: 1;
-                color: #fff; /* Blanco */
-                transform: skew(-5deg);
-            }
-        }
-        /* -------------------------------- */
-
+        .float { animation: float 3s ease-in-out infinite; }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans">
+<body class="bg-[#001E50] min-h-screen flex flex-col items-center justify-center px-4 text-white">
 
-    <div class="venezuela-gradient"></div>
-
-
-    <nav class="bg-[#003893] shadow-md fixed w-full top-[6px] z-40 transition-all duration-300" id="navbar">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between items-center h-20">
-      
-      <div class="flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
-        <img src="image_0.png" alt="Logo" class="h-16 md:h-24 w-auto object-contain" onerror="this.style.display='none'; document.getElementById('fallback-logo').classList.remove('hidden');">
-        <i id="fallback-logo" class="fa-solid fa-person-running text-3xl text-yellow-400 border-2 border-yellow-400 rounded-full p-2 hidden"></i>
-
-        <span class="font-heading font-extrabold text-lg md:text-2xl text-white tracking-tight leading-tight">
-          RETO VIRTUAL <br class="md:hidden"><span class="text-yellow-400">VENEZUELA</span>
-        </span>
-      </div>
-
-      <button id="mobile-menu-btn" class="md:hidden text-white hover:text-yellow-400 focus:outline-none transition">
-        <i class="fa-solid fa-bars text-3xl"></i>
-      </button>
-
-      <div class="hidden md:flex space-x-4 lg:space-x-6 items-center">
-        <a href="#info" class="text-white hover:text-yellow-300 font-semibold transition whitespace-nowrap">El Reto</a>
-        <a href="#experiencia-digital" class="text-white hover:text-yellow-300 font-semibold transition whitespace-nowrap">Kit Digital</a>
-        <a href="#preparacion-ia" class="text-yellow-300 font-bold hover:opacity-80 transition whitespace-nowrap">Preparación IA</a>
-        <a href="resultados.html" class="text-white hover:text-yellow-300 font-semibold transition flex items-center gap-1 whitespace-nowrap">
-            <i class="fa-solid fa-ranking-star"></i> Resultados
-        </a>
-        
-        <a href="10k.html" class="glitch-item text-white text-xs cursor-crosshair whitespace-nowrap" title="System Error">
-            <span class="glitch-text">&lt;_Error_10.k&gt;</span>
-        </a>
-        
-        <a href="#podium-digital" class="bg-yellow-400 text-blue-900 px-6 py-2 rounded-full font-black hover:bg-yellow-300 transition shadow-[0_0_15px_rgba(250,204,21,0.5)] transform hover:-translate-y-0.5 flex items-center gap-2 whitespace-nowrap">
-          <i class="fa-solid fa-cloud-arrow-up"></i> Validar Tiempo
-        </a>
-      </div>
+    <!-- Logo flotante -->
+    <div class="float mb-10">
+        <img src="img/RV-Isotipo-sinfondo.png" alt="Reto Virtual VZLA" class="h-32 w-auto mx-auto"
+             style="filter: drop-shadow(0 0 20px rgba(0,210,255,0.6));">
     </div>
-  </div>
 
-  <div id="mobile-menu" class="hidden md:hidden bg-[#003893] w-full absolute top-20 left-0 border-t border-blue-800 shadow-2xl flex flex-col px-4 py-6 space-y-5 text-center transition-all duration-300">
-    <a href="#info" class="text-white hover:text-yellow-300 font-bold text-lg" onclick="toggleMenu()">El Reto</a>
-    <a href="#experiencia-digital" class="text-white hover:text-yellow-300 font-bold text-lg" onclick="toggleMenu()">Kit Digital</a>
-    <a href="#preparacion-ia" class="text-yellow-300 font-bold text-lg" onclick="toggleMenu()">Preparación IA</a>
-    <a href="resultados.html" class="text-white hover:text-yellow-300 font-bold text-lg flex items-center justify-center gap-2" onclick="toggleMenu()">
-        <i class="fa-solid fa-ranking-star"></i> Resultados
-    </a>
-    
-    <a href="10k.html" class="glitch-item text-white text-xs cursor-crosshair mx-auto mt-2" title="System Error">
-        <span class="glitch-text">&lt;_Error_10.k&gt;</span>
-    </a>
-    
-    <a href="#podium-digital" class="bg-yellow-400 text-blue-900 px-6 py-3 rounded-full font-black text-lg mx-auto shadow-lg flex items-center gap-2 mt-4" onclick="toggleMenu()">
-        <i class="fa-solid fa-cloud-arrow-up"></i> Validar Tiempo
-    </a>
-  </div>
-</nav>
-
-<script>
-    function toggleMenu() {
-        const menu = document.getElementById('mobile-menu');
-        menu.classList.toggle('hidden');
-    }
-    document.getElementById('mobile-menu-btn').addEventListener('click', toggleMenu);
-</script>
-
-
-    <section id="hero-carousel" class="relative h-screen text-white overflow-hidden">
-        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-100 z-20" style="background: linear-gradient(rgba(0, 30, 80, 0.6), rgba(0, 30, 80, 0.7)), url('https://images.unsplash.com/photo-1552674605-db6ffd4facb5?q=80&w=1920') center/cover no-repeat fixed;">
-            <div class="h-full flex items-center justify-center text-center px-4">
-                <div class="max-w-4xl mx-auto" data-aos="fade-up">
-                    <span class="bg-yellow-500 text-blue-900 font-bold py-1 px-4 rounded-full text-sm uppercase tracking-wide mb-4 inline-block shadow-lg">Edición #1 - Marzo 2026</span>
-                    <h1 class="font-heading text-4xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight drop-shadow-lg">
-                        TU PRIMERA GRAN META: <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-200 to-yellow-400">RETO VIRTUAL 5K VENEZUELA</span>
-                    </h1>
-                    <p class="text-lg md:text-2xl mb-10 font-light max-w-2xl mx-auto drop-shadow-md">
-                        ¿Por qué competir? Porque mereces demostrarte de qué eres capaz. <br>
-                        No necesitas ser experto, solo necesitas dar el primer paso.
-                    </p>
-                    <div class="mt-8 animate-pulse">
-    <span class="inline-block bg-red-600 text-white font-black text-xl md:text-2xl px-6 py-3 rounded-full shadow-[0_0_20px_rgba(220,38,38,0.6)] border-4 border-red-800 uppercase tracking-widest cursor-not-allowed">
-        🔥 SOLD OUT - 1ERA EDICIÓN 🔥
-    </span>
-    <p class="text-yellow-400 mt-4 font-bold text-lg drop-shadow-md">¡50/50 CUPOS VENDIDOS! Gracias Venezuela 🇻🇪</p>
-</div>
-                </div>
-            </div>
-        </div>
-        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 z-10" style="background: linear-gradient(rgba(0, 30, 80, 0.6), rgba(0, 30, 80, 0.7)), url('https://images.unsplash.com/photo-1532444458054-01a7dd3e9fca?q=80&w=1920') center/cover no-repeat fixed;">
-            <div class="h-full flex items-center justify-center text-center px-4">
-                <div class="max-w-4xl mx-auto">
-                    <span class="bg-blue-600 text-white font-bold py-1 px-4 rounded-full text-sm uppercase tracking-wide mb-4 inline-block shadow-lg"><i class="fa-solid fa-medal mr-2"></i>Serie Coleccionable</span>
-                    <h1 class="font-heading text-4xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight drop-shadow-lg">
-                        MÁS QUE UNA MEDALLA: <br><span class="text-yellow-400">UN LEGADO EN ACRÍLICO</span>
-                    </h1>
-                    <p class="text-lg md:text-2xl mb-10 font-light max-w-2xl mx-auto drop-shadow-md">
-                        ¿Para qué correr? Para ganar la <strong>Pieza 1 de 4</strong>. <br>
-                        Inicia hoy la colección y completa el gran rompecabezas runner del año.
-                    </p>
-                    <a href="#registro" class="bg-yellow-400 text-blue-900 font-bold py-4 px-8 rounded-full shadow-xl hover:bg-yellow-300 transition transform hover:scale-105 inline-flex items-center gap-2">
-                        <i class="fa-solid fa-medal"></i> Quiero mi Medalla
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 z-10" style="background: linear-gradient(rgba(0, 30, 80, 0.7), rgba(0, 30, 80, 0.8)), url('https://images.unsplash.com/photo-1530143311094-34d807799e8f?q=80&w=1920') center/cover no-repeat fixed;">
-            <div class="h-full flex items-center justify-center text-center px-4">
-                <div class="max-w-4xl mx-auto">
-                    <span class="bg-purple-600 text-white font-bold py-1 px-4 rounded-full text-sm uppercase tracking-wide mb-4 inline-block shadow-lg"><i class="fa-solid fa-wand-magic-sparkles mr-2"></i>Tecnología IA Incluida</span>
-                    <h1 class="font-heading text-4xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight drop-shadow-lg">
-                        CORRE INTELIGENTE, <br><span class="text-purple-300">CORRE A TU MANERA</span>
-                    </h1>
-                    <p class="text-lg md:text-2xl mb-10 font-light max-w-2xl mx-auto drop-shadow-md">
-                        ¿Por qué nosotros? Porque somos la única carrera que te da un <strong>Entrenador con IA</strong> gratis. Flexibilidad total con soporte profesional.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a href="#registro" class="bg-red-600 text-white font-bold py-4 px-8 rounded-full shadow-xl hover:bg-red-700 transition transform hover:scale-105 flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-paper-plane"></i> Inscribirme
-                        </a>
-                        <a href="#preparacion-ia" class="bg-white text-purple-700 font-bold py-4 px-8 rounded-full hover:bg-gray-100 transition flex items-center justify-center gap-2 shadow-lg">
-                            <i class="fa-solid fa-wand-magic-sparkles"></i> Probar la IA
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <button id="prevSlide" class="absolute top-1/2 left-4 md:left-8 transform -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-3 md:p-4 rounded-full z-30 transition"><i class="fa-solid fa-chevron-left text-xl md:text-2xl"></i></button>
-        <button id="nextSlide" class="absolute top-1/2 right-4 md:right-8 transform -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-3 md:p-4 rounded-full z-30 transition"><i class="fa-solid fa-chevron-right text-xl md:text-2xl"></i></button>
-        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-3 z-30">
-            <button class="carousel-indicator w-3 h-3 rounded-full bg-white opacity-100 transition"></button>
-            <button class="carousel-indicator w-3 h-3 rounded-full bg-white opacity-50 hover:opacity-100 transition"></button>
-            <button class="carousel-indicator w-3 h-3 rounded-full bg-white opacity-50 hover:opacity-100 transition"></button>
-        </div>
-    </section>
-
-    <div class="bg-blue-900 py-8 px-4 border-b-4 border-yellow-400 shadow-inner">
-    <div class="max-w-4xl mx-auto text-center">
-        <div class="bg-blue-800 border-2 border-yellow-400 rounded-2xl p-6 md:p-8 shadow-[0_0_20px_rgba(250,204,21,0.3)]">
-            <h3 class="text-3xl md:text-4xl font-black text-white mb-2 uppercase tracking-wide font-heading">
-                🔥 ¡CARRERA EN CURSO! 🔥
-            </h3>
-            <p class="text-gray-200 text-lg md:text-xl mb-6 font-medium">
-                La ventana está abierta. Tienes hasta el <strong class="text-yellow-400">Domingo 15 de Marzo</strong> para completar tus 5K y registrar tu evidencia.
-            </p>
-
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSc7jlvwLh5jQ2Ivquphma7VYf9BiAuJ7J8b7gTq_qgxlGF-lQ/viewform" target="_blank" class="inline-block bg-yellow-400 text-blue-900 font-black text-lg py-4 px-10 rounded-full shadow-lg hover:bg-yellow-300 transition-all transform hover:scale-105 hover:shadow-[0_0_15px_rgba(250,204,21,0.6)]">
-    ⏱️ VALIDAR MI TIEMPO
-</a>
-        </div>
-    </div>
-</div>
-
-    <section id="info" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="font-heading text-3xl md:text-4xl font-bold text-blue-900 mb-4">¿En qué consiste el Reto?</h2>
-                <div class="w-24 h-1 bg-red-600 mx-auto rounded-full"></div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-                <div class="bg-gray-50 p-8 rounded-2xl shadow-sm border-b-4 border-yellow-400 text-center hover:shadow-xl transition">
-                    <i class="fa-solid fa-map-location-dot text-blue-900 text-4xl mb-4"></i>
-                    <h3 class="font-heading text-xl font-bold mb-3">Donde Quieras</h3>
-                    <p class="text-gray-600">Corre en tu ciudad, parque favorito o caminadora. ¡Tú decides!</p>
-                </div>
-                <div class="bg-gray-50 p-8 rounded-2xl shadow-sm border-b-4 border-blue-900 text-center hover:shadow-xl transition">
-                    <i class="fa-solid fa-stopwatch text-blue-900 text-4xl mb-4"></i>
-                    <h3 class="font-heading text-xl font-bold mb-3">Registra 5K</h3>
-                    <p class="text-gray-600">Del 6 al 15 de Marzo. Usa Strava, Garmin o tu reloj y captura la evidencia.</p>
-                </div>
-                <div class="bg-gray-50 p-8 rounded-2xl shadow-sm border-b-4 border-red-600 text-center hover:shadow-xl transition">
-                    <i class="fa-solid fa-medal text-blue-900 text-4xl mb-4"></i>
-                    <h3 class="font-heading text-xl font-bold mb-3">Gana tu Medalla</h3>
-                    <p class="text-gray-600">Recíbela en físico en la puerta de tu casa.</p>
-                </div>
-            </div>
-
-            <div class="mt-16 bg-blue-900 rounded-2xl p-8 md:p-12 text-white shadow-2xl relative overflow-hidden">
-                <div class="relative z-10 grid md:grid-cols-2 gap-8 items-center">
-                    <div>
-                        <h3 class="font-heading text-2xl font-bold mb-4 border-l-4 border-yellow-500 pl-4">Fechas y Modalidad</h3>
-                        <ul class="space-y-4">
-                            <li class="flex items-start gap-3"><i class="fa-regular fa-calendar-check mt-1 text-yellow-400"></i><span><strong>Carrera:</strong> 6 al 15 de Marzo 2026.</span></li>
-                            <li class="flex items-start gap-3"><i class="fa-solid fa-person-running mt-1 text-yellow-400"></i><span><strong>Distancia:</strong> 5 Kilómetros (Una sesión).</span></li>
-                            <li class="flex items-start gap-3"><i class="fa-solid fa-mobile-screen mt-1 text-yellow-400"></i><span><strong>Evidencia:</strong> Captura de pantalla de app o reloj.</span></li>
-                        </ul>
-                    </div>
-                    <div class="bg-white/10 p-6 rounded-xl backdrop-blur-sm border border-white/20">
-                        <h4 class="font-heading font-bold text-xl mb-4 text-center">Tu Inscripción Incluye:</h4>
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 justify-items-center">
-                            <div class="text-center p-2"><i class="fa-solid fa-medal text-3xl text-yellow-400 mb-2"></i><p class="text-sm font-semibold">Medalla Física</p></div>
-                            <div class="text-center p-2"><i class="fa-solid fa-certificate text-3xl text-blue-300 mb-2"></i><p class="text-sm font-semibold">Diploma Digital</p></div>
-                            <div class="text-center p-2"><i class="fa-solid fa-list-ol text-3xl text-green-400 mb-2"></i><p class="text-sm font-semibold">Ranking Oficial</p></div>
-                            <div class="text-center p-2 bg-white/10 rounded-lg w-full"><i class="fa-solid fa-wand-magic-sparkles text-3xl text-purple-300 mb-2"></i><p class="text-sm font-bold text-white">Pack IA</p></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
-    <section class="py-16 bg-blue-600 relative overflow-hidden text-white" id="experiencia-digital">
-        <div class="absolute top-0 left-0 w-full h-full opacity-10" style="background-image: url('https://www.transparenttextures.com/patterns/cubes.png');"></div>
-        <section class="py-16 bg-blue-600 relative overflow-hidden text-white" id="experiencia-digital">
-        <div class="absolute top-0 left-0 w-full h-full opacity-10" style="background-image: url('https://www.transparenttextures.com/patterns/cubes.png');"></div>
-        <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Merriweather:wght@900&display=swap" rel="stylesheet">
-
-        <div class="max-w-7xl mx-auto px-4 relative z-10">
-            <div id="header-text" class="text-center mb-12 transition-opacity duration-300">
-                <span class="bg-yellow-400 text-blue-900 font-bold px-3 py-1 rounded-full text-xs uppercase tracking-wider mb-2 inline-block shadow-lg">Tu Kit Digital</span>
-                <h2 class="font-heading text-3xl md:text-4xl font-bold">Vive la Experiencia Completa 📸</h2>
-                <p class="text-blue-100 mt-2">Personaliza, oculta los botones y haz Capture para Instagram.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start justify-items-center">
-                
-                <div class="flex flex-col items-center w-full">
-                    <h3 class="control-element text-xl font-bold mb-4 text-center text-white"><i class="fa-brands fa-instagram"></i> Creador de Historias</h3>
-                    
-                    <div id="photo-frame" class="relative bg-white shadow-2xl overflow-hidden group transition-all duration-300" 
-                         style="width: 320px; height: 568px; border-radius: 15px; border: 4px solid #fff;">
-                        
-                        <div class="absolute inset-0 bg-gray-200 flex items-center justify-center">
-                            <img id="user-photo" src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?q=80&w=600" 
-                                 class="w-full h-full object-cover opacity-90" alt="Sube tu foto">
-                        </div>
-
-                        <div class="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-blue-900/90 to-transparent z-10"></div>
-
-                        <div class="absolute top-2 left-2 z-20 opacity-70">
-                            <div class="absolute inset-1 bg-blue-900/95 shadow-sm transform -rotate-12 scale-90 rounded-full z-0"></div>
-                            <div class="relative z-10 w-28 drop-shadow-sm">
-                                <img src="image_0.png" class="w-full object-contain filter brightness-110" alt="Logo">
-                            </div>
-                        </div>
-
-                        <div class="absolute bottom-4 left-4 w-10 h-7 shadow-md border border-white bg-cover bg-center z-20" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Flag_of_Venezuela.svg/255px-Flag_of_Venezuela.svg.png');"></div>
-                        <div class="absolute bottom-12 right-0 bg-yellow-400 text-blue-900 font-heading font-black px-4 py-1 z-20 shadow-lg transform -skew-x-12 origin-bottom-right">#RETOVIRTUAL5K</div>
-                        <div class="absolute bottom-4 right-4 text-white font-bold text-sm z-20">VENEZUELA 2026 🇻🇪</div>
-                    </div>
-
-                    <div class="control-element mt-6 flex flex-col gap-3 w-full max-w-xs text-center transition-opacity duration-300">
-                        <label class="cursor-pointer bg-blue-800 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition text-center border border-blue-500">
-                            <i class="fa-solid fa-camera mr-2"></i> 1. Subir Foto
-                            <input type="file" accept="image/*" class="hidden" onchange="loadFile(event)">
-                        </label>
-                        
-                        <button onclick="cleanScreen()" class="bg-yellow-400 hover:bg-yellow-300 text-blue-900 font-bold py-3 px-6 rounded-lg shadow-lg transition text-center animate-pulse">
-                            <i class="fa-regular fa-eye-slash mr-2"></i> 2. Ocultar Botones (5s)
-                        </button>
-                        
-                        <p class="text-xs text-blue-200 opacity-80 mt-1">
-                            Dale a "Ocultar", espera que se limpie y haz <strong>Capture de Pantalla</strong>.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="flex flex-col items-center w-full">
-                    <h3 class="control-element text-xl font-bold mb-4 text-center text-white">🎽 Tu Dorsal Oficial</h3>
-                    <div class="bg-blue-800 rounded-3xl p-6 border border-blue-500 shadow-2xl relative w-full max-w-lg">
-                        
-                        <div id="bib-preview-area" class="relative mx-auto shadow-2xl transition-all duration-300" 
-                             style="width: 100%; 
-                                    aspect-ratio: 3/2; 
-                                    background-color: #f3f4f6;
-                                    background-image: url('dorsal-fondo.png'); 
-                                    background-size: cover; 
-                                    background-position: center; 
-                                    border-radius: 8px;
-                                    overflow: hidden;">
-                            
-                            <div class="absolute inset-0 z-10">
-                                <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-15">
-                                    <span class="text-gray-900 font-black text-5xl transform -rotate-12 scale-x-150 tracking-widest border-4 border-gray-900 p-4 rounded-2xl">PREVIEW</span>
-                                </div>
-                                <div class="absolute w-full text-center" style="top: 48%; transform: translateY(-50%);">
-                                    <span class="text-7xl md:text-9xl leading-none block drop-shadow-sm font-bold tracking-tighter" style="font-family: 'Abril Fatface', cursive; color: #354eab;">020</span>
-                                </div>
-                                <div class="absolute w-full text-center px-8" style="bottom: 15%;">
-                                    <span id="bib-name-display" class="text-lg md:text-2xl font-black uppercase block break-words leading-tight" style="font-family: 'Merriweather', serif; color: #354eab;">TU NOMBRE</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="control-element mt-6 bg-blue-900/50 p-4 rounded-xl border border-blue-400/30 transition-opacity duration-300">
-                            <label class="text-xs font-bold text-yellow-400 ml-1 mb-1 block">Personalízalo aquí:</label>
-                            <input type="text" id="bib-input" maxlength="20" placeholder="Escribe tu Nombre..." class="w-full p-3 rounded-lg text-gray-900 font-bold text-center focus:outline-none focus:ring-4 focus:ring-yellow-400 transition" oninput="updateBib()">
-                            <div class="mt-3 text-center">
-                                <a href="#registro" class="inline-block w-full py-2 bg-yellow-400 text-blue-900 font-bold rounded shadow-lg hover:bg-yellow-300 transition text-sm">
-                                    ¡Lo quiero! Inscribirme ($8)
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div id="screenshot-hint" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/80 text-white px-6 py-4 rounded-2xl z-50 hidden text-center pointer-events-none">
-            <i class="fa-solid fa-camera text-4xl mb-2 text-yellow-400"></i>
-            <p class="font-bold text-lg">¡Haz Capture Ahora!</p>
-        </div>
-    </section>
-
-    <script>
-        // 1. CARGAR FOTO (Simple y Rápido)
-        var loadFile = function(event) { 
-            var reader = new FileReader();
-            reader.onload = function(){
-                var output = document.getElementById('user-photo');
-                output.src = reader.result; 
-            };
-            reader.readAsDataURL(event.target.files[0]);
-        };
-
-        // 2. FUNCIÓN LIMPIAR PANTALLA
-        function cleanScreen() {
-            const controls = document.querySelectorAll('.control-element');
-            const header = document.getElementById('header-text');
-            const hint = document.getElementById('screenshot-hint');
-
-            header.style.opacity = '0';
-            controls.forEach(el => el.style.opacity = '0');
-
-            hint.classList.remove('hidden');
-            setTimeout(() => { hint.classList.add('hidden'); }, 1000);
-
-            setTimeout(() => {
-                header.style.opacity = '1';
-                controls.forEach(el => el.style.opacity = '1');
-            }, 5000);
-        }
-    </script>
-
-    <section id="preparacion-ia" class="py-20 bg-gray-50 relative overflow-hidden">
-        <div class="max-w-6xl mx-auto px-4 relative z-10">
-            <div class="text-center mb-8">
-                <span class="bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold py-1 px-4 rounded-full text-xs uppercase tracking-wide mb-3 inline-block shadow-lg">
-                    <i class="fa-solid fa-star mr-1 text-yellow-300"></i> Plus Exclusivo con Gemini AI
-                </span>
-                <h2 class="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-4">Centro de Preparación Inteligente ✨</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Nuestra IA diseña tu entreno, alimentación y estrategia de carrera.</p>
-            </div>
-
-            <div class="flex justify-center mb-8 gap-2 overflow-x-auto p-2">
-                <button onclick="switchTab('entreno')" id="tab-entreno" class="tab-active px-6 py-2 rounded-lg font-bold text-sm flex items-center gap-2 transition"><i class="fa-solid fa-person-running"></i> Entrenador</button>
-                <button onclick="switchTab('nutricion')" id="tab-nutricion" class="tab-inactive px-6 py-2 rounded-lg font-bold text-sm flex items-center gap-2 transition"><i class="fa-solid fa-apple-whole"></i> Nutricionista</button>
-                <button onclick="switchTab('estrategia')" id="tab-estrategia" class="tab-inactive px-6 py-2 rounded-lg font-bold text-sm flex items-center gap-2 transition"><i class="fa-solid fa-chess-knight"></i> Estratega</button>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="md:col-span-1 bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
-                    <div id="form-entreno" class="space-y-4">
-                        <label class="block font-bold text-gray-700 text-sm">Nivel</label>
-                        <select id="ai-level"
-  class="w-full border rounded p-2 text-sm bg-white text-gray-900">
-<option>Principiante</option><option>Intermedio</option><option>Avanzado</option></select>
-                        <label class="block font-bold text-gray-700 text-sm">Días/Semana</label>
-                        <select id="ai-days"
-  			class="w-full border rounded p-2 text-sm bg-white text-gray-900"><option>3 días</option><option>4 días</option><option>5 días</option></select>
-                        <button onclick="callAI('entreno')" id="btn-entreno" class="w-full ai-gradient text-white font-bold py-3 rounded-lg mt-4 hover:shadow-lg transition">Generar Plan</button>
-                    </div>
-                    <div id="form-nutricion" class="space-y-4 hidden">
-                        <label class="block font-bold text-gray-700 text-sm">Dieta</label>
-                        <select id="ai-diet" class="w-full border rounded p-2 text-sm bg-gray-50"><option>Omnívora</option><option>Vegetariana</option><option>Keto</option></select>
-                        <label class="block font-bold text-gray-700 text-sm">Alergias</label>
-                        <input id="ai-allergies" type="text" class="w-full border rounded p-2 text-sm bg-gray-50" placeholder="Ninguna">
-                        <button onclick="callAI('nutricion')" id="btn-nutricion" class="w-full nutrition-gradient text-white font-bold py-3 rounded-lg mt-4 hover:shadow-lg transition">Crear Menú</button>
-                    </div>
-                    <div id="form-estrategia" class="space-y-4 hidden">
-                        <label class="block font-bold text-gray-700 text-sm">Tiempo Meta</label>
-                        <input id="ai-time" type="text" class="w-full border rounded p-2 text-sm bg-gray-50" placeholder="Ej. 30 min">
-                        <label class="block font-bold text-gray-700 text-sm">Clima</label>
-                        <select id="ai-weather" class="w-full border rounded p-2 text-sm bg-gray-50"><option>Soleado</option><option>Húmedo</option><option>Lluvioso</option></select>
-                        <button onclick="callAI('estrategia')" id="btn-estrategia" class="w-full strategy-gradient text-white font-bold py-3 rounded-lg mt-4 hover:shadow-lg transition">Diseñar Estrategia</button>
-                    </div>
-                </div>
-
-                <div class="md:col-span-2 bg-white p-8 rounded-2xl shadow-lg border border-gray-100 min-h-[300px] relative">
-                    <div id="ai-placeholder" class="flex flex-col items-center justify-center h-full text-center text-gray-400">
-                        <i class="fa-solid fa-robot text-6xl mb-4 text-purple-100"></i>
-                        <p>Selecciona una opción y genera tu plan personalizado.</p>
-                        <p class="text-xs text-purple-400 mt-2">✨ Conectado con Gemini Pro AI</p>
-                    </div>
-                    <div id="ai-loading" class="hidden absolute inset-0 bg-white/90 flex flex-col items-center justify-center z-10 rounded-2xl">
-                        <div class="loader mb-4"></div>
-                        <p class="text-purple-700 font-bold animate-pulse">La IA está pensando...</p>
-                    </div>
-                    <div id="ai-result" class="hidden h-full overflow-y-auto text-sm text-gray-700 space-y-2 pr-2"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-<section id="podium-digital" class="py-20 bg-gray-900 relative overflow-hidden border-t-4 border-yellow-400">
-    <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#FCD116 1px, transparent 1px); background-size: 30px 30px;"></div>
-    
-    <div class="max-w-6xl mx-auto px-4 relative z-10 text-center">
-        <span class="bg-yellow-400 text-gray-900 font-bold px-5 py-1.5 rounded-full text-xs uppercase tracking-widest mb-4 inline-block shadow-lg">
-            <i class="fa-solid fa-crown mr-1"></i> Zona Élite Exclusiva
+    <!-- Texto principal -->
+    <div class="text-center mb-12">
+        <span class="text-[#00D2FF] font-bold text-[10px] uppercase tracking-[0.5em] mb-4 block">
+            🚧 En construcción
         </span>
-        <h2 class="font-heading text-4xl md:text-5xl font-black text-white mb-6 uppercase tracking-wide drop-shadow-lg">
-            🏆 Podium Digital
-        </h2>
-        
-        <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-12 font-medium">
-            El Checkpoint oficial para los 50 Fundadores. Corre tus 5K entre el <strong class="text-yellow-400">6 y el 15 de Marzo</strong> y registra tu evidencia aquí para reclamar tu lugar en la historia.
+        <h1 class="font-heading text-5xl md:text-7xl font-black uppercase tracking-tighter leading-tight mb-6">
+            ALGO GRANDE <br> <span class="text-[#00D2FF] italic">SE VIENE</span>
+        </h1>
+        <p class="text-white/50 text-lg max-w-md mx-auto font-light leading-relaxed">
+            El circuito de running virtual más exigente de Venezuela está por llegar. Prepárate.
         </p>
+    </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            
-            <div class="bg-gradient-to-br from-blue-900 to-blue-800 p-8 rounded-2xl border-2 border-blue-500 shadow-[0_0_25px_rgba(37,99,235,0.4)] transform transition hover:-translate-y-2 hover:shadow-[0_0_35px_rgba(37,99,235,0.7)] flex flex-col h-full relative overflow-hidden">
-                <div class="absolute -right-4 -top-4 bg-yellow-400 text-blue-900 text-[10px] font-black py-1 px-8 rotate-45 shadow-sm">PASO 1</div>
-                <div class="text-yellow-400 text-6xl mb-4"><i class="fa-solid fa-cloud-arrow-up animate-bounce"></i></div>
-                <h3 class="text-white font-bold text-2xl mb-2 font-heading">Validar Tiempo</h3>
-                <p class="text-blue-200 text-sm mb-8 flex-grow">Sube la captura de tu Strava, Garmin o Reloj inteligente con tu tiempo oficial.</p>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSc7jlvwLh5jQ2Ivquphma7VYf9BiAuJ7J8b7gTq_qgxlGF-lQ/viewform" target="_blank" class="w-full block bg-yellow-400 hover:bg-yellow-300 text-blue-900 font-black py-4 px-4 rounded-xl shadow-lg transition transform hover:scale-105">
-                    📸 SUBIR EVIDENCIA
-                </a>
-            </div>
+    <!-- Redes sociales -->
+    <div class="flex gap-8 mb-16">
+        <a href="https://www.instagram.com/retovirtual.vzla/" target="_blank"
+           class="text-white/30 hover:text-[#00D2FF] text-2xl transition-all hover:scale-110">
+            <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://wa.me/584127732710" target="_blank"
+           class="text-white/30 hover:text-[#00D2FF] text-2xl transition-all hover:scale-110">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="https://www.strava.com/clubs/1859944" target="_blank"
+           class="text-white/30 hover:text-[#00D2FF] text-2xl transition-all hover:scale-110">
+            <i class="fa-brands fa-strava"></i>
+        </a>
+    </div>
 
-            <div class="bg-gray-800 p-8 rounded-2xl border border-gray-700 shadow-lg flex flex-col h-full opacity-90 transition hover:bg-gray-700 hover:border-blue-500">
-                <div class="text-blue-400 text-6xl mb-4"><i class="fa-solid fa-ranking-star"></i></div>
-                <h3 class="text-white font-bold text-2xl mb-2 font-heading">Ranking Oficial</h3>
-                <p class="text-gray-400 text-sm mb-8 flex-grow">La tabla de posiciones general de los 50 Fundadores.</p>
-               <a href="resultados.html" class="w-full block bg-gray-700 hover:bg-blue-600 text-white font-bold py-4 px-4 rounded-xl transition text-center border border-gray-600 hover:border-blue-400">
-                    <i class="fa-solid fa-list-ol mr-2"></i> VER RANKING
-                </a>
-            </div>
+    <!-- Input clave secreta (invisible hasta click) -->
+    <div class="fixed bottom-6 right-6">
+        <button onclick="document.getElementById('secret-box').classList.toggle('hidden')"
+                class="w-10 h-10 rounded-full bg-white/5 border border-white/10 
+                       flex items-center justify-center hover:bg-white/10 transition-all"
+                title="Acceso privado">
+            <svg class="w-4 h-4 text-white/20" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd"></path>
+            </svg>
+        </button>
 
-            <div class="bg-gray-800 p-8 rounded-2xl border border-gray-700 shadow-lg flex flex-col h-full opacity-90 transition hover:bg-gray-700 hover:border-yellow-500">
-                <div class="text-yellow-500 text-6xl mb-4"><i class="fa-solid fa-user-graduate"></i></div>
-                <h3 class="text-white font-bold text-2xl mb-2 font-heading">Diploma Digital</h3>
-                <p class="text-gray-400 text-sm mb-8 flex-grow">Tu certificado de finalización con tu tiempo y posición oficial.</p>
-                <a href="resultados.html" onclick="alert('🔒 Tu Diploma estará disponible para descargar en esta sección al finalizar el evento (15 de Marzo), una vez validemos tu tiempo oficial.')" class="w-full block bg-gray-700 hover:bg-yellow-500 text-white hover:text-blue-900 font-bold py-4 px-4 rounded-xl transition text-center border border-gray-600 hover:border-yellow-400">
-                    <i class="fa-solid fa-download mr-2"></i> DESCARGAR
-                </a>
-            </div>
-
-        </div>
-        
-        <div class="mt-16 bg-blue-900/40 border border-blue-500/30 rounded-2xl p-6 max-w-4xl mx-auto text-left backdrop-blur-sm">
-            <h4 class="text-yellow-400 font-bold mb-4 text-lg"><i class="fa-solid fa-triangle-exclamation mr-2"></i> Reglas del Podium Oficial:</h4>
-            <div class="grid md:grid-cols-2 gap-4">
-                <ul class="text-blue-100 text-sm space-y-3">
-                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-400 mt-1"></i> <span>Solo tienes <strong>un (1) intento</strong> para subir tu tiempo. Asegúrate de que sea tu mejor marca.</span></li>
-                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-400 mt-1"></i> <span>Debes usar tu <strong>Número de Dorsal Oficial</strong> para que el sistema te identifique.</span></li>
-                </ul>
-                <ul class="text-blue-100 text-sm space-y-3">
-                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-400 mt-1"></i> <span><strong>¿Corriste una distancia mayor (ej. 10K o 21K)?</strong> Adjunta la foto del recorrido general Y el detalle (splits) de tus mejores 5K.</span></li>
-                    <li class="flex items-start gap-2"><i class="fa-solid fa-clock text-red-400 mt-1"></i> <span>El Registro de Tiempos Oficiales se cierra irrevocablemente el <strong>15 de marzo a las 11:59 PM</strong>.</span></li>
-                </ul>
-            </div>
+        <!-- Caja de clave -->
+        <div id="secret-box" class="hidden absolute bottom-14 right-0 bg-[#001840] border border-white/20 
+                                     rounded-2xl p-4 shadow-2xl w-56">
+            <p class="text-white/50 text-[10px] uppercase tracking-widest mb-3 font-bold">Acceso Preview</p>
+            <input id="secret-input" type="password" placeholder="Clave de acceso"
+                   class="w-full bg-white/10 border border-white/10 rounded-lg px-3 py-2 text-white 
+                          text-sm placeholder-white/20 outline-none focus:border-[#00D2FF]/50 mb-3"
+                   onkeypress="if(event.key==='Enter') checkKey()">
+            <button onclick="checkKey()"
+                    class="w-full bg-[#00D2FF] text-[#001E50] py-2 rounded-lg text-xs font-black 
+                           uppercase tracking-widest hover:scale-105 transition-all">
+                Entrar
+            </button>
+            <p id="key-error" class="text-red-400 text-[10px] text-center mt-2 hidden">Clave incorrecta</p>
         </div>
     </div>
-</section>
-<section class="py-16 bg-white overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-    <section class="py-16 bg-white overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="bg-gradient-to-r from-blue-900 to-indigo-900 rounded-3xl shadow-2xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-10 relative">
-            <div class="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-yellow-500 rounded-full opacity-10 blur-3xl"></div>
-            
-            <div class="md:w-1/2 relative z-10 text-white">
-                <span class="bg-yellow-400 text-blue-900 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-4 inline-block shadow-[0_0_10px_rgba(250,204,21,0.5)]">¡DISEÑO EN FASE FINAL! ⏳</span>
-                <h2 class="font-heading text-3xl md:text-4xl font-bold mb-4">Más que una medalla... <br>Tu Primera Pieza del Rompecabezas 🧩</h2>
-                <p class="text-blue-100 mb-6 text-lg">
-    Esta no es una medalla común. Es la <strong>Parte 1 de 4</strong>. 
-    Diseñada en <strong>acrílico de alta densidad con corte láser y relieve 3D</strong>. 
-    <br><br>
-    Al completar las 4 ediciones del año, unirás las piezas para completar el <strong>Rompecabezas Definitivo y revelar la Pieza Maestra Coleccionable</strong>.
-</p>
-                <a href="#precios" class="bg-yellow-400 text-blue-900 px-6 py-3 rounded-lg font-bold hover:bg-yellow-300 transition-all transform hover:scale-105 inline-block shadow-[0_0_15px_rgba(250,204,21,0.5)]">
-                    <i class="fa-solid fa-cart-shopping mr-2"></i> Asegurar mi Medalla
-                </a>
-            </div>
-            
-            <div class="md:w-1/2 flex justify-center relative z-10 mt-12 md:mt-0">
-    <div class="relative w-80 h-80 md:w-[450px] md:h-[450px] lg:w-[500px] lg:h-[500px] flex items-center justify-center group">
-        
-        <div class="absolute inset-0 bg-yellow-400 rounded-full blur-[80px] opacity-40 animate-pulse group-hover:opacity-60 transition-opacity duration-500"></div>
-        
-        <img src="Medalla1web.png" 
-             alt="Medalla Oficial Reto 5K Acrílico" 
-             class="relative z-20 w-full h-full object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.7)] animate-float scale-110 md:scale-100 transform transition-transform duration-500 hover:scale-105">
-        
-        <div class="absolute -bottom-6 bg-gradient-to-r from-yellow-400 to-yellow-500 text-blue-900 px-8 py-3 rounded-full text-base md:text-lg font-bold shadow-2xl border-2 border-white z-30 font-heading tracking-wide">
-            PIEZA 1 DE 4 - 2026 🧩
-        </div>
-    </div>
-</div>
-            
-        </div>
-    </div>
-</section>
-
-    <section id="precios" class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
-            <h2 class="font-heading text-3xl font-bold text-gray-900">Planes de Inscripción</h2>
-            <p class="mt-2 text-lg text-gray-600">¡La Etapa 1 voló! 🚀 Asegura tu cupo en la Etapa General.</p>
-        </div>
-        
-        <div class="flex flex-col md:flex-row justify-center gap-8 items-center md:items-stretch">
-            
-            <div class="w-full max-w-sm bg-gray-50 rounded-2xl shadow-inner border border-gray-200 p-8 relative opacity-75 grayscale-[0.5] order-2 md:order-1">
-                 <div class="bg-red-600 text-white text-xs font-bold px-4 py-1 absolute top-0 left-1/2 transform -translate-x-1/2 rounded-b-lg uppercase shadow-sm z-10">
-                    🚫 AGOTADA
-                </div>
-                
-                <h3 class="font-bold text-2xl text-gray-500 mt-6">Preventa</h3>
-                <p class="text-gray-400 font-bold text-sm mt-1">Etapa Finalizada</p>
-                
-                <div class="my-6 text-5xl font-black text-gray-400 line-through decoration-red-500 decoration-4">
-                    $8 <span class="text-lg text-gray-400 font-medium no-underline">USD</span>
-                </div>
-                
-                <ul class="space-y-3 text-sm text-gray-500 mb-8">
-                     <li class="flex items-center"><i class="fa-solid fa-check text-gray-400 mr-2"></i>Medalla Física</li>
-                     <li class="flex items-center"><i class="fa-solid fa-check text-gray-400 mr-2"></i>Dorsal + IA Pack</li>
-                </ul>
-                
-                <button disabled class="block w-full py-3 bg-gray-200 text-gray-500 font-bold text-center rounded-lg cursor-not-allowed">
-                    Cupos Agotados
-                </button>
-            </div>
-
-            <div class="w-full max-w-sm bg-gray-50 rounded-2xl shadow-inner border border-gray-200 p-8 relative opacity-75 grayscale-[0.5] z-20 order-1 md:order-2">
-                <div class="bg-red-600 text-white text-xs font-bold px-6 py-1 absolute top-0 left-1/2 transform -translate-x-1/2 rounded-b-lg uppercase shadow-sm">
-                    🚫 SOLD OUT
-                </div>
-
-                <h3 class="font-bold text-2xl text-gray-500 mt-6">Entrada General</h3>
-                <p class="text-red-500 font-bold text-sm mt-1">¡50/50 Cupos Vendidos!</p>
-                
-                <div class="my-6 text-5xl font-black text-gray-400 line-through decoration-red-500 decoration-4">
-                    $10 <span class="text-lg text-gray-400 font-medium no-underline">USD</span>
-                </div>
-                
-                <ul class="space-y-3 text-sm text-gray-500 mb-8 font-medium">
-                    <li class="flex items-center"><i class="fa-solid fa-check text-gray-400 mr-2"></i>Medalla Física (Agotada)</li>
-                    <li class="flex items-center"><i class="fa-solid fa-check text-gray-400 mr-2"></i>Diploma de Finalista</li>
-                    <li class="flex items-center"><i class="fa-solid fa-check text-gray-400 mr-2"></i>Dorsal Digital + IA Pack</li>
-                </ul>
-                
-                <button disabled class="block w-full py-4 bg-gray-200 text-gray-500 font-extrabold text-lg text-center rounded-xl cursor-not-allowed border border-gray-300">
-                    Misión Cumplida 🏁
-                </button>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-    <section id="registro" class="py-20 bg-blue-900 relative">
-    <div class="max-w-4xl mx-auto px-4 relative z-10">
-        <div class="bg-gradient-to-br from-gray-900 to-black p-8 md:p-12 rounded-2xl shadow-2xl text-center border border-gray-800 relative overflow-hidden mt-10">
-            <div class="absolute top-0 left-0 w-full h-2 bg-red-600"></div>
-            
-            <h2 class="text-4xl md:text-5xl font-black text-white mb-4 uppercase tracking-wider">¡Misión Cumplida! 🏁</h2>
-            <div class="text-7xl mb-6 transform hover:scale-110 transition duration-300">🥇</div>
-            
-            <p class="text-xl md:text-2xl text-gray-300 mb-6 font-medium">
-                La 1era Edición del Reto Virtual 5K Venezuela está oficialmente 
-                <span class="text-red-500 font-black tracking-widest border-b-2 border-red-500 pb-1">SOLD OUT</span>.
-            </p>
-            
-            <p class="text-gray-400 mb-8 text-lg">
-                Los 50 corredores élite ya tienen su lugar asegurado. La plataforma de inscripciones y recepción de pagos ha sido cerrada por seguridad.
-            </p>
-            
-            <div class="bg-gray-800 p-6 rounded-xl border border-gray-700 shadow-inner">
-                <h3 class="text-xl font-bold text-yellow-500 mb-2">¿Ya estás inscrito?</h3>
-                <p class="text-gray-300 mb-5">Prepárate para la carrera. Entrena, come bien y mantente atento a tu correo. Pronto habilitaremos el Registro de Tiempos Oficiales para subir tus tiempos.</p>
-                
-                <a href="#preparacion-ia" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition-colors shadow-lg">
-                    🤖 Ir a la IA de Preparación VIP
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
-
-    <footer>
-
-         
-	    <section class="py-16 bg-white relative overflow-hidden">
-        <div class="absolute inset-0 bg-orange-50 skew-y-3 transform origin-bottom-left z-0"></div>
-        
-        <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
-            <h2 class="font-heading text-3xl font-bold text-gray-900 mb-6">
-                Sigue la acción en <span class="text-[#FC4C02]">Strava</span>
-            </h2>
-            <p class="text-gray-600 mb-8 text-lg">
-                Únete a nuestro club oficial, registra tus tiempos y compite con corredores de todo el país.
-            </p>	
-
-            <div class="bg-white rounded-2xl shadow-xl border border-gray-200 p-8 flex flex-col md:flex-row items-center gap-8 max-w-2xl mx-auto transition hover:shadow-2xl">
-                <div class="bg-[#FC4C02] w-24 h-24 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg">
-                    <i class="fa-brands fa-strava text-white text-5xl"></i>
-                </div>
-                
-                <div class="text-center md:text-left flex-1">
-                    <h3 class="text-xl font-bold text-gray-900">Club Oficial Reto Virtual 5K Venezuela</h3>
-                    <p class="text-sm text-gray-500 mb-4">Comunidad de corredores • Reto Virtual 2026</p>
-                    
-                    <a href="https://www.strava.com/clubs/1859944" target="_blank" 
-                       class="inline-block w-full md:w-auto bg-[#FC4C02] hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-lg shadow-md transition transform hover:scale-105 text-center">
-                        UNIRME AL CLUB <i class="fa-solid fa-arrow-right ml-2"></i>
-                    </a>
-                </div>
-            </div>
-            
-            <p class="mt-6 text-sm text-gray-400">
-                *Es necesario tener una cuenta gratuita de Strava para participar en el ranking.
-            </p>
-        </div>
-    </section>
-            <section class="py-12 px-4 bg-gray-100">
-            <div class="max-w-4xl mx-auto bg-[#001E50] rounded-2xl p-8 text-center shadow-2xl border border-blue-800 relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-64 h-64 bg-blue-500 rounded-full opacity-10 blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
-
-            <h2 class="text-2xl md:text-3xl font-bold text-white mb-8 relative z-10">
-                Únete a la comunidad <span class="font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-300">#RETOVIRTUAL5KVZLA</span>
-            </h2>
-
-            <div class="flex justify-center flex-wrap gap-4 mb-8 relative z-10">
-                <a href="https://retovirtual5kvzla.vercel.app/" class="w-10 h-10 rounded-full bg-[#3b5998] flex items-center justify-center text-white hover:scale-110 transition shadow-lg">
-                    <i class="fa-brands fa-facebook-f"></i>
-                </a>
-                <a href="https://www.instagram.com/retovirtual.vzla/" target="_blank" class="w-10 h-10 rounded-full bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-500 flex items-center justify-center text-white hover:scale-110 transition shadow-lg">
-                    <i class="fa-brands fa-instagram"></i>
-                </a>
-                <a href="https://www.tiktok.com/@retovirtual5kvzla/" class="w-10 h-10 rounded-full bg-black flex items-center justify-center text-white hover:scale-110 transition shadow-lg border border-gray-700">
-                    <i class="fa-brands fa-tiktok"></i>
-                </a>
-            </div>
-
-            <div class="flex flex-col sm:flex-row justify-center gap-4 relative z-10">
-                <a href="https://retovirtual5kvzla.vercel.app/" class="bg-[#00A3E0] hover:bg-[#008Cb0] text-white font-bold py-2 px-6 rounded-lg shadow-lg transition flex items-center justify-center gap-2 text-sm">
-                    <i class="fa-solid fa-link"></i> Sitio web de 5K...
-                </a>
-                <a href="https://www.strava.com/clubs/1859944" class="bg-[#00A3E0] hover:bg-[#008Cb0] text-white font-bold py-2 px-6 rounded-lg shadow-lg transition flex items-center justify-center gap-2 text-sm">
-                    <i class="fa-brands fa-strava"></i> Club Strava
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <footer class="bg-gray-900 text-white py-8 text-center border-t border-gray-800">
-        <p class="text-xs text-gray-500">© 2026 Reto Virtual 5K Venezuela. Todos los derechos reservados.</p>
-    </footer>
-    </footer>
-
-    <a href="https://wa.me/584127732710" target="_blank" class="fixed bottom-6 right-6 z-50 bg-green-500 text-white p-4 rounded-full shadow-2xl hover:bg-green-600 hover:scale-110 transition-all flex items-center justify-center group"><i class="fa-brands fa-whatsapp text-3xl"></i></a>
-
-    <div id="successModal" class="fixed inset-0 z-50 hidden overflow-y-auto">
-        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-            <div class="fixed inset-0 bg-gray-500 bg-opacity-75" onclick="closeModal()"></div>
-            <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
-            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                    <div class="sm:flex sm:items-start">
-                        <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10"><i class="fa-solid fa-check text-green-600"></i></div>
-                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                            <h3 class="text-lg leading-6 font-medium text-green-600">¡Inscripción Exitosa!</h3>
-                            <div class="mt-2"><p class="text-sm text-gray-500"><span id="modalName" class="font-bold"></span>, hemos recibido tus datos.<br><br>📩 Te enviaremos tu dorsal digital pronto.</p></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                    <button type="button" onclick="sendToWhatsapp()" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 sm:ml-3 sm:w-auto sm:text-sm"><i class="fa-brands fa-whatsapp mr-2 mt-1"></i> Confirmar en WhatsApp</button>
-                    <button type="button" onclick="closeModal()" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">Cerrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <script>
-        // CONFIGURACIÓN
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbyyhFWu9ncCAj-j-CEWeQJb1Rp3vGcnKkbv1JSCHMDJyOfErE4hY1uwYqsZ2w9YWDUpkA/exec'; 
+        // ⬇️ CAMBIA ESTA CLAVE POR LA QUE QUIERAS
+        var CLAVE_SECRETA = "rvzla2026";
 
-        // 1. COUNTDOWN
-        // Configura la fecha para el 6 DE MARZO DE 2026 (Inicio del evento)
-const countDownDate = new Date("Mar 6, 2026 00:00:00").getTime();
-        setInterval(function() {
-            const now = new Date().getTime();
-            const distance = countDownDate - now;
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            if(document.getElementById("days")) {
-                document.getElementById("days").innerText = days < 10 ? "0" + days : days;
-                document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
-                document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+        function checkKey() {
+            var input = document.getElementById("secret-input").value;
+            if (input === CLAVE_SECRETA) {
+                // Redirige a la página real
+                window.location.href = "preview.html";
+            } else {
+                document.getElementById("key-error").classList.remove("hidden");
+                document.getElementById("secret-input").value = "";
+                setTimeout(function() {
+                    document.getElementById("key-error").classList.add("hidden");
+                }, 2000);
             }
-        }, 1000);
-
-        // 2. FUNCIÓN DORSAL
-        function updateBib() {
-            const input = document.getElementById('bib-input').value;
-            const display = document.getElementById('bib-name-display');
-            display.innerText = input ? input : "TU NOMBRE";
-        }
-
-        // 3. TABS IA
-        function switchTab(tab) {
-            ['entreno', 'nutricion', 'estrategia'].forEach(t => {
-                document.getElementById('tab-' + t).className = (t === tab) ? 'tab-active px-6 py-2 rounded-lg font-bold text-sm flex items-center gap-2 transition' : 'tab-inactive px-6 py-2 rounded-lg font-bold text-sm flex items-center gap-2 transition';
-                document.getElementById('form-' + t).classList.toggle('hidden', t !== tab);
-            });
-            document.getElementById('ai-result').classList.add('hidden');
-            document.getElementById('ai-placeholder').classList.remove('hidden');
-        }
-
-        // 4. IA GEMINI (CONEXIÓN SEGURA + ESCUDO ACTIVO)
-        async function callAI(type) {
-            const btn = document.getElementById('btn-' + type);
-            btn.disabled = true;
-            btn.classList.add('opacity-50');
-            document.getElementById('ai-placeholder').classList.add('hidden');
-            document.getElementById('ai-loading').classList.remove('hidden');
-            document.getElementById('ai-result').classList.add('hidden');
-
-            const promptMap = {
-                'entreno': `Actúa como entrenador de running experto. Crea un micro-plan de entrenamiento para una carrera de 5K. Nivel: ${document.getElementById('ai-level').value}. Días: ${document.getElementById('ai-days').value} por semana. Sé breve (máximo 4 puntos), motivador y usa formato Markdown.`,
-                'nutricion': `Actúa como nutricionista deportivo. Crea menú pre-carrera para 5K en Venezuela. Dieta: ${document.getElementById('ai-diet').value}. Alergias: ${document.getElementById('ai-allergies').value}. Sé breve (máximo 4 puntos) y usa formato Markdown.`,
-                'estrategia': `Actúa como estratega de carreras. Dame estrategia para correr 5K. Tiempo meta: ${document.getElementById('ai-time').value}. Clima: ${document.getElementById('ai-weather').value}. Sé breve (máximo 4 puntos) y usa formato Markdown.`
-            };
-
-            try {
-                // Intentamos hablar con nuestro servidor seguro
-                const response = await fetch('/api/gemini', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ prompt: promptMap[type] })
-                });
-
-                if (!response.ok) throw new Error('Google rechazó la llave temporalmente');
-
-                const data = await response.json();
-                const iaText = data.candidates[0].content.parts[0].text;
-                document.getElementById('ai-result').innerHTML = marked.parse(iaText);
-
-            } catch (error) {
-                // 🛡️ EL ESCUDO VIP: Versión Extendida y Profesional
-                const fallbackPlans = {
-                    'entreno': "### 🏃‍♂️ Tu Plan 5K Élite (Versión Extendida)\n\nAnalizando tu perfil y optimizando para tu nivel actual, aquí tienes tu hoja de ruta hacia la medalla:\n\n* **Fase de Activación (Lunes y Miércoles):** 25 min de trote conversacional (Z2). Si no puedes hablar mientras trotas, vas muy rápido.\n* **Fase de Potencia (Jueves):** Calentamiento 10 min. Luego 5 series de 1 minuto a máxima velocidad x 1 minuto de caminata. Enfriamiento 5 min.\n* **Fase de Simulación (Sábado):** Carrera continua de 3.5K a 4K. Intenta mantener el ritmo exacto que quieres llevar el día del evento.\n* **Recuperación Activa (Martes y Viernes):** 15 min de estiramientos profundos, yoga o bicicleta suave. Cero impacto.\n* **Día de la Carrera:** Calienta 15 min antes con movilidad articular. ¡Confía en el proceso!\n\n*💡 Tip de la IA: El descanso es donde el músculo crece y se adapta. No te saltes tus días libres.*",
-                    
-                    'nutricion': "### 🍏 Menú Pre-Carrera 5K (Alto Rendimiento)\n\nHemos estructurado tu carga de glucógeno y nivel de hidratación para evitar la fatiga prematura:\n\n* **48 Horas Antes:** Aumenta un 20% tu consumo de carbohidratos complejos (pasta, arroz, papa). Reduce las grasas pesadas y fritos al 0%.\n* **Cena del Día Anterior:** Un plato equilibrado. Recomendación: Pasta con salsa de tomate natural y una pechuga de pollo a la plancha. Cero lácteos, cero salsas pesadas.\n* **Desayuno (2 a 3 horas antes):** Avena preparada con agua (no leche), medio cambur (banana) y una cucharada de miel. Opcional: una arepa asada pequeña con mermelada.\n* **Protocolo de Hidratación:** Toma 2 litros de agua diarios los 3 días previos. El día del evento, toma 500ml de agua al despertar y pequeños sorbos hasta 30 min antes de la salida.\n\n*💡 Tip de la IA: Nunca estrenes comida el día de la carrera. Come solo lo que tu estómago ya conoce.*",
-                    
-                    'estrategia': "### 🧠 Estrategia de Carrera y Mindset 5K\n\nEl 5K es 60% físico y 40% mental. Así vas a devorar esos 5 kilómetros:\n\n* **La Salida (Km 0 - 1) | 'El Error de Novato':** La adrenalina te hará querer correr rápido. ¡Frena! Corre el primer kilómetro 10 segundos MÁS LENTO de tu ritmo objetivo. Guarda gasolina.\n* **Asentamiento (Km 1 - 3) | 'Ritmo Crucero':** Encuentra un paso constante donde tu respiración sea rítmica (2 pasos inspiro, 2 pasos expiro). Mantén la postura erguida.\n* **La Pared Mental (Km 3 - 4) | 'La Prueba':** Aquí el cuerpo pedirá parar. Engaña a tu cerebro contando tus pasos o enfocándote en la espalda de alguien adelante para alcanzarlo.\n* **El Remate Final (Km 4 - 5) | 'Fase de Caza':** Sube el ritmo progresivamente. Los últimos 400 metros usa absolutamente todo lo que te quede en el tanque. ¡La medalla es tuya!\n\n*💡 Tip de la IA: Divide la carrera en tu mente. No pienses en 5K, piensa en llegar al próximo kilómetro.*"
-                };
-                
-                // Simulamos que la IA está pensando por 1.5 segundos
-                await new Promise(r => setTimeout(r, 1500));
-                document.getElementById('ai-result').innerHTML = marked.parse(fallbackPlans[type]);
-
-            } finally {
-                // Formato impecable
-                document.querySelectorAll('#ai-result ul').forEach(ul => ul.classList.add('list-disc', 'ml-4', 'mb-4', 'text-gray-700'));
-                document.querySelectorAll('#ai-result h3').forEach(h3 => h3.classList.add('font-bold', 'text-lg', 'mt-4', 'mb-2', 'text-blue-900'));
-                
-                document.getElementById('ai-loading').classList.add('hidden');
-                document.getElementById('ai-result').classList.remove('hidden');
-                btn.disabled = false;
-                btn.classList.remove('opacity-50');
-            }
-        }
-
-        // 5. CIUDADES
-        const venezuelaLocations = { "Falcón": ["Punto Fijo", "Coro", "Tucacas", "Chichiriviche"], "Caracas": ["Caracas"], "Zulia": ["Maracaibo", "San Francisco", "Cabimas"], "Carabobo": ["Valencia", "Puerto Cabello", "San Diego"], "Lara": ["Barquisimeto", "Cabudare"], "Miranda": ["Los Teques", "Guarenas", "Guatire"], "Aragua": ["Maracay", "Turmero"], "Bolívar": ["Ciudad Guayana", "Ciudad Bolívar"], "Anzoátegui": ["Barcelona", "Puerto La Cruz"], "Mérida": ["Mérida", "El Vigía"], "Táchira": ["San Cristóbal"], "Trujillo": ["Valera", "Trujillo"], "Yaracuy": ["San Felipe"], "Portuguesa": ["Acarigua", "Guanare"], "Sucre": ["Cumaná"], "Barinas": ["Barinas"], "Guárico": ["San Juan de los Morros"], "Apure": ["San Fernando"], "Cojedes": ["San Carlos"], "Delta Amacuro": ["Tucupita"], "Amazonas": ["Puerto Ayacucho"], "Nueva Esparta": ["Porlamar"], "Vargas": ["La Guaira"] };
-        const selEstado = document.getElementById('estado');
-        Object.keys(venezuelaLocations).forEach(e => { let opt = document.createElement('option'); opt.value = e; opt.innerText = e; selEstado.appendChild(opt); });
-        function cargarCiudades() {
-            const estado = document.getElementById('estado').value;
-            const ciudad = document.getElementById('ciudad');
-            ciudad.innerHTML = '<option value="">Selecciona...</option>';
-            if (estado && venezuelaLocations[estado]) {
-                venezuelaLocations[estado].forEach(c => { let opt = document.createElement('option'); opt.value = c; opt.innerText = c; ciudad.appendChild(opt); });
-                ciudad.disabled = false;
-            } else { ciudad.disabled = true; }
-        }
-
-        // 6. ENVIAR FORM
-        function procesarRegistro(e) {
-            e.preventDefault();
-            const btn = document.getElementById('btn-submit');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Enviando...';
-            btn.disabled = true;
-            const form = new FormData(e.target);
-            const data = {};
-            form.forEach((value, key) => data[key] = value);
-            if(!scriptURL.includes('PEGAR_AQUI')) { fetch(scriptURL, { method: 'POST', body: form, mode: 'no-cors'}).catch(err => console.error(err)); }
-            setTimeout(() => {
-                document.getElementById('successModal').classList.remove('hidden');
-                document.getElementById('modalName').innerText = data.nombre;
-                window.whatsappLink = `https://wa.me/584127732710?text=Hola! Inscripción Reto 5K.%0A%0A👤 ${data.nombre} (${data.cedula})%0A📍 ${data.estado}, ${data.ciudad}%0A💰 Monto: ${data.monto}%0A💳 Ref: ${data.referencia}`;
-                btn.innerHTML = originalText;
-                btn.disabled = false;
-                e.target.reset();
-            }, 1500);
-        }
-        function closeModal() { document.getElementById('successModal').classList.add('hidden'); }
-        function sendToWhatsapp() { window.open(window.whatsappLink, '_blank'); closeModal(); }
-
-        // 7. CARRUSEL
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.carousel-item');
-        const indicators = document.querySelectorAll('.carousel-indicator');
-        const totalSlides = slides.length;
-        function updateCarousel() {
-            slides.forEach((slide, index) => {
-                if (index === currentSlide) { slide.classList.remove('opacity-0', 'z-10'); slide.classList.add('opacity-100', 'z-20'); }
-                else { slide.classList.remove('opacity-100', 'z-20'); slide.classList.add('opacity-0', 'z-10'); }
-            });
-            indicators.forEach((ind, index) => { ind.classList.toggle('opacity-100', index === currentSlide); ind.classList.toggle('opacity-50', index !== currentSlide); });
-        }
-        function nextSlide() { currentSlide = (currentSlide + 1) % totalSlides; updateCarousel(); }
-        function prevSlide() { currentSlide = (currentSlide - 1 + totalSlides) % totalSlides; updateCarousel(); }
-        if(document.getElementById('nextSlide')) {
-            document.getElementById('nextSlide').addEventListener('click', nextSlide);
-            document.getElementById('prevSlide').addEventListener('click', prevSlide);
-            indicators.forEach((ind, index) => { ind.addEventListener('click', () => { currentSlide = index; updateCarousel(); }); });
-            setInterval(nextSlide, 6000);
         }
     </script>
 </body>

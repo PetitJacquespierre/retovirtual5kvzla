@@ -3,138 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ranking Oficial - Reto Virtual 5K Venezuela</title>
+    <title>Ranking Oficial - Reto Virtual VZLA 2026</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        body { font-family: 'Open Sans', sans-serif; }
+        body { font-family: 'Inter', sans-serif; }
         h1, h2, h3, .font-heading { font-family: 'Montserrat', sans-serif; }
-        .venezuela-gradient { background: linear-gradient(90deg, #FCD116 0%, #003893 50%, #CE1126 100%); height: 6px; width: 100%; position: fixed; top: 0; z-index: 60; }
+        
+        .bg-boston-navy { background-color: #001E50; }
+        .text-accent { color: #00D2FF; } 
+        .bg-accent { background-color: #00D2FF; }
 
-        /* --- ESTILOS DEL CERTIFICADO --- */
+        /* Estilos del Certificado (Mantenemos tu lógica) */
         .contenedor-certificado-objetivo { position: relative; width: 100%; max-width: 800px; margin: 0 auto; border-radius: 12px; overflow: hidden; display: none; }
         .imagen-fondo-certificado { width: 100%; height: auto; display: block; }
         .texto-nombre-certificado { position: absolute; top: 35%; left: 50%; transform: translateX(-50%); color: #FFFFFF; font-size: clamp(16px, 4.5vw, 36px); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin: 0; white-space: nowrap; font-family: 'Montserrat', sans-serif; }
         .texto-dorsal-certificado, .texto-tiempo-certificado { position: absolute; bottom: 27%; color: #FFFFFF; font-size: clamp(14px, 3.5vw, 26px); font-weight: 800; margin: 0; font-family: 'Montserrat', sans-serif; }
         .texto-dorsal-certificado { left: 25%; }
-        .texto-tiempo-certificado { right: 10%; }    
+        .texto-tiempo-certificado { right: 10%; }  
+        
+        .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
-<body class="bg-gray-900 text-white min-h-screen flex flex-col">
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
 
-    <div class="venezuela-gradient"></div>
+    <div class="bg-boston-navy text-white py-2 text-center text-[10px] font-bold uppercase tracking-[0.4em] z-50 relative border-b border-white/10">
+        Resultados Oficiales Auditados por TeamFS
+    </div>
 
-    <nav class="bg-[#003893] shadow-md w-full z-40 py-4 mt-[6px]">
-        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <img src="image_0.png" alt="Logo" class="h-16 md:h-20 w-auto object-contain hidden sm:block" onerror="this.style.display='none'; document.getElementById('res-fallback-logo').classList.remove('hidden');">
-                <i id="res-fallback-logo" class="fa-solid fa-person-running text-2xl text-white border border-yellow-400 rounded-full p-1.5 sm:hidden hidden"></i>
-                <span class="font-heading font-extrabold text-lg md:text-xl tracking-tight text-white ml-2">
-                    RETO VIRTUAL 5K <span class="text-yellow-400">VENEZUELA</span>
-                </span>
+    <nav class="bg-boston-navy shadow-md w-full z-40 py-6">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <div class="flex items-center gap-6">
+                <img src="image_0.png" alt="Logo" class="h-16 md:h-20 w-auto object-contain brightness-125">
+                <div class="h-10 w-[1px] bg-white/20 hidden md:block"></div>
+                <div class="hidden md:flex flex-col">
+                    <span class="text-[8px] text-white/50 font-bold uppercase tracking-widest">Socio Tecnológico</span>
+                    <span class="text-white font-black text-xl italic tracking-tighter">TeamFS</span>
+                </div>
             </div>
-            <a href="index.html" class="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg font-bold transition flex items-center gap-2 text-sm">
-                <i class="fa-solid fa-arrow-left"></i> Volver al Inicio
+            <a href="index.html" class="bg-white/10 hover:bg-accent hover:text-boston-navy text-white px-6 py-2 rounded-full font-bold transition-all text-xs uppercase tracking-widest border border-white/20">
+                <i class="fa-solid fa-arrow-left mr-2"></i> Volver
             </a>
         </div>
     </nav>
 
-    <header class="py-12 px-4 text-center border-b border-gray-800 bg-black/50 relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-64 h-64 bg-yellow-500 rounded-full opacity-5 blur-3xl"></div>
-        <span class="bg-blue-600 text-white font-bold px-4 py-1 rounded-full text-xs uppercase tracking-widest mb-4 inline-block shadow-lg animate-pulse">
-            <i class="fa-solid fa-satellite-dish mr-1"></i> Sistema en Vivo
-        </span>
-        <h1 class="font-heading text-4xl md:text-5xl font-black mb-4 uppercase tracking-wide">
-            Ranking <span class="text-yellow-400">Oficial</span>
+    <header class="py-16 px-4 text-center bg-white border-b border-slate-200">
+        <h1 class="font-heading text-4xl md:text-6xl font-black text-boston-navy mb-4 uppercase tracking-tighter italic">
+            Ranking <span class="text-accent">Oficial 2026</span>
         </h1>
-        <p class="text-gray-400 max-w-2xl mx-auto">
-            Aquí se registrarán los tiempos validados de nuestros 50 Fundadores. 
+        <p class="text-slate-400 max-w-2xl mx-auto text-sm uppercase tracking-widest">
+            Cronometraje y clasificación validada para la serie nacional.
         </p>
     </header>
 
-    <main class="flex-grow max-w-5xl mx-auto px-4 py-12 w-full">
+    <main class="flex-grow max-w-6xl mx-auto px-4 py-16 w-full">
         
-        <div class="bg-blue-900/30 border border-blue-500/50 rounded-2xl p-6 mb-12 text-center flex flex-col items-center justify-center">
-            <i class="fa-solid fa-stopwatch-20 text-5xl text-blue-400 mb-4 animate-spin-slow"></i>
-            <h2 class="text-2xl font-bold text-white mb-2 font-heading">Fase de Carrera Activa</h2>
-            <p class="text-blue-200">Los corredores están registrando sus tiempos (6 al 15 de Marzo). La tabla de posiciones se actualizará progresivamente.</p>
-        </div>
-
-        <div class="flex flex-wrap justify-center gap-3 mb-6">
-            <button id="btn-general" onclick="cambiarFiltro('GENERAL')" class="bg-[#00FFFF] text-black shadow-[0_0_15px_rgba(0,255,255,0.4)] font-black px-5 py-2 rounded-xl transition-all scale-105">GENERAL</button>
-            <button id="btn-masculino" onclick="cambiarFiltro('MASCULINO')" class="bg-gray-800 hover:bg-blue-600 text-gray-300 font-bold px-5 py-2 rounded-xl transition-all border border-blue-500/30">MASCULINO</button>
-            <button id="btn-femenino" onclick="cambiarFiltro('FEMENINO')" class="bg-gray-800 hover:bg-pink-600 text-gray-300 font-bold px-5 py-2 rounded-xl transition-all border border-pink-500/30">FEMENINO</button>
-        </div>
-
-        <div id="contenedor-tabla" class="bg-gray-800 rounded-2xl shadow-2xl overflow-hidden border border-[#00FFFF]/50 mb-12 transition-colors duration-300">
-            <div id="header-tabla" class="bg-gray-700 px-6 py-4 border-b border-gray-600 flex justify-between items-center transition-colors duration-300">
-                <h3 class="font-bold text-lg font-heading text-white" id="titulo-tabla"><i class="fa-solid fa-trophy text-yellow-400 mr-2"></i> Clasificación General</h3>
-                <span class="text-xs text-yellow-400 font-bold animate-pulse">Pre-Carrera</span>
+        <div class="bg-white border border-slate-200 rounded-3xl p-8 mb-12 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-6">
+                <div class="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center">
+                    <i class="fa-solid fa-stopwatch text-2xl text-accent animate-pulse"></i>
+                </div>
+                <div class="text-left">
+                    <h2 class="text-xl font-black text-boston-navy uppercase tracking-tighter">Fase de Carrera Activa</h2>
+                    <p class="text-slate-400 text-sm">Edición 1: 06 al 15 de Marzo</p>
+                </div>
             </div>
+            <div class="text-right">
+                <span class="text-[10px] font-bold text-accent uppercase tracking-[0.3em] bg-boston-navy px-4 py-2 rounded-full">Actualización en Vivo</span>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap justify-center lg:justify-start gap-4 mb-8">
+            <button id="btn-general" onclick="cambiarFiltro('GENERAL')" class="bg-accent text-boston-navy font-black px-8 py-3 rounded-full transition-all shadow-lg text-xs uppercase tracking-widest">General</button>
+            <button id="btn-masculino" onclick="cambiarFiltro('MASCULINO')" class="bg-white text-slate-400 font-bold px-8 py-3 rounded-full transition-all border border-slate-200 text-xs uppercase tracking-widest hover:border-accent">Masculino</button>
+            <button id="btn-femenino" onclick="cambiarFiltro('FEMENINO')" class="bg-white text-slate-400 font-bold px-8 py-3 rounded-full transition-all border border-slate-200 text-xs uppercase tracking-widest hover:border-accent">Femenino</button>
+        </div>
+
+        <div id="contenedor-tabla" class="bg-white rounded-[2rem] shadow-2xl overflow-hidden border border-slate-100 mb-16">
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
                     <thead>
-                        <tr class="bg-gray-800/50 text-gray-400 text-sm uppercase tracking-wider border-b border-gray-700">
-                            <th class="p-4 font-semibold text-center w-16">Pos</th>
-                            <th class="p-4 font-semibold text-center w-20">Dorsal</th>
-                            <th class="p-4 font-semibold">Corredor</th>
-                            <th class="p-4 font-semibold text-center hidden sm:table-cell" id="col-cat">Cat.</th>
-                            <th class="p-4 font-semibold text-center">Tiempo / Estado</th>
+                        <tr class="bg-slate-50 text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] border-b border-slate-100">
+                            <th class="p-8 text-center w-24">Pos</th>
+                            <th class="p-8 text-center w-24">Dorsal</th>
+                            <th class="p-8">Corredor</th>
+                            <th class="p-8 text-center hidden sm:table-cell" id="col-cat">Cat.</th>
+                            <th class="p-8 text-right">Tiempo</th>
                         </tr>
                     </thead>
-                    <tbody id="tabla-corredores" class="text-gray-300 divide-y divide-gray-700">
+                    <tbody id="tabla-corredores" class="text-slate-600 divide-y divide-slate-50">
                         </tbody>
                 </table>
             </div>
         </div>
 
-        <div id="candado-certificado" class="bg-gradient-to-br from-[#001F54] to-black rounded-2xl p-8 border border-[#00FFFF]/30 text-center relative mt-12 shadow-[0_0_30px_rgba(0,31,84,0.6)] hidden">
-            <div class="bg-black/50 p-4 rounded-full mb-3 border border-[#FCD116]/30 inline-block">
-                <i class="fa-solid fa-lock text-5xl text-[#FCD116]"></i>
-            </div>
-            <h3 class="text-2xl font-bold text-white font-heading uppercase tracking-widest mt-4">Sistema Bloqueado</h3>
-            <p class="text-gray-300 text-sm mt-4 max-w-md mx-auto leading-relaxed">
-                Los certificados de la 1era Edición se generarán de forma automática a partir del <strong class="text-[#00FFFF]">15 de Marzo</strong>, una vez que finalice el evento y nuestro equipo valide todas las evidencias. ¡Concéntrate en tu carrera, Runner!
-            </p>
-        </div>
-
-        <div id="seccion-certificado-externo" class="bg-gradient-to-br from-[#001F54] to-black rounded-2xl p-8 border border-[#00FFFF]/30 text-center relative mt-12 shadow-[0_0_30px_rgba(0,31,84,0.6)]">
-            <i class="fa-solid fa-certificate text-6xl text-[#00FFFF] mb-4"></i>
-            <h3 class="text-3xl font-black mb-2 font-heading text-white uppercase tracking-widest">Tu Diploma Oficial</h3>
-            <p class="text-gray-400 mb-6 text-sm">Ingresa tu número de Dorsal para generar y descargar tu certificado.</p>
+        <div id="seccion-certificado-externo" class="bg-boston-navy rounded-[3rem] p-12 text-center relative overflow-hidden shadow-2xl">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-accent/10 rounded-full blur-3xl"></div>
             
-            <div class="flex max-w-sm mx-auto gap-2 mt-6 mb-12">
-                <input type="text" id="input-dorsal" placeholder="EJ: 015" class="w-full bg-gray-800 border-2 border-[#00FFFF] rounded-xl px-4 py-3 text-white text-center font-bold focus:outline-none focus:ring-2 focus:ring-[#FF00FF]">
-                <button onclick="mostrarCertificado()" class="bg-gradient-to-r from-[#00FFFF] to-[#FF00FF] text-white font-bold px-6 py-3 rounded-xl hover:scale-105 transition-transform"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <i class="fa-solid fa-certificate text-6xl text-accent mb-6"></i>
+            <h3 class="text-3xl font-black text-white uppercase tracking-tighter mb-4 italic">Reclama tu Diploma Oficial</h3>
+            <p class="text-white/50 mb-10 text-sm max-w-md mx-auto">Ingresa tu número de Dorsal para generar tu certificado de finalista con tu tiempo oficial.</p>
+            
+            <div class="flex flex-col sm:flex-row max-w-md mx-auto gap-3">
+                <input type="text" id="input-dorsal" placeholder="EJ: 015" class="w-full bg-white/5 border-2 border-white/10 rounded-2xl px-6 py-4 text-white text-center font-bold focus:outline-none focus:border-accent transition-all">
+                <button onclick="mostrarCertificado()" class="bg-accent text-boston-navy font-black px-10 py-4 rounded-2xl hover:scale-105 transition-transform uppercase text-xs tracking-widest">Buscar</button>
             </div>
 
-            <div class="contenedor-certificado-objetivo" id="mi-certificado-objetivo">
-                <img src="fondo-certificado.png" alt="Certificado Reto Virtual" class="imagen-fondo-certificado">
-                <h2 class="texto-nombre-certificado" id="cert-nombre">JACQUESPIERRE PETIT</h2>
-                <p class="texto-dorsal-certificado" id="cert-dorsal">001</p>
-                <p class="texto-tiempo-certificado" id="cert-tiempo">24:50</p>
+            <div class="contenedor-certificado-objetivo mt-12 shadow-2xl" id="mi-certificado-objetivo">
+                <img src="fondo-certificado.png" alt="Certificado" class="imagen-fondo-certificado">
+                <h2 class="texto-nombre-certificado" id="cert-nombre">---</h2>
+                <p class="texto-dorsal-certificado" id="cert-dorsal">---</p>
+                <p class="texto-tiempo-certificado" id="cert-tiempo">---</p>
             </div>
 
-            <div class="text-center mt-10">
-                <button id="btn-descargar" onclick="descargarCertificado()" class="hidden bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-black px-10 py-4 rounded-xl shadow-[0_0_20px_rgba(252,209,22,0.6)] hover:scale-105 transition-transform uppercase tracking-widest text-lg mx-auto">
-                    <i class="fa-solid fa-download mr-2"></i> Descargar mi Certificado
+            <div class="mt-10">
+                <button id="btn-descargar" onclick="descargarCertificado()" class="hidden bg-white text-boston-navy font-black px-12 py-5 rounded-full shadow-2xl hover:scale-105 transition-transform uppercase tracking-widest text-sm">
+                    <i class="fa-solid fa-download mr-2 text-accent"></i> Descargar Imagen
                 </button>
             </div>
         </div>
 
     </main>
 
-    <footer class="bg-black py-6 text-center text-gray-500 text-sm border-t border-gray-800">
-        <p>© 2026 Reto Virtual 5K Venezuela.</p>
+    <footer class="bg-boston-navy py-12 text-center border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+            <img src="image_0.png" class="h-12 grayscale brightness-200 opacity-30">
+            <p class="text-white/20 text-[10px] uppercase tracking-[0.5em]">© 2026 RETO VIRTUAL VZLA | POWERED BY TEAMFS</p>
+            <div class="flex gap-6">
+                <a href="#" class="text-white/30 hover:text-accent"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="text-white/30 hover:text-accent"><i class="fa-brands fa-strava"></i></a>
+            </div>
+        </div>
     </footer>
 
     <script>
         const urlBaseExcel = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5yMHsenxCWE5kZBDUZ8UcYqDtdAHstfqXcvWkuYZPQ_4n2xSrfs6ptk7k21r1kcMHHLtWjz8SEHwl/pub?gid=1297920374&single=true&output=csv";
-        
         let corredores = [];
         let filtroActual = 'GENERAL'; 
 
@@ -143,204 +150,92 @@
                 const urlFresca = urlBaseExcel + "&t=" + new Date().getTime();
                 const respuesta = await fetch(urlFresca);
                 const datosCsv = await respuesta.text();
-                
                 const filas = datosCsv.split(/\r?\n/);
-                corredores = []; // Limpiamos la lista para cargar los nuevos datos
+                corredores = [];
 
                 for(let i = 1; i < filas.length; i++) {
                     if(!filas[i].trim()) continue;
-                    
                     const valores = filas[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
-                    
-                    // 1. Procesar Dorsal (Asegurar 3 dígitos: 001, 015, etc.)
                     let dRaw = valores[0] ? valores[0].replace(/\D/g, '') : '';
                     if(dRaw === "" || dRaw.length > 3) continue;
                     while (dRaw.length < 3) dRaw = "0" + dRaw;
                     const dorsal = dRaw;
-                    
-                    // 2. Lógica de Nombre Inteligente para Reto Virtual Venezuela
                     const nombreCompleto = valores[1] ? valores[1].trim().replace(/"/g, '') : '';
-                    let p = nombreCompleto.split(' ').filter(w => w.length > 0);
-                    let nombreCorto = nombreCompleto;
-
-                    if (p.length >= 2) {
-                        let particulas = ["DE", "DEL", "LA", "LAS", "LOS", "DA", "DOS", "DAS", "E", "DELLA"];
-                        let idx = p.length - 2; // Empezamos asumiendo que el apellido es la penúltima palabra
-
-                        if (p.length >= 3) {
-                            // Si la penúltima es una partícula (como "de"), retrocedemos una más
-                            while (idx > 0 && particulas.includes(p[idx].toUpperCase())) {
-                                idx--;
-                            }
-                        } else {
-                            idx = 1; // Si solo hay 2 palabras (Luis Perez), el apellido es la segunda
-                        }
-                        nombreCorto = p[0] + " " + p[idx];
-                    }
-                    
                     const genero = valores[2] ? valores[2].trim().replace(/"/g, '') : '';
                     const tiempoExcel = valores[3] ? valores[3].trim().replace(/"/g, '') : '';
                     const tiempo = tiempoExcel !== "" ? tiempoExcel : "Pendiente";
-                    
-                    // Guardamos en el array global
-                    corredores.push({ 
-                        dorsal: dorsal, 
-                        nombre: nombreCorto, 
-                        genero: genero, 
-                        tiempo: tiempo 
-                    });
+                    corredores.push({ dorsal: dorsal, nombre: nombreCompleto, genero: genero, tiempo: tiempo });
                 }
-                
-                // ACTUALIZAR EL RANKING (La tabla)
                 pintarTablaCorredores();
-                
-                // 3. DESBLOQUEAR EL SISTEMA DE CERTIFICADOS
-                const divCandado = document.getElementById('candado-certificado');
-                const divSeccion = document.getElementById('seccion-certificado-externo');
-                
-                if(divCandado && divSeccion) {
-                    divCandado.classList.add('hidden');
-                    divSeccion.classList.remove('hidden');
-                }
-
-            } catch (error) {
-                console.error("Error en el sistema:", error);
-            }
-        }
-
-        function cambiarFiltro(filtro) {
-            filtroActual = filtro;
-            
-            const btnGen = document.getElementById('btn-general');
-            const btnMas = document.getElementById('btn-masculino');
-            const btnFem = document.getElementById('btn-femenino');
-            
-            btnGen.className = "bg-gray-800 hover:bg-[#00FFFF] hover:text-black text-gray-300 font-bold px-5 py-2 rounded-xl transition-all border border-[#00FFFF]/30";
-            btnMas.className = "bg-gray-800 hover:bg-blue-600 text-gray-300 font-bold px-5 py-2 rounded-xl transition-all border border-blue-500/30";
-            btnFem.className = "bg-gray-800 hover:bg-pink-600 text-gray-300 font-bold px-5 py-2 rounded-xl transition-all border border-pink-500/30";
-            
-            if(filtro === 'GENERAL') {
-                btnGen.className = "bg-[#00FFFF] text-black shadow-[0_0_15px_rgba(0,255,255,0.4)] font-black px-5 py-2 rounded-xl transition-all scale-105";
-                document.getElementById('titulo-tabla').innerHTML = '<i class="fa-solid fa-trophy text-yellow-400 mr-2"></i> Clasificación General';
-                document.getElementById('contenedor-tabla').className = "bg-gray-800 rounded-2xl shadow-2xl overflow-hidden border border-[#00FFFF]/50 mb-12 transition-colors duration-300";
-            } else if(filtro === 'MASCULINO') {
-                btnMas.className = "bg-blue-600 text-white shadow-[0_0_15px_rgba(37,99,235,0.4)] font-black px-5 py-2 rounded-xl transition-all scale-105";
-                document.getElementById('titulo-tabla').innerHTML = '<i class="fa-solid fa-mars text-blue-400 mr-2"></i> Top Masculino';
-                document.getElementById('contenedor-tabla').className = "bg-gray-800 rounded-2xl shadow-2xl overflow-hidden border border-blue-500/50 mb-12 transition-colors duration-300";
-            } else if(filtro === 'FEMENINO') {
-                btnFem.className = "bg-pink-600 text-white shadow-[0_0_15px_rgba(219,39,119,0.4)] font-black px-5 py-2 rounded-xl transition-all scale-105";
-                document.getElementById('titulo-tabla').innerHTML = '<i class="fa-solid fa-venus text-pink-400 mr-2"></i> Top Femenino';
-                document.getElementById('contenedor-tabla').className = "bg-gray-800 rounded-2xl shadow-2xl overflow-hidden border border-pink-500/50 mb-12 transition-colors duration-300";
-            }
-
-            pintarTablaCorredores();
+            } catch (error) { console.error("Error:", error); }
         }
 
         function pintarTablaCorredores() {
             const tbody = document.getElementById('tabla-corredores');
-            if(!tbody) return; 
-            tbody.innerHTML = ''; 
-            
-            let corredoresFiltrados = corredores;
-            
-            if(filtroActual === 'MASCULINO') {
-                corredoresFiltrados = corredores.filter(c => c.genero.toUpperCase().trim() !== 'F' && c.genero.toUpperCase().trim() !== 'FEMENINO');
-            } else if(filtroActual === 'FEMENINO') {
-                corredoresFiltrados = corredores.filter(c => c.genero.toUpperCase().trim() === 'F' || c.genero.toUpperCase().trim() === 'FEMENINO');
-            }
+            tbody.innerHTML = '';
+            let filtrados = corredores;
+            if(filtroActual === 'MASCULINO') filtrados = corredores.filter(c => c.genero.toUpperCase().trim().startsWith('M'));
+            if(filtroActual === 'FEMENINO') filtrados = corredores.filter(c => c.genero.toUpperCase().trim().startsWith('F'));
 
-           // ORDENAR POR TIEMPO (AHORA LEE HORAS, MINUTOS Y SEGUNDOS)
-            corredoresFiltrados.sort((a, b) => {
-                function tiempoASegundos(t) {
-                    if (!t || t.toLowerCase() === "pendiente" || !t.includes(":")) return 999999;
-                    let partes = t.split(":");
-                    
-                    // Si el tiempo tiene formato 0:00:00 (Horas:Minutos:Segundos)
-                    if (partes.length === 3) {
-                        return (parseInt(partes[0]) * 3600) + (parseInt(partes[1]) * 60) + parseInt(partes[2]);
-                    } 
-                    // Si el tiempo tiene formato 00:00 (Minutos:Segundos)
-                    else {
-                        return (parseInt(partes[0]) * 60) + parseInt(partes[1]);
-                    }
-                }
-                return tiempoASegundos(a.tiempo) - tiempoASegundos(b.tiempo);
+            filtrados.sort((a, b) => {
+                const tS = (t) => {
+                    if (!t || t === "Pendiente") return 999999;
+                    let p = t.split(":");
+                    return p.length === 3 ? (p[0]*3600)+(p[1]*60)+(+p[2]) : (p[0]*60)+(+p[1]);
+                };
+                return tS(a.tiempo) - tS(b.tiempo);
             });
 
-            // PINTAR CON LA POSICIÓN (Índice)
-            corredoresFiltrados.forEach((c, index) => {
-                let esFemenino = c.genero.toUpperCase().trim() === 'F' || c.genero.toUpperCase().trim() === 'FEMENINO';
-                let iconCat = esFemenino ? '<i class="fa-solid fa-venus text-pink-400" title="Femenino"></i>' : '<i class="fa-solid fa-mars text-blue-400" title="Masculino"></i>';
-                
-                let colCatHtml = filtroActual === 'GENERAL' ? `<td class="p-4 text-center hidden sm:table-cell text-lg">${iconCat}</td>` : '';
-                document.getElementById('col-cat').style.display = filtroActual === 'GENERAL' ? 'table-cell' : 'none';
-
-                // 🏅 LÓGICA DEL PODIO
-                let posHtml = `<span class="text-gray-600">-</span>`; 
-                if (c.tiempo.toLowerCase() !== "pendiente" && c.tiempo !== "") {
-                    let pos = index + 1; 
-                    if (pos === 1) posHtml = '<i class="fa-solid fa-trophy text-yellow-400 text-2xl drop-shadow-[0_0_8px_rgba(250,204,21,0.8)] animate-pulse" title="1er Lugar"></i>';
-                    else if (pos === 2) posHtml = '<i class="fa-solid fa-medal text-gray-300 text-2xl drop-shadow-[0_0_5px_rgba(209,213,219,0.8)]" title="2do Lugar"></i>';
-                    else if (pos === 3) posHtml = '<i class="fa-solid fa-medal text-orange-400 text-2xl drop-shadow-[0_0_5px_rgba(251,146,60,0.8)]" title="3er Lugar"></i>';
-                    else posHtml = `<span class="font-bold text-gray-400 text-lg">${pos}</span>`;
-                }
+            filtrados.forEach((c, i) => {
+                const pos = c.tiempo === "Pendiente" ? "-" : i + 1;
+                let posHtml = `<span class="font-bold text-slate-300 text-lg">${pos}</span>`;
+                if(pos === 1) posHtml = '🥇'; else if(pos === 2) posHtml = '🥈'; else if(pos === 3) posHtml = '🥉';
 
                 const fila = `
-                    <tr class="hover:bg-gray-700/50 transition-colors border-b border-gray-700">
-                        <td class="p-4 text-center">${posHtml}</td>
-                        <td class="p-4 text-center font-bold text-[#00FFFF]">${c.dorsal}</td>
-                        <td class="p-4 font-bold uppercase">${c.nombre}</td>
-                        ${colCatHtml}
-                        <td class="p-4 text-center text-sm text-yellow-400"><i class="fa-solid fa-clock mr-1"></i> ${c.tiempo}</td>
-                    </tr>
-                `;
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="p-8 text-center">${posHtml}</td>
+                        <td class="p-8 text-center font-black text-accent">${c.dorsal}</td>
+                        <td class="p-8 font-bold text-boston-navy uppercase tracking-tighter">${c.nombre}</td>
+                        <td class="p-8 text-center hidden sm:table-cell text-slate-400 text-xs uppercase">${c.genero}</td>
+                        <td class="p-8 text-right font-mono font-bold text-boston-navy">${c.tiempo}</td>
+                    </tr>`;
                 tbody.innerHTML += fila;
             });
         }
 
+        function cambiarFiltro(f) {
+            filtroActual = f;
+            ['btn-general', 'btn-masculino', 'btn-femenino'].forEach(id => {
+                document.getElementById(id).className = "bg-white text-slate-400 font-bold px-8 py-3 rounded-full transition-all border border-slate-200 text-xs uppercase tracking-widest";
+            });
+            const activo = document.getElementById('btn-' + f.toLowerCase());
+            activo.className = "bg-accent text-boston-navy font-black px-8 py-3 rounded-full transition-all shadow-lg text-xs uppercase tracking-widest";
+            pintarTablaCorredores();
+        }
+
         function mostrarCertificado() {
-            let dorsalIngresado = document.getElementById('input-dorsal').value.replace(/\D/g, '');
-            if(dorsalIngresado === "") { alert("⚠️ ¡Epa campeón! Ingresa un número de dorsal primero."); return; }
-            if(dorsalIngresado.length === 2) dorsalIngresado = "0" + dorsalIngresado;
-            if(dorsalIngresado.length === 1) dorsalIngresado = "00" + dorsalIngresado;
-
-            const corredorEncontrado = corredores.find(c => c.dorsal === dorsalIngresado);
-
-            if (corredorEncontrado) {
-                document.getElementById('cert-nombre').innerText = corredorEncontrado.nombre;
-                document.getElementById('cert-dorsal').innerText = corredorEncontrado.dorsal;
-                document.getElementById('cert-tiempo').innerText = corredorEncontrado.tiempo;
+            let d = document.getElementById('input-dorsal').value.padStart(3, '0');
+            const c = corredores.find(x => x.dorsal === d);
+            if (c) {
+                document.getElementById('cert-nombre').innerText = c.nombre;
+                document.getElementById('cert-dorsal').innerText = c.dorsal;
+                document.getElementById('cert-tiempo').innerText = c.tiempo;
                 document.getElementById('mi-certificado-objetivo').style.display = 'block';
                 document.getElementById('btn-descargar').classList.remove('hidden');
-            } else {
-                alert("🛑 ¡ALTO AHÍ! El dorsal '" + dorsalIngresado + "' no existe en nuestra base de datos o no te has inscrito.");
-                document.getElementById('mi-certificado-objetivo').style.display = 'none';
-                document.getElementById('btn-descargar').classList.add('hidden');
-            }
+            } else { alert("Dorsal no encontrado"); }
         }
 
         function descargarCertificado() {
-            const certificadoObjetivo = document.getElementById('mi-certificado-objetivo');
-            let numDorsal = document.getElementById('input-dorsal').value.replace(/\D/g, '');
-            if(numDorsal.length === 2) numDorsal = "0" + numDorsal;
-            if(numDorsal.length === 1) numDorsal = "00" + numDorsal;
-
-            html2canvas(certificadoObjetivo, { scale: 2, logging: false, useCORS: true }).then(canvas => {
-                const enlace = document.createElement('a');
-                enlace.download = 'Certificado-RetoVirtual-' + numDorsal + '.png';
-                enlace.href = canvas.toDataURL('image/png');
-                enlace.click(); 
+            const cert = document.getElementById('mi-certificado-objetivo');
+            html2canvas(cert, { scale: 2 }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'Certificado-Reto.png';
+                link.href = canvas.toDataURL();
+                link.click();
             });
         }
 
         window.onload = cargarDatosDesdeExcel;
-// Escuchar la tecla Enter en el buscador de dorsal
-document.getElementById('input-dorsal').addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-        mostrarCertificado();
-    }
-});
     </script>
-
 </body>
 </html>

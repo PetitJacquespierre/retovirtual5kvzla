@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reto Virtual VZLA 2026 | El Circuito Nacional</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-heading { font-family: 'Montserrat', sans-serif; }
+        .bg-boston-navy { background-color: #001E50; }
+        .text-accent { color: #00D2FF; }
+        .bg-accent { background-color: #00D2FF; }
+        .border-accent { border-color: #00D2FF; }
+        .hero-gradient {
+            background: linear-gradient(to bottom, rgba(0,30,80,0.95), rgba(0,30,80,0.6), rgba(0,30,80,0.98));
+        }
+
+        /* ========== SPLASH SCREEN ========== */
+        #splash {
+            position: fixed;
+            inset: 0;
+            background: #0a0a1a;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            animation: splash-exit 0.8s ease-out 3.2s forwards;
+        }
+        @keyframes splash-exit {
+            0%   { opacity: 1; }
+            100% { opacity: 0; pointer-events: none; visibility: hidden; }
+        }
+        .splash-scene {
+            position: relative;
+            width: min(700px, 92vw);
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(16px, 4vw, 40px);
+        }
+        .rv-logo { width: clamp(160px, 30vw, 260px); height: clamp(160px, 30vw, 260px); flex-shrink: 0; }
+        .rv-logo img {
+            width: 100%; height: 100%; object-fit: contain; display: block;
+            animation: rv-float 2.5s ease-in-out infinite;
+        }
+        @keyframes rv-float {
+            0%   { transform: translateY(0px);    filter: drop-shadow(0 0 10px rgba(0,180,255,0.5))  drop-shadow(0 0 20px rgba(220,50,200,0.3)); }
+            50%  { transform: translateY(-12px);  filter: drop-shadow(0 0 22px rgba(0,220,255,0.95)) drop-shadow(0 0 40px rgba(220,50,200,0.75)); }
+            100% { transform: translateY(0px);    filter: drop-shadow(0 0 10px rgba(0,180,255,0.5))  drop-shadow(0 0 20px rgba(220,50,200,0.3)); }
+        }
+        .splash-divider {
+            width: 2px; height: 160px; flex-shrink: 0;
+            background: linear-gradient(to bottom, transparent, #00d4ff, #dc32c8, transparent);
+            animation: divider-pulse 2.5s ease-in-out infinite;
+        }
+        @keyframes divider-pulse {
+            0%, 100% { opacity: 0.4; transform: scaleY(0.85); }
+            50%       { opacity: 1;   transform: scaleY(1); }
+        }
+        .teamfs-splash {
+            width: clamp(120px, 20vw, 180px); flex-shrink: 0;
+            animation: teamfs-entrance 1s ease-out both;
+        }
+        @keyframes teamfs-entrance {
+            from { opacity: 0; transform: scale(0.5) rotate(-15deg); }
+            to   { opacity: 1; transform: scale(1)   rotate(0deg); }
+        }
+        .teamfs-splash.floating {
+            animation: teamfs-float 3s ease-in-out infinite;
+        }
+        @keyframes teamfs-float {
+            0%   { transform: translateY(0px);  filter: drop-shadow(0 0 8px  rgba(255,220,0,0.4)); }
+            50%  { transform: translateY(-9px); filter: drop-shadow(0 0 20px rgba(0,220,200,0.85)); }
+            100% { transform: translateY(0px);  filter: drop-shadow(0 0 8px  rgba(255,220,0,0.4)); }
+        }
+        .splash-particles { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+        .particle { position: absolute; border-radius: 50%; animation: particle-move linear infinite; opacity: 0; }
+        @keyframes particle-move {
+            0%   { transform: translateY(100%)   translateX(0);    opacity: 0; }
+            10%  { opacity: 0.8; }
+            90%  { opacity: 0.5; }
+            100% { transform: translateY(-120%) translateX(20px); opacity: 0; }
+        }
+        .p1  { width:4px;height:4px;background:#00d4ff;left:10%;animation-duration:3.2s;animation-delay:0s; }
+        .p2  { width:3px;height:3px;background:#dc32c8;left:20%;animation-duration:2.8s;animation-delay:0.5s; }
+        .p3  { width:5px;height:5px;background:#ffdd00;left:35%;animation-duration:3.5s;animation-delay:1s; }
+        .p4  { width:2px;height:2px;background:#00d4ff;left:50%;animation-duration:2.5s;animation-delay:0.3s; }
+        .p5  { width:4px;height:4px;background:#dc32c8;left:65%;animation-duration:3.8s;animation-delay:0.8s; }
+        .p6  { width:3px;height:3px;background:#00ffcc;left:78%;animation-duration:2.9s;animation-delay:1.5s; }
+        .p7  { width:5px;height:5px;background:#ffdd00;left:88%;animation-duration:3.1s;animation-delay:0.2s; }
+        .p8  { width:2px;height:2px;background:#00d4ff;left:5%; animation-duration:4s;  animation-delay:2s; }
+        .p9  { width:4px;height:4px;background:#dc32c8;left:93%;animation-duration:2.6s;animation-delay:1.2s; }
+        .p10 { width:3px;height:3px;background:#00ffcc;left:45%;animation-duration:3.3s;animation-delay:0.7s; }
+        .collab-text {
+            position: absolute; bottom: 10px; width: 100%; text-align: center;
+            font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+            color: rgba(255,255,255,0.3);
+            animation: text-fade 3s ease-in-out infinite;
+        }
+        @keyframes text-fade {
+            0%, 100% { opacity: 0.3; }
+            50%       { opacity: 0.7; }
+        }
+        .splash-progress {
+            position: absolute; bottom: 0; left: 0;
+            height: 2px; width: 0%;
+            background: linear-gradient(to right, #00d4ff, #dc32c8);
+            animation: progress-fill 3.2s linear forwards;
+        }
+        @keyframes progress-fill {
+            0%   { width: 0%; }
+            100% { width: 100%; }
+        }
+        /* ========== FIN SPLASH ========== */
+    </style>
+</head>
+<body class="bg-white text-slate-900">
+
+    <!-- ===================== SPLASH SCREEN ===================== -->
+    <div id="splash">
+        <div class="splash-scene">
+            <div class="splash-particles">
+                <div class="particle p1"></div><div class="particle p2"></div>
+                <div class="particle p3"></div><div class="particle p4"></div>
+                <div class="particle p5"></div><div class="particle p6"></div>
+                <div class="particle p7"></div><div class="particle p8"></div>
+                <div class="particle p9"></div><div class="particle p10"></div>
+            </div>
+            <div class="rv-logo">
+                <img src="img/RV-Isotipo-sinfondo.png" alt="Reto Virtual VZLA" />
+            </div>
+            <div class="splash-divider"></div>
+            <img class="teamfs-splash" id="teamfs-splash" src="img/teamfslogo.png" alt="Team FS" />
+            <div class="collab-text">Reto Virtual VZLA × Team FS</div>
+        </div>
+        <div class="splash-progress"></div>
+    </div>
+    <!-- ================== FIN SPLASH SCREEN =================== -->
+
+
+    <div class="bg-[#001E50] text-white py-2 text-center text-[10px] font-bold uppercase tracking-[0.4em] z-50 relative border-b border-white/10">
+        El estándar de oro del running virtual en Venezuela
+    </div>
+
+    <nav class="bg-[#001E50] sticky top-0 z-50 shadow-2xl">
+        <div class="max-w-7xl mx-auto px-4 md:px-12">
+            <div class="flex justify-between items-center h-28">
+                <div class="flex items-center gap-6 cursor-pointer group" onclick="window.scrollTo(0,0)">
+                    <img src="img/RV-Isotipo-sinfondo.png" alt="Reto" class="h-20 md:h-22 w-auto object-contain brightness-125 transition-transform group-hover:scale-105">
+                    <div class="h-12 w-[1px] bg-white/20"></div>
+                    <div class="flex flex-col">
+                        <span class="text-[9px] text-white/60 font-bold tracking-[0.3em] uppercase mb-1">Presentado por</span>
+                        <span class="text-white font-black text-2xl md:text-4xl tracking-tighter leading-none group-hover:text-[#00D2FF] transition-colors italic">TEAMFS</span>
+                    </div>
+                </div>
+                <div class="hidden lg:flex items-center space-x-10">
+                    <a href="index.html#el-reto" class="text-white/80 hover:text-[#00D2FF] text-xs font-bold uppercase tracking-widest transition-all">El Reto</a>
+                    <a href="index.html#ediciones" class="text-white/80 hover:text-[#00D2FF] text-xs font-bold uppercase tracking-widest transition-all">Calendario</a>
+                    <a href="10k.html" class="bg-[#00D2FF] text-[#001E50] px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest hover:scale-105 transition-all">Especial 10K</a>
+                    <a href="resultados.html" class="text-white/80 hover:text-[#00D2FF] text-xs font-bold uppercase tracking-widest transition-all">Resultados</a>
+                    <a href="tienda.html" class="text-white/80 hover:text-[#00D2FF] text-xs font-bold uppercase tracking-widest transition-all">TIENDA</a>
+                    <a href="faq.html" class="text-white/80 hover:text-[#00D2FF] text-xs font-bold uppercase tracking-widest transition-all">FAQ</a>
+                    <a href="inscripcion.html" class="border-2 border-white text-white px-8 py-2.5 rounded-full font-black text-xs uppercase tracking-widest hover:bg-white hover:text-[#001E50] transition-all shadow-lg">Inscribirme</a>
+                </div>
+                <button class="lg:hidden text-white text-3xl"><i class="fa-solid fa-bars-staggered"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="relative h-[85vh] flex items-center justify-center overflow-hidden bg-black">
+    <img src="..." class="absolute inset-0 w-full h-full object-cover opacity-40 grayscale" alt="Runner">
+    <div class="absolute inset-0 hero-gradient"></div>
+
+    <div class="relative z-10 text-center px-4 max-w-5xl w-full">
+
+        <h2 class="text-[#00D2FF] font-bold tracking-[0.5em] uppercase text-xs md:text-sm mb-6 animate-pulse">Una Nación, Un Solo Cronómetro</h2>
+
+        <h1 class="font-heading text-6xl md:text-9xl font-black text-white leading-[0.85] mb-8 tracking-tighter uppercase">
+            RETO VIRTUAL <br> <span class="text-[#00D2FF] italic">VENEZUELA</span>
+        </h1>
+
+        <p class="text-white/80 max-w-2xl mx-auto text-lg md:text-2xl font-light mb-12 leading-relaxed">
+            4 ediciones. 4 medallas. 1 rompecabezas nacional.
+El running virtual más exigente de Venezuela, un legado que se corre, se siente y se lleva puesto.
+        </p>
+
+        <!-- BOTONES 
+        <div class="flex flex-col md:flex-row gap-6 justify-center mb-14">
+            <a href="inscripcion.html" class="bg-[#00D2FF] text-[#001E50] px-14 py-5 rounded-full font-black text-sm uppercase tracking-[0.2em] shadow-2xl hover:scale-110 transition-all">Asegurar mi Medalla</a>
+            <a href="#ediciones" class="border border-white/30 text-white px-10 py-5 rounded-full font-bold text-sm uppercase tracking-widest hover:bg-white/10 transition-all">Ver Calendario</a>
+        </div> -->
+
+     
+
+        <!-- COUNTDOWN — DEBAJO DE LOS BOTONES -->
+        <div class="flex items-center justify-center gap-4 md:gap-10">
+            <div class="text-center">
+                <span id="cd-dias" class="block text-5xl md:text-7xl font-black text-white leading-none tracking-tighter tabular-nums">00</span>
+                <span class="text-[#00D2FF] text-[9px] font-black uppercase tracking-[0.35em] mt-2 block">Días</span>
+            </div>
+            <span class="text-[#00D2FF]/30 text-5xl font-black pb-6">:</span>
+            <div class="text-center">
+                <span id="cd-horas" class="block text-5xl md:text-7xl font-black text-white leading-none tracking-tighter tabular-nums">00</span>
+                <span class="text-[#00D2FF] text-[9px] font-black uppercase tracking-[0.35em] mt-2 block">Horas</span>
+            </div>
+            <span class="text-[#00D2FF]/30 text-5xl font-black pb-6">:</span>
+            <div class="text-center">
+                <span id="cd-min" class="block text-5xl md:text-7xl font-black text-white leading-none tracking-tighter tabular-nums">00</span>
+                <span class="text-[#00D2FF] text-[9px] font-black uppercase tracking-[0.35em] mt-2 block">Min</span>
+            </div>
+            <span class="text-[#00D2FF]/30 text-5xl font-black pb-6">:</span>
+            <div class="text-center">
+                <span id="cd-seg" class="block text-5xl md:text-7xl font-black text-white leading-none tracking-tighter tabular-nums">00</span>
+                <span class="text-[#00D2FF] text-[9px] font-black uppercase tracking-[0.35em] mt-2 block">Seg</span>
+            </div>
+        </div>
+        <p class="text-white/25 text-[9px] uppercase tracking-[0.4em] mt-5">
+            ⏱ Edición 2 · Junio 05, 2026
+        </p>
+
+    </div>
+
+
+    </section>
+
+    <section id="nosotros" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <span class="text-[#00D2FF] font-black text-[10px] uppercase tracking-[0.5em] mb-4 block">Nuestra Visión</span>
+                    <h2 class="text-[#001E50] text-4xl md:text-6xl font-black uppercase leading-[0.9] tracking-tighter mb-8">
+                        RETO VIRTUAL <br> <span class="text-[#00D2FF] italic">x TEAMFS</span>
+                    </h2>
+                    <p class="text-slate-600 text-lg leading-relaxed mb-8 font-light">
+                        Hemos unido la pasión por el running con el <b>respaldo y la trayectoria de TeamFS</b> para redefinir la meta en Venezuela. No solo organizamos carreras; construimos la plataforma donde cada kilómetro cuenta y cada corredor compite bajo estándares de clase mundial.
+                    </p>
+                    <div class="flex items-center gap-4 border-l-4 border-[#00D2FF] pl-6 py-2">
+                        <p class="text-[#001E50] font-bold italic text-sm">"Uniendo al país, un latido a la vez."</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div class="bg-slate-50 p-10 rounded-[2rem] border border-slate-100">
+                        <span class="text-5xl font-black text-[#001E50] block mb-2 tracking-tighter">500+</span>
+                        <span class="text-[#00D2FF] font-bold text-[10px] uppercase tracking-widest leading-tight block">Atletas <br> Impulsados</span>
+                    </div>
+                    <div class="bg-[#001E50] p-10 rounded-[2rem] shadow-xl">
+                        <span class="text-5xl font-black text-[#00D2FF] block mb-2 tracking-tighter">6+</span>
+                        <span class="text-white/50 font-bold text-[10px] uppercase tracking-widest italic leading-tight block">Estados <br> Alcanzados</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="el-reto" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 md:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                <div>
+                    <span class="text-[#00D2FF] font-bold text-xs uppercase tracking-widest">Experiencia de Élite</span>
+                    <h2 class="text-[#001E50] text-4xl md:text-5xl font-black uppercase mt-4 mb-8 leading-tight">
+                        Más que una medalla, <br> un legado físico.
+                    </h2>
+                    <p class="text-slate-600 text-lg mb-8 leading-relaxed">
+                        En el <b>Reto Virtual VZLA</b>, la distancia la pones tú, pero la gloria es compartida. Hemos diseñado un circuito de 4 etapas donde cada medalla es una pieza de un rompecabezas nacional único en su clase.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-3 font-semibold text-[#001E50]"><i class="fa-solid fa-check-double text-[#00D2FF]"></i> Cronometraje validado por TeamFS</li>
+                        <li class="flex items-center gap-3 font-semibold text-[#001E50]"><i class="fa-solid fa-check-double text-[#00D2FF]"></i> Medallas de acrílico de alta densidad</li>
+                        <li class="flex items-center gap-3 font-semibold text-[#001E50]"><i class="fa-solid fa-check-double text-[#00D2FF]"></i> Ranking nacional en tiempo real</li>
+                    </ul>
+                </div>
+                <div class="bg-slate-100 rounded-3xl p-12 border border-slate-200 shadow-inner text-center">
+                    <i class="fa-solid fa-puzzle-piece text-8xl text-[#001E50]/10 mb-6"></i>
+                    <h3 class="text-2xl font-black text-[#001E50] uppercase mb-4 tracking-tighter">Completa la Serie</h3>
+                    <p class="text-slate-500 text-sm italic">"Cuatro carreras, un solo destino. ¿Tienes lo necesario para completar el mapa?"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="ediciones" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 md:px-12 text-center">
+            <span class="text-[#00D2FF] font-bold text-xs uppercase tracking-[0.4em]">Temporada 2026</span>
+            <h2 class="text-[#001E50] text-5xl font-black uppercase mt-2 mb-16">Ruta a la Gloria</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="group relative aspect-[3/4] overflow-hidden rounded-2xl shadow-xl transition-all hover:scale-[1.02]">
+                    <img src="img/Medalla1web.png" class="absolute inset-0 w-full h-full object-cover" alt="Pieza 1">
+                    <div class="absolute inset-0 bg-black/50 bg-gradient-to-t from-black/90 via-black/10 to-black/40"></div>
+                    <div class="absolute inset-0 flex flex-col items-center justify-center p-6 text-white z-10">
+                        <div class="mb-3 bg-[#00D2FF]/20 backdrop-blur-sm border border-[#00D2FF] p-2 rounded-full shadow-lg">
+                            <i class="fa-solid fa-lock-open text-[#00D2FF] text-sm"></i>
+                        </div>
+                        <h4 class="font-black text-2xl uppercase mb-1 tracking-tighter">Edición 1</h4>
+                        <p class="text-[#00D2FF] text-[11px] font-bold uppercase tracking-[0.3em] mb-5">Misión Completada</p>
+                        <span class="border-2 border-white/50 px-5 py-1.5 rounded-full text-[11px] font-bold bg-white/10 backdrop-blur-sm shadow-lg">Marzo 06 - 15</span>
+                    </div>
+                </div>
+                <div class="bg-[#001E50] p-8 rounded-3xl shadow-2xl border-b-8 border-[#00D2FF] transform scale-105 relative flex flex-col justify-between">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#00D2FF] text-[#001E50] text-[10px] font-black px-6 py-2 rounded-full uppercase shadow-xl tracking-tighter">Apertura: 15 Mayo</div>
+                    <div class="mt-4">
+                        <h4 class="font-black text-3xl text-white mb-2 uppercase tracking-tighter">Edición 2</h4>
+                        <p class="text-[#00D2FF] text-xs font-bold uppercase tracking-[0.2em] mb-6 italic">Pieza: La Conquista</p>
+                        <div class="bg-white/5 py-4 rounded-xl border border-white/10 mb-6">
+                            <p class="text-white font-bold text-lg leading-none mb-1">Junio 05 - 14</p>
+                            <p class="text-white/40 text-[9px] uppercase tracking-widest font-bold">Fecha de Carrera</p>
+                        </div>
+                    </div>
+                    <a href="#registro" class="block bg-white text-[#001E50] py-4 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-[#00D2FF] hover:text-white transition-all shadow-lg">Reservar Mi Cupo</a>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 flex flex-col justify-center">
+                    <h4 class="font-black text-2xl text-slate-300 mb-2 uppercase tracking-tighter">Edición 3</h4>
+                    <p class="text-slate-400 font-bold text-sm mb-4">Septiembre 04 - 13</p>
+                    <p class="text-[10px] text-slate-300 font-bold uppercase tracking-widest">Inscripciones Ago 15</p>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 flex flex-col justify-center">
+                    <h4 class="font-black text-2xl text-slate-300 mb-2 uppercase tracking-tighter">Edición 4</h4>
+                    <p class="text-slate-400 font-bold text-sm mb-4">Diciembre 04 - 13</p>
+                    <p class="text-[#00D2FF] text-[9px] font-black uppercase tracking-widest italic">La Gran Final</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 md:px-12 text-center">
+            <h2 class="text-[#001E50] text-4xl font-black uppercase tracking-tighter mb-4">Galería de Conquistadores</h2>
+            <p class="text-slate-500 mb-12 max-w-2xl mx-auto text-sm">Las mejores postales de nuestra comunidad. Cada km cuenta una historia diferente.</p>
+            <div class="flex gap-4 pb-10 overflow-x-auto snap-x">
+                <img src="img/tu-foto-1.png" class="flex-none w-72 h-96 object-cover rounded-2xl snap-center shadow-lg" alt="Runner">
+                <img src="img/tu-foto-2.jpg" class="flex-none w-72 h-96 object-cover rounded-2xl snap-center shadow-lg" alt="Runner">
+                <img src="img/tu-foto-3.png" class="flex-none w-72 h-96 object-cover rounded-2xl snap-center shadow-lg" alt="Runner">
+                <img src="img/tu-foto-4.jpg" class="flex-none w-72 h-96 object-cover rounded-2xl snap-center shadow-lg" alt="Runner">
+            </div>
+            <div class="mt-8">
+                <a href="https://drive.google.com/drive/folders/1aaoaoAIUHxevRezYuz7j0CP_fcOvjOfb?usp=drive_link" target="_blank" class="inline-flex items-center gap-3 bg-slate-100 text-[#001E50] px-8 py-4 rounded-full font-black text-xs uppercase tracking-widest hover:bg-[#00D2FF] hover:text-white transition-all border border-slate-200">
+                    <i class="fa-solid fa-images text-lg"></i> Ver todas las fotos en Google Drive
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="especial-10k" class="py-28 bg-[#001E50] relative overflow-hidden border-y border-white/5">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+        </div>
+        <div class="absolute -left-20 top-0 w-96 h-96 bg-[#00D2FF]/5 rounded-full blur-[120px]"></div>
+        <div class="max-w-7xl mx-auto px-4 md:px-12 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-3/5 text-center lg:text-left">
+                    <div class="inline-block border border-[#00D2FF]/50 px-4 py-1 rounded mb-6">
+                        <span class="text-[#00D2FF] font-black text-[10px] uppercase tracking-[0.5em]">The Iron Series</span>
+                    </div>
+                    <h2 class="text-white text-5xl md:text-8xl font-black uppercase mb-4 leading-[0.8] tracking-tighter">
+                        EDICIÓN <br> <span class="text-[#00D2FF] italic">ESPECIAL 10K</span>
+                    </h2>
+                    <h3 class="text-white/40 font-bold text-xl md:text-2xl uppercase tracking-widest mb-8">FORJANDO LEYENDAS EN EL ASFALTO</h3>
+                    <p class="text-white/70 text-lg md:text-xl mb-12 font-light leading-relaxed max-w-2xl">
+                        Esta no es una pieza más del rompecabezas. Es el desafío máximo del 2026. Una distancia que exige respeto y una <b>medalla de metal macizo</b> forjada para perdurar.
+                    </p>
+                    <div class="flex flex-wrap gap-10 justify-center lg:justify-start">
+                        <div class="flex flex-col items-center lg:items-start">
+                            <span class="text-[#00D2FF] text-3xl font-black mb-1 leading-none italic">100%</span>
+                            <span class="text-white/50 text-[9px] font-bold uppercase tracking-[0.2em]">Metal Macizo</span>
+                        </div>
+                        <div class="h-10 w-[1px] bg-white/10 hidden md:block"></div>
+                        <div class="flex flex-col items-center lg:items-start">
+                            <span class="text-[#00D2FF] text-3xl font-black mb-1 leading-none italic">ELITE</span>
+                            <span class="text-white/50 text-[9px] font-bold uppercase tracking-[0.2em]">Ranking Oficial</span>
+                        </div>
+                        <div class="h-10 w-[1px] bg-white/10 hidden md:block"></div>
+                        <div class="flex flex-col items-center lg:items-start">
+                            <span class="text-[#00D2FF] text-3xl font-black mb-1 leading-none italic">#1</span>
+                            <span class="text-white/50 text-[9px] font-bold uppercase tracking-[0.2em]">Socio: TeamFS</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-2/5 w-full">
+                    <div class="relative group">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-[#00D2FF]/50 to-white/20 rounded-[3rem] blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+                        <div class="relative aspect-square bg-[#001840] border border-white/10 rounded-[3rem] flex flex-col items-center justify-center p-12 shadow-2xl overflow-hidden">
+                            <div class="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-[#00D2FF]/10 via-transparent to-transparent"></div>
+                            <i class="fa-solid fa-shield-halved text-7xl text-white/5 mb-8 group-hover:text-[#00D2FF]/40 transition-all duration-700 group-hover:scale-110"></i>
+                            <div class="text-center">
+                                <p class="text-white font-black text-xs uppercase tracking-[0.5em] mb-2">Diseño Premium</p>
+                                <p class="text-[#00D2FF]/60 font-bold text-[10px] uppercase tracking-widest">Render Final en Proceso</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="aliados" class="py-24 bg-slate-50 border-t border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 md:px-12 text-center">
+            <span class="text-[#00D2FF] font-black text-[10px] uppercase tracking-[0.5em] mb-4 block">Alianza Estratégica</span>
+            <h2 class="text-[#001E50] text-4xl font-black uppercase mb-16 tracking-tighter italic">Nuestros <span class="text-[#00D2FF]">Aliados</span></h2>
+            <div class="mb-20">
+                <div class="max-w-md mx-auto bg-white p-10 rounded-[3rem] shadow-2xl border-2 border-[#00D2FF]/10 transition-transform hover:scale-105">
+                    <p class="text-[9px] text-slate-400 font-black uppercase tracking-[0.4em] mb-8 italic">Presentador Oficial</p>
+                    <a href="https://www.instagram.com/team_fs__/" target="_blank" class="block group">
+                        <img src="img/teamfslogo.png" alt="TeamFS Logo" class="h-38 mx-auto object-contain transition-transform group-hover:scale-110">
+                        <div class="mt-8 flex justify-center gap-2">
+                            <span class="h-1 w-8 bg-[#00D2FF] rounded-full group-hover:w-12 transition-all"></span>
+                            <span class="h-1 w-2 bg-[#00D2FF]/30 rounded-full"></span>
+                        </div>
+                        <p class="mt-4 text-[10px] text-[#00D2FF] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
+                            Ver Instagram <i class="fa-brands fa-instagram ml-1"></i>
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="bg-white/50 p-8 rounded-2xl border border-slate-100 group transition-all hover:bg-white hover:shadow-lg">
+                    <div class="h-12 flex items-center justify-center opacity-40 group-hover:opacity-100 transition-all">
+                        <span class="text-slate-300 font-bold uppercase text-[10px] tracking-widest">Logo Aliado 1</span>
+                    </div>
+                </div>
+                <div class="bg-white/50 p-8 rounded-2xl border border-slate-100 group transition-all hover:bg-white hover:shadow-lg">
+                    <div class="h-12 flex items-center justify-center opacity-40 group-hover:opacity-100 transition-all">
+                        <span class="text-slate-300 font-bold uppercase text-[10px] tracking-widest">Logo Aliado 2</span>
+                    </div>
+                </div>
+                <div class="bg-white/50 p-8 rounded-2xl border border-slate-100 group transition-all hover:bg-white hover:shadow-lg">
+                    <div class="h-12 flex items-center justify-center opacity-40 group-hover:opacity-100 transition-all">
+                        <span class="text-slate-300 font-bold uppercase text-[10px] tracking-widest">Logo Aliado 3</span>
+                    </div>
+                </div>
+                <div class="bg-white/50 p-8 rounded-2xl border border-slate-100 group transition-all hover:bg-white hover:shadow-lg">
+                    <div class="h-12 flex items-center justify-center opacity-40 group-hover:opacity-100 transition-all">
+                        <span class="text-slate-300 font-bold uppercase text-[10px] tracking-widest">Logo Aliado 4</span>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-16">
+                <a href="https://wa.me/584127732710" class="text-slate-400 text-[10px] font-bold uppercase tracking-widest border-b border-slate-200 pb-2 hover:text-[#00D2FF] hover:border-[#00D2FF] transition-all">
+                    ¿Quieres ser aliado del Circuito 2026? Contáctanos
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-[#001E50] relative overflow-hidden">
+        <div class="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-96 h-96 bg-[#00D2FF]/10 rounded-full blur-3xl"></div>
+        <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+            <h2 class="text-white text-4xl md:text-6xl font-black uppercase mb-6 leading-none">Tu próxima meta <br> <span class="text-[#00D2FF] italic">empieza aquí.</span></h2>
+            <p class="text-white/70 text-lg mb-10">No dejes para después la medalla que puedes ganar hoy. La Edición 2 de Junio te espera.</p>
+            <a href="inscripcion.html" class="inline-block bg-[#00D2FF] text-[#001E50] px-16 py-5 rounded-full font-black text-lg uppercase tracking-widest hover:scale-110 transition-transform shadow-2xl">¡INSCRIBIRME AHORA!</a>
+        </div>
+    </section>
+
+    <footer class="bg-[#001E50] py-20 px-4 border-t border-white/5">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-16 text-center md:text-left">
+            <div>
+                <img src="img/RV-Isotipo-sinfondo.png" class="h-14 mx-auto md:mx-0 mb-6 grayscale brightness-200 opacity-40">
+                <p class="text-white/30 text-[10px] uppercase tracking-[0.4em] leading-relaxed">
+                    Reto Virtual VZLA es una producción de <br>
+                    <a href="https://www.instagram.com/team_fs__/" target="_blank" class="text-white/60 hover:text-[#00D2FF] transition-colors font-bold">TeamFS</a>. <br>
+                    © 2026 THE ROAD TO GLORY.
+                </p>
+            </div>
+            <div class="flex flex-col items-center justify-center gap-6">
+                <h4 class="text-[#00D2FF] font-bold text-[10px] uppercase tracking-[0.3em]">Síguenos en la ruta</h4>
+                <div class="flex gap-10">
+                    <a href="https://wa.me/584127732710" class="text-white/40 hover:text-[#00D2FF] text-3xl transition-all transform hover:scale-110"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="https://www.instagram.com/retovirtual.vzla/" class="text-white/40 hover:text-[#00D2FF] text-3xl transition-all transform hover:scale-110"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.strava.com/clubs/1859944" class="text-white/40 hover:text-[#00D2FF] text-3xl transition-all transform hover:scale-110"><i class="fa-brands fa-strava"></i></a>
+                </div>
+            </div>
+            <div class="border-l border-white/10 pl-8 hidden md:block text-right">
+                <h4 class="text-[#00D2FF] font-bold text-[10px] uppercase tracking-[0.3em] mb-2">Presentado por</h4>
+                <a href="https://www.instagram.com/team_fs__/" target="_blank" class="group">
+                    <p class="text-white font-black text-3xl italic tracking-tighter uppercase opacity-80 group-hover:text-[#00D2FF] transition-all">TeamFS</p>
+                    <p class="text-[9px] text-white/40 uppercase tracking-widest">Socio Tecnológico Oficial</p>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Activa float del Team FS después del entrance
+        setTimeout(function() {
+            var el = document.getElementById("teamfs-splash");
+            if (el) el.classList.add("floating");
+        }, 1050);
+
+        // Elimina splash del DOM al terminar completamente
+        setTimeout(function() {
+            var splash = document.getElementById("splash");
+            if (splash) splash.remove();
+        }, 4100);
+
+// ===== COUNTDOWN EDICIÓN 2 =====
+    (function() {
+        var meta = new Date("2026-06-05T07:00:00");
+
+        function tick() {
+            var diff = meta - new Date();
+
+            if (diff <= 0) {
+                document.getElementById("cd-dias").textContent = "00";
+                document.getElementById("cd-horas").textContent = "00";
+                document.getElementById("cd-min").textContent = "00";
+                document.getElementById("cd-seg").textContent = "00";
+                return;
+            }
+
+            document.getElementById("cd-dias").textContent  = String(Math.floor(diff / 86400000)).padStart(2, "0");
+            document.getElementById("cd-horas").textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, "0");
+            document.getElementById("cd-min").textContent   = String(Math.floor((diff % 3600000) / 60000)).padStart(2, "0");
+            document.getElementById("cd-seg").textContent   = String(Math.floor((diff % 60000) / 1000)).padStart(2, "0");
+        }
+
+        tick();
+        setInterval(tick, 1000);
+    })();
+
+    // Activa float del Team FS después del entrance
+    setTimeout(function() {
+        var el = document.getElementById("teamfs-splash");
+        if (el) el.classList.add("floating");
+    }, 1050);
+
+    // Elimina splash del DOM al terminar completamente
+    setTimeout(function() {
+        var splash = document.getElementById("splash");
+        if (splash) splash.remove();
+    }, 4100);
+    </script>
+
+</body>
+</html>
