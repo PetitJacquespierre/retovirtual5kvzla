@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrenador IA | Reto Virtual VZLA 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-heading { font-family: 'Montserrat', sans-serif; }
+
+        /* Tabs */
+        .tab-btn { transition: all 0.3s; }
+        .tab-btn.active {
+            background: #00D2FF;
+            color: #001E50;
+            box-shadow: 0 0 30px rgba(0,210,255,0.4);
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        /* Typewriter */
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+        .cursor::after {
+            content: '|';
+            animation: blink 0.7s infinite;
+            color: #00D2FF;
+            margin-left: 2px;
+        }
+
+        /* Resultado markdown básico */
+        #resultado-texto h3 { color: #00D2FF; font-weight: 900; font-size: 1rem; margin: 1rem 0 0.4rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        #resultado-texto strong { color: white; font-weight: 700; }
+        #resultado-texto ul { list-style: none; padding: 0; }
+        #resultado-texto ul li::before { content: "▸ "; color: #00D2FF; }
+        #resultado-texto ul li { margin-bottom: 0.3rem; color: rgba(255,255,255,0.8); }
+        #resultado-texto p { color: rgba(255,255,255,0.75); margin-bottom: 0.6rem; line-height: 1.7; }
+        #resultado-texto em { color: #00D2FF; font-style: normal; font-weight: 600; }
+
+        /* Glow animado fondo */
+        .glow-orb {
+            position: absolute; border-radius: 50%; filter: blur(120px);
+            pointer-events: none; animation: orb-move 8s ease-in-out infinite;
+        }
+        @keyframes orb-move {
+            0%,100% { transform: translate(0,0); }
+            50% { transform: translate(40px, -30px); }
+        }
+
+        select, input[type=number], input[type=text] {
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: white;
+            border-radius: 0.75rem;
+            padding: 0.75rem 1rem;
+            width: 100%;
+            font-size: 0.875rem;
+            outline: none;
+            transition: border-color 0.3s;
+            appearance: none;
+        }
+        select:focus, input:focus { border-color: rgba(0,210,255,0.5); }
+        select option { background: #001E50; color: white; }
+        label { color: rgba(255,255,255,0.5); font-size: 0.7rem; font-weight: 700;
+                text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 0.4rem; }
+    </style>
+</head>
+<body class="bg-[#001E50] text-white min-h-screen">
+
+    <!-- NAV -->
+    <nav class="bg-[#001E50] sticky top-0 z-50 shadow-2xl border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 md:px-12">
+            <div class="flex justify-between items-center h-20">
+                <a href="index.html" class="flex items-center gap-4 group">
+                    <img src="img/RV-Isotipo-sinfondo.png" alt="Reto" class="h-12 w-auto object-contain brightness-125 transition-transform group-hover:scale-105">
+                    <div class="h-8 w-[1px] bg-white/20"></div>
+                    <span class="text-white font-black text-xl tracking-tighter italic group-hover:text-[#00D2FF] transition-colors">TEAMFS</span>
+                </a>
+                <div class="hidden lg:flex items-center space-x-8">
+                    <a href="index.html#el-reto" class="text-white/70 hover:text-[#00D2FF] text-xs font-bold uppercase tracking-widest transition-all">El Reto</a>
+                    <a href="index.html#ediciones" class="text-white/70 hover:text-[#00D2FF] text-xs font-bold uppercase tracking-widest transition-all">Calendario</a>
+                    <a href="10k.html" class="text-white/70 hover:text-[#00D2FF] text-xs font-bold uppercase tracking-widest transition-all">Especial 10K</a>
+                    <a href="resultados.html" class="text-white/70 hover:text-[#00D2FF] text-xs font-bold uppercase tracking-widest transition-all">Resultados</a>
+                    <span class="text-[#00D2FF] text-xs font-black uppercase tracking-widest border-b-2 border-[#00D2FF] pb-0.5">Entrenador IA</span>
+                    <a href="inscripcion.html" class="border-2 border-white text-white px-6 py-2 rounded-full font-black text-xs uppercase tracking-widest hover:bg-white hover:text-[#001E50] transition-all">Inscribirme</a>
+                </div>
+                <a href="index.html" class="lg:hidden text-white/60 hover:text-white text-sm font-bold">← Inicio</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO pequeño -->
+    <section class="relative py-20 px-4 text-center overflow-hidden">
+        <div class="glow-orb w-96 h-96 bg-[#00D2FF]/15 top-0 right-0"></div>
+        <div class="glow-orb w-72 h-72 bg-purple-500/10 bottom-0 left-0" style="animation-delay:4s"></div>
+        <div class="relative z-10">
+            <div class="inline-flex items-center gap-2 border border-[#00D2FF]/40 bg-[#00D2FF]/5 px-5 py-2 rounded-full mb-6">
+                <i class="fa-solid fa-microchip text-[#00D2FF] text-xs"></i>
+                <span class="text-[#00D2FF] font-black text-[10px] uppercase tracking-[0.4em]">Potenciado por Gemini AI</span>
+            </div>
+            <h1 class="font-heading text-4xl md:text-6xl font-black uppercase tracking-tighter leading-tight mb-4">
+                Tu Centro de <span class="text-[#00D2FF] italic">Preparación Inteligente</span>
+            </h1>
+            <p class="text-white/50 max-w-xl mx-auto text-base font-light">
+                IA entrenada con contexto del Reto Virtual VZLA. Planes reales, respuestas reales.
+            </p>
+        </div>
+    </section>
+
+    <!-- MAIN -->
+    <section class="max-w-6xl mx-auto px-4 md:px-8 pb-24">
+
+        <!-- TABS -->
+        <div class="flex gap-3 justify-center mb-10 flex-wrap">
+            <button class="tab-btn active px-7 py-3 rounded-full text-xs font-black uppercase tracking-widest border border-white/10"
+                    onclick="switchTab('entrenador', this)">
+                <i class="fa-solid fa-person-running mr-2"></i>Entrenador
+            </button>
+            <button class="tab-btn px-7 py-3 rounded-full text-xs font-black uppercase tracking-widest border border-white/10 text-white/60 hover:text-white"
+                    onclick="switchTab('nutricionista', this)">
+                <i class="fa-solid fa-apple-whole mr-2"></i>Nutricionista
+            </button>
+            <button class="tab-btn px-7 py-3 rounded-full text-xs font-black uppercase tracking-widest border border-white/10 text-white/60 hover:text-white"
+                    onclick="switchTab('estratega', this)">
+                <i class="fa-solid fa-chess mr-2"></i>Estratega
+            </button>
+        </div>
+
+        <!-- GRID: formulario + resultado -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+            <!-- COLUMNA IZQUIERDA: formularios -->
+            <div class="bg-white/5 border border-white/10 rounded-3xl p-8">
+
+                <!-- TAB: ENTRENADOR -->
+                <div id="tab-entrenador" class="tab-content active space-y-5">
+                    <div>
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-10 h-10 bg-[#00D2FF]/10 border border-[#00D2FF]/30 rounded-xl flex items-center justify-center">
+                                <i class="fa-solid fa-person-running text-[#00D2FF]"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-black text-base uppercase tracking-tight">Plan de Entrenamiento</h3>
+                                <p class="text-white/30 text-xs">Personalizado para tu próxima edición</p>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div>
+                                <label>Tu nivel actual</label>
+                                <select id="ent-nivel">
+                                    <option value="principiante">Principiante (nunca he corrido)</option>
+                                    <option value="intermedio">Intermedio (corro ocasionalmente)</option>
+                                    <option value="avanzado">Avanzado (corro regularmente)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label>Días disponibles por semana</label>
+                                <select id="ent-dias">
+                                    <option value="2">2 días</option>
+                                    <option value="3" selected>3 días</option>
+                                    <option value="4">4 días</option>
+                                    <option value="5">5 días</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label>Semanas hasta tu carrera</label>
+                                <select id="ent-semanas">
+                                    <option value="4">4 semanas</option>
+                                    <option value="6" selected>6 semanas</option>
+                                    <option value="8">8 semanas</option>
+                                    <option value="12">12 semanas</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label>Objetivo</label>
+                                <select id="ent-objetivo">
+                                    <option value="terminar">Solo terminar el 5K</option>
+                                    <option value="sub30">Bajar de 30 minutos</option>
+                                    <option value="sub25">Bajar de 25 minutos</option>
+                                    <option value="mejorar">Mejorar mi marca personal</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="generarPlan('entrenador')"
+                            class="w-full bg-[#00D2FF] text-[#001E50] py-4 rounded-2xl font-black text-sm uppercase tracking-widest hover:scale-[1.02] transition-all shadow-lg mt-2">
+                        <i class="fa-solid fa-bolt mr-2"></i>Generar Mi Plan
+                    </button>
+                </div>
+
+                <!-- TAB: NUTRICIONISTA -->
+                <div id="tab-nutricionista" class="tab-content space-y-5">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 bg-[#00D2FF]/10 border border-[#00D2FF]/30 rounded-xl flex items-center justify-center">
+                            <i class="fa-solid fa-apple-whole text-[#00D2FF]"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-black text-base uppercase tracking-tight">Plan Nutricional</h3>
+                            <p class="text-white/30 text-xs">Alimentación adaptada al corredor venezolano</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label>Tu peso (kg)</label>
+                            <input type="number" id="nut-peso" placeholder="Ej: 70" min="40" max="150">
+                        </div>
+                        <div>
+                            <label>Objetivo nutricional</label>
+                            <select id="nut-objetivo">
+                                <option value="rendimiento">Mejorar rendimiento en carrera</option>
+                                <option value="perder_peso">Perder peso corriendo</option>
+                                <option value="resistencia">Aumentar resistencia</option>
+                                <option value="recuperacion">Mejorar recuperación</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Horario habitual de entrenamiento</label>
+                            <select id="nut-horario">
+                                <option value="mañana">Mañana (6am - 9am)</option>
+                                <option value="medio_dia">Medio día (11am - 1pm)</option>
+                                <option value="tarde">Tarde (4pm - 7pm)</option>
+                                <option value="noche">Noche (7pm en adelante)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>¿Tienes restricciones alimentarias?</label>
+                            <select id="nut-restriccion">
+                                <option value="ninguna">Ninguna</option>
+                                <option value="vegetariano">Vegetariano</option>
+                                <option value="sin_lactosa">Sin lactosa</option>
+                                <option value="diabetico">Diabético</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button onclick="generarPlan('nutricionista')"
+                            class="w-full bg-[#00D2FF] text-[#001E50] py-4 rounded-2xl font-black text-sm uppercase tracking-widest hover:scale-[1.02] transition-all shadow-lg mt-2">
+                        <i class="fa-solid fa-bolt mr-2"></i>Generar Mi Plan
+                    </button>
+                </div>
+
+                <!-- TAB: ESTRATEGA -->
+                <div id="tab-estratega" class="tab-content space-y-5">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 bg-[#00D2FF]/10 border border-[#00D2FF]/30 rounded-xl flex items-center justify-center">
+                            <i class="fa-solid fa-chess text-[#00D2FF]"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-black text-base uppercase tracking-tight">Estrategia de Carrera</h3>
+                            <p class="text-white/30 text-xs">Pace, ritmo y táctica para tu 5K</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label>Tiempo objetivo en 5K (minutos)</label>
+                            <input type="number" id="est-tiempo" placeholder="Ej: 28" min="15" max="60">
+                        </div>
+                        <div>
+                            <label>¿Has corrido un 5K antes?</label>
+                            <select id="est-experiencia">
+                                <option value="nunca">Nunca</option>
+                                <option value="1_vez">1 vez</option>
+                                <option value="varias">Varias veces</option>
+                                <option value="regularmente">Regularmente</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>¿Cómo describes tu estado físico?</label>
+                            <select id="est-estado">
+                                <option value="bajo">Bajo (poco activo)</option>
+                                <option value="regular">Regular (activo a veces)</option>
+                                <option value="bueno">Bueno (activo frecuente)</option>
+                                <option value="excelente">Excelente (atleta)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>¿Qué sueles fallar en carrera?</label>
+                            <select id="est-fallo">
+                                <option value="arranque">Arranco muy rápido y me canso</option>
+                                <option value="final">Me falta energía al final</option>
+                                <option value="respiracion">Problemas de respiración</option>
+                                <option value="mental">Me rindo mentalmente</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button onclick="generarPlan('estratega')"
+                            class="w-full bg-[#00D2FF] text-[#001E50] py-4 rounded-2xl font-black text-sm uppercase tracking-widest hover:scale-[1.02] transition-all shadow-lg mt-2">
+                        <i class="fa-solid fa-bolt mr-2"></i>Generar Mi Estrategia
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- COLUMNA DERECHA: resultado -->
+            <div class="bg-white/5 border border-white/10 rounded-3xl p-8 flex flex-col">
+
+                <!-- Header resultado -->
+                <div class="flex items-center gap-3 mb-6 pb-4 border-b border-white/10">
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-[#00D2FF] to-purple-500 flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-robot text-white text-xs"></i>
+                    </div>
+                    <div>
+                        <p class="text-white font-black text-sm">Asistente RV VZLA</p>
+                        <p id="estado-ia" class="text-[#00D2FF] text-[10px] uppercase tracking-widest font-bold">● En espera</p>
+                    </div>
+                    <button id="btn-copiar" onclick="copiarResultado()"
+                            class="ml-auto text-white/20 hover:text-[#00D2FF] text-xs font-bold uppercase tracking-widest transition-all hidden">
+                        <i class="fa-solid fa-copy mr-1"></i>Copiar
+                    </button>
+                </div>
+
+                <!-- Área de resultado -->
+                <div id="resultado-area" class="flex-1 flex flex-col">
+
+                    <!-- Estado vacío -->
+                    <div id="estado-vacio" class="flex-1 flex flex-col items-center justify-center text-center py-12">
+                        <div class="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-4">
+                            <i class="fa-solid fa-robot text-white/10 text-3xl"></i>
+                        </div>
+                        <p class="text-white/20 text-sm font-light">Selecciona un modo y genera tu plan personalizado.</p>
+                        <p class="text-[#00D2FF]/40 text-[10px] uppercase tracking-widest mt-2 font-bold">
+                            <i class="fa-solid fa-microchip mr-1"></i>Conectado con Gemini 2.0 Flash
+                        </p>
+                    </div>
+
+                    <!-- Loading -->
+                    <div id="estado-loading" class="hidden flex-1 flex flex-col items-center justify-center text-center py-12">
+                        <div class="flex gap-1.5 mb-4">
+                            <div class="w-2 h-2 rounded-full bg-[#00D2FF] animate-bounce" style="animation-delay:0s"></div>
+                            <div class="w-2 h-2 rounded-full bg-[#00D2FF] animate-bounce" style="animation-delay:0.15s"></div>
+                            <div class="w-2 h-2 rounded-full bg-[#00D2FF] animate-bounce" style="animation-delay:0.3s"></div>
+                        </div>
+                        <p class="text-white/40 text-sm">Analizando tu perfil...</p>
+                    </div>
+
+                    <!-- Texto resultado -->
+                    <div id="estado-resultado" class="hidden flex-1 overflow-y-auto">
+                        <div id="resultado-texto" class="text-sm leading-relaxed cursor"></div>
+                    </div>
+
+                </div>
+
+                <!-- Footer resultado -->
+                <p class="text-white/15 text-[9px] uppercase tracking-widest mt-6 text-center">
+                    Las recomendaciones son orientativas · Consulta a un profesional de salud
+                </p>
+
+            </div>
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="mt-6 text-center">
+            <p class="text-white/20 text-[10px] uppercase tracking-widest">
+                <i class="fa-solid fa-shield-halved mr-1 text-[#00D2FF]/30"></i>
+                Tus datos no se almacenan · Solo se procesan para generar tu plan
+            </p>
+        </div>
+
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#001840] py-10 px-4 border-t border-white/5 text-center">
+        <div class="flex justify-center gap-8 mb-4">
+            <a href="https://wa.me/584127732710" class="text-white/30 hover:text-[#00D2FF] text-xl transition-all"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://www.instagram.com/retovirtual.vzla/" class="text-white/30 hover:text-[#00D2FF] text-xl transition-all"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.strava.com/clubs/1859944" class="text-white/30 hover:text-[#00D2FF] text-xl transition-all"><i class="fa-brands fa-strava"></i></a>
+        </div>
+        <p class="text-white/20 text-[9px] uppercase tracking-[0.4em]">© 2026 Reto Virtual VZLA · Presentado por TeamFS</p>
+    </footer>
+
+    <script>
+    // ======= TABS =======
+    function switchTab(nombre, btn) {
+        document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(el => {
+            el.classList.remove('active');
+            el.classList.add('text-white/60');
+        });
+        document.getElementById('tab-' + nombre).classList.add('active');
+        btn.classList.add('active');
+        btn.classList.remove('text-white/60');
+        resetResultado();
+    }
+
+    function resetResultado() {
+        document.getElementById('estado-vacio').classList.remove('hidden');
+        document.getElementById('estado-loading').classList.add('hidden');
+        document.getElementById('estado-resultado').classList.add('hidden');
+        document.getElementById('btn-copiar').classList.add('hidden');
+        document.getElementById('estado-ia').textContent = '● En espera';
+        document.getElementById('resultado-texto').innerHTML = '';
+    }
+
+    // ======= PROMPTS =======
+    function armarPrompt(modo) {
+        var base = "Eres el asistente oficial del Reto Virtual VZLA 2026, el circuito de running virtual más importante de Venezuela organizado por TeamFS. Responde en español, usa emojis moderadamente, estructura con subtítulos claros con ###, usa listas cuando sea útil. Sé específico, práctico y motivador. Máximo 400 palabras.\n\n";
+
+        if (modo === 'entrenador') {
+            var nivel   = document.getElementById('ent-nivel').value;
+            var dias    = document.getElementById('ent-dias').value;
+            var semanas = document.getElementById('ent-semanas').value;
+            var obj     = document.getElementById('ent-objetivo').value;
+            return base + "Actúa como entrenador de running. Crea un plan de entrenamiento de " + semanas + " semanas para un atleta de nivel " + nivel + " que puede entrenar " + dias + " días por semana. Su objetivo es: " + obj + ". Incluye: qué hacer cada día de entrenamiento, días de descanso, progresión semanal y consejo final motivador.";
+        }
+
+        if (modo === 'nutricionista') {
+            var peso       = document.getElementById('nut-peso').value || '70';
+            var obj        = document.getElementById('nut-objetivo').value;
+            var horario    = document.getElementById('nut-horario').value;
+            var restriccion= document.getElementById('nut-restriccion').value;
+            return base + "Actúa como nutricionista deportiva. El atleta pesa " + peso + "kg, su objetivo es " + obj + ", entrena en horario " + horario + " y tiene restricción: " + restriccion + ". Crea un plan nutricional para corredor venezolano con alimentos accesibles en Venezuela. Incluye: qué comer antes de correr, durante (si aplica) y después. También da tips para la semana de carrera.";
+        }
+
+        if (modo === 'estratega') {
+            var tiempo      = document.getElementById('est-tiempo').value || '30';
+            var experiencia = document.getElementById('est-experiencia').value;
+            var estado      = document.getElementById('est-estado').value;
+            var fallo       = document.getElementById('est-fallo').value;
+            return base + "Actúa como estratega de carrera. El atleta quiere terminar 5K en " + tiempo + " minutos, ha corrido " + experiencia + ", su estado físico es " + estado + " y su mayor problema es: " + fallo + ". Define: pace objetivo por km (min/km), estrategia km a km (1-2 conservador, 3-4 sostenido, km 5 final), cómo resolver su problema principal y 3 tips clave para el día de carrera virtual.";
+        }
+    }
+
+    // ======= GENERAR =======
+    async function generarPlan(modo) {
+        var prompt = armarPrompt(modo);
+
+        // UI: loading
+        document.getElementById('estado-vacio').classList.add('hidden');
+        document.getElementById('estado-resultado').classList.add('hidden');
+        document.getElementById('estado-loading').classList.remove('hidden');
+        document.getElementById('estado-ia').textContent = '● Analizando...';
+        document.getElementById('btn-copiar').classList.add('hidden');
+
+        try {
+            var res = await fetch('/api/gemini', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ prompt: prompt })
+            });
+
+            var data = await res.json();
+
+            if (!res.ok) throw new Error(data.error || 'Error al conectar con la IA');
+
+            var texto = data.candidates[0].content.parts[0].text;
+
+            // UI: mostrar resultado
+            document.getElementById('estado-loading').classList.add('hidden');
+            document.getElementById('estado-resultado').classList.remove('hidden');
+            document.getElementById('estado-ia').textContent = '● Plan listo';
+            document.getElementById('btn-copiar').classList.remove('hidden');
+
+            // Typewriter
+            typewriter(texto);
+
+        } catch (err) {
+            document.getElementById('estado-loading').classList.add('hidden');
+            document.getElementById('estado-vacio').classList.remove('hidden');
+            document.getElementById('estado-ia').textContent = '● Error de conexión';
+            document.getElementById('estado-vacio').querySelector('p').textContent = 'Error: ' + err.message + '. Intenta de nuevo.';
+        }
+    }
+
+    // ======= TYPEWRITER =======
+    function typewriter(texto) {
+        var contenedor = document.getElementById('resultado-texto');
+        contenedor.innerHTML = '';
+        contenedor.classList.add('cursor');
+
+        // Convertir markdown básico a HTML
+        var html = texto
+            .replace(/### (.*)/g, '<h3>$1</h3>')
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\*(.*?)\*/g, '<em>$1</em>')
+            .replace(/^- (.*)/gm, '<li>$1</li>')
+            .replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>')
+            .replace(/\n/g, '<br>');
+
+        var i = 0;
+        var rawChars = html.split('');
+        var velocidad = rawChars.length > 800 ? 5 : 15;
+
+        function escribir() {
+            if (i < rawChars.length) {
+                contenedor.innerHTML = html.substring(0, i + 1);
+                i += Math.ceil(rawChars.length / 200); // acelerar en textos largos
+                setTimeout(escribir, velocidad);
+                contenedor.parentElement.scrollTop = contenedor.parentElement.scrollHeight;
+            } else {
+                contenedor.innerHTML = html;
+                contenedor.classList.remove('cursor');
+            }
+        }
+        escribir();
+    }
+
+    // ======= COPIAR =======
+    function copiarResultado() {
+        var texto = document.getElementById('resultado-texto').innerText;
+        navigator.clipboard.writeText(texto).then(function() {
+            var btn = document.getElementById('btn-copiar');
+            btn.innerHTML = '<i class="fa-solid fa-check mr-1"></i>Copiado';
+            setTimeout(function() {
+                btn.innerHTML = '<i class="fa-solid fa-copy mr-1"></i>Copiar';
+            }, 2000);
+        });
+    }
+    </script>
+
+</body>
+</html>
