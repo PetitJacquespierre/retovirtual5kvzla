@@ -25,13 +25,11 @@ export default async function handler(req, res) {
         return res.status(500).json({ error: 'API Key no configurada en variables de entorno' });
     }
 
-    console.log('✅ API Key encontrada:', API_KEY.substring(0, 10) + '...');
-
     try {
         console.log('📤 Llamando a Gemini API...');
         
         const response = await fetch(
-            `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${API_KEY}`,
+            `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`,
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -42,7 +40,7 @@ export default async function handler(req, res) {
                     generationConfig: {
                         temperature: 0.7,
                         maxOutputTokens: 1000,
-                        topP: 0.8,
+                        topP: 0.9,
                         topK: 40
                     }
                 })
