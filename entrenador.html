@@ -98,13 +98,13 @@
         <div class="relative z-10">
             <div class="inline-flex items-center gap-2 border border-[#00D2FF]/40 bg-[#00D2FF]/5 px-5 py-2 rounded-full mb-6">
                 <i class="fa-solid fa-microchip text-[#00D2FF] text-xs"></i>
-                <span class="text-[#00D2FF] font-black text-[10px] uppercase tracking-[0.4em]">Potenciado por Gemini AI</span>
+                <span class="text-[#00D2FF] font-black text-[10px] uppercase tracking-[0.4em]">Potenciado por OpenRouter API (Global)</span>
             </div>
             <h1 class="font-heading text-4xl md:text-6xl font-black uppercase tracking-tighter leading-tight mb-4">
                 Tu Centro de <span class="text-[#00D2FF] italic">Preparación Inteligente</span>
             </h1>
             <p class="text-white/50 max-w-xl mx-auto text-base font-light">
-                IA entrenada con contexto del Reto Virtual VZLA. Planes reales, respuestas reales.
+                IA optimizada sin bloqueos geográficos para el Reto Virtual VZLA. Planes reales, respuestas reales.
             </p>
         </div>
     </section>
@@ -318,9 +318,9 @@
                         <div class="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-4">
                             <i class="fa-solid fa-robot text-white/10 text-3xl"></i>
                         </div>
-                        <p class="text-white/20 text-sm font-light">Selecciona un modo y genera tu plan personalizado.</p>
+                        <p class="text-white/50 text-sm font-light">Selecciona un modo y genera tu plan personalizado.</p>
                         <p class="text-[#00D2FF]/40 text-[10px] uppercase tracking-widest mt-2 font-bold">
-                            <i class="fa-solid fa-microchip mr-1"></i>Conectado con Gemini 1.5 Flash
+                            <i class="fa-solid fa-microchip mr-1"></i>Conectado con Gemini 2.0 via OpenRouter
                         </p>
                     </div>
 
@@ -331,7 +331,7 @@
                             <div class="w-2 h-2 rounded-full bg-[#00D2FF] animate-bounce" style="animation-delay:0.15s"></div>
                             <div class="w-2 h-2 rounded-full bg-[#00D2FF] animate-bounce" style="animation-delay:0.3s"></div>
                         </div>
-                        <p class="text-white/40 text-sm">Analizando tu perfil...</p>
+                        <p class="text-white/40 text-sm">Analizando tu perfil e historial...</p>
                     </div>
 
                     <!-- Texto resultado -->
@@ -353,7 +353,7 @@
         <div class="mt-6 text-center">
             <p class="text-white/20 text-[10px] uppercase tracking-widest">
                 <i class="fa-solid fa-shield-halved mr-1 text-[#00D2FF]/30"></i>
-                Tus datos no se almacenan · Solo se procesan para generar tu plan
+                Tus datos no se almacenan · Conectado de forma segura y privada
             </p>
         </div>
 
@@ -422,61 +422,53 @@
     }
 
     // ======= GENERAR =======
-async function generarPlan(modo) {
-    var prompt = armarPrompt(modo);
+    async function generarPlan(modo) {
+        var prompt = armarPrompt(modo);
 
-    // UI: loading
-    document.getElementById('estado-vacio').classList.add('hidden');
-    document.getElementById('estado-resultado').classList.add('hidden');
-    document.getElementById('estado-loading').classList.remove('hidden');
-    document.getElementById('estado-ia').textContent = '● Analizando...';
-    document.getElementById('btn-copiar').classList.add('hidden');
+        // UI: loading
+        document.getElementById('estado-vacio').classList.add('hidden');
+        document.getElementById('estado-resultado').classList.add('hidden');
+        document.getElementById('estado-loading').classList.remove('hidden');
+        document.getElementById('estado-ia').textContent = '● Analizando...';
+        document.getElementById('btn-copiar').classList.add('hidden');
 
-    try {
-        console.log('📤 Enviando prompt:', prompt.substring(0, 100) + '...');
+        try {
+            var res = await fetch('/api/gemini', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ prompt: prompt })
+            });
 
-        const res = await fetch('/api/gemini', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ prompt: prompt })
-        });
+            var data = await res.json();
 
-        const data = await res.json();
-        console.log('📥 Respuesta completa:', data);
+            if (!res.ok) throw new Error(data.error || 'Error al procesar la solicitud en el servidor.');
 
-        if (!res.ok) {
-            throw new Error(data.error || 'Error en la API');
+            // Validamos estructura recibida del endpoint mapeado
+            if (!data.candidates || !data.candidates[0]) {
+                throw new Error('La respuesta de la IA no contiene el formato esperado.');
+            }
+
+            var texto = data.candidates[0].content.parts[0].text;
+
+            // UI: mostrar resultado
+            document.getElementById('estado-loading').classList.add('hidden');
+            document.getElementById('estado-resultado').classList.remove('hidden');
+            document.getElementById('estado-ia').textContent = '● Plan listo';
+            document.getElementById('btn-copiar').classList.remove('hidden');
+
+            // Typewriter
+            typewriter(texto);
+
+        } catch (err) {
+            document.getElementById('estado-loading').classList.add('hidden');
+            document.getElementById('estado-vacio').classList.remove('hidden');
+            document.getElementById('estado-ia').textContent = '● Error de conexión';
+            
+            // Mensaje informativo completo de fallas
+            document.getElementById('estado-vacio').querySelector('p').innerHTML = 
+                `<span class="text-red-400 font-bold">Fallo en la comunicación:</span><br>${err.message}<br><br><small class="text-white/30">Verifica las variables de entorno en tu panel de Vercel.</small>`;
         }
-
-        // Verificar estructura
-        if (!data.candidates || !data.candidates[0]) {
-            console.error('⚠️ Estructura inesperada:', data);
-            throw new Error('La IA no devolvió una respuesta válida');
-        }
-
-        const texto = data.candidates[0].content.parts[0].text;
-        console.log('✅ Texto recibido:', texto.substring(0, 100) + '...');
-
-        // UI: mostrar resultado
-        document.getElementById('estado-loading').classList.add('hidden');
-        document.getElementById('estado-resultado').classList.remove('hidden');
-        document.getElementById('estado-ia').textContent = '● Plan listo';
-        document.getElementById('btn-copiar').classList.remove('hidden');
-
-        // Typewriter
-        typewriter(texto);
-
-    } catch (err) {
-        console.error('❌ Error completo:', err);
-        document.getElementById('estado-loading').classList.add('hidden');
-        document.getElementById('estado-vacio').classList.remove('hidden');
-        document.getElementById('estado-ia').textContent = '● Error de conexión';
-        
-        const mensajeError = err.message || 'Error desconocido';
-        const parrafo = document.getElementById('estado-vacio').querySelector('p');
-        parrafo.innerHTML = `<span class="text-red-400">Error:</span> ${mensajeError}<br><small class="text-white/30 block mt-2">Abre la consola (F12) para más detalles</small>`;
     }
-}
 
     // ======= TYPEWRITER =======
     function typewriter(texto) {
@@ -495,12 +487,12 @@ async function generarPlan(modo) {
 
         var i = 0;
         var rawChars = html.split('');
-        var velocidad = rawChars.length > 800 ? 5 : 15;
+        var velocidad = rawChars.length > 800 ? 3 : 10;
 
         function escribir() {
             if (i < rawChars.length) {
                 contenedor.innerHTML = html.substring(0, i + 1);
-                i += Math.ceil(rawChars.length / 200); // acelerar en textos largos
+                i += Math.ceil(rawChars.length / 250); // Ajuste dinámico de velocidad en textos muy largos
                 setTimeout(escribir, velocidad);
                 contenedor.parentElement.scrollTop = contenedor.parentElement.scrollHeight;
             } else {
@@ -523,6 +515,5 @@ async function generarPlan(modo) {
         });
     }
     </script>
-
 </body>
 </html>
