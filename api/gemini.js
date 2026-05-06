@@ -1,5 +1,4 @@
 export default async function handler(req, res) {
-    // CORS
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -18,27 +17,31 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'Prompt requerido' });
     }
 
-    const API_KEY = process.env.GEMINI_API_KEY;
+    const API_KEY = process.env.OPENROUTER_API_KEY; // Cambié el nombre
 
     if (!API_KEY) {
         return res.status(500).json({ error: 'API Key no configurada' });
     }
 
     try {
-        // Usando v1 (más estable) en lugar de v1beta
         const response = await fetch(
-            `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${API_KEY}`,
+            'https://openrouter.ai/api/v1/chat/completions',
             {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Authorization': `Bearer ${API_KEY}`,
+                    'Content-Type': 'application/json',
+                    'HTTP-Referer': 'https://retovirtualvzla.com', // Cambia a tu dominio
+                    'X-Title': 'Reto Virtual VZLA'
+                },
                 body: JSON.stringify({
-                    contents: [{
-                        parts: [{ text: prompt }]
+                    model: 'google/gemini-2.0-flash-exp:free', // Gemini gratis vía OpenRouter
+                    messages: [{
+                        role: 'user',
+                        content: prompt
                     }],
-                    generationConfig: {
-                        temperature: 0.7,
-                        maxOutputTokens: 1024
-                    }
+                    temperature: 0.7,
+                    max_tokens: 1024
                 })
             }
         );
@@ -46,20 +49,25 @@ export default async function handler(req, res) {
         const data = await response.json();
 
         if (!response.ok) {
-            console.error('Error de Gemini:', data);
+            console.error('Error de OpenRouter:', data);
             return res.status(response.status).json({ 
                 error: data.error?.message || 'Error al generar respuesta'
             });
         }
 
-        if (!data.candidates?.[0]?.content) {
-            console.error('Respuesta inválida:', data);
-            return res.status(500).json({ 
-                error: 'Respuesta inválida de la IA'
-            });
-        }
+        // Adaptar respuesta al formato de Gemini
+        const textoGenerado = data.choices[0].message.content;
+        
+        // Formato compatible con tu frontend
+        const respuestaAdaptada = {
+            candidates: [{
+                content: {
+                    parts: [{ text: textoGenerado }]
+                }
+            }]
+        };
 
-        return res.status(200).json(data);
+        return res.status(200).json(respuestaAdaptada);
 
     } catch (error) {
         console.error('Error:', error);
