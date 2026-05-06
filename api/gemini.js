@@ -1,5 +1,5 @@
 export default async function handler(req, res) {
-    // Habilitar CORS
+    // CORS
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -21,15 +21,13 @@ export default async function handler(req, res) {
     const API_KEY = process.env.GEMINI_API_KEY;
 
     if (!API_KEY) {
-        console.error('❌ API Key no configurada');
-        return res.status(500).json({ error: 'API Key no configurada en variables de entorno' });
+        return res.status(500).json({ error: 'API Key no configurada' });
     }
 
     try {
-        console.log('📤 Llamando a Gemini API...');
-        
+        // Usando v1 (más estable) en lugar de v1beta
         const response = await fetch(
-            `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`,
+            `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${API_KEY}`,
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -39,9 +37,7 @@ export default async function handler(req, res) {
                     }],
                     generationConfig: {
                         temperature: 0.7,
-                        maxOutputTokens: 1000,
-                        topP: 0.9,
-                        topK: 40
+                        maxOutputTokens: 1024
                     }
                 })
             }
@@ -50,29 +46,25 @@ export default async function handler(req, res) {
         const data = await response.json();
 
         if (!response.ok) {
-            console.error('❌ Error de Gemini:', data);
+            console.error('Error de Gemini:', data);
             return res.status(response.status).json({ 
-                error: data.error?.message || 'Error al generar respuesta',
-                details: data
+                error: data.error?.message || 'Error al generar respuesta'
             });
         }
 
-        if (!data.candidates || !data.candidates[0]) {
-            console.error('⚠️ Estructura inesperada:', data);
+        if (!data.candidates?.[0]?.content) {
+            console.error('Respuesta inválida:', data);
             return res.status(500).json({ 
-                error: 'Respuesta inválida de la IA',
-                details: data
+                error: 'Respuesta inválida de la IA'
             });
         }
 
-        console.log('✅ Respuesta exitosa de Gemini');
         return res.status(200).json(data);
 
     } catch (error) {
-        console.error('❌ Error en función:', error);
+        console.error('Error:', error);
         return res.status(500).json({ 
-            error: error.message,
-            stack: error.stack
+            error: error.message
         });
     }
 }
