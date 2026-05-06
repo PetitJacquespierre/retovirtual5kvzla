@@ -21,10 +21,15 @@ export default async function handler(req, res) {
     const API_KEY = process.env.GEMINI_API_KEY;
 
     if (!API_KEY) {
+        console.error('❌ API Key no configurada');
         return res.status(500).json({ error: 'API Key no configurada en variables de entorno' });
     }
 
+    console.log('✅ API Key encontrada:', API_KEY.substring(0, 10) + '...');
+
     try {
+        console.log('📤 Llamando a Gemini API...');
+        
         const response = await fetch(
             `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${API_KEY}`,
             {
@@ -46,28 +51,27 @@ export default async function handler(req, res) {
 
         const data = await response.json();
 
-        // Verificar si hay error en la respuesta
         if (!response.ok) {
-            console.error('Error de Gemini API:', data);
+            console.error('❌ Error de Gemini:', data);
             return res.status(response.status).json({ 
                 error: data.error?.message || 'Error al generar respuesta',
                 details: data
             });
         }
 
-        // Verificar estructura de respuesta
-        if (!data.candidates || !data.candidates[0] || !data.candidates[0].content) {
-            console.error('Estructura inesperada:', data);
+        if (!data.candidates || !data.candidates[0]) {
+            console.error('⚠️ Estructura inesperada:', data);
             return res.status(500).json({ 
                 error: 'Respuesta inválida de la IA',
                 details: data
             });
         }
 
+        console.log('✅ Respuesta exitosa de Gemini');
         return res.status(200).json(data);
 
     } catch (error) {
-        console.error('Error en función:', error);
+        console.error('❌ Error en función:', error);
         return res.status(500).json({ 
             error: error.message,
             stack: error.stack

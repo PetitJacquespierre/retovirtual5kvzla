@@ -422,45 +422,61 @@
     }
 
     // ======= GENERAR =======
-    async function generarPlan(modo) {
-        var prompt = armarPrompt(modo);
+async function generarPlan(modo) {
+    var prompt = armarPrompt(modo);
 
-        // UI: loading
-        document.getElementById('estado-vacio').classList.add('hidden');
-        document.getElementById('estado-resultado').classList.add('hidden');
-        document.getElementById('estado-loading').classList.remove('hidden');
-        document.getElementById('estado-ia').textContent = '● Analizando...';
-        document.getElementById('btn-copiar').classList.add('hidden');
+    // UI: loading
+    document.getElementById('estado-vacio').classList.add('hidden');
+    document.getElementById('estado-resultado').classList.add('hidden');
+    document.getElementById('estado-loading').classList.remove('hidden');
+    document.getElementById('estado-ia').textContent = '● Analizando...';
+    document.getElementById('btn-copiar').classList.add('hidden');
 
-        try {
-            var res = await fetch('/api/gemini', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ prompt: prompt })
-            });
+    try {
+        console.log('📤 Enviando prompt:', prompt.substring(0, 100) + '...');
 
-            var data = await res.json();
+        const res = await fetch('/api/gemini', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ prompt: prompt })
+        });
 
-            if (!res.ok) throw new Error(data.error || 'Error al conectar con la IA');
+        const data = await res.json();
+        console.log('📥 Respuesta completa:', data);
 
-            var texto = data.candidates[0].content.parts[0].text;
-
-            // UI: mostrar resultado
-            document.getElementById('estado-loading').classList.add('hidden');
-            document.getElementById('estado-resultado').classList.remove('hidden');
-            document.getElementById('estado-ia').textContent = '● Plan listo';
-            document.getElementById('btn-copiar').classList.remove('hidden');
-
-            // Typewriter
-            typewriter(texto);
-
-        } catch (err) {
-            document.getElementById('estado-loading').classList.add('hidden');
-            document.getElementById('estado-vacio').classList.remove('hidden');
-            document.getElementById('estado-ia').textContent = '● Error de conexión';
-            document.getElementById('estado-vacio').querySelector('p').textContent = 'Error: ' + err.message + '. Intenta de nuevo.';
+        if (!res.ok) {
+            throw new Error(data.error || 'Error en la API');
         }
+
+        // Verificar estructura
+        if (!data.candidates || !data.candidates[0]) {
+            console.error('⚠️ Estructura inesperada:', data);
+            throw new Error('La IA no devolvió una respuesta válida');
+        }
+
+        const texto = data.candidates[0].content.parts[0].text;
+        console.log('✅ Texto recibido:', texto.substring(0, 100) + '...');
+
+        // UI: mostrar resultado
+        document.getElementById('estado-loading').classList.add('hidden');
+        document.getElementById('estado-resultado').classList.remove('hidden');
+        document.getElementById('estado-ia').textContent = '● Plan listo';
+        document.getElementById('btn-copiar').classList.remove('hidden');
+
+        // Typewriter
+        typewriter(texto);
+
+    } catch (err) {
+        console.error('❌ Error completo:', err);
+        document.getElementById('estado-loading').classList.add('hidden');
+        document.getElementById('estado-vacio').classList.remove('hidden');
+        document.getElementById('estado-ia').textContent = '● Error de conexión';
+        
+        const mensajeError = err.message || 'Error desconocido';
+        const parrafo = document.getElementById('estado-vacio').querySelector('p');
+        parrafo.innerHTML = `<span class="text-red-400">Error:</span> ${mensajeError}<br><small class="text-white/30 block mt-2">Abre la consola (F12) para más detalles</small>`;
     }
+}
 
     // ======= TYPEWRITER =======
     function typewriter(texto) {
