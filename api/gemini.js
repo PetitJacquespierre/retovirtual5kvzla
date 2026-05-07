@@ -9,50 +9,67 @@ export default async function handler(req, res) {
     const { prompt } = req.body;
     if (!prompt) return res.status(400).json({ error: 'Prompt requerido' });
 
-    const API_KEY = process.env.OPENROUTER_API_KEY;
-    if (!API_KEY) {
-        return res.status(500).json({ error: 'API Key no configurada' });
+    const HF_TOKEN = process.env.HUGGINGFACE_TOKEN;
+    if (!HF_TOKEN) {
+        return res.status(500).json({ 
+            error: 'HUGGINGFACE_TOKEN no configurado en Vercel' 
+        });
     }
 
+    console.log('✅ Token encontrado, llamando a Hugging Face...');
+
     try {
-        const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${API_KEY}`,
-                'Content-Type': 'application/json',
-                'HTTP-Referer': 'https://retovirtual5kvzla.vercel.app',
-                'X-Title': 'Reto Virtual VZLA'
-            },
-            body: JSON.stringify({
-                model: 'meta-llama/llama-3.2-3b-instruct', // ✅ Modelo económico que SÍ existe
-                messages: [{ 
-                    role: 'user', 
-                    content: prompt 
-                }],
-                temperature: 0.7,
-                max_tokens: 1024
-            })
-        });
+        const response = await fetch(
+            'https://api-inference.huggingface.co/models/microsoft/Phi-3-mini-4k-instruct',
+            {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${HF_TOKEN}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    inputs: prompt,
+                    parameters: {
+                        max_new_tokens: 1024,
+                        temperature: 0.7,
+                        top_p: 0.9,
+                        return_full_text: false
+                    }
+                })
+            }
+        );
 
         const data = await response.json();
+        console.log('📥 Respuesta HF:', JSON.stringify(data).substring(0, 200));
 
         if (!response.ok) {
-            console.error('❌ Error OpenRouter:', data);
+            console.error('❌ Error de Hugging Face:', data);
             return res.status(response.status).json({ 
-                error: data.error?.message || 'Error de OpenRouter',
+                error: data.error || 'Error de Hugging Face',
                 details: data
             });
         }
 
-        if (!data.choices?.[0]?.message?.content) {
-            console.error('❌ Sin respuesta:', data);
+        // Hugging Face puede devolver array o objeto
+        let texto = '';
+        
+        if (Array.isArray(data)) {
+            texto = data[0]?.generated_text || '';
+        } else if (data.generated_text) {
+            texto = data.generated_text;
+        }
+
+        if (!texto) {
+            console.error('❌ Sin texto en respuesta:', data);
             return res.status(500).json({ 
-                error: 'Sin respuesta del modelo' 
+                error: 'Sin respuesta del modelo',
+                received: data
             });
         }
 
-        const texto = data.choices[0].message.content;
+        console.log('✅ Texto generado (100 chars):', texto.substring(0, 100));
 
+        // Formato compatible con tu frontend (Gemini format)
         return res.status(200).json({
             candidates: [{
                 content: {
@@ -62,7 +79,7 @@ export default async function handler(req, res) {
         });
 
     } catch (error) {
-        console.error('❌ Error:', error);
+        console.error('❌ Error catch:', error);
         return res.status(500).json({ 
             error: error.message 
         });
