@@ -11,9 +11,7 @@ export default async function handler(req, res) {
 
     const API_KEY = process.env.OPENROUTER_API_KEY;
     if (!API_KEY) {
-        return res.status(500).json({ 
-            error: 'OPENROUTER_API_KEY no configurada en Vercel' 
-        });
+        return res.status(500).json({ error: 'API Key no configurada' });
     }
 
     try {
@@ -22,12 +20,14 @@ export default async function handler(req, res) {
             headers: {
                 'Authorization': `Bearer ${API_KEY}`,
                 'Content-Type': 'application/json',
-                'HTTP-Referer': 'https://retovirtual5kvzla.vercel.app',
-                'X-Title': 'Reto Virtual VZLA'
+                'HTTP-Referer': 'https://retovirtual5kvzla.vercel.app'
             },
             body: JSON.stringify({
-                model: 'google/gemini-pro-1.5', // ✅ MODELO CORREGIDO
-                messages: [{ role: 'user', content: prompt }],
+                model: 'meta-llama/llama-3.1-8b-instruct:free', // ✅ MODELO QUE FUNCIONA
+                messages: [{ 
+                    role: 'user', 
+                    content: prompt 
+                }],
                 temperature: 0.7,
                 max_tokens: 1024
             })
@@ -36,30 +36,35 @@ export default async function handler(req, res) {
         const data = await response.json();
 
         if (!response.ok) {
-            console.error('❌ Error de OpenRouter:', data);
+            console.error('❌ Error OpenRouter:', data);
             return res.status(response.status).json({ 
-                error: data.error?.message || 'Error de OpenRouter' 
+                error: data.error?.message || 'Error de OpenRouter',
+                details: data
             });
         }
 
         if (!data.choices?.[0]?.message?.content) {
-            console.error('❌ Respuesta inválida:', data);
-            return res.status(500).json({ error: 'Respuesta inválida' });
+            console.error('❌ Respuesta sin contenido:', data);
+            return res.status(500).json({ 
+                error: 'Respuesta inválida del modelo' 
+            });
         }
 
-        const textoGenerado = data.choices[0].message.content;
+        const texto = data.choices[0].message.content;
 
-        // Formato compatible con tu frontend
+        // Adaptar al formato que espera tu frontend (Gemini format)
         return res.status(200).json({
             candidates: [{
                 content: {
-                    parts: [{ text: textoGenerado }]
+                    parts: [{ text: texto }]
                 }
             }]
         });
 
     } catch (error) {
-        console.error('❌ Error:', error);
-        return res.status(500).json({ error: error.message });
+        console.error('❌ Error catch:', error);
+        return res.status(500).json({ 
+            error: error.message 
+        });
     }
 }
