@@ -20,10 +20,11 @@ export default async function handler(req, res) {
             headers: {
                 'Authorization': `Bearer ${API_KEY}`,
                 'Content-Type': 'application/json',
-                'HTTP-Referer': 'https://retovirtual5kvzla.vercel.app'
+                'HTTP-Referer': 'https://retovirtual5kvzla.vercel.app',
+                'X-Title': 'Reto Virtual VZLA'
             },
             body: JSON.stringify({
-                model: 'meta-llama/llama-3.1-8b-instruct:free', // ✅ MODELO QUE FUNCIONA
+                model: 'meta-llama/llama-3.2-3b-instruct', // ✅ Modelo económico que SÍ existe
                 messages: [{ 
                     role: 'user', 
                     content: prompt 
@@ -44,15 +45,14 @@ export default async function handler(req, res) {
         }
 
         if (!data.choices?.[0]?.message?.content) {
-            console.error('❌ Respuesta sin contenido:', data);
+            console.error('❌ Sin respuesta:', data);
             return res.status(500).json({ 
-                error: 'Respuesta inválida del modelo' 
+                error: 'Sin respuesta del modelo' 
             });
         }
 
         const texto = data.choices[0].message.content;
 
-        // Adaptar al formato que espera tu frontend (Gemini format)
         return res.status(200).json({
             candidates: [{
                 content: {
@@ -62,7 +62,7 @@ export default async function handler(req, res) {
         });
 
     } catch (error) {
-        console.error('❌ Error catch:', error);
+        console.error('❌ Error:', error);
         return res.status(500).json({ 
             error: error.message 
         });
