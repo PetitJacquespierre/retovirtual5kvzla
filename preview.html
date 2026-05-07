@@ -149,32 +149,58 @@
         El estándar de oro del running virtual en Venezuela
     </div>
 
-    <nav class="bg-[#001E50] sticky top-0 z-50 shadow-2xl">
-        <div class="max-w-7xl mx-auto px-4 md:px-12">
-            <div class="flex justify-between items-center h-28">
-                <div class="flex items-center gap-6 cursor-pointer group" onclick="window.scrollTo(0,0)">
-                    <img src="img/RV-Isotipo-sinfondo.png" alt="Reto" class="h-20 md:h-22 w-auto object-contain brightness-125 transition-transform group-hover:scale-105">
-                    <div class="h-12 w-[1px] bg-white/20"></div>
-                    <div class="flex flex-col">
-                        <span class="text-[9px] text-white/60 font-bold tracking-[0.3em] uppercase mb-1">Presentado por</span>
-                        <span class="text-white font-black text-2xl md:text-4xl tracking-tighter leading-none group-hover:text-[#00D2FF] transition-colors italic">TEAMFS</span>
-                    </div>
+    <!-- Reemplaza toda la sección <nav> con esta versión corregida -->
+
+<nav class="bg-[#001E50] sticky top-0 z-50 shadow-2xl">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-12">
+        <div class="flex justify-between items-center h-20 md:h-28">
+            <!-- Logo - Ajustado el gap y tamaño -->
+            <div class="flex items-center gap-3 md:gap-6 cursor-pointer group" onclick="window.scrollTo(0,0)">
+                <img src="img/RV-Isotipo-sinfondo.png" alt="Reto" class="h-14 md:h-20 lg:h-22 w-auto object-contain brightness-125 transition-transform group-hover:scale-105">
+                <div class="h-8 md:h-12 w-[1px] bg-white/20"></div>
+                <div class="flex flex-col">
+                    <span class="text-[7px] md:text-[9px] text-white/60 font-bold tracking-[0.2em] md:tracking-[0.3em] uppercase mb-1">Presentado por</span>
+                    <span class="text-white font-black text-lg md:text-2xl lg:text-4xl tracking-tighter leading-none group-hover:text-[#00D2FF] transition-colors italic">TEAMFS</span>
                 </div>
-                <div class="hidden lg:flex items-center space-x-10">
-                    <a href="index.html#el-reto" class="text-white/80 hover:text-[#00D2FF] text-xs font-bold uppercase tracking-widest transition-all">El Reto</a>
-                    <a href="index.html#ediciones" class="text-white/80 hover:text-[#00D2FF] text-xs font-bold uppercase tracking-widest transition-all">Calendario</a>
-                    <a href="10k.html" class="bg-[#00D2FF] text-[#001E50] px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest hover:scale-105 transition-all">Especial 10K</a>
-                    <a href="resultados.html" class="text-white/80 hover:text-[#00D2FF] text-xs font-bold uppercase tracking-widest transition-all">Resultados</a>
-                    <a href="tienda.html" class="text-white/80 hover:text-[#00D2FF] text-xs font-bold uppercase tracking-widest transition-all">TIENDA</a>
-                    <a href="faq.html" class="text-white/80 hover:text-[#00D2FF] text-xs font-bold uppercase tracking-widest transition-all">FAQ</a>
-		    <a href="entrenador.html" class="text-white/80 hover:text-[#00D2FF] text-xs font-bold uppercase tracking-widest transition-all">
-    <i class="fa-solid fa-robot mr-1"></i>Entrenador IA</a>
-                    <a href="inscripcion.html" class="border-2 border-white text-white px-8 py-2.5 rounded-full font-black text-xs uppercase tracking-widest hover:bg-white hover:text-[#001E50] transition-all shadow-lg">Inscribirme</a>
-                </div>
-                <button class="lg:hidden text-white text-3xl"><i class="fa-solid fa-bars-staggered"></i></button>
             </div>
+
+            <!-- Menú Desktop -->
+            <div class="hidden lg:flex items-center space-x-6 xl:space-x-10">
+                <a href="index.html#el-reto" class="text-white/80 hover:text-[#00D2FF] text-xs font-bold uppercase tracking-widest transition-all">El Reto</a>
+                <a href="index.html#ediciones" class="text-white/80 hover:text-[#00D2FF] text-xs font-bold uppercase tracking-widest transition-all">Calendario</a>
+                <a href="10k.html" class="bg-[#00D2FF] text-[#001E50] px-4 xl:px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest hover:scale-105 transition-all">Especial 10K</a>
+                <a href="resultados.html" class="text-white/80 hover:text-[#00D2FF] text-xs font-bold uppercase tracking-widest transition-all">Resultados</a>
+                <a href="tienda.html" class="text-white/80 hover:text-[#00D2FF] text-xs font-bold uppercase tracking-widest transition-all">TIENDA</a>
+                <a href="faq.html" class="text-white/80 hover:text-[#00D2FF] text-xs font-bold uppercase tracking-widest transition-all">FAQ</a>
+                <a href="entrenador.html" class="text-white/80 hover:text-[#00D2FF] text-xs font-bold uppercase tracking-widest transition-all">
+                    <i class="fa-solid fa-robot mr-1"></i>Entrenador IA
+                </a>
+                <a href="inscripcion.html" class="border-2 border-white text-white px-6 xl:px-8 py-2.5 rounded-full font-black text-xs uppercase tracking-widest hover:bg-white hover:text-[#001E50] transition-all shadow-lg">Inscribirme</a>
+            </div>
+
+            <!-- Botón Hamburguesa Mobile -->
+            <button id="menuToggle" class="lg:hidden text-white text-2xl md:text-3xl focus:outline-none z-50">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </button>
         </div>
-    </nav>
+    </div>
+
+    <!-- Menú Mobile (Overlay) -->
+    <div id="mobileMenu" class="fixed inset-0 bg-[#001E50] z-40 transform translate-x-full transition-transform duration-300 ease-in-out lg:hidden">
+        <div class="flex flex-col items-center justify-center h-full space-y-8 px-8">
+            <a href="index.html#el-reto" class="text-white text-xl font-bold uppercase tracking-widest hover:text-[#00D2FF] transition-all">El Reto</a>
+            <a href="index.html#ediciones" class="text-white text-xl font-bold uppercase tracking-widest hover:text-[#00D2FF] transition-all">Calendario</a>
+            <a href="10k.html" class="bg-[#00D2FF] text-[#001E50] px-8 py-3 rounded-full text-lg font-black uppercase tracking-widest">Especial 10K</a>
+            <a href="resultados.html" class="text-white text-xl font-bold uppercase tracking-widest hover:text-[#00D2FF] transition-all">Resultados</a>
+            <a href="tienda.html" class="text-white text-xl font-bold uppercase tracking-widest hover:text-[#00D2FF] transition-all">TIENDA</a>
+            <a href="faq.html" class="text-white text-xl font-bold uppercase tracking-widest hover:text-[#00D2FF] transition-all">FAQ</a>
+            <a href="entrenador.html" class="text-white text-xl font-bold uppercase tracking-widest hover:text-[#00D2FF] transition-all">
+                <i class="fa-solid fa-robot mr-2"></i>Entrenador IA
+            </a>
+            <a href="inscripcion.html" class="border-2 border-white text-white px-10 py-3 rounded-full font-black text-lg uppercase tracking-widest hover:bg-white hover:text-[#001E50] transition-all mt-6">Inscribirme</a>
+        </div>
+    </div>
+</nav>
 
     <section class="relative h-[85vh] flex items-center justify-center overflow-hidden bg-black">
     <img src="..." class="absolute inset-0 w-full h-full object-cover opacity-40 grayscale" alt="Runner">
@@ -486,7 +512,63 @@ El running virtual más exigente de Venezuela, un legado que se corre, se siente
         </div>
     </footer>
 
+        <!-- Tu contenido HTML termina aquí -->
+
     <script>
+        // ========== MENÚ MÓVIL HAMBURGUESA ==========
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuIcon = menuToggle.querySelector('i');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('translate-x-full');
+            
+            // Cambiar icono
+            if (mobileMenu.classList.contains('translate-x-full')) {
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars-staggered');
+            } else {
+                menuIcon.classList.remove('fa-bars-staggered');
+                menuIcon.classList.add('fa-xmark');
+            }
+        });
+
+        // Cerrar menú al hacer click en un enlace
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('translate-x-full');
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars-staggered');
+            });
+        });
+
+        // ========== COUNTDOWN EDICIÓN 2 ==========
+        (function() {
+            var meta = new Date("2026-06-05T07:00:00");
+
+            function tick() {
+                var diff = meta - new Date();
+
+                if (diff <= 0) {
+                    document.getElementById("cd-dias").textContent = "00";
+                    document.getElementById("cd-horas").textContent = "00";
+                    document.getElementById("cd-min").textContent = "00";
+                    document.getElementById("cd-seg").textContent = "00";
+                    return;
+                }
+
+                document.getElementById("cd-dias").textContent  = String(Math.floor(diff / 86400000)).padStart(2, "0");
+                document.getElementById("cd-horas").textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, "0");
+                document.getElementById("cd-min").textContent   = String(Math.floor((diff % 3600000) / 60000)).padStart(2, "0");
+                document.getElementById("cd-seg").textContent   = String(Math.floor((diff % 60000) / 1000)).padStart(2, "0");
+            }
+
+            tick();
+            setInterval(tick, 1000);
+        })();
+
+        // ========== SPLASH SCREEN ==========
         // Activa float del Team FS después del entrance
         setTimeout(function() {
             var el = document.getElementById("teamfs-splash");
@@ -498,44 +580,10 @@ El running virtual más exigente de Venezuela, un legado que se corre, se siente
             var splash = document.getElementById("splash");
             if (splash) splash.remove();
         }, 4100);
-
-// ===== COUNTDOWN EDICIÓN 2 =====
-    (function() {
-        var meta = new Date("2026-06-05T07:00:00");
-
-        function tick() {
-            var diff = meta - new Date();
-
-            if (diff <= 0) {
-                document.getElementById("cd-dias").textContent = "00";
-                document.getElementById("cd-horas").textContent = "00";
-                document.getElementById("cd-min").textContent = "00";
-                document.getElementById("cd-seg").textContent = "00";
-                return;
-            }
-
-            document.getElementById("cd-dias").textContent  = String(Math.floor(diff / 86400000)).padStart(2, "0");
-            document.getElementById("cd-horas").textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, "0");
-            document.getElementById("cd-min").textContent   = String(Math.floor((diff % 3600000) / 60000)).padStart(2, "0");
-            document.getElementById("cd-seg").textContent   = String(Math.floor((diff % 60000) / 1000)).padStart(2, "0");
-        }
-
-        tick();
-        setInterval(tick, 1000);
-    })();
-
-    // Activa float del Team FS después del entrance
-    setTimeout(function() {
-        var el = document.getElementById("teamfs-splash");
-        if (el) el.classList.add("floating");
-    }, 1050);
-
-    // Elimina splash del DOM al terminar completamente
-    setTimeout(function() {
-        var splash = document.getElementById("splash");
-        if (splash) splash.remove();
-    }, 4100);
     </script>
+
+</body>
+</html>
 
 </body>
 </html>
