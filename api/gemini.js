@@ -31,7 +31,7 @@ export default async function handler(req, res) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                model: 'llama-3.1-70b-versatile', // Modelo potente y rápido
+                model: 'llama-3.3-70b-versatile', // Modelo potente y rápido
                 messages: [{
                     role: 'user',
                     content: prompt
