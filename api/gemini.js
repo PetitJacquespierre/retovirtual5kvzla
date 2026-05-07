@@ -20,7 +20,7 @@ export default async function handler(req, res) {
         });
     }
 
-    console.log('✅ Token encontrado, llamando a Hugging Face...');
+    console.log('✅ Llamando a Hugging Face...');
 
     try {
         const response = await fetch(
@@ -43,60 +43,60 @@ export default async function handler(req, res) {
             }
         );
 
-        console.log('📥 Status HF:', response.status);
+        console.log('📥 Status:', response.status);
 
-        // Si es 503, el modelo está cargando
-        if (response.status === 503) {
-            return res.status(503).json({ 
-                error: 'El modelo está inicializando. Intenta de nuevo en 20 segundos.' 
-            });
-        }
-
-        // Intentar parsear JSON
+        // Leer el body UNA SOLA VEZ
+        const contentType = response.headers.get('content-type');
         let data;
-        try {
+
+        if (contentType && contentType.includes('application/json')) {
             data = await response.json();
-        } catch (parseError) {
+        } else {
             const text = await response.text();
-            console.error('❌ Respuesta no es JSON:', text.substring(0, 500));
+            console.error('❌ Respuesta no JSON:', text.substring(0, 300));
             return res.status(500).json({ 
-                error: 'Respuesta inválida de Hugging Face',
-                details: text.substring(0, 200)
+                error: 'Hugging Face devolvió una respuesta inválida',
+                hint: 'El modelo puede no estar disponible'
             });
         }
 
-        console.log('📥 Data recibida:', JSON.stringify(data).substring(0, 300));
+        console.log('📥 Data:', JSON.stringify(data).substring(0, 300));
 
-        if (!response.ok) {
-            console.error('❌ Error de HF:', data);
-            return res.status(response.status).json({ 
-                error: data.error || 'Error de Hugging Face'
+        // Si el modelo está cargando
+        if (response.status === 503 && data.error?.includes('loading')) {
+            return res.status(503).json({ 
+                error: 'El modelo está inicializando. Espera 30 segundos e intenta de nuevo.' 
+            });
+        }
+
+        // Si hay error de Hugging Face
+        if (!response.ok || data.error) {
+            console.error('❌ Error HF:', data);
+            return res.status(response.status || 500).json({ 
+                error: data.error || 'Error de Hugging Face',
+                details: data
             });
         }
 
         // Extraer texto generado
         let texto = '';
         
-        if (Array.isArray(data)) {
-            // Formato: [{ generated_text: "..." }]
+        if (Array.isArray(data) && data.length > 0) {
             texto = data[0]?.generated_text || data[0]?.summary_text || '';
         } else if (data.generated_text) {
-            // Formato: { generated_text: "..." }
             texto = data.generated_text;
-        } else if (data[0]) {
-            // Formato alternativo
-            texto = data[0];
         }
 
-        if (!texto || typeof texto !== 'string') {
-            console.error('❌ Sin texto válido:', data);
+        if (!texto) {
+            console.error('❌ Sin texto en respuesta:', data);
             return res.status(500).json({ 
-                error: 'No se pudo extraer texto de la respuesta',
+                error: 'El modelo no generó texto',
+                hint: 'Intenta con otro modelo',
                 data: data
             });
         }
 
-        console.log('✅ Texto extraído:', texto.substring(0, 150));
+        console.log('✅ Generado:', texto.substring(0, 100));
 
         // Formato compatible con frontend
         return res.status(200).json({
@@ -108,9 +108,10 @@ export default async function handler(req, res) {
         });
 
     } catch (error) {
-        console.error('❌ Error catch:', error.message);
+        console.error('❌ Error:', error);
         return res.status(500).json({ 
-            error: error.message
+            error: error.message,
+            hint: 'Revisa los logs en Vercel Functions'
         });
     }
 }
