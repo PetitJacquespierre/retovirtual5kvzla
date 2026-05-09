@@ -47,7 +47,7 @@
                 <i class="fa-solid fa-id-card text-3xl"></i>
             </div>
             <h2 class="text-[#001E50] font-black text-3xl uppercase tracking-tighter mb-4 italic">Verificación de Atleta</h2>
-            <p class="text-slate-400 text-sm mb-10 italic">Ingresa tu cédula para verificar tu acceso.</p>
+            <p class="text-slate-400 text-sm mb-10 italic">Ingresa tu cédula para verificar tu acceso y recuperar tus datos.</p>
             
             <div class="max-w-xs mx-auto space-y-4">
                 <label class="text-left block text-[10px] font-bold uppercase text-slate-400 ml-2 mb-1">Cédula de Identidad <span class="req">*</span></label>
@@ -63,6 +63,7 @@
         <div id="paso-fundador" class="hidden-step space-y-8 animate-fade-in mt-8">
             <div class="bg-[#00D2FF]/10 border-2 border-[#00D2FF] p-8 rounded-[2rem] text-center text-[#001E50]">
                 <h3 class="font-black uppercase text-xl">¡Felicidades, eres Fundador!</h3>
+                <p id="textoDorsal" class="text-sm font-bold uppercase tracking-widest mt-2 bg-[#001E50] text-white inline-block px-4 py-1 rounded-full">Dorsal Asignado: #000</p>
             </div>
 
             <!-- Promoción Base -->
@@ -78,7 +79,6 @@
                 <h3 class="text-[#001E50] font-black text-xl mb-6 uppercase italic">Completa tu equipo</h3>
                 
                 <label class="cursor-pointer group flex flex-col md:flex-row gap-6 items-center border-2 border-slate-100 p-4 rounded-3xl hover:border-[#00D2FF] has-[:checked]:border-[#00D2FF] has-[:checked]:bg-blue-50/20 transition-all">
-                    
                     <div class="w-full md:w-32 h-32 bg-slate-100 rounded-2xl flex items-center justify-center relative overflow-hidden shrink-0">
                         <img src="foto_franela.jpg" alt="Franela Extra" class="w-full h-full object-cover absolute z-10" onerror="this.style.opacity='0'">
                         <div class="text-center text-slate-400 z-0">
@@ -86,7 +86,6 @@
                             <p class="text-[9px] font-bold uppercase">Foto<br>Aquí</p>
                         </div>
                     </div>
-
                     <div class="flex-1 w-full text-left">
                         <div class="flex justify-between items-start mb-2">
                             <div>
@@ -115,15 +114,16 @@
             <!-- Formulario de Despacho y Pago -->
             <div class="bg-white p-10 rounded-[2.5rem] shadow-xl border border-slate-100">
                 <h3 class="text-[#001E50] font-black text-2xl mb-8 uppercase italic border-b border-slate-50 pb-4">Datos de Despacho y Kit Oficial</h3>
+                <p class="text-xs text-slate-400 mb-6 font-bold">Verifica y completa los datos recuperados de tu edición anterior.</p>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="flex flex-col gap-2">
                         <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Nombre Completo <span class="req">*</span></label>
-                        <input type="text" id="nombreEnvio" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3 outline-none" required>
+                        <input type="text" id="nombreEnvio" class="bg-slate-50 border-2 border-[#00D2FF]/30 rounded-2xl px-6 py-3 outline-none" required>
                     </div>
                     <div class="flex flex-col gap-2">
                         <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Teléfono de Contacto <span class="req">*</span></label>
-                        <input type="text" id="telefonoEnvio" placeholder="0412-0000000" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3 outline-none" required>
+                        <input type="text" id="telefonoEnvio" placeholder="0412-0000000" class="bg-slate-50 border-2 border-[#00D2FF]/30 rounded-2xl px-6 py-3 outline-none" required>
                     </div>
 
                     <div class="flex flex-col gap-2">
@@ -187,7 +187,7 @@
                         <input type="text" id="referenciaEnvio" placeholder="Ej: Frente a la plaza, al lado de la panadería..." class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3 outline-none" required>
                     </div>
 
-                    <!-- NUEVOS CAMPOS DE PAGO -->
+                    <!-- CAMPOS DE PAGO -->
                     <div class="md:col-span-2 border-t border-slate-100 pt-6 mt-2">
                         <h4 class="font-black text-[#001E50] text-sm uppercase mb-4">Verificación de Pago</h4>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -201,7 +201,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
 
@@ -243,11 +242,13 @@
         const tasaBCV = 487.119; 
         const urlCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5yMHsenxCWE5kZBDUZ8UcYqDtdAHstfqXcvWkuYZPQ_4n2xSrfs6ptk7k21r1kcMHHLtWjz8SEHwl/pub?gid=0&single=true&output=csv";
         
-        // AQUÍ PEGARÁS LA URL DE LA APLICACIÓN WEB DE GOOGLE APPS SCRIPT:
+        // PEGA AQUÍ LA URL DEL SCRIPT DE GOOGLE CUANDO LO TENGAS LISTO:
         const urlBaseDeDatos = ""; 
 
         document.getElementById('valor-tasa').innerText = tasaBCV;
         actualizarTotal();
+
+        let dorsalActual = "N/A";
 
         const ciudadesPorEstado = {
             "Falcón": ["Punto Fijo", "Punta Cardón", "Judibana", "Coro", "Tucacas", "Dabajuro", "Otra"],
@@ -308,20 +309,47 @@
                 const res = await fetch(urlCSV + "&t=" + new Date().getTime());
                 const data = await res.text();
                 const lineas = data.split(/\r?\n/);
-                const esFundador = lineas.some(linea => {
-                    const lineaLimpia = linea.replace(/[^0-9]/g, ''); 
-                    return lineaLimpia.includes(ciLimpia);
-                });
+                
+                let encontrado = false;
+
+                // Lógica ajustada al nuevo orden del Excel
+                // Columna 0: Dorsal
+                // Columna 1: Fecha (Ignorada aquí)
+                // Columna 2: Nombre
+                // Columna 3: Cédula
+                for(let i = 0; i < lineas.length; i++) {
+                    const columnas = lineas[i].split(','); 
+                    
+                    // Verificamos que la fila tenga al menos hasta la columna D (índice 3)
+                    if(columnas.length >= 4) {
+                        const celdaCedula = columnas[3].replace(/[^0-9]/g, '');
+                        if(celdaCedula === ciLimpia) {
+                            encontrado = true;
+                            
+                            // Extraemos el Dorsal (Columna A - índice 0)
+                            dorsalActual = columnas[0] ? columnas[0].trim() : "000";
+                            document.getElementById('textoDorsal').innerText = "Dorsal Asignado: #" + dorsalActual;
+                            
+                            // Autocompletamos Nombre (Columna C - índice 2)
+                            if(columnas[2]) document.getElementById('nombreEnvio').value = columnas[2].trim();
+                            
+                            // El teléfono no está en las primeras 4 columnas, lo dejamos vacío
+                            document.getElementById('telefonoEnvio').value = "";
+                            
+                            break; 
+                        }
+                    }
+                }
 
                 document.getElementById('paso-1').classList.add('hidden-step');
 
-                if(esFundador) {
+                if(encontrado) {
                     document.getElementById('paso-fundador').classList.remove('hidden-step');
                 } else {
                     document.getElementById('paso-general').classList.remove('hidden-step');
                 }
             } catch (e) {
-                alert("Hubo un problema de conexión.");
+                alert("Hubo un problema de conexión con la base de datos de fundadores.");
             } finally {
                 btn.innerText = "Verificar Cédula";
                 btn.disabled = false;
@@ -338,11 +366,8 @@
             const agencia = document.querySelector('input[name="agencia"]:checked').value;
             const direccion = document.getElementById('direccionEnvio').value;
             const referencia = document.getElementById('referenciaEnvio').value;
-            
-            // Nuevos datos de pago
             const refPago = document.getElementById('numReferenciaPago').value;
             const fechaPago = document.getElementById('fechaPago').value;
-            
             const ig = document.getElementById('igEnvio').value || "No indicó";
             const quiereExtra = document.getElementById('checkFranelaExtra').checked;
             const tallaExtra = document.getElementById('tallaFranelaExtra').value;
@@ -358,7 +383,7 @@
 
             let detalleExtra = quiereExtra ? `👕 *EXTRA:* Genérica (Talla ${tallaExtra})` : `👕 *EXTRA:* Ninguno`;
 
-            const msg = `🏆 *NUEVO FUNDADOR INSCRITO*%0A--------------------------------%0A👤 *ATLETA:* ${nombre}%0A💳 *CI:* ${ci}%0A📱 *TEL:* ${tel}%0A📸 *IG:* ${ig}%0A🏅 *KIT OFICIAL:* Talla ${tallaOficial}%0A${detalleExtra}%0A--------------------------------%0A📍 *ENVÍO:* ${estado}, ${ciudad} (${agencia})%0A🏠 *DIRECCIÓN:* ${direccion}%0A📌 *REF LUGAR:* ${referencia}%0A--------------------------------%0A💰 *TOTAL A PAGAR:* ${totalUSD}%0A🧾 *Nº REFERENCIA:* ${refPago}%0A📅 *FECHA PAGO:* ${fechaPago}%0A--------------------------------%0A_Adjunto mi comprobante de pago a continuación..._`;
+            const msg = `🏆 *FUNDADOR RENOVADO*%0A--------------------------------%0A🏃‍♂️ *DORSAL:* #${dorsalActual}%0A👤 *ATLETA:* ${nombre}%0A💳 *CI:* ${ci}%0A📱 *TEL:* ${tel}%0A📸 *IG:* ${ig}%0A🏅 *KIT OFICIAL:* Talla ${tallaOficial}%0A${detalleExtra}%0A--------------------------------%0A📍 *ENVÍO:* ${estado}, ${ciudad} (${agencia})%0A🏠 *DIRECCIÓN:* ${direccion}%0A📌 *REF LUGAR:* ${referencia}%0A--------------------------------%0A💰 *TOTAL PAGADO:* ${totalUSD}%0A🧾 *Nº REFERENCIA:* ${refPago}%0A📅 *FECHA PAGO:* ${fechaPago}%0A--------------------------------%0A_Adjunto mi comprobante de pago..._`;
 
             if(urlBaseDeDatos !== "") {
                 const btn = document.getElementById('btnInscribir');
@@ -367,6 +392,7 @@
                 
                 try {
                     const formData = new FormData();
+                    formData.append("Dorsal", dorsalActual); 
                     formData.append("Cedula", ci);
                     formData.append("Nombre", nombre);
                     formData.append("Telefono", tel);
@@ -381,7 +407,7 @@
                     formData.append("FechaPago", fechaPago);
                     formData.append("Total", totalUSD);
 
-                    await fetch(urlBaseDeDatos, { method: 'POST', body: formData });
+                    await fetch(urlBaseDeDatos, { method: 'POST', body: formData, mode: 'no-cors' });
                 } catch (error) {
                     console.error("Error guardando datos:", error);
                 }
