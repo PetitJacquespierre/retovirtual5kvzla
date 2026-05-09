@@ -29,6 +29,10 @@
         
         /* Estilo para el selector nativo */
         select { -webkit-appearance: none; -moz-appearance: none; appearance: none; }
+        
+        /* Estilo para los títulos de los grupos en el selector */
+        optgroup { font-weight: 900; color: #001E50; background-color: #f1f5f9; font-style: normal; }
+        option { font-weight: 600; color: #334155; background-color: #ffffff; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
@@ -61,14 +65,24 @@
             Historial oficial del Reto Virtual VZLA
         </p>
 
-        <!-- SELECTOR MAESTRO DE EDICIONES -->
-        <div class="relative max-w-sm mx-auto">
+        <!-- SELECTOR AGRUPADO POR AÑO -->
+        <div class="relative max-w-md mx-auto">
             <select id="selector-edicion" onchange="cambiarEdicion(this.value)" class="w-full bg-boston-navy text-white font-black text-center px-6 py-4 rounded-2xl border-2 border-accent shadow-xl uppercase tracking-widest cursor-pointer focus:outline-none focus:ring-4 focus:ring-accent/30 transition-all">
-                <option value="edicion2">5K - 2da Edición (Jun 2026)</option>
-                <option value="edicion1">5K - 1era Edición (Mar 2026)</option>
-                <option value="edicion3">5K - 3era Edición (Próximamente)</option>
-                <option value="edicion4">5K - 4ta Edición (Próximamente)</option>
-                <option value="edicion10k">10K - Edición Especial 2026</option>
+                
+                <!-- GRUPO 2026 -->
+                <optgroup label="🏆 TEMPORADA 2026">
+                    <option value="edicion2">5K - 2da Edición (Junio)</option>
+                    <option value="edicion1">5K - 1era Edición (Marzo)</option>
+                    <option value="edicion3">5K - 3era Edición</option>
+                    <option value="edicion4">5K - 4ta Edición</option>
+                    <option value="edicion10k">10K - Edición Especial</option>
+                </optgroup>
+
+                <!-- GRUPO 2027 (Ejemplo de escalabilidad) -->
+                <optgroup label="🚀 TEMPORADA 2027">
+                    <option value="edicion1_2027">5K - 1era Edición 2027</option>
+                </optgroup>
+
             </select>
             <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none">
                 <i class="fa-solid fa-chevron-down text-accent"></i>
@@ -161,41 +175,42 @@
 
     <script>
         // ====================================================================
-        // CONFIGURADOR MAESTRO DE EDICIONES
+        // CONFIGURADOR MAESTRO DE EDICIONES POR AÑO
         // ====================================================================
         const enlaceBase = "https://docs.google.com/spreadsheets/d/1vg9nwhkFxwN4qVzjkfmXTrIVoHVYxeMH3-PXjqzeWao/gviz/tq?tqx=out:csv&gid=";
         
         const BASE_DE_DATOS = {
+            // TEMPORADA 2026
             "edicion2": {
-                gid: "316140127", // Reemplaza esto con el GID de la Edición 2
+                gid: "316140127", 
                 titulo: "Fase de Inscripciones",
                 fecha: "2da Edición: Junio 2026",
                 estado: "Inscripciones Abiertas",
-                nombreCorto: "Ed2_5K",
-                imagenCertificado: "fondo-certificado.png" // Por ahora usa el que tienes
+                nombreCorto: "2026_Ed2_5K",
+                imagenCertificado: "img/fondo-certificado.png"
             },
             "edicion1": {
-                gid: "1297920374", // Historial guardado de Marzo
+                gid: "1297920374", 
                 titulo: "Carrera Finalizada",
                 fecha: "1era Edición: Marzo 2026",
                 estado: "Resultados Oficiales",
-                nombreCorto: "Ed1_5K",
-                imagenCertificado: "img/fondo-certificado-ed1.png" // <- NOMBRE DEL FONDO PARA EDICIÓN 1
+                nombreCorto: "2026_Ed1_5K",
+                imagenCertificado: "img/fondo-certificado.png"
             },
             "edicion3": {
                 gid: "PENDIENTE", 
                 titulo: "Próximamente",
-                fecha: "3era Edición: Por definir",
+                fecha: "3era Edición 2026",
                 estado: "En Planificación",
-                nombreCorto: "Ed3_5K",
+                nombreCorto: "2026_Ed3_5K",
                 imagenCertificado: "fondo-certificado-ed3.png"
             },
             "edicion4": {
                 gid: "PENDIENTE", 
                 titulo: "Próximamente",
-                fecha: "4ta Edición: Por definir",
+                fecha: "4ta Edición 2026",
                 estado: "En Planificación",
-                nombreCorto: "Ed4_5K",
+                nombreCorto: "2026_Ed4_5K",
                 imagenCertificado: "fondo-certificado-ed4.png"
             },
             "edicion10k": {
@@ -203,30 +218,36 @@
                 titulo: "Reto Especial",
                 fecha: "10K: Edición 2026",
                 estado: "En Planificación",
-                nombreCorto: "Ed_10K",
+                nombreCorto: "2026_Ed10K",
                 imagenCertificado: "fondo-certificado-10k.png"
+            },
+            // TEMPORADA 2027
+            "edicion1_2027": {
+                gid: "PENDIENTE", 
+                titulo: "Próximamente",
+                fecha: "1era Edición 2027",
+                estado: "Próximo Año",
+                nombreCorto: "2027_Ed1_5K",
+                imagenCertificado: "fondo-certificado-2027.png"
             }
         };
         // ====================================================================
 
         let corredores = [];
         let filtroActual = 'GENERAL'; 
-        let edicionActiva = 'edicion2'; // Arranca en la edición 2 por defecto
+        let edicionActiva = 'edicion2'; 
 
         function cambiarEdicion(claveEdicion) {
             edicionActiva = claveEdicion;
             const data = BASE_DE_DATOS[claveEdicion];
 
-            // Actualizar textos de la interfaz
             document.getElementById('titulo-carrera').innerText = data.titulo;
             document.getElementById('fechas-carrera').innerText = data.fecha;
             document.getElementById('estado-carrera').innerText = data.estado;
             document.getElementById('texto-diploma').innerText = `Ingresa tu número de Dorsal para generar tu certificado de la ${data.fecha}.`;
 
-            // Actualizar la imagen de fondo del certificado
             document.getElementById('img-fondo-cert').src = data.imagenCertificado;
 
-            // Resetear certificado
             document.getElementById('mi-certificado-objetivo').style.display = 'none';
             document.getElementById('btn-descargar').classList.add('hidden');
             document.getElementById('input-dorsal').value = '';
@@ -260,7 +281,6 @@
 
                 if(filas.length < 2) throw new Error("La hoja de cálculo está vacía.");
 
-                // Buscador Inteligente de Columnas
                 const headers = filas[0].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(v => v.replace(/^"|"$/g, '').trim().toLowerCase());
                 
                 let idxDorsal = 0, idxNombre = 1, idxGenero = 2, idxTiempo = 3; 
@@ -373,10 +393,8 @@
                 document.getElementById('cert-dorsal').innerText = c.dorsal;
                 document.getElementById('cert-tiempo').innerText = c.tiempo;
                 
-                // Asegurarse de que el fondo se vea, por si acaso falta la imagen
                 const imgFondo = document.getElementById('img-fondo-cert');
                 imgFondo.onerror = function() {
-                     // Si no encuentra la imagen de la edición, trata de usar la genérica
                      this.onerror = null;
                      this.src = "fondo-certificado.png";
                 };
