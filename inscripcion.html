@@ -95,7 +95,7 @@
                         </tr>
                     </thead>
                     <tbody id="tabla-corredores" class="text-slate-600 divide-y divide-slate-50">
-                        <tr><td colspan="5" class="p-8 text-center font-bold">Conectando base de datos...</td></tr>
+                        <tr><td colspan="5" class="p-8 text-center font-bold">Iniciando sistema...</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -141,59 +141,56 @@
     </footer>
 
     <script>
+        // Enlace 100% completo hacia los servidores de Google (No lo modifiques)
         const urlBaseExcel = "https://docs.google.com/spreadsheets/d/1vg9nwhkFxwN4qVzjkfmXTrIVoHVYxeMH3-PXjqzeWao/gviz/tq?tqx=out:csv";
+        
         let corredores = [];
         let filtroActual = 'GENERAL'; 
 
         async function cargarDatosDesdeExcel() {
             try {
-                const urlFresca = urlBaseExcel + "&nocache=" + new Date().getTime();
+                document.getElementById('tabla-corredores').innerHTML = `<tr><td colspan="5" class="p-8 text-center text-boston-navy font-bold">Descargando datos desde Google...</td></tr>`;
+                
+                // Conectando al CSV con evasión de caché segura
+                const urlFresca = urlBaseExcel + "&t=" + new Date().getTime();
                 const respuesta = await fetch(urlFresca);
                 
-                if(!respuesta.ok) throw new Error("Fallo de conexión");
+                if (!respuesta.ok) {
+                    throw new Error("Google rechazó la conexión (Código " + respuesta.status + ")");
+                }
                 
                 const datosCsv = await respuesta.text();
+                
+                if(!datosCsv || datosCsv.trim() === "") {
+                    throw new Error("El archivo CSV llegó en blanco.");
+                }
+
                 const filas = datosCsv.split(/\r?\n/);
                 corredores = [];
 
                 for(let i = 1; i < filas.length; i++) {
                     if(!filas[i].trim()) continue;
                     
-                    // Limpia la fila de posibles comillas problemáticas del CSV
                     const valores = filas[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(v => v ? v.replace(/^"|"$/g, '').trim() : '');
                     
                     let dRaw = valores[0] ? valores[0].replace(/\D/g, '') : '';
-                    if(dRaw === "" || dRaw.length > 3) continue;
-                    while (dRaw.length < 3) dRaw = "0" + dRaw;
+                    if(dRaw === "") continue; 
+                    while (dRaw.length < 3) dRaw = "0" + dRaw; 
                     
-                    const dorsal = dRaw;
+                    const nombreCompleto = valores[1] || 'Corredor';
+                    const genero = valores[2] || '-';
+                    const tiempoExcel = valores[3] || '';
                     
-                    // =============== MAPEO DE COLUMNAS ===============
-                    // Basado en tu imagen:
-                    // valores[0] es Dorsal (ej. 001)
-                    // valores[1] es Fecha (ej. 5/2/2026) -> Se ignora
-                    // valores[2] es Nombre (ej. IBRAHIM JIMENEZ)
-                    // valores[3] es Cédula (ej. 24788261) -> Se ignora
-                    // Asumimos:
-                    // valores[4] es Género (M/F)
-                    // valores[5] es Tiempo (ej. 00:25:30)
-                    
-                    const nombreCompleto = valores[2] ? valores[2] : 'Corredor';
-                    
-                    // Si el género no está en la columna 5 (índice 4), cambia el número 4 por el correcto.
-                    const genero = valores[4] ? valores[4] : '-';
-                    
-                    // Si el tiempo no está en la columna 6 (índice 5), cambia el número 5 por el correcto.
-                    const tiempoExcel = valores[5] ? valores[5] : '';
                     const tiempo = (tiempoExcel === "" || tiempoExcel.toLowerCase() === "pendiente") ? "Pendiente" : tiempoExcel;
-                    // =================================================
-
-                    corredores.push({ dorsal: dorsal, nombre: nombreCompleto, genero: genero, tiempo: tiempo });
+                    
+                    corredores.push({ dorsal: dRaw, nombre: nombreCompleto, genero: genero, tiempo: tiempo });
                 }
+                
                 pintarTablaCorredores();
+                
             } catch (error) { 
-                console.error("Error:", error); 
-                document.getElementById('tabla-corredores').innerHTML = `<tr><td colspan="5" class="p-8 text-center text-red-500 font-bold">Error conectando a los datos.</td></tr>`;
+                console.error("Falla de ejecución:", error); 
+                document.getElementById('tabla-corredores').innerHTML = `<tr><td colspan="5" class="p-8 text-center text-red-600 font-black bg-red-50 text-sm">⚠️ ERROR AL CARGAR LOS DATOS: <br><span class="font-normal mt-2 block">${error.message}</span></td></tr>`;
             }
         }
 
@@ -207,18 +204,18 @@
             if(filtroActual === 'FEMENINO') filtrados = corredores.filter(c => c.genero.toUpperCase().startsWith('F'));
 
             filtrados.sort((a, b) => {
-                const tS = (t) => {
+                const tiempoASegundos = (t) => {
                     if (!t || t === "Pendiente") return 999999;
-                    let p = t.split(":");
-                    if (p.length === 3) return (parseInt(p[0]) * 3600) + (parseInt(p[1]) * 60) + parseInt(p[2]);
-                    if (p.length === 2) return (parseInt(p[0]) * 60) + parseInt(p[1]);
+                    let partes = t.split(":");
+                    if (partes.length === 3) return (parseInt(partes[0]) * 3600) + (parseInt(partes[1]) * 60) + parseInt(partes[2]);
+                    if (partes.length === 2) return (parseInt(partes[0]) * 60) + parseInt(partes[1]);
                     return 999999;
                 };
-                return tS(a.tiempo) - tS(b.tiempo);
+                return tiempoASegundos(a.tiempo) - tiempoASegundos(b.tiempo);
             });
 
             if (filtrados.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" class="p-8 text-center text-slate-400">Sin datos que mostrar.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="5" class="p-8 text-center text-slate-400">No hay corredores registrados.</td></tr>`;
                 return;
             }
 
@@ -226,7 +223,10 @@
                 const esPendiente = c.tiempo === "Pendiente";
                 const pos = esPendiente ? "-" : i + 1;
                 let posHtml = `<span class="font-bold text-slate-300 text-lg">${pos}</span>`;
-                if(pos === 1 && !esPendiente) posHtml = '🥇'; else if(pos === 2 && !esPendiente) posHtml = '🥈'; else if(pos === 3 && !esPendiente) posHtml = '🥉';
+                
+                if(pos === 1 && !esPendiente) posHtml = '🥇'; 
+                else if(pos === 2 && !esPendiente) posHtml = '🥈'; 
+                else if(pos === 3 && !esPendiente) posHtml = '🥉';
 
                 const fila = `
                     <tr class="hover:bg-slate-50 transition-colors border-b border-slate-50">
@@ -266,7 +266,7 @@
                 document.getElementById('cert-tiempo').innerText = c.tiempo;
                 document.getElementById('mi-certificado-objetivo').style.display = 'block';
                 document.getElementById('btn-descargar').classList.remove('hidden');
-            } else { alert("Dorsal no encontrado."); }
+            } else { alert("Dorsal no encontrado en los registros."); }
         }
 
         function descargarCertificado() {
@@ -284,7 +284,7 @@
             if (e.key === 'Enter') mostrarCertificado();
         });
 
-        window.onload = cargarDatosDesdeExcel;
+        window.onload = () => setTimeout(cargarDatosDesdeExcel, 500);
     </script>
 </body>
 </html>
