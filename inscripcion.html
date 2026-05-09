@@ -101,7 +101,6 @@
                 <h3 class="text-[#001E50] font-black text-xl mb-6 uppercase italic">Equípate al máximo</h3>
                 <label class="cursor-pointer group flex flex-col md:flex-row gap-6 items-center border-2 border-slate-100 p-4 rounded-3xl hover:border-[#00D2FF] has-[:checked]:border-[#00D2FF] has-[:checked]:bg-blue-50/20 transition-all">
                     <div class="w-full md:w-32 h-32 bg-slate-100 rounded-2xl flex items-center justify-center relative overflow-hidden shrink-0">
-                        <!-- Pon el nombre de tu imagen aquí -->
                         <img src="foto_franela.jpg" alt="Franela Extra" class="w-full h-full object-cover absolute z-10" onerror="this.style.opacity='0'">
                         <div class="text-center text-slate-400 z-0">
                             <i class="fa-solid fa-shirt text-2xl mb-1"></i>
@@ -148,7 +147,6 @@
                         <input type="text" id="telefonoEnvio" placeholder="0412-0000000" class="bg-slate-50 border-2 border-[#00D2FF]/30 rounded-2xl px-6 py-3 outline-none" required>
                     </div>
 
-                    <!-- ESTE CONTENEDOR SE OCULTA SI SELECCIONAN EL DE $15 -->
                     <div id="contenedorTallaOficial" class="hidden flex-col gap-2 transition-all">
                         <label class="text-[10px] font-bold uppercase text-[#001E50] ml-2">Talla Franela Oficial 10K <span class="req">*</span></label>
                         <select id="tallaFranelaOficial" class="bg-blue-50 border-2 border-[#00D2FF]/50 rounded-2xl px-6 py-3 outline-none font-bold text-[#001E50]">
@@ -210,7 +208,6 @@
                         <input type="text" id="referenciaEnvio" placeholder="Ej: Frente a la plaza, al lado de la panadería..." class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3 outline-none" required>
                     </div>
 
-                    <!-- CAMPOS DE PAGO -->
                     <div class="md:col-span-2 border-t border-slate-100 pt-6 mt-2">
                         <h4 class="font-black text-[#001E50] text-sm uppercase mb-4">Verificación de Pago</h4>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -263,11 +260,10 @@
 
     <script>
         const tasaBCV = 487.119; 
-        // Tu archivo de consulta de fundadores
         const urlCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5yMHsenxCWE5kZBDUZ8UcYqDtdAHstfqXcvWkuYZPQ_4n2xSrfs6ptk7k21r1kcMHHLtWjz8SEHwl/pub?gid=0&single=true&output=csv";
         
-        // La URL de tu Apps Script para guardar datos:
-        const urlBaseDeDatos = ""; 
+        // ¡PEGA AQUÍ LA URL DE TU APLICACIÓN WEB DE APPS SCRIPT!
+        const urlBaseDeDatos = "https://script.google.com/macros/s/AKfycbyp-NJc2uozcF4VDYRm3_XhKiKmPwdLfB4jLxJV_L9EFpXSBI7dp1TuMG0hxWzC7dLaCg/exec"; 
 
         document.getElementById('valor-tasa').innerText = tasaBCV;
         
@@ -301,7 +297,6 @@
             }
         }
 
-        // Esta función calcula el precio según el paquete y activa/desactiva las tallas
         function actualizarTotal() {
             const paqueteBaseRadio = document.querySelector('input[name="paqueteBase"]:checked').value;
             let total = parseInt(paqueteBaseRadio);
@@ -311,17 +306,15 @@
             const contenedorTallaOficial = document.getElementById('contenedorTallaOficial');
             const selectTallaOficial = document.getElementById('tallaFranelaOficial');
 
-            // Si seleccionan el de $30, mostramos el selector de Talla Oficial
             if (total === 30) {
                 contenedorTallaOficial.style.display = "flex";
                 selectTallaOficial.required = true;
             } else {
                 contenedorTallaOficial.style.display = "none";
                 selectTallaOficial.required = false;
-                selectTallaOficial.value = ""; // Resetea si cambia de opinión
+                selectTallaOficial.value = ""; 
             }
 
-            // Lógica de Franela Extra ($15 adicionales)
             if(checkExtra) {
                 total += 15;
                 contenedorTallaExtra.classList.remove('hidden');
@@ -334,7 +327,6 @@
             document.getElementById('total-bs').innerText = (total * tasaBCV).toFixed(2) + " Bs.";
         }
 
-        // Ejecutar al cargar para configurar los campos iniciales (predeterminado $15)
         window.onload = actualizarTotal;
 
         async function validarAtleta() {
@@ -354,17 +346,14 @@
                 
                 let encontrado = false;
 
-                // Cédula está en la columna D (índice 3) en tu archivo
                 for(let i = 0; i < lineas.length; i++) {
                     const columnas = lineas[i].split(','); 
                     if(columnas.length >= 4) {
                         const celdaCedula = columnas[3].replace(/[^0-9]/g, '');
                         if(celdaCedula === ciLimpia) {
                             encontrado = true;
-                            // Dorsal en Columna A (índice 0)
                             dorsalActual = columnas[0] ? columnas[0].trim() : "000";
                             document.getElementById('textoDorsal').innerText = "Dorsal Asignado: #" + dorsalActual;
-                            // Nombre en Columna C (índice 2)
                             if(columnas[2]) document.getElementById('nombreEnvio').value = columnas[2].trim();
                             document.getElementById('telefonoEnvio').value = "";
                             break; 
@@ -408,22 +397,18 @@
             const tallaExtra = document.getElementById('tallaFranelaExtra').value;
             const totalUSD = document.getElementById('total-usd').innerText;
 
-            // Validación estricta
             if(!nombre || !tel || !estado || !ciudad || !direccion || !referencia || !refPago || !fechaPago) {
                 return alert("⚠️ Por favor, completa todos los campos obligatorios marcados con asterisco rojo (*).");
             }
 
-            // Si escogió el paquete Premium de $30, DEBE poner talla oficial
             if(paqueteBaseRadio === "30" && !tallaOficial) {
                 return alert("⚠️ Has elegido el paquete Premium de 10K. Por favor selecciona la Talla de tu Franela Oficial.");
             }
 
-            // Si escogió camisa extra, DEBE poner talla extra
             if(quiereExtra && !tallaExtra) {
                 return alert("⚠️ Marcaste la franela extra, por favor selecciona su talla.");
             }
 
-            // Textos dinámicos para el mensaje
             let txtPaquete = paqueteBaseRadio === "30" ? "Premium 10K ($30)" : "Base 5K ($15)";
             let txtTallaOficial = paqueteBaseRadio === "30" ? `🏅 *TALLA OFICIAL:* ${tallaOficial}` : `🏅 *KIT:* Digital / Sin Franela`;
             let detalleExtra = quiereExtra ? `👕 *EXTRA:* Genérica (Talla ${tallaExtra})` : `👕 *EXTRA:* Ninguno`;
@@ -441,7 +426,6 @@
                     formData.append("Cedula", ci);
                     formData.append("Nombre", nombre);
                     formData.append("Telefono", tel);
-                    // Si no aplica franela oficial porque compró el de $15, mandamos "N/A" al Excel
                     formData.append("TallaKit", paqueteBaseRadio === "30" ? tallaOficial : "N/A");
                     formData.append("FranelaExtra", quiereExtra ? tallaExtra : "NO");
                     formData.append("Estado", estado);
