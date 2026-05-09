@@ -141,7 +141,7 @@
     </footer>
 
     <script>
-        const urlBaseExcel = "1vg9nwhkFxwN4qVzjkfmXTrIVoHVYxeMH3-PXjqzeWao";
+        const urlBaseExcel = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5yMHsenxCWE5kZBDUZ8UcYqDtdAHstfqXcvWkuYZPQ_4n2xSrfs6ptk7k21r1kcMHHLtWjz8SEHwl/pub?gid=1297920374&single=true&output=csv";
         let corredores = [];
         let filtroActual = 'GENERAL'; 
 
@@ -156,52 +156,40 @@
                 for(let i = 1; i < filas.length; i++) {
                     if(!filas[i].trim()) continue;
                     const valores = filas[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
-                    
                     let dRaw = valores[0] ? valores[0].replace(/\D/g, '') : '';
                     if(dRaw === "" || dRaw.length > 3) continue;
                     while (dRaw.length < 3) dRaw = "0" + dRaw;
-                    
                     const dorsal = dRaw;
                     const nombreCompleto = valores[1] ? valores[1].trim().replace(/"/g, '') : '';
                     const genero = valores[2] ? valores[2].trim().replace(/"/g, '') : '';
                     const tiempoExcel = valores[3] ? valores[3].trim().replace(/"/g, '') : '';
                     const tiempo = tiempoExcel !== "" ? tiempoExcel : "Pendiente";
-                    
                     corredores.push({ dorsal: dorsal, nombre: nombreCompleto, genero: genero, tiempo: tiempo });
                 }
                 pintarTablaCorredores();
-            } catch (error) { 
-                console.error("Error cargando Excel:", error); 
-            }
+            } catch (error) { console.error("Error:", error); }
         }
 
         function pintarTablaCorredores() {
             const tbody = document.getElementById('tabla-corredores');
-            if(!tbody) return;
             tbody.innerHTML = '';
-            
             let filtrados = corredores;
             if(filtroActual === 'MASCULINO') filtrados = corredores.filter(c => c.genero.toUpperCase().trim().startsWith('M'));
             if(filtroActual === 'FEMENINO') filtrados = corredores.filter(c => c.genero.toUpperCase().trim().startsWith('F'));
 
-            // CORRECCIÓN: Lógica matemática segura para evitar el error NaN
             filtrados.sort((a, b) => {
                 const tS = (t) => {
-                    if (!t || t.toLowerCase() === "pendiente" || !t.includes(":")) return 999999;
+                    if (!t || t === "Pendiente") return 999999;
                     let p = t.split(":");
-                    return p.length === 3 ? (parseInt(p[0])*3600) + (parseInt(p[1])*60) + parseInt(p[2]) : (parseInt(p[0])*60) + parseInt(p[1]);
+                    return p.length === 3 ? (p[0]*3600)+(p[1]*60)+(+p[2]) : (p[0]*60)+(+p[1]);
                 };
                 return tS(a.tiempo) - tS(b.tiempo);
             });
 
             filtrados.forEach((c, i) => {
-                const esPendiente = c.tiempo.toLowerCase() === "pendiente" || c.tiempo === "";
-                const pos = esPendiente ? "-" : i + 1;
+                const pos = c.tiempo === "Pendiente" ? "-" : i + 1;
                 let posHtml = `<span class="font-bold text-slate-300 text-lg">${pos}</span>`;
-                
-                if(pos === 1 && !esPendiente) posHtml = '🥇'; 
-                else if(pos === 2 && !esPendiente) posHtml = '🥈'; 
-                else if(pos === 3 && !esPendiente) posHtml = '🥉';
+                if(pos === 1) posHtml = '🥇'; else if(pos === 2) posHtml = '🥈'; else if(pos === 3) posHtml = '🥉';
 
                 const fila = `
                     <tr class="hover:bg-slate-50 transition-colors">
@@ -218,23 +206,15 @@
         function cambiarFiltro(f) {
             filtroActual = f;
             ['btn-general', 'btn-masculino', 'btn-femenino'].forEach(id => {
-                const btn = document.getElementById(id);
-                if(btn) btn.className = "bg-white text-slate-400 font-bold px-8 py-3 rounded-full transition-all border border-slate-200 text-xs uppercase tracking-widest hover:border-accent";
+                document.getElementById(id).className = "bg-white text-slate-400 font-bold px-8 py-3 rounded-full transition-all border border-slate-200 text-xs uppercase tracking-widest";
             });
             const activo = document.getElementById('btn-' + f.toLowerCase());
-            if(activo) activo.className = "bg-accent text-boston-navy font-black px-8 py-3 rounded-full transition-all shadow-lg text-xs uppercase tracking-widest";
+            activo.className = "bg-accent text-boston-navy font-black px-8 py-3 rounded-full transition-all shadow-lg text-xs uppercase tracking-widest";
             pintarTablaCorredores();
         }
 
         function mostrarCertificado() {
-            // CORRECCIÓN: Limpieza de letras para no romper la búsqueda del dorsal
-            let inputRaw = document.getElementById('input-dorsal').value.replace(/\D/g, '');
-            if(inputRaw === "") { 
-                alert("Por favor, ingresa un número de dorsal válido."); 
-                return; 
-            }
-            let d = inputRaw.padStart(3, '0');
-            
+            let d = document.getElementById('input-dorsal').value.padStart(3, '0');
             const c = corredores.find(x => x.dorsal === d);
             if (c) {
                 document.getElementById('cert-nombre').innerText = c.nombre;
@@ -242,28 +222,18 @@
                 document.getElementById('cert-tiempo').innerText = c.tiempo;
                 document.getElementById('mi-certificado-objetivo').style.display = 'block';
                 document.getElementById('btn-descargar').classList.remove('hidden');
-            } else { 
-                alert("Dorsal no encontrado en la base de datos."); 
-            }
+            } else { alert("Dorsal no encontrado"); }
         }
 
         function descargarCertificado() {
             const cert = document.getElementById('mi-certificado-objetivo');
-            let numDorsal = document.getElementById('cert-dorsal').innerText;
-            
-            // CORRECCIÓN: Reactivación de useCORS para que la descarga no se bloquee
-            html2canvas(cert, { scale: 2, useCORS: true, logging: false }).then(canvas => {
+            html2canvas(cert, { scale: 2 }).then(canvas => {
                 const link = document.createElement('a');
-                link.download = 'Certificado-Reto-' + numDorsal + '.png';
-                link.href = canvas.toDataURL('image/png');
+                link.download = 'Certificado-Reto.png';
+                link.href = canvas.toDataURL();
                 link.click();
             });
         }
-
-        // UX Plus: Permite usar la tecla Enter en el buscador
-        document.getElementById('input-dorsal').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') mostrarCertificado();
-        });
 
         window.onload = cargarDatosDesdeExcel;
     </script>
