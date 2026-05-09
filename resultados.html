@@ -141,7 +141,7 @@
     </footer>
 
     <script>
-        const urlBaseExcel = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5yMHsenxCWE5kZBDUZ8UcYqDtdAHstfqXcvWkuYZPQ_4n2xSrfs6ptk7k21r1kcMHHLtWjz8SEHwl/pub?gid=1297920374&single=true&output=csv";
+        const urlBaseExcel = "https://docs.google.com/spreadsheets/d/1vg9nwhkFxwN4qVzjkfmXTrIVoHVYxeMH3-PXjqzeWao/gviz/tq?tqx=out:csv";
         let corredores = [];
         let filtroActual = 'GENERAL'; 
 
@@ -168,25 +168,18 @@
                     
                     const dorsal = dRaw;
                     
-                    // =============== MAPEO DE COLUMNAS ===============
-                    // Basado en tu imagen:
-                    // valores[0] es Dorsal (ej. 001)
-                    // valores[1] es Fecha (ej. 5/2/2026) -> Se ignora
-                    // valores[2] es Nombre (ej. IBRAHIM JIMENEZ)
-                    // valores[3] es Cédula (ej. 24788261) -> Se ignora
-                    // Asumimos:
-                    // valores[4] es Género (M/F)
-                    // valores[5] es Tiempo (ej. 00:25:30)
+                    // =============== MAPEO DE COLUMNAS ACTUALIZADO ===============
+                    // Columna A (0) = Dorsal
+                    // Columna B (1) = Nombre
+                    // Columna C (2) = Género
+                    // Columna D (3) = Tiempo
                     
-                    const nombreCompleto = valores[2] ? valores[2] : 'Corredor';
+                    const nombreCompleto = valores[1] ? valores[1] : 'Corredor';
+                    const genero = valores[2] ? valores[2] : '-';
                     
-                    // Si el género no está en la columna 5 (índice 4), cambia el número 4 por el correcto.
-                    const genero = valores[4] ? valores[4] : '-';
-                    
-                    // Si el tiempo no está en la columna 6 (índice 5), cambia el número 5 por el correcto.
-                    const tiempoExcel = valores[5] ? valores[5] : '';
+                    const tiempoExcel = valores[3] ? valores[3] : '';
                     const tiempo = (tiempoExcel === "" || tiempoExcel.toLowerCase() === "pendiente") ? "Pendiente" : tiempoExcel;
-                    // =================================================
+                    // =============================================================
 
                     corredores.push({ dorsal: dorsal, nombre: nombreCompleto, genero: genero, tiempo: tiempo });
                 }
