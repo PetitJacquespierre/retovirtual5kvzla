@@ -32,7 +32,7 @@
         <div class="max-w-7xl mx-auto px-4 md:px-12">
             <div class="flex justify-between items-center h-28">
                 <div class="flex items-center gap-6 cursor-pointer group" onclick="window.location.href='index.html'">
-                    <!-- Asegúrate de tener tu image_0.png en la misma carpeta -->
+                    <img src="image_0.png" alt="Reto" class="h-20 md:h-22 w-auto object-contain brightness-125 transition-transform group-hover:scale-105" onerror="this.style.display='none'">
                     <div class="h-12 w-[1px] bg-white/20"></div>
                     <div class="flex flex-col text-left">
                         <span class="text-[9px] text-white/60 font-bold tracking-[0.3em] uppercase mb-1">Presentado por</span>
@@ -58,7 +58,7 @@
             <div class="max-w-xs mx-auto space-y-4">
                 <input type="text" id="cedulaAtleta" placeholder="V-00000000" 
                        class="w-full border-2 border-slate-100 rounded-2xl px-6 py-4 text-center font-bold outline-none transition-all text-lg">
-                <button onclick="validarAtleta()" class="w-full bg-[#001E50] text-white py-5 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-[#00D2FF] hover:text-[#001E50] transition-all shadow-xl">
+                <button id="btnVerificar" onclick="validarAtleta()" class="w-full bg-[#001E50] text-white py-5 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-[#00D2FF] hover:text-[#001E50] transition-all shadow-xl">
                     Verificar Estatus
                 </button>
             </div>
@@ -150,36 +150,49 @@
         document.getElementById('valor-tasa').innerText = tasaBCV;
 
         async function validarAtleta() {
+            const btn = document.getElementById('btnVerificar');
             const rawCi = document.getElementById('cedulaAtleta').value.trim();
+            
             if(!rawCi) return alert("⚠️ Ingresa tu cédula.");
 
-            // 1. Limpiamos la cédula ingresada (dejamos solo los números)
-            const ciLimpia = rawCi.replace(/\D/g, ''); 
+            // Limpiamos la cédula extrañendo SOLO los números
+            const ciLimpia = rawCi.replace(/[^0-9]/g, ''); 
 
-            // Validar que al menos haya ingresado un número razonable
             if(ciLimpia.length < 5) return alert("⚠️ Ingresa una cédula válida.");
 
+            // Indicador de carga
+            const textoOriginal = btn.innerText;
+            btn.innerText = "VERIFICANDO...";
+            btn.disabled = true;
+            btn.style.opacity = "0.7";
+
             try {
+                // Hacemos la consulta al CSV de Google Sheets
                 const res = await fetch(urlCSV + "&t=" + new Date().getTime());
+                if(!res.ok) throw new Error("No se pudo conectar a la base de datos");
                 const data = await res.text();
                 
-                const lineas = data.split(/
-?
-/);
+                // Dividimos los datos por saltos de línea (funciona en Mac, Windows y Linux)
+                const lineas = data.split(/\r?\n/);
                 
-                // 2. Buscamos en el CSV
+                // Verificamos si la cédula limpia está en alguna de las líneas del Excel
                 esFundador = lineas.some(linea => {
-                    // Limpiamos la línea de caracteres como V, E, guiones, puntos y espacios
-                    // Dejando intactos los números para poder comparar bien.
-                    const lineaLimpia = linea.replace(/[VvEe.-]/g, '').replace(/\s+/g, '');
-                    return lineaLimpia.includes(ciLimpia);
+                    // Limpiamos la línea del excel dejando solo números para asegurar coincidencia exacta
+                    const lineaLimpia = linea.replace(/[^0-9]/g, '');
+                    return lineaLimpia.includes(ciLimpia) && ciLimpia.length > 4;
                 });
 
                 mostrarMenu();
             } catch (e) {
                 console.error("Error validando:", e);
-                esFundador = false;
+                // Si falla el internet o el enlace, por seguridad lo pasamos a general
+                esFundador = false; 
                 mostrarMenu();
+            } finally {
+                // Restaurar el botón
+                btn.innerText = textoOriginal;
+                btn.disabled = false;
+                btn.style.opacity = "1";
             }
         }
 
@@ -189,7 +202,6 @@
             const bienvenida = document.getElementById('mensaje-bienvenida');
             const contenedor = document.getElementById('opciones-contenedor');
 
-            // Resetear carrito
             carrito = { p5k: 0, p10k: 0 };
 
             if(esFundador) {
@@ -211,7 +223,7 @@
             } else {
                 bienvenida.innerHTML = `<h3 class="font-black uppercase text-xl text-[#001E50]">Inscripción General</h3><p class="text-xs opacity-70 uppercase tracking-widest mt-1">Bienvenido a la Distancia Reina.</p>`;
                 contenedor.innerHTML = `
-                    <label class="bg-white p-8 rounded-3xl border-2 border-[#00D2FF] shadow-lg md:col-span-2 max-w-md mx-auto w-full">
+                    <label class="bg-white p-8 rounded-3xl border-2 border-[#00D2FF] shadow-lg md:col-span-2 max-w-md mx-auto w-full block">
                         <input type="checkbox" checked disabled class="mb-4 w-5 h-5 accent-[#00D2FF]">
                         <h4 class="font-black text-[#001E50] text-lg uppercase tracking-tighter">10K Edición Especial</h4>
                         <p class="text-4xl font-black text-[#00D2FF] mt-1">$35</p>
@@ -252,6 +264,7 @@
             if(!nombre || !direccion || !tel || !ciudad) return alert("⚠️ Completa todos los datos de envío.");
 
             const msg = `🏆 *NUEVA INSCRIPCIÓN: RETO VIRTUAL 2026*%0A--------------------------------%0A👤 *ATLETA:* ${nombre}%0A💳 *CI:* ${ci}%0A📱 *TEL:* ${tel}%0A📸 *IG:* ${ig}%0A📍 *ENVÍO:* ${estado}, ${ciudad} (${agencia})%0A🏠 *DIRECCIÓN:* ${direccion}%0A💰 *TOTAL:* ${total}%0A--------------------------------%0A_Envío capture de pago a continuación..._`;
+            // El enlace redirigirá directo a tu WhatsApp
             window.open(`https://wa.me/584127732710?text=${msg}`, '_blank');
         }
     </script>
