@@ -18,7 +18,6 @@
         .text-accent { color: #00D2FF; } 
         .bg-accent { background-color: #00D2FF; }
 
-        /* Estilos del Certificado (Mantenemos tu lógica) */
         .contenedor-certificado-objetivo { position: relative; width: 100%; max-width: 800px; margin: 0 auto; border-radius: 12px; overflow: hidden; display: none; }
         .imagen-fondo-certificado { width: 100%; height: auto; display: block; }
         .texto-nombre-certificado { position: absolute; top: 35%; left: 50%; transform: translateX(-50%); color: #FFFFFF; font-size: clamp(16px, 4.5vw, 36px); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin: 0; white-space: nowrap; font-family: 'Montserrat', sans-serif; }
@@ -38,7 +37,7 @@
     <nav class="bg-boston-navy shadow-md w-full z-40 py-6">
         <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
             <div class="flex items-center gap-6">
-                <img src="image_0.png" alt="Logo" class="h-16 md:h-20 w-auto object-contain brightness-125">
+                <img src="image_0.png" alt="Logo" class="h-16 md:h-20 w-auto object-contain brightness-125" onerror="this.style.display='none'">
                 <div class="h-10 w-[1px] bg-white/20 hidden md:block"></div>
                 <div class="hidden md:flex flex-col">
                     <span class="text-[8px] text-white/50 font-bold uppercase tracking-widest">Socio Tecnológico</span>
@@ -96,7 +95,8 @@
                         </tr>
                     </thead>
                     <tbody id="tabla-corredores" class="text-slate-600 divide-y divide-slate-50">
-                        </tbody>
+                        <tr><td colspan="5" class="p-8 text-center font-bold">Conectando base de datos...</td></tr>
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -131,7 +131,7 @@
 
     <footer class="bg-boston-navy py-12 text-center border-t border-white/5">
         <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
-            <img src="image_0.png" class="h-12 grayscale brightness-200 opacity-30">
+            <img src="image_0.png" class="h-12 grayscale brightness-200 opacity-30" onerror="this.style.display='none'">
             <p class="text-white/20 text-[10px] uppercase tracking-[0.5em]">© 2026 RETO VIRTUAL VZLA | POWERED BY TEAMFS</p>
             <div class="flex gap-6">
                 <a href="#" class="text-white/30 hover:text-accent"><i class="fa-brands fa-instagram"></i></a>
@@ -147,52 +147,89 @@
 
         async function cargarDatosDesdeExcel() {
             try {
-                const urlFresca = urlBaseExcel + "&t=" + new Date().getTime();
+                const urlFresca = urlBaseExcel + "&nocache=" + new Date().getTime();
                 const respuesta = await fetch(urlFresca);
+                
+                if(!respuesta.ok) throw new Error("Fallo de conexión");
+                
                 const datosCsv = await respuesta.text();
                 const filas = datosCsv.split(/\r?\n/);
                 corredores = [];
 
                 for(let i = 1; i < filas.length; i++) {
                     if(!filas[i].trim()) continue;
-                    const valores = filas[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+                    
+                    // Limpia la fila de posibles comillas problemáticas del CSV
+                    const valores = filas[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(v => v ? v.replace(/^"|"$/g, '').trim() : '');
+                    
                     let dRaw = valores[0] ? valores[0].replace(/\D/g, '') : '';
                     if(dRaw === "" || dRaw.length > 3) continue;
                     while (dRaw.length < 3) dRaw = "0" + dRaw;
+                    
                     const dorsal = dRaw;
-                    const nombreCompleto = valores[1] ? valores[1].trim().replace(/"/g, '') : '';
-                    const genero = valores[2] ? valores[2].trim().replace(/"/g, '') : '';
-                    const tiempoExcel = valores[3] ? valores[3].trim().replace(/"/g, '') : '';
-                    const tiempo = tiempoExcel !== "" ? tiempoExcel : "Pendiente";
+                    
+                    // =============== MAPEO DE COLUMNAS ===============
+                    // Basado en tu imagen:
+                    // valores[0] es Dorsal (ej. 001)
+                    // valores[1] es Fecha (ej. 5/2/2026) -> Se ignora
+                    // valores[2] es Nombre (ej. IBRAHIM JIMENEZ)
+                    // valores[3] es Cédula (ej. 24788261) -> Se ignora
+                    // Asumimos:
+                    // valores[4] es Género (M/F)
+                    // valores[5] es Tiempo (ej. 00:25:30)
+                    
+                    const nombreCompleto = valores[2] ? valores[2] : 'Corredor';
+                    
+                    // Si el género no está en la columna 5 (índice 4), cambia el número 4 por el correcto.
+                    const genero = valores[4] ? valores[4] : '-';
+                    
+                    // Si el tiempo no está en la columna 6 (índice 5), cambia el número 5 por el correcto.
+                    const tiempoExcel = valores[5] ? valores[5] : '';
+                    const tiempo = (tiempoExcel === "" || tiempoExcel.toLowerCase() === "pendiente") ? "Pendiente" : tiempoExcel;
+                    // =================================================
+
                     corredores.push({ dorsal: dorsal, nombre: nombreCompleto, genero: genero, tiempo: tiempo });
                 }
                 pintarTablaCorredores();
-            } catch (error) { console.error("Error:", error); }
+            } catch (error) { 
+                console.error("Error:", error); 
+                document.getElementById('tabla-corredores').innerHTML = `<tr><td colspan="5" class="p-8 text-center text-red-500 font-bold">Error conectando a los datos.</td></tr>`;
+            }
         }
 
         function pintarTablaCorredores() {
             const tbody = document.getElementById('tabla-corredores');
+            if(!tbody) return;
             tbody.innerHTML = '';
+            
             let filtrados = corredores;
-            if(filtroActual === 'MASCULINO') filtrados = corredores.filter(c => c.genero.toUpperCase().trim().startsWith('M'));
-            if(filtroActual === 'FEMENINO') filtrados = corredores.filter(c => c.genero.toUpperCase().trim().startsWith('F'));
+            if(filtroActual === 'MASCULINO') filtrados = corredores.filter(c => c.genero.toUpperCase().startsWith('M'));
+            if(filtroActual === 'FEMENINO') filtrados = corredores.filter(c => c.genero.toUpperCase().startsWith('F'));
 
             filtrados.sort((a, b) => {
                 const tS = (t) => {
                     if (!t || t === "Pendiente") return 999999;
                     let p = t.split(":");
-                    return p.length === 3 ? (p[0]*3600)+(p[1]*60)+(+p[2]) : (p[0]*60)+(+p[1]);
+                    if (p.length === 3) return (parseInt(p[0]) * 3600) + (parseInt(p[1]) * 60) + parseInt(p[2]);
+                    if (p.length === 2) return (parseInt(p[0]) * 60) + parseInt(p[1]);
+                    return 999999;
                 };
                 return tS(a.tiempo) - tS(b.tiempo);
             });
 
+            if (filtrados.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="p-8 text-center text-slate-400">Sin datos que mostrar.</td></tr>`;
+                return;
+            }
+
             filtrados.forEach((c, i) => {
-                const pos = c.tiempo === "Pendiente" ? "-" : i + 1;
+                const esPendiente = c.tiempo === "Pendiente";
+                const pos = esPendiente ? "-" : i + 1;
                 let posHtml = `<span class="font-bold text-slate-300 text-lg">${pos}</span>`;
-                if(pos === 1) posHtml = '🥇'; else if(pos === 2) posHtml = '🥈'; else if(pos === 3) posHtml = '🥉';
+                if(pos === 1 && !esPendiente) posHtml = '🥇'; else if(pos === 2 && !esPendiente) posHtml = '🥈'; else if(pos === 3 && !esPendiente) posHtml = '🥉';
 
                 const fila = `
-                    <tr class="hover:bg-slate-50 transition-colors">
+                    <tr class="hover:bg-slate-50 transition-colors border-b border-slate-50">
                         <td class="p-8 text-center">${posHtml}</td>
                         <td class="p-8 text-center font-black text-accent">${c.dorsal}</td>
                         <td class="p-8 font-bold text-boston-navy uppercase tracking-tighter">${c.nombre}</td>
@@ -206,15 +243,22 @@
         function cambiarFiltro(f) {
             filtroActual = f;
             ['btn-general', 'btn-masculino', 'btn-femenino'].forEach(id => {
-                document.getElementById(id).className = "bg-white text-slate-400 font-bold px-8 py-3 rounded-full transition-all border border-slate-200 text-xs uppercase tracking-widest";
+                const btn = document.getElementById(id);
+                if(btn) btn.className = "bg-white text-slate-400 font-bold px-8 py-3 rounded-full transition-all border border-slate-200 text-xs uppercase tracking-widest hover:border-accent";
             });
             const activo = document.getElementById('btn-' + f.toLowerCase());
-            activo.className = "bg-accent text-boston-navy font-black px-8 py-3 rounded-full transition-all shadow-lg text-xs uppercase tracking-widest";
+            if(activo) activo.className = "bg-accent text-boston-navy font-black px-8 py-3 rounded-full transition-all shadow-lg text-xs uppercase tracking-widest";
+            
+            const colCat = document.getElementById('col-cat');
+            if (colCat) colCat.style.display = f === 'GENERAL' ? 'table-cell' : 'none';
             pintarTablaCorredores();
         }
 
         function mostrarCertificado() {
-            let d = document.getElementById('input-dorsal').value.padStart(3, '0');
+            let inputRaw = document.getElementById('input-dorsal').value.replace(/\D/g, '');
+            if(inputRaw === "") { alert("Ingresa un número de dorsal."); return; }
+            let d = inputRaw.padStart(3, '0');
+            
             const c = corredores.find(x => x.dorsal === d);
             if (c) {
                 document.getElementById('cert-nombre').innerText = c.nombre;
@@ -222,18 +266,23 @@
                 document.getElementById('cert-tiempo').innerText = c.tiempo;
                 document.getElementById('mi-certificado-objetivo').style.display = 'block';
                 document.getElementById('btn-descargar').classList.remove('hidden');
-            } else { alert("Dorsal no encontrado"); }
+            } else { alert("Dorsal no encontrado."); }
         }
 
         function descargarCertificado() {
             const cert = document.getElementById('mi-certificado-objetivo');
-            html2canvas(cert, { scale: 2 }).then(canvas => {
+            let numDorsal = document.getElementById('cert-dorsal').innerText;
+            html2canvas(cert, { scale: 2, useCORS: true, logging: false }).then(canvas => {
                 const link = document.createElement('a');
-                link.download = 'Certificado-Reto.png';
-                link.href = canvas.toDataURL();
+                link.download = 'Certificado-Reto-' + numDorsal + '.png';
+                link.href = canvas.toDataURL('image/png');
                 link.click();
             });
         }
+
+        document.getElementById('input-dorsal').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') mostrarCertificado();
+        });
 
         window.onload = cargarDatosDesdeExcel;
     </script>
