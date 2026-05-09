@@ -156,13 +156,19 @@
                 for(let i = 1; i < filas.length; i++) {
                     if(!filas[i].trim()) continue;
                     const valores = filas[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
-                    let dRaw = valores[0] ? valores[0].replace(/\D/g, '') : '';
-                    if(dRaw === "" || dRaw.length > 3) continue;
-                    while (dRaw.length < 3) dRaw = "0" + dRaw;
-                    const dorsal = dRaw;
-                    const nombreCompleto = valores[1] ? valores[1].trim().replace(/"/g, '') : '';
-                    const genero = valores[2] ? valores[2].trim().replace(/"/g, '') : '';
-                    const tiempoExcel = valores[3] ? valores[3].trim().replace(/"/g, '') : '';
+                    // La columna A (0) sigue siendo el Dorsal, eso está bien.
+let dRaw = valores[0] ? valores[0].replace(/\D/g, '') : '';
+if(dRaw === "") continue; 
+while (dRaw.length < 3) dRaw = "0" + dRaw; 
+
+// Como los nombres están en la Columna C, cambiamos al número 2
+const nombreCompleto = valores[2] || 'Corredor';
+
+// 👇 AQUÍ PONES EL NÚMERO DE LA COLUMNA DONDE ESTÁ EL GÉNERO (Ej: Si es la E, pon 4)
+const genero = valores[4] || '-'; 
+
+// 👇 AQUÍ PONES EL NÚMERO DE LA COLUMNA DONDE ESTÁ EL TIEMPO REAL (Ej: Si es la F, pon 5)
+const tiempoExcel = valores[5] || '';
                     const tiempo = tiempoExcel !== "" ? tiempoExcel : "Pendiente";
                     corredores.push({ dorsal: dorsal, nombre: nombreCompleto, genero: genero, tiempo: tiempo });
                 }
