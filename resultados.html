@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ranking Oficial - Reto Virtual VZLA 2026</title>
+    <title>Ranking Oficial - Reto Virtual VZLA</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -52,30 +52,37 @@
 
     <header class="py-16 px-4 text-center bg-white border-b border-slate-200">
         <h1 class="font-heading text-4xl md:text-6xl font-black text-boston-navy mb-4 uppercase tracking-tighter italic">
-            Ranking <span class="text-accent">Oficial 2026</span>
+            Ranking <span class="text-accent">Oficial</span>
         </h1>
         <p class="text-slate-400 max-w-2xl mx-auto text-sm uppercase tracking-widest">
             Cronometraje y clasificación validada para la serie nacional.
         </p>
     </header>
 
-    <main class="flex-grow max-w-6xl mx-auto px-4 py-16 w-full">
+    <main class="flex-grow max-w-6xl mx-auto px-4 py-10 w-full">
         
+        <!-- SELECTOR DE EDICIONES (Historial) -->
+        <div class="flex flex-wrap justify-center gap-3 mb-10 bg-slate-200/50 p-2 rounded-full w-fit mx-auto">
+            <button id="btn-ed2" onclick="cambiarEdicion('EDICION_2')" class="bg-boston-navy text-white font-black px-8 py-3 rounded-full transition-all shadow-lg text-xs uppercase tracking-widest">2DA EDICIÓN (JUN 2026)</button>
+            <button id="btn-ed1" onclick="cambiarEdicion('EDICION_1')" class="bg-transparent text-slate-500 font-bold px-8 py-3 rounded-full transition-all text-xs uppercase tracking-widest hover:bg-white hover:shadow-sm">1ERA EDICIÓN (MAR 2026)</button>
+        </div>
+
         <div class="bg-white border border-slate-200 rounded-3xl p-8 mb-12 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
             <div class="flex items-center gap-6">
                 <div class="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center">
                     <i class="fa-solid fa-stopwatch text-2xl text-accent animate-pulse"></i>
                 </div>
                 <div class="text-left">
-                    <h2 class="text-xl font-black text-boston-navy uppercase tracking-tighter">Fase de Carrera Activa</h2>
-                    <p class="text-slate-400 text-sm">Edición 1: 06 al 15 de Marzo</p>
+                    <h2 id="titulo-carrera" class="text-xl font-black text-boston-navy uppercase tracking-tighter">Fase de Carrera Activa</h2>
+                    <p id="fechas-carrera" class="text-slate-400 text-sm">Próximamente: Junio 2026</p>
                 </div>
             </div>
             <div class="text-right">
-                <span class="text-[10px] font-bold text-accent uppercase tracking-[0.3em] bg-boston-navy px-4 py-2 rounded-full">Actualización en Vivo</span>
+                <span id="estado-carrera" class="text-[10px] font-bold text-accent uppercase tracking-[0.3em] bg-boston-navy px-4 py-2 rounded-full">Inscripciones Abiertas</span>
             </div>
         </div>
 
+        <!-- FILTROS DE GÉNERO -->
         <div class="flex flex-wrap justify-center lg:justify-start gap-4 mb-8">
             <button id="btn-general" onclick="cambiarFiltro('GENERAL')" class="bg-accent text-boston-navy font-black px-8 py-3 rounded-full transition-all shadow-lg text-xs uppercase tracking-widest">General</button>
             <button id="btn-masculino" onclick="cambiarFiltro('MASCULINO')" class="bg-white text-slate-400 font-bold px-8 py-3 rounded-full transition-all border border-slate-200 text-xs uppercase tracking-widest hover:border-accent">Masculino</button>
@@ -101,12 +108,13 @@
             </div>
         </div>
 
-        <div id="seccion-certificado-externo" class="bg-boston-navy rounded-[3rem] p-12 text-center relative overflow-hidden shadow-2xl">
+        <!-- SECCIÓN CERTIFICADO -->
+        <div class="bg-boston-navy rounded-[3rem] p-12 text-center relative overflow-hidden shadow-2xl">
             <div class="absolute top-0 right-0 w-64 h-64 bg-accent/10 rounded-full blur-3xl"></div>
             
             <i class="fa-solid fa-certificate text-6xl text-accent mb-6"></i>
             <h3 class="text-3xl font-black text-white uppercase tracking-tighter mb-4 italic">Reclama tu Diploma Oficial</h3>
-            <p class="text-white/50 mb-10 text-sm max-w-md mx-auto">Ingresa tu número de Dorsal para generar tu certificado de finalista con tu tiempo oficial.</p>
+            <p class="text-white/50 mb-10 text-sm max-w-md mx-auto">Ingresa tu número de Dorsal para generar tu certificado de la edición seleccionada.</p>
             
             <div class="flex flex-col sm:flex-row max-w-md mx-auto gap-3">
                 <input type="text" id="input-dorsal" placeholder="EJ: 015" class="w-full bg-white/5 border-2 border-white/10 rounded-2xl px-6 py-4 text-white text-center font-bold focus:outline-none focus:border-accent transition-all">
@@ -141,13 +149,52 @@
     </footer>
 
     <script>
-        const urlBaseExcel = "https://docs.google.com/spreadsheets/d/1vg9nwhkFxwN4qVzjkfmXTrIVoHVYxeMH3-PXjqzeWao/gviz/tq?tqx=out:csv&gid=1297920374";
+        // CONFIGURACIÓN DE TUS ENLACES DE GOOGLE SHEETS
+        const enlaceBase = "https://docs.google.com/spreadsheets/d/1vg9nwhkFxwN4qVzjkfmXTrIVoHVYxeMH3-PXjqzeWao/gviz/tq?tqx=out:csv&gid=";
+        
+        // 👇👇👇 AQUÍ PONES TUS NÚMEROS GID 👇👇👇
+        const gidEdicion2 = "AQUI_PON_EL_GID_DE_LA_PESTAÑA_NUEVA_DE_JUNIO"; 
+        const gidEdicion1 = "1297920374"; // Este es el GID viejo de marzo que conectamos ahorita
+        
+        let urlActiva = enlaceBase + gidEdicion2; // Arranca por defecto en la Edición 2
+        
         let corredores = [];
         let filtroActual = 'GENERAL'; 
+        let edicionActual = 'EDICION_2';
+
+        function cambiarEdicion(edicion) {
+            edicionActual = edicion;
+            
+            // Cambiar la interfaz gráfica y el GID
+            if(edicion === 'EDICION_2') {
+                document.getElementById('btn-ed2').className = "bg-boston-navy text-white font-black px-8 py-3 rounded-full transition-all shadow-lg text-xs uppercase tracking-widest";
+                document.getElementById('btn-ed1').className = "bg-transparent text-slate-500 font-bold px-8 py-3 rounded-full transition-all text-xs uppercase tracking-widest hover:bg-white hover:shadow-sm";
+                
+                document.getElementById('titulo-carrera').innerText = "Fase de Inscripciones";
+                document.getElementById('fechas-carrera').innerText = "2da Edición: Junio 2026";
+                document.getElementById('estado-carrera').innerText = "Próximamente";
+                
+                urlActiva = enlaceBase + gidEdicion2;
+            } else {
+                document.getElementById('btn-ed1').className = "bg-boston-navy text-white font-black px-8 py-3 rounded-full transition-all shadow-lg text-xs uppercase tracking-widest";
+                document.getElementById('btn-ed2').className = "bg-transparent text-slate-500 font-bold px-8 py-3 rounded-full transition-all text-xs uppercase tracking-widest hover:bg-white hover:shadow-sm";
+                
+                document.getElementById('titulo-carrera').innerText = "Carrera Finalizada";
+                document.getElementById('fechas-carrera').innerText = "1era Edición: Marzo 2026";
+                document.getElementById('estado-carrera').innerText = "Resultados Oficiales";
+                
+                urlActiva = enlaceBase + gidEdicion1;
+            }
+            
+            // Recargar los datos con la pestaña seleccionada
+            cargarDatosDesdeExcel();
+        }
 
         async function cargarDatosDesdeExcel() {
             try {
-                const urlFresca = urlBaseExcel + "&nocache=" + new Date().getTime();
+                document.getElementById('tabla-corredores').innerHTML = `<tr><td colspan="5" class="p-8 text-center text-boston-navy font-bold">Cargando base de datos de la edición seleccionada...</td></tr>`;
+                
+                const urlFresca = urlActiva + "&nocache=" + new Date().getTime();
                 const respuesta = await fetch(urlFresca);
                 
                 if(!respuesta.ok) throw new Error("Fallo de conexión");
@@ -159,7 +206,6 @@
                 for(let i = 1; i < filas.length; i++) {
                     if(!filas[i].trim()) continue;
                     
-                    // Limpia la fila de posibles comillas problemáticas del CSV
                     const valores = filas[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(v => v ? v.replace(/^"|"$/g, '').trim() : '');
                     
                     let dRaw = valores[0] ? valores[0].replace(/\D/g, '') : '';
@@ -167,26 +213,18 @@
                     while (dRaw.length < 3) dRaw = "0" + dRaw;
                     
                     const dorsal = dRaw;
-                    
-                    // =============== MAPEO DE COLUMNAS ACTUALIZADO ===============
-                    // Columna A (0) = Dorsal
-                    // Columna B (1) = Nombre
-                    // Columna C (2) = Género
-                    // Columna D (3) = Tiempo
-                    
                     const nombreCompleto = valores[1] ? valores[1] : 'Corredor';
                     const genero = valores[2] ? valores[2] : '-';
                     
                     const tiempoExcel = valores[3] ? valores[3] : '';
                     const tiempo = (tiempoExcel === "" || tiempoExcel.toLowerCase() === "pendiente") ? "Pendiente" : tiempoExcel;
-                    // =============================================================
 
                     corredores.push({ dorsal: dorsal, nombre: nombreCompleto, genero: genero, tiempo: tiempo });
                 }
                 pintarTablaCorredores();
             } catch (error) { 
                 console.error("Error:", error); 
-                document.getElementById('tabla-corredores').innerHTML = `<tr><td colspan="5" class="p-8 text-center text-red-500 font-bold">Error conectando a los datos.</td></tr>`;
+                document.getElementById('tabla-corredores').innerHTML = `<tr><td colspan="5" class="p-8 text-center text-slate-400">Sin datos de corredores en esta edición todavía.</td></tr>`;
             }
         }
 
@@ -259,7 +297,7 @@
                 document.getElementById('cert-tiempo').innerText = c.tiempo;
                 document.getElementById('mi-certificado-objetivo').style.display = 'block';
                 document.getElementById('btn-descargar').classList.remove('hidden');
-            } else { alert("Dorsal no encontrado."); }
+            } else { alert("Dorsal no encontrado en esta edición."); }
         }
 
         function descargarCertificado() {
@@ -267,7 +305,9 @@
             let numDorsal = document.getElementById('cert-dorsal').innerText;
             html2canvas(cert, { scale: 2, useCORS: true, logging: false }).then(canvas => {
                 const link = document.createElement('a');
-                link.download = 'Certificado-Reto-' + numDorsal + '.png';
+                // Añadí la edición al nombre de descarga para que no se sobreescriban
+                let edicionNombre = edicionActual === 'EDICION_2' ? 'Ed2' : 'Ed1';
+                link.download = `Certificado-Reto-${edicionNombre}-${numDorsal}.png`;
                 link.href = canvas.toDataURL('image/png');
                 link.click();
             });
@@ -277,7 +317,8 @@
             if (e.key === 'Enter') mostrarCertificado();
         });
 
-        window.onload = cargarDatosDesdeExcel;
+        // Al iniciar, cargamos la edición activa
+        window.onload = cambiarEdicion('EDICION_2');
     </script>
 </body>
 </html>
