@@ -32,7 +32,7 @@
         <div class="max-w-7xl mx-auto px-4 md:px-12">
             <div class="flex justify-between items-center h-28">
                 <div class="flex items-center gap-6 cursor-pointer group" onclick="window.location.href='index.html'">
-                    <img src="image_0.png" alt="Reto" class="h-20 md:h-22 w-auto object-contain brightness-125 transition-transform group-hover:scale-105">
+                    <!-- Asegúrate de tener tu image_0.png en la misma carpeta -->
                     <div class="h-12 w-[1px] bg-white/20"></div>
                     <div class="flex flex-col text-left">
                         <span class="text-[9px] text-white/60 font-bold tracking-[0.3em] uppercase mb-1">Presentado por</span>
@@ -137,7 +137,6 @@
     </main>
 
     <footer class="bg-[#001E50] py-16 px-6 border-t border-white/5 text-center">
-        <img src="image_0.png" class="h-16 mx-auto mb-6 grayscale brightness-200 opacity-20">
         <p class="text-white/30 text-[10px] uppercase tracking-[0.4em] mb-4 font-bold italic">Reto Virtual VZLA x TeamFS</p>
     </footer>
 
@@ -151,17 +150,34 @@
         document.getElementById('valor-tasa').innerText = tasaBCV;
 
         async function validarAtleta() {
-            const ci = document.getElementById('cedulaAtleta').value.trim();
-            if(!ci) return alert("⚠️ Ingresa tu cédula.");
+            const rawCi = document.getElementById('cedulaAtleta').value.trim();
+            if(!rawCi) return alert("⚠️ Ingresa tu cédula.");
+
+            // 1. Limpiamos la cédula ingresada (dejamos solo los números)
+            const ciLimpia = rawCi.replace(/\D/g, ''); 
+
+            // Validar que al menos haya ingresado un número razonable
+            if(ciLimpia.length < 5) return alert("⚠️ Ingresa una cédula válida.");
 
             try {
                 const res = await fetch(urlCSV + "&t=" + new Date().getTime());
                 const data = await res.text();
-                // Buscamos la cédula exacta en el texto
-                const lineas = data.split('\n');
-                esFundador = lineas.some(linea => linea.includes(ci));
+                
+                const lineas = data.split(/
+?
+/);
+                
+                // 2. Buscamos en el CSV
+                esFundador = lineas.some(linea => {
+                    // Limpiamos la línea de caracteres como V, E, guiones, puntos y espacios
+                    // Dejando intactos los números para poder comparar bien.
+                    const lineaLimpia = linea.replace(/[VvEe.-]/g, '').replace(/\s+/g, '');
+                    return lineaLimpia.includes(ciLimpia);
+                });
+
                 mostrarMenu();
             } catch (e) {
+                console.error("Error validando:", e);
                 esFundador = false;
                 mostrarMenu();
             }
@@ -172,6 +188,9 @@
             document.getElementById('paso-2').classList.remove('hidden-step');
             const bienvenida = document.getElementById('mensaje-bienvenida');
             const contenedor = document.getElementById('opciones-contenedor');
+
+            // Resetear carrito
+            carrito = { p5k: 0, p10k: 0 };
 
             if(esFundador) {
                 bienvenida.innerHTML = `<h3 class="font-black uppercase text-xl">¡Hola, Atleta Fundador!</h3><p class="text-xs opacity-70 uppercase tracking-widest mt-1 italic">Beneficios de temporada activados.</p>`;
@@ -204,8 +223,8 @@
                     </label>
                 `;
                 carrito.p10k = 35;
-                calc();
             }
+            calc();
         }
 
         function updateCarrito(precio, key) {
