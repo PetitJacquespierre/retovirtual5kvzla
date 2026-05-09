@@ -79,8 +79,6 @@
                 
                 <label class="cursor-pointer group flex flex-col md:flex-row gap-6 items-center border-2 border-slate-100 p-4 rounded-3xl hover:border-[#00D2FF] has-[:checked]:border-[#00D2FF] has-[:checked]:bg-blue-50/20 transition-all">
                     
-                    <!-- REEMPLAZAR IMAGEN AQUÍ -->
-                    <!-- Cambia "foto_franela.jpg" por la ruta o nombre de la foto de tu franela genérica -->
                     <div class="w-full md:w-32 h-32 bg-slate-100 rounded-2xl flex items-center justify-center relative overflow-hidden shrink-0">
                         <img src="foto_franela.jpg" alt="Franela Extra" class="w-full h-full object-cover absolute z-10" onerror="this.style.opacity='0'">
                         <div class="text-center text-slate-400 z-0">
@@ -99,7 +97,6 @@
                         </div>
                         <p class="text-2xl font-black text-[#00D2FF] mb-3">+$15</p>
                         
-                        <!-- SELECTOR DE TALLA EXTRA (Oculto hasta que marcan el check) -->
                         <div id="contenedorTallaExtra" class="hidden flex flex-col gap-2">
                             <label class="text-[10px] font-bold uppercase text-slate-400">Selecciona la talla <span class="req">*</span></label>
                             <select id="tallaFranelaExtra" class="bg-white border-2 border-slate-200 rounded-xl px-4 py-2 outline-none font-bold text-sm w-full md:w-1/2">
@@ -115,7 +112,7 @@
                 </label>
             </div>
 
-            <!-- Formulario de Despacho -->
+            <!-- Formulario de Despacho y Pago -->
             <div class="bg-white p-10 rounded-[2.5rem] shadow-xl border border-slate-100">
                 <h3 class="text-[#001E50] font-black text-2xl mb-8 uppercase italic border-b border-slate-50 pb-4">Datos de Despacho y Kit Oficial</h3>
                 
@@ -189,6 +186,22 @@
                         <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Punto de Referencia <span class="req">*</span></label>
                         <input type="text" id="referenciaEnvio" placeholder="Ej: Frente a la plaza, al lado de la panadería..." class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3 outline-none" required>
                     </div>
+
+                    <!-- NUEVOS CAMPOS DE PAGO -->
+                    <div class="md:col-span-2 border-t border-slate-100 pt-6 mt-2">
+                        <h4 class="font-black text-[#001E50] text-sm uppercase mb-4">Verificación de Pago</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="flex flex-col gap-2">
+                                <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Número de Referencia <span class="req">*</span></label>
+                                <input type="text" id="numReferenciaPago" placeholder="Ej: 12345678" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3 outline-none" required>
+                            </div>
+                            <div class="flex flex-col gap-2">
+                                <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Fecha de Pago <span class="req">*</span></label>
+                                <input type="date" id="fechaPago" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3 outline-none text-sm font-bold text-slate-700" required>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
@@ -230,7 +243,7 @@
         const tasaBCV = 487.119; 
         const urlCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5yMHsenxCWE5kZBDUZ8UcYqDtdAHstfqXcvWkuYZPQ_4n2xSrfs6ptk7k21r1kcMHHLtWjz8SEHwl/pub?gid=0&single=true&output=csv";
         
-        // AQUÍ PEGARÁS EL ENLACE DE TU BASE DE DATOS MÁS ADELANTE:
+        // AQUÍ PEGARÁS LA URL DE LA APLICACIÓN WEB DE GOOGLE APPS SCRIPT:
         const urlBaseDeDatos = ""; 
 
         document.getElementById('valor-tasa').innerText = tasaBCV;
@@ -274,7 +287,7 @@
                 contenedorTalla.classList.remove('hidden');
             } else {
                 contenedorTalla.classList.add('hidden');
-                document.getElementById('tallaFranelaExtra').value = ""; // Resetea la talla si desmarcan
+                document.getElementById('tallaFranelaExtra').value = ""; 
             }
 
             document.getElementById('total-usd').innerText = `$${total}`;
@@ -325,13 +338,17 @@
             const agencia = document.querySelector('input[name="agencia"]:checked').value;
             const direccion = document.getElementById('direccionEnvio').value;
             const referencia = document.getElementById('referenciaEnvio').value;
-            const ig = document.getElementById('igEnvio').value || "No indicó";
             
+            // Nuevos datos de pago
+            const refPago = document.getElementById('numReferenciaPago').value;
+            const fechaPago = document.getElementById('fechaPago').value;
+            
+            const ig = document.getElementById('igEnvio').value || "No indicó";
             const quiereExtra = document.getElementById('checkFranelaExtra').checked;
             const tallaExtra = document.getElementById('tallaFranelaExtra').value;
             const totalUSD = document.getElementById('total-usd').innerText;
 
-            if(!nombre || !tel || !tallaOficial || !estado || !ciudad || !direccion || !referencia) {
+            if(!nombre || !tel || !tallaOficial || !estado || !ciudad || !direccion || !referencia || !refPago || !fechaPago) {
                 return alert("⚠️ Por favor, completa todos los campos obligatorios marcados con asterisco rojo (*).");
             }
 
@@ -339,22 +356,16 @@
                 return alert("⚠️ Marcaste la franela extra, por favor selecciona su talla.");
             }
 
-            let detalleExtra = quiereExtra ? `👕 *EXTRA:* Franela Genérica (Talla ${tallaExtra})` : `👕 *EXTRA:* Ninguno`;
+            let detalleExtra = quiereExtra ? `👕 *EXTRA:* Genérica (Talla ${tallaExtra})` : `👕 *EXTRA:* Ninguno`;
 
-            // Mensaje para WhatsApp
-            const msg = `🏆 *NUEVO FUNDADOR INSCRITO*%0A--------------------------------%0A👤 *ATLETA:* ${nombre}%0A💳 *CI:* ${ci}%0A📱 *TEL:* ${tel}%0A📸 *IG:* ${ig}%0A🏅 *KIT OFICIAL:* Talla ${tallaOficial}%0A${detalleExtra}%0A--------------------------------%0A📍 *ENVÍO:* ${estado}, ${ciudad} (${agencia})%0A🏠 *DIRECCIÓN:* ${direccion}%0A📌 *REF:* ${referencia}%0A💰 *TOTAL A PAGAR:* ${totalUSD}%0A--------------------------------%0A_Adjunto mi comprobante de pago a continuación..._`;
+            const msg = `🏆 *NUEVO FUNDADOR INSCRITO*%0A--------------------------------%0A👤 *ATLETA:* ${nombre}%0A💳 *CI:* ${ci}%0A📱 *TEL:* ${tel}%0A📸 *IG:* ${ig}%0A🏅 *KIT OFICIAL:* Talla ${tallaOficial}%0A${detalleExtra}%0A--------------------------------%0A📍 *ENVÍO:* ${estado}, ${ciudad} (${agencia})%0A🏠 *DIRECCIÓN:* ${direccion}%0A📌 *REF LUGAR:* ${referencia}%0A--------------------------------%0A💰 *TOTAL A PAGAR:* ${totalUSD}%0A🧾 *Nº REFERENCIA:* ${refPago}%0A📅 *FECHA PAGO:* ${fechaPago}%0A--------------------------------%0A_Adjunto mi comprobante de pago a continuación..._`;
 
-            /* 
-               AQUÍ ENVIARÍAMOS LOS DATOS A GOOGLE SHEETS
-               Como la URL de la base de datos está vacía por ahora, solo enviará el WhatsApp.
-            */
             if(urlBaseDeDatos !== "") {
                 const btn = document.getElementById('btnInscribir');
                 btn.innerText = "GUARDANDO...";
                 btn.disabled = true;
                 
                 try {
-                    // Preparamos los datos para la hoja de cálculo
                     const formData = new FormData();
                     formData.append("Cedula", ci);
                     formData.append("Nombre", nombre);
@@ -365,6 +376,9 @@
                     formData.append("Ciudad", ciudad);
                     formData.append("Agencia", agencia);
                     formData.append("Direccion", direccion);
+                    formData.append("PuntoRef", referencia);
+                    formData.append("RefPago", refPago);
+                    formData.append("FechaPago", fechaPago);
                     formData.append("Total", totalUSD);
 
                     await fetch(urlBaseDeDatos, { method: 'POST', body: formData });
@@ -373,7 +387,6 @@
                 }
             }
 
-            // Redirigimos a WhatsApp
             window.open(`https://wa.me/584127732710?text=${msg}`, '_blank');
         }
     </script>
