@@ -3,464 +3,288 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscripción Oficial - Reto Virtual VZLA</title>
+    <title>Ranking Oficial - Reto Virtual VZLA 2026</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
-        h1, h2, h3 { font-family: 'Montserrat', sans-serif; }
-        .hidden-step { display: none !important; }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-heading { font-family: 'Montserrat', sans-serif; }
         
-        input:focus, select:focus, textarea:focus { 
-            border-color: #00D2FF !important; 
-            box-shadow: 0 0 10px rgba(0, 210, 255, 0.1); 
-        }
-        .req { color: #ef4444; font-weight: bold; margin-left: 2px; }
+        .bg-boston-navy { background-color: #001E50; }
+        .text-accent { color: #00D2FF; } 
+        .bg-accent { background-color: #00D2FF; }
+
+        .contenedor-certificado-objetivo { position: relative; width: 100%; max-width: 800px; margin: 0 auto; border-radius: 12px; overflow: hidden; display: none; }
+        .imagen-fondo-certificado { width: 100%; height: auto; display: block; }
+        .texto-nombre-certificado { position: absolute; top: 35%; left: 50%; transform: translateX(-50%); color: #FFFFFF; font-size: clamp(16px, 4.5vw, 36px); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin: 0; white-space: nowrap; font-family: 'Montserrat', sans-serif; }
+        .texto-dorsal-certificado, .texto-tiempo-certificado { position: absolute; bottom: 27%; color: #FFFFFF; font-size: clamp(14px, 3.5vw, 26px); font-weight: 800; margin: 0; font-family: 'Montserrat', sans-serif; }
+        .texto-dorsal-certificado { left: 25%; }
+        .texto-tiempo-certificado { right: 10%; }  
+        
+        .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
-<body class="text-slate-900">
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
 
-    <div class="bg-[#001E50] text-white py-2 text-center text-[10px] font-bold uppercase tracking-[0.4em] z-50 relative border-b border-white/10">
-        El estándar de oro del running virtual en Venezuela
+    <div class="bg-boston-navy text-white py-2 text-center text-[10px] font-bold uppercase tracking-[0.4em] z-50 relative border-b border-white/10">
+        Resultados Oficiales Auditados por TeamFS
     </div>
 
-    <nav class="bg-[#001E50] sticky top-0 z-50 shadow-2xl">
-        <div class="max-w-7xl mx-auto px-4 md:px-12">
-            <div class="flex justify-between items-center h-28">
-                <div class="flex items-center gap-6 cursor-pointer group" onclick="window.location.href='index.html'">
-                    <div class="flex flex-col text-left">
-                        <span class="text-[9px] text-white/60 font-bold tracking-[0.3em] uppercase mb-1">Presentado por</span>
-                        <span class="text-white font-black text-2xl md:text-4xl tracking-tighter leading-none group-hover:text-[#00D2FF] transition-colors italic uppercase">TEAMFS</span>
-                    </div>
+    <nav class="bg-boston-navy shadow-md w-full z-40 py-6">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <div class="flex items-center gap-6">
+                <img src="image_0.png" alt="Logo" class="h-16 md:h-20 w-auto object-contain brightness-125" onerror="this.style.display='none'">
+                <div class="h-10 w-[1px] bg-white/20 hidden md:block"></div>
+                <div class="hidden md:flex flex-col">
+                    <span class="text-[8px] text-white/50 font-bold uppercase tracking-widest">Socio Tecnológico</span>
+                    <span class="text-white font-black text-xl italic tracking-tighter">TeamFS</span>
                 </div>
             </div>
+            <a href="index.html" class="bg-white/10 hover:bg-accent hover:text-boston-navy text-white px-6 py-2 rounded-full font-bold transition-all text-xs uppercase tracking-widest border border-white/20">
+                <i class="fa-solid fa-arrow-left mr-2"></i> Volver
+            </a>
         </div>
     </nav>
 
-    <main class="max-w-4xl mx-auto px-6 py-16">
+    <header class="py-16 px-4 text-center bg-white border-b border-slate-200">
+        <h1 class="font-heading text-4xl md:text-6xl font-black text-boston-navy mb-4 uppercase tracking-tighter italic">
+            Ranking <span class="text-accent">Oficial 2026</span>
+        </h1>
+        <p class="text-slate-400 max-w-2xl mx-auto text-sm uppercase tracking-widest">
+            Cronometraje y clasificación validada para la serie nacional.
+        </p>
+    </header>
+
+    <main class="flex-grow max-w-6xl mx-auto px-4 py-16 w-full">
         
-        <!-- PASO 1: VERIFICACIÓN -->
-        <div id="paso-1" class="bg-white p-10 md:p-16 rounded-[3rem] shadow-2xl border border-slate-100 text-center">
-            <div class="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6 text-[#001E50]">
-                <i class="fa-solid fa-id-card text-3xl"></i>
+        <div class="bg-white border border-slate-200 rounded-3xl p-8 mb-12 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-6">
+                <div class="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center">
+                    <i class="fa-solid fa-stopwatch text-2xl text-accent animate-pulse"></i>
+                </div>
+                <div class="text-left">
+                    <h2 class="text-xl font-black text-boston-navy uppercase tracking-tighter">Fase de Carrera Activa</h2>
+                    <p class="text-slate-400 text-sm">Edición 1: 06 al 15 de Marzo</p>
+                </div>
             </div>
-            <h2 class="text-[#001E50] font-black text-3xl uppercase tracking-tighter mb-4 italic">Verificación de Atleta</h2>
-            <p class="text-slate-400 text-sm mb-10 italic">Ingresa tu cédula para verificar tu acceso y recuperar tus datos.</p>
+            <div class="text-right">
+                <span class="text-[10px] font-bold text-accent uppercase tracking-[0.3em] bg-boston-navy px-4 py-2 rounded-full">Actualización en Vivo</span>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap justify-center lg:justify-start gap-4 mb-8">
+            <button id="btn-general" onclick="cambiarFiltro('GENERAL')" class="bg-accent text-boston-navy font-black px-8 py-3 rounded-full transition-all shadow-lg text-xs uppercase tracking-widest">General</button>
+            <button id="btn-masculino" onclick="cambiarFiltro('MASCULINO')" class="bg-white text-slate-400 font-bold px-8 py-3 rounded-full transition-all border border-slate-200 text-xs uppercase tracking-widest hover:border-accent">Masculino</button>
+            <button id="btn-femenino" onclick="cambiarFiltro('FEMENINO')" class="bg-white text-slate-400 font-bold px-8 py-3 rounded-full transition-all border border-slate-200 text-xs uppercase tracking-widest hover:border-accent">Femenino</button>
+        </div>
+
+        <div id="contenedor-tabla" class="bg-white rounded-[2rem] shadow-2xl overflow-hidden border border-slate-100 mb-16">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-50 text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] border-b border-slate-100">
+                            <th class="p-8 text-center w-24">Pos</th>
+                            <th class="p-8 text-center w-24">Dorsal</th>
+                            <th class="p-8">Corredor</th>
+                            <th class="p-8 text-center hidden sm:table-cell" id="col-cat">Cat.</th>
+                            <th class="p-8 text-right">Tiempo</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-corredores" class="text-slate-600 divide-y divide-slate-50">
+                        <tr><td colspan="5" class="p-8 text-center font-bold">Iniciando sistema...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="seccion-certificado-externo" class="bg-boston-navy rounded-[3rem] p-12 text-center relative overflow-hidden shadow-2xl">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-accent/10 rounded-full blur-3xl"></div>
             
-            <div class="max-w-xs mx-auto space-y-4">
-                <label class="text-left block text-[10px] font-bold uppercase text-slate-400 ml-2 mb-1">Cédula de Identidad <span class="req">*</span></label>
-                <input type="text" id="cedulaAtleta" placeholder="Ej: 12345678" 
-                       class="w-full border-2 border-slate-100 rounded-2xl px-6 py-4 text-center font-bold outline-none transition-all text-lg">
-                <button id="btnVerificar" onclick="validarAtleta()" class="w-full bg-[#001E50] text-white py-5 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-[#00D2FF] hover:text-[#001E50] transition-all shadow-xl">
-                    Verificar Cédula
+            <i class="fa-solid fa-certificate text-6xl text-accent mb-6"></i>
+            <h3 class="text-3xl font-black text-white uppercase tracking-tighter mb-4 italic">Reclama tu Diploma Oficial</h3>
+            <p class="text-white/50 mb-10 text-sm max-w-md mx-auto">Ingresa tu número de Dorsal para generar tu certificado de finalista con tu tiempo oficial.</p>
+            
+            <div class="flex flex-col sm:flex-row max-w-md mx-auto gap-3">
+                <input type="text" id="input-dorsal" placeholder="EJ: 015" class="w-full bg-white/5 border-2 border-white/10 rounded-2xl px-6 py-4 text-white text-center font-bold focus:outline-none focus:border-accent transition-all">
+                <button onclick="mostrarCertificado()" class="bg-accent text-boston-navy font-black px-10 py-4 rounded-2xl hover:scale-105 transition-transform uppercase text-xs tracking-widest">Buscar</button>
+            </div>
+
+            <div class="contenedor-certificado-objetivo mt-12 shadow-2xl" id="mi-certificado-objetivo">
+                <img src="fondo-certificado.png" alt="Certificado" class="imagen-fondo-certificado">
+                <h2 class="texto-nombre-certificado" id="cert-nombre">---</h2>
+                <p class="texto-dorsal-certificado" id="cert-dorsal">---</p>
+                <p class="texto-tiempo-certificado" id="cert-tiempo">---</p>
+            </div>
+
+            <div class="mt-10">
+                <button id="btn-descargar" onclick="descargarCertificado()" class="hidden bg-white text-boston-navy font-black px-12 py-5 rounded-full shadow-2xl hover:scale-105 transition-transform uppercase tracking-widest text-sm">
+                    <i class="fa-solid fa-download mr-2 text-accent"></i> Descargar Imagen
                 </button>
-            </div>
-        </div>
-
-        <!-- PASO 2: ES FUNDADOR -->
-        <div id="paso-fundador" class="hidden-step space-y-8 animate-fade-in mt-8">
-            <div class="bg-[#00D2FF]/10 border-2 border-[#00D2FF] p-8 rounded-[2rem] text-center text-[#001E50]">
-                <h3 class="font-black uppercase text-xl">¡Felicidades, eres Fundador!</h3>
-                <p id="textoDorsal" class="text-sm font-bold uppercase tracking-widest mt-2 bg-[#001E50] text-white inline-block px-4 py-1 rounded-full">Dorsal Asignado: #000</p>
-            </div>
-
-            <!-- SELECCIÓN DE PAQUETE BASE -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Tarjeta 5K ($15) -->
-                <label class="cursor-pointer group flex flex-col bg-white border-2 border-slate-200 p-8 rounded-[2rem] shadow-sm hover:shadow-xl hover:border-[#00D2FF] has-[:checked]:border-[#00D2FF] has-[:checked]:bg-[#00D2FF]/5 transition-all relative overflow-hidden">
-                    <input type="radio" name="paqueteBase" value="15" onchange="actualizarTotal()" class="absolute top-8 right-8 w-6 h-6 accent-[#00D2FF]" checked>
-                    <h4 class="font-black text-[#001E50] text-xl uppercase tracking-tighter w-5/6">Edición 5K</h4>
-                    <p class="text-xs text-slate-400 font-bold uppercase mb-2">Paquete Base</p>
-                    <p class="text-5xl font-black text-[#00D2FF] mt-2 mb-4">$15</p>
-                    <ul class="text-[10px] text-slate-500 font-bold uppercase space-y-2 mt-auto">
-                        <li><i class="fa-solid fa-check text-[#00D2FF] mr-2"></i> Medalla Acrílico 3D</li>
-                        <li><i class="fa-solid fa-check text-[#00D2FF] mr-2"></i> Kit Digital y Dorsal</li>
-                        <li><i class="fa-solid fa-check text-[#00D2FF] mr-2"></i> Acceso a la carrera</li>
-                    </ul>
-                </label>
-
-                <!-- Tarjeta 10K ($30) -->
-                <label class="cursor-pointer group flex flex-col bg-white border-2 border-slate-200 p-8 rounded-[2rem] shadow-sm hover:shadow-xl hover:border-[#00D2FF] has-[:checked]:border-[#00D2FF] has-[:checked]:bg-[#00D2FF]/5 transition-all relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#001E50] to-[#00D2FF]"></div>
-                    <input type="radio" name="paqueteBase" value="30" onchange="actualizarTotal()" class="absolute top-8 right-8 w-6 h-6 accent-[#00D2FF]">
-                    <h4 class="font-black text-[#001E50] text-xl uppercase tracking-tighter w-5/6">Edición 10K</h4>
-                    <p class="text-xs text-[#00D2FF] font-bold uppercase mb-2">Paquete Premium VIP</p>
-                    <p class="text-5xl font-black text-[#001E50] mt-2 mb-4">$30</p>
-                    <ul class="text-[10px] text-slate-500 font-bold uppercase space-y-2 mt-auto">
-                        <li><i class="fa-solid fa-star text-yellow-400 mr-2"></i> Medalla Metal 3D</li>
-                        <li><i class="fa-solid fa-star text-yellow-400 mr-2"></i> Franela Oficial Full Print</li>
-                        <li><i class="fa-solid fa-star text-yellow-400 mr-2"></i> Envío Preferencial</li>
-                    </ul>
-                </label>
-            </div>
-
-            <!-- SECCIÓN FRANELA EXTRA (UPSELL) -->
-            <div class="bg-white p-8 rounded-[2.5rem] shadow-xl border border-slate-100">
-                <h3 class="text-[#001E50] font-black text-xl mb-6 uppercase italic">Equípate al máximo</h3>
-                <label class="cursor-pointer group flex flex-col md:flex-row gap-6 items-center border-2 border-slate-100 p-4 rounded-3xl hover:border-[#00D2FF] has-[:checked]:border-[#00D2FF] has-[:checked]:bg-blue-50/20 transition-all">
-                    <div class="w-full md:w-32 h-32 bg-slate-100 rounded-2xl flex items-center justify-center relative overflow-hidden shrink-0">
-                        <!-- Pon el nombre de tu imagen aquí -->
-                        <img src="foto_franela.jpg" alt="Franela Extra" class="w-full h-full object-cover absolute z-10" onerror="this.style.opacity='0'">
-                        <div class="text-center text-slate-400 z-0">
-                            <i class="fa-solid fa-shirt text-2xl mb-1"></i>
-                            <p class="text-[9px] font-bold uppercase">Foto<br>Aquí</p>
-                        </div>
-                    </div>
-                    <div class="flex-1 w-full text-left">
-                        <div class="flex justify-between items-start mb-2">
-                            <div>
-                                <h4 class="font-black text-[#001E50] text-lg uppercase">Franela Genérica Adicional</h4>
-                                <p class="text-[10px] text-slate-400 uppercase font-bold mt-1">Ideal para entrenamientos de ruta</p>
-                            </div>
-                            <input type="checkbox" id="checkFranelaExtra" onchange="actualizarTotal()" class="w-6 h-6 accent-[#00D2FF] shrink-0">
-                        </div>
-                        <p class="text-2xl font-black text-[#00D2FF] mb-3">+$15</p>
-                        
-                        <div id="contenedorTallaExtra" class="hidden flex flex-col gap-2">
-                            <label class="text-[10px] font-bold uppercase text-slate-400">Selecciona la talla <span class="req">*</span></label>
-                            <select id="tallaFranelaExtra" class="bg-white border-2 border-slate-200 rounded-xl px-4 py-2 outline-none font-bold text-sm w-full md:w-1/2">
-                                <option value="" disabled selected>Elegir talla...</option>
-                                <option value="S">S - Pequeña</option>
-                                <option value="M">M - Mediana</option>
-                                <option value="L">L - Grande</option>
-                                <option value="XL">XL - Extra Grande</option>
-                                <option value="2XL">2XL - Doble XL</option>
-                            </select>
-                        </div>
-                    </div>
-                </label>
-            </div>
-
-            <!-- Formulario de Despacho y Pago -->
-            <div class="bg-white p-10 rounded-[2.5rem] shadow-xl border border-slate-100">
-                <h3 class="text-[#001E50] font-black text-2xl mb-8 uppercase italic border-b border-slate-50 pb-4">Tus Datos Logísticos</h3>
-                <p class="text-xs text-slate-400 mb-6 font-bold">Verifica y completa los datos recuperados de tu edición anterior.</p>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="flex flex-col gap-2">
-                        <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Nombre Completo <span class="req">*</span></label>
-                        <input type="text" id="nombreEnvio" class="bg-slate-50 border-2 border-[#00D2FF]/30 rounded-2xl px-6 py-3 outline-none" required>
-                    </div>
-                    <div class="flex flex-col gap-2">
-                        <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Teléfono de Contacto <span class="req">*</span></label>
-                        <input type="text" id="telefonoEnvio" placeholder="0412-0000000" class="bg-slate-50 border-2 border-[#00D2FF]/30 rounded-2xl px-6 py-3 outline-none" required>
-                    </div>
-
-                    <!-- ESTE CONTENEDOR SE OCULTA SI SELECCIONAN EL DE $15 -->
-                    <div id="contenedorTallaOficial" class="hidden flex-col gap-2 transition-all">
-                        <label class="text-[10px] font-bold uppercase text-[#001E50] ml-2">Talla Franela Oficial 10K <span class="req">*</span></label>
-                        <select id="tallaFranelaOficial" class="bg-blue-50 border-2 border-[#00D2FF]/50 rounded-2xl px-6 py-3 outline-none font-bold text-[#001E50]">
-                            <option value="" disabled selected>Selecciona tu talla...</option>
-                            <option value="S">S - Pequeña</option>
-                            <option value="M">M - Mediana</option>
-                            <option value="L">L - Grande</option>
-                            <option value="XL">XL - Extra Grande</option>
-                            <option value="2XL">2XL - Doble XL</option>
-                        </select>
-                    </div>
-
-                    <div class="flex flex-col gap-2">
-                        <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Usuario Instagram (Opcional)</label>
-                        <input type="text" id="igEnvio" placeholder="@usuario" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3 outline-none">
-                    </div>
-                    
-                    <div class="flex flex-col gap-2">
-                        <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Estado <span class="req">*</span></label>
-                        <select id="estadoEnvio" onchange="cargarCiudades()" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3 outline-none font-bold" required>
-                            <option value="" disabled selected>Selecciona un estado...</option>
-                            <option value="Caracas">Distrito Capital (Caracas)</option>
-                            <option value="Falcon">Falcón</option>
-                            <option value="Zulia">Zulia</option>
-                            <option value="Carabobo">Carabobo</option>
-                            <option value="Lara">Lara</option>
-                            <option value="Miranda">Miranda</option>
-                            <option value="Aragua">Aragua</option>
-                            <option value="Otro">Otro Estado</option>
-                        </select>
-                    </div>
-
-                    <div class="flex flex-col gap-2">
-                        <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Ciudad <span class="req">*</span></label>
-                        <select id="ciudadEnvio" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3 outline-none font-bold disabled:opacity-50" disabled required>
-                            <option value="" disabled selected>Primero selecciona un estado</option>
-                        </select>
-                    </div>
-
-                    <div class="flex flex-col gap-2 md:col-span-2">
-                        <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Agencia de Envío Preferida <span class="req">*</span></label>
-                        <div class="flex gap-4">
-                            <label class="flex-1 border-2 border-slate-100 p-3 rounded-xl cursor-pointer flex items-center justify-center gap-2 has-[:checked]:border-[#00D2FF] has-[:checked]:bg-[#00D2FF]/5 transition-all">
-                                <input type="radio" name="agencia" value="ZOOM" checked> <span class="text-xs font-bold">ZOOM</span>
-                            </label>
-                            <label class="flex-1 border-2 border-slate-100 p-3 rounded-xl cursor-pointer flex items-center justify-center gap-2 has-[:checked]:border-[#00D2FF] has-[:checked]:bg-[#00D2FF]/5 transition-all">
-                                <input type="radio" name="agencia" value="MRW"> <span class="text-xs font-bold">MRW</span>
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <div class="md:col-span-2 flex flex-col gap-2">
-                        <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Dirección Exacta de Agencia o Domicilio <span class="req">*</span></label>
-                        <textarea id="direccionEnvio" rows="2" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 outline-none" placeholder="Ej: Agencia ZOOM del Centro, Calle Bolívar..." required></textarea>
-                    </div>
-
-                    <div class="md:col-span-2 flex flex-col gap-2">
-                        <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Punto de Referencia <span class="req">*</span></label>
-                        <input type="text" id="referenciaEnvio" placeholder="Ej: Frente a la plaza, al lado de la panadería..." class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3 outline-none" required>
-                    </div>
-
-                    <!-- CAMPOS DE PAGO -->
-                    <div class="md:col-span-2 border-t border-slate-100 pt-6 mt-2">
-                        <h4 class="font-black text-[#001E50] text-sm uppercase mb-4">Verificación de Pago</h4>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="flex flex-col gap-2">
-                                <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Número de Referencia <span class="req">*</span></label>
-                                <input type="text" id="numReferenciaPago" placeholder="Ej: 12345678" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3 outline-none" required>
-                            </div>
-                            <div class="flex flex-col gap-2">
-                                <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Fecha de Pago <span class="req">*</span></label>
-                                <input type="date" id="fechaPago" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3 outline-none text-sm font-bold text-slate-700" required>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Totales y Botón -->
-            <div class="bg-[#001E50] p-10 rounded-[3rem] text-white shadow-2xl">
-                <div class="flex justify-between items-center mb-6 border-b border-white/10 pb-6">
-                    <div>
-                        <h4 class="font-black text-2xl uppercase italic leading-none mb-2 text-white">Total a Pagar</h4>
-                        <p class="text-white/30 text-[9px] uppercase tracking-[0.3em]">Tasa BCV: <span id="valor-tasa">--</span> Bs.</p>
-                    </div>
-                    <div class="text-right">
-                        <span id="total-usd" class="text-5xl font-black text-[#00D2FF] block tracking-tighter">$15</span>
-                        <span id="total-bs" class="text-sm font-bold text-white/50 tracking-widest">0.00 Bs.</span>
-                    </div>
-                </div>
-                
-                <div class="bg-white/5 rounded-xl p-4 mb-6 border border-white/10 flex items-center gap-4">
-                    <i class="fa-solid fa-file-invoice-dollar text-[#00D2FF] text-2xl"></i>
-                    <p class="text-xs text-white/70">Al hacer clic, se abrirá WhatsApp. <b>Debes adjuntar la foto de tu comprobante de pago</b> en el chat para validar la inscripción.</p>
-                </div>
-
-                <button id="btnInscribir" onclick="procesarInscripcion()" class="w-full bg-[#00D2FF] text-[#001E50] py-6 rounded-2xl font-black uppercase tracking-[0.2em] hover:scale-[1.02] transition-all shadow-xl flex items-center justify-center gap-4">
-                    CONFIRMAR E INSCRIBIRME <i class="fa-brands fa-whatsapp text-xl"></i>
-                </button>
-            </div>
-        </div>
-
-        <!-- PASO 2B: RECHAZO -->
-        <div id="paso-general" class="hidden-step space-y-8 animate-fade-in mt-8">
-            <div class="bg-red-50 border-2 border-red-200 p-10 rounded-[3rem] text-center shadow-xl">
-                <h3 class="text-[#001E50] font-black text-2xl uppercase tracking-tighter mb-2">Cédula no encontrada</h3>
-                <a href="10k.html" class="inline-block w-full bg-[#001E50] text-white py-5 rounded-2xl font-black uppercase">Ir a Inscripción General 10K</a>
             </div>
         </div>
 
     </main>
 
+    <footer class="bg-boston-navy py-12 text-center border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+            <img src="image_0.png" class="h-12 grayscale brightness-200 opacity-30" onerror="this.style.display='none'">
+            <p class="text-white/20 text-[10px] uppercase tracking-[0.5em]">© 2026 RETO VIRTUAL VZLA | POWERED BY TEAMFS</p>
+            <div class="flex gap-6">
+                <a href="#" class="text-white/30 hover:text-accent"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="text-white/30 hover:text-accent"><i class="fa-brands fa-strava"></i></a>
+            </div>
+        </div>
+    </footer>
+
     <script>
-        const tasaBCV = 487.119; 
-        // Tu archivo de consulta de fundadores
-        const urlCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5yMHsenxCWE5kZBDUZ8UcYqDtdAHstfqXcvWkuYZPQ_4n2xSrfs6ptk7k21r1kcMHHLtWjz8SEHwl/pub?gid=0&single=true&output=csv";
+        // Enlace 100% completo hacia los servidores de Google (No lo modifiques)
+        const urlBaseExcel = "https://docs.google.com/spreadsheets/d/1vg9nwhkFxwN4qVzjkfmXTrIVoHVYxeMH3-PXjqzeWao/gviz/tq?tqx=out:csv";
         
-        // La URL de tu Apps Script para guardar datos:
-        const urlBaseDeDatos = ""; 
+        let corredores = [];
+        let filtroActual = 'GENERAL'; 
 
-        document.getElementById('valor-tasa').innerText = tasaBCV;
-        
-        let dorsalActual = "N/A";
-
-        const ciudadesPorEstado = {
-            "Falcón": ["Punto Fijo", "Punta Cardón", "Judibana", "Coro", "Tucacas", "Dabajuro", "Otra"],
-            "Caracas": ["Caracas (Todas las zonas)"],
-            "Zulia": ["Maracaibo", "San Francisco", "Cabimas", "Ciudad Ojeda", "Otra"],
-            "Carabobo": ["Valencia", "Puerto Cabello", "San Diego", "Guacara", "Naguanagua", "Otra"],
-            "Lara": ["Barquisimeto", "Cabudare", "Carora", "El Tocuyo", "Otra"],
-            "Miranda": ["Los Teques", "Guarenas", "Guatire", "Charallave", "Cúa", "Otra"],
-            "Aragua": ["Maracay", "Cagua", "Turmero", "La Victoria", "Otra"],
-            "Otro": ["Indicar por texto en la dirección"]
-        };
-
-        function cargarCiudades() {
-            const estadoSelec = document.getElementById('estadoEnvio').value;
-            const selectCiudad = document.getElementById('ciudadEnvio');
-            selectCiudad.innerHTML = '<option value="" disabled selected>Selecciona tu ciudad...</option>';
-            if(estadoSelec && ciudadesPorEstado[estadoSelec]) {
-                selectCiudad.disabled = false;
-                ciudadesPorEstado[estadoSelec].forEach(ciudad => {
-                    let option = document.createElement('option');
-                    option.value = ciudad;
-                    option.text = ciudad;
-                    selectCiudad.add(option);
-                });
-            } else {
-                selectCiudad.disabled = true;
-            }
-        }
-
-        // Esta función calcula el precio según el paquete y activa/desactiva las tallas
-        function actualizarTotal() {
-            const paqueteBaseRadio = document.querySelector('input[name="paqueteBase"]:checked').value;
-            let total = parseInt(paqueteBaseRadio);
-            
-            const checkExtra = document.getElementById('checkFranelaExtra').checked;
-            const contenedorTallaExtra = document.getElementById('contenedorTallaExtra');
-            const contenedorTallaOficial = document.getElementById('contenedorTallaOficial');
-            const selectTallaOficial = document.getElementById('tallaFranelaOficial');
-
-            // Si seleccionan el de $30, mostramos el selector de Talla Oficial
-            if (total === 30) {
-                contenedorTallaOficial.style.display = "flex";
-                selectTallaOficial.required = true;
-            } else {
-                contenedorTallaOficial.style.display = "none";
-                selectTallaOficial.required = false;
-                selectTallaOficial.value = ""; // Resetea si cambia de opinión
-            }
-
-            // Lógica de Franela Extra ($15 adicionales)
-            if(checkExtra) {
-                total += 15;
-                contenedorTallaExtra.classList.remove('hidden');
-            } else {
-                contenedorTallaExtra.classList.add('hidden');
-                document.getElementById('tallaFranelaExtra').value = ""; 
-            }
-
-            document.getElementById('total-usd').innerText = `$${total}`;
-            document.getElementById('total-bs').innerText = (total * tasaBCV).toFixed(2) + " Bs.";
-        }
-
-        // Ejecutar al cargar para configurar los campos iniciales (predeterminado $15)
-        window.onload = actualizarTotal;
-
-        async function validarAtleta() {
-            const btn = document.getElementById('btnVerificar');
-            const rawCi = document.getElementById('cedulaAtleta').value.trim();
-            if(!rawCi) return alert("⚠️ Por favor, ingresa una cédula.");
-            const ciLimpia = rawCi.replace(/[^0-9]/g, ''); 
-            if(ciLimpia.length < 5) return alert("⚠️ Ingresa una cédula válida.");
-
-            btn.innerText = "BUSCANDO...";
-            btn.disabled = true;
-
+        async function cargarDatosDesdeExcel() {
             try {
-                const res = await fetch(urlCSV + "&t=" + new Date().getTime());
-                const data = await res.text();
-                const lineas = data.split(/\r?\n/);
+                document.getElementById('tabla-corredores').innerHTML = `<tr><td colspan="5" class="p-8 text-center text-boston-navy font-bold">Descargando datos desde Google...</td></tr>`;
                 
-                let encontrado = false;
-
-                // Cédula está en la columna D (índice 3) en tu archivo
-                for(let i = 0; i < lineas.length; i++) {
-                    const columnas = lineas[i].split(','); 
-                    if(columnas.length >= 4) {
-                        const celdaCedula = columnas[3].replace(/[^0-9]/g, '');
-                        if(celdaCedula === ciLimpia) {
-                            encontrado = true;
-                            // Dorsal en Columna A (índice 0)
-                            dorsalActual = columnas[0] ? columnas[0].trim() : "000";
-                            document.getElementById('textoDorsal').innerText = "Dorsal Asignado: #" + dorsalActual;
-                            // Nombre en Columna C (índice 2)
-                            if(columnas[2]) document.getElementById('nombreEnvio').value = columnas[2].trim();
-                            document.getElementById('telefonoEnvio').value = "";
-                            break; 
-                        }
-                    }
+                // Conectando al CSV con evasión de caché segura
+                const urlFresca = urlBaseExcel + "&t=" + new Date().getTime();
+                const respuesta = await fetch(urlFresca);
+                
+                if (!respuesta.ok) {
+                    throw new Error("Google rechazó la conexión (Código " + respuesta.status + ")");
+                }
+                
+                const datosCsv = await respuesta.text();
+                
+                if(!datosCsv || datosCsv.trim() === "") {
+                    throw new Error("El archivo CSV llegó en blanco.");
                 }
 
-                document.getElementById('paso-1').classList.add('hidden-step');
+                const filas = datosCsv.split(/\r?\n/);
+                corredores = [];
 
-                if(encontrado) {
-                    document.getElementById('paso-fundador').classList.remove('hidden-step');
-                } else {
-                    document.getElementById('paso-general').classList.remove('hidden-step');
+                for(let i = 1; i < filas.length; i++) {
+                    if(!filas[i].trim()) continue;
+                    
+                    const valores = filas[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(v => v ? v.replace(/^"|"$/g, '').trim() : '');
+                    
+                    let dRaw = valores[0] ? valores[0].replace(/\D/g, '') : '';
+                    if(dRaw === "") continue; 
+                    while (dRaw.length < 3) dRaw = "0" + dRaw; 
+                    
+                    const nombreCompleto = valores[1] || 'Corredor';
+                    const genero = valores[2] || '-';
+                    const tiempoExcel = valores[3] || '';
+                    
+                    const tiempo = (tiempoExcel === "" || tiempoExcel.toLowerCase() === "pendiente") ? "Pendiente" : tiempoExcel;
+                    
+                    corredores.push({ dorsal: dRaw, nombre: nombreCompleto, genero: genero, tiempo: tiempo });
                 }
-            } catch (e) {
-                alert("Hubo un problema de conexión con la base de datos.");
-            } finally {
-                btn.innerText = "Verificar Cédula";
-                btn.disabled = false;
+                
+                pintarTablaCorredores();
+                
+            } catch (error) { 
+                console.error("Falla de ejecución:", error); 
+                document.getElementById('tabla-corredores').innerHTML = `<tr><td colspan="5" class="p-8 text-center text-red-600 font-black bg-red-50 text-sm">⚠️ ERROR AL CARGAR LOS DATOS: <br><span class="font-normal mt-2 block">${error.message}</span></td></tr>`;
             }
         }
 
-        async function procesarInscripcion() {
-            const ci = document.getElementById('cedulaAtleta').value;
-            const nombre = document.getElementById('nombreEnvio').value;
-            const tel = document.getElementById('telefonoEnvio').value;
+        function pintarTablaCorredores() {
+            const tbody = document.getElementById('tabla-corredores');
+            if(!tbody) return;
+            tbody.innerHTML = '';
             
-            const paqueteBaseRadio = document.querySelector('input[name="paqueteBase"]:checked').value;
-            const tallaOficial = document.getElementById('tallaFranelaOficial').value;
-            
-            const estado = document.getElementById('estadoEnvio').value;
-            const ciudad = document.getElementById('ciudadEnvio').value;
-            const agencia = document.querySelector('input[name="agencia"]:checked').value;
-            const direccion = document.getElementById('direccionEnvio').value;
-            const referencia = document.getElementById('referenciaEnvio').value;
-            const refPago = document.getElementById('numReferenciaPago').value;
-            const fechaPago = document.getElementById('fechaPago').value;
-            const ig = document.getElementById('igEnvio').value || "No indicó";
-            
-            const quiereExtra = document.getElementById('checkFranelaExtra').checked;
-            const tallaExtra = document.getElementById('tallaFranelaExtra').value;
-            const totalUSD = document.getElementById('total-usd').innerText;
+            let filtrados = corredores;
+            if(filtroActual === 'MASCULINO') filtrados = corredores.filter(c => c.genero.toUpperCase().startsWith('M'));
+            if(filtroActual === 'FEMENINO') filtrados = corredores.filter(c => c.genero.toUpperCase().startsWith('F'));
 
-            // Validación estricta
-            if(!nombre || !tel || !estado || !ciudad || !direccion || !referencia || !refPago || !fechaPago) {
-                return alert("⚠️ Por favor, completa todos los campos obligatorios marcados con asterisco rojo (*).");
+            filtrados.sort((a, b) => {
+                const tiempoASegundos = (t) => {
+                    if (!t || t === "Pendiente") return 999999;
+                    let partes = t.split(":");
+                    if (partes.length === 3) return (parseInt(partes[0]) * 3600) + (parseInt(partes[1]) * 60) + parseInt(partes[2]);
+                    if (partes.length === 2) return (parseInt(partes[0]) * 60) + parseInt(partes[1]);
+                    return 999999;
+                };
+                return tiempoASegundos(a.tiempo) - tiempoASegundos(b.tiempo);
+            });
+
+            if (filtrados.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="p-8 text-center text-slate-400">No hay corredores registrados.</td></tr>`;
+                return;
             }
 
-            // Si escogió el paquete Premium de $30, DEBE poner talla oficial
-            if(paqueteBaseRadio === "30" && !tallaOficial) {
-                return alert("⚠️ Has elegido el paquete Premium de 10K. Por favor selecciona la Talla de tu Franela Oficial.");
-            }
-
-            // Si escogió camisa extra, DEBE poner talla extra
-            if(quiereExtra && !tallaExtra) {
-                return alert("⚠️ Marcaste la franela extra, por favor selecciona su talla.");
-            }
-
-            // Textos dinámicos para el mensaje
-            let txtPaquete = paqueteBaseRadio === "30" ? "Premium 10K ($30)" : "Base 5K ($15)";
-            let txtTallaOficial = paqueteBaseRadio === "30" ? `🏅 *TALLA OFICIAL:* ${tallaOficial}` : `🏅 *KIT:* Digital / Sin Franela`;
-            let detalleExtra = quiereExtra ? `👕 *EXTRA:* Genérica (Talla ${tallaExtra})` : `👕 *EXTRA:* Ninguno`;
-
-            const msg = `🏆 *FUNDADOR RENOVADO*%0A--------------------------------%0A🏃‍♂️ *DORSAL:* #${dorsalActual}%0A📦 *PAQUETE:* ${txtPaquete}%0A👤 *ATLETA:* ${nombre}%0A💳 *CI:* ${ci}%0A📱 *TEL:* ${tel}%0A📸 *IG:* ${ig}%0A${txtTallaOficial}%0A${detalleExtra}%0A--------------------------------%0A📍 *ENVÍO:* ${estado}, ${ciudad} (${agencia})%0A🏠 *DIRECCIÓN:* ${direccion}%0A📌 *REF:* ${referencia}%0A--------------------------------%0A💰 *TOTAL PAGADO:* ${totalUSD}%0A🧾 *Nº REF:* ${refPago}%0A📅 *FECHA:* ${fechaPago}%0A--------------------------------%0A_Adjunto mi comprobante de pago..._`;
-
-            if(urlBaseDeDatos !== "") {
-                const btn = document.getElementById('btnInscribir');
-                btn.innerText = "GUARDANDO...";
-                btn.disabled = true;
+            filtrados.forEach((c, i) => {
+                const esPendiente = c.tiempo === "Pendiente";
+                const pos = esPendiente ? "-" : i + 1;
+                let posHtml = `<span class="font-bold text-slate-300 text-lg">${pos}</span>`;
                 
-                try {
-                    const formData = new FormData();
-                    formData.append("Dorsal", dorsalActual); 
-                    formData.append("Cedula", ci);
-                    formData.append("Nombre", nombre);
-                    formData.append("Telefono", tel);
-                    // Si no aplica franela oficial porque compró el de $15, mandamos "N/A" al Excel
-                    formData.append("TallaKit", paqueteBaseRadio === "30" ? tallaOficial : "N/A");
-                    formData.append("FranelaExtra", quiereExtra ? tallaExtra : "NO");
-                    formData.append("Estado", estado);
-                    formData.append("Ciudad", ciudad);
-                    formData.append("Agencia", agencia);
-                    formData.append("Direccion", direccion);
-                    formData.append("PuntoRef", referencia);
-                    formData.append("RefPago", refPago);
-                    formData.append("FechaPago", fechaPago);
-                    formData.append("Total", totalUSD);
+                if(pos === 1 && !esPendiente) posHtml = '🥇'; 
+                else if(pos === 2 && !esPendiente) posHtml = '🥈'; 
+                else if(pos === 3 && !esPendiente) posHtml = '🥉';
 
-                    await fetch(urlBaseDeDatos, { method: 'POST', body: formData, mode: 'no-cors' });
-                } catch (error) {
-                    console.error("Error guardando datos:", error);
-                }
-            }
-
-            window.open(`https://wa.me/584127732710?text=${msg}`, '_blank');
+                const fila = `
+                    <tr class="hover:bg-slate-50 transition-colors border-b border-slate-50">
+                        <td class="p-8 text-center">${posHtml}</td>
+                        <td class="p-8 text-center font-black text-accent">${c.dorsal}</td>
+                        <td class="p-8 font-bold text-boston-navy uppercase tracking-tighter">${c.nombre}</td>
+                        <td class="p-8 text-center hidden sm:table-cell text-slate-400 text-xs uppercase">${c.genero}</td>
+                        <td class="p-8 text-right font-mono font-bold text-boston-navy">${c.tiempo}</td>
+                    </tr>`;
+                tbody.innerHTML += fila;
+            });
         }
+
+        function cambiarFiltro(f) {
+            filtroActual = f;
+            ['btn-general', 'btn-masculino', 'btn-femenino'].forEach(id => {
+                const btn = document.getElementById(id);
+                if(btn) btn.className = "bg-white text-slate-400 font-bold px-8 py-3 rounded-full transition-all border border-slate-200 text-xs uppercase tracking-widest hover:border-accent";
+            });
+            const activo = document.getElementById('btn-' + f.toLowerCase());
+            if(activo) activo.className = "bg-accent text-boston-navy font-black px-8 py-3 rounded-full transition-all shadow-lg text-xs uppercase tracking-widest";
+            
+            const colCat = document.getElementById('col-cat');
+            if (colCat) colCat.style.display = f === 'GENERAL' ? 'table-cell' : 'none';
+            pintarTablaCorredores();
+        }
+
+        function mostrarCertificado() {
+            let inputRaw = document.getElementById('input-dorsal').value.replace(/\D/g, '');
+            if(inputRaw === "") { alert("Ingresa un número de dorsal."); return; }
+            let d = inputRaw.padStart(3, '0');
+            
+            const c = corredores.find(x => x.dorsal === d);
+            if (c) {
+                document.getElementById('cert-nombre').innerText = c.nombre;
+                document.getElementById('cert-dorsal').innerText = c.dorsal;
+                document.getElementById('cert-tiempo').innerText = c.tiempo;
+                document.getElementById('mi-certificado-objetivo').style.display = 'block';
+                document.getElementById('btn-descargar').classList.remove('hidden');
+            } else { alert("Dorsal no encontrado en los registros."); }
+        }
+
+        function descargarCertificado() {
+            const cert = document.getElementById('mi-certificado-objetivo');
+            let numDorsal = document.getElementById('cert-dorsal').innerText;
+            html2canvas(cert, { scale: 2, useCORS: true, logging: false }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'Certificado-Reto-' + numDorsal + '.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        }
+
+        document.getElementById('input-dorsal').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') mostrarCertificado();
+        });
+
+        window.onload = () => setTimeout(cargarDatosDesdeExcel, 500);
     </script>
 </body>
 </html>
