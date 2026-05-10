@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscripción Oficial - Reto Virtual VZLA</title>
+    <title>Renovación 5K - Reto Virtual VZLA</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -18,9 +18,26 @@
             outline: none;
         }
         .req { color: #ef4444; font-weight: bold; margin-left: 2px; }
+        .loader-overlay { background: rgba(0, 30, 80, 0.9); backdrop-filter: blur(5px); }
     </style>
 </head>
 <body class="text-slate-900">
+
+    <div id="loader" class="fixed inset-0 z-[100] loader-overlay flex flex-col items-center justify-center text-white hidden">
+        <i class="fa-solid fa-circle-notch fa-spin text-5xl text-[#00D2FF] mb-4"></i>
+        <p class="font-black uppercase tracking-widest text-sm">Validando y Guardando...</p>
+    </div>
+
+    <div id="pantalla-exito" class="fixed inset-0 z-[100] bg-white flex flex-col items-center justify-center text-center p-6 hidden">
+        <div class="w-24 h-24 bg-green-100 text-green-500 rounded-full flex items-center justify-center mb-6 text-5xl shadow-inner">
+            <i class="fa-solid fa-check"></i>
+        </div>
+        <h2 class="text-3xl font-black text-[#001E50] uppercase italic mb-2 tracking-tighter">¡Inscripción Exitosa!</h2>
+        <p class="text-slate-500 mb-8 max-w-md">Tus datos han sido registrados correctamente en nuestra base de datos. Serás redirigido a WhatsApp para enviar tu comprobante.</p>
+        <button onclick="window.location.href='index.html'" class="bg-[#001E50] text-white px-10 py-4 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-[#00D2FF] hover:text-[#001E50] transition-all">
+            Volver al Inicio
+        </button>
+    </div>
 
     <div class="bg-[#001E50] text-white py-2 text-center text-[10px] font-bold uppercase tracking-[0.4em] z-50 relative border-b border-white/10">
         El estándar de oro del running virtual en Venezuela
@@ -41,17 +58,18 @@
 
     <main class="max-w-4xl mx-auto px-6 py-16">
         
-        <div id="paso-1" class="bg-white p-10 md:p-16 rounded-[3rem] shadow-2xl border border-slate-100 text-center">
-            <div class="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6 text-[#001E50]">
+        <div id="paso-1" class="bg-white p-10 md:p-16 rounded-[3rem] shadow-2xl border border-slate-100 text-center relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-[#00D2FF]/10 rounded-full blur-2xl"></div>
+            <div class="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6 text-[#001E50] border-2 border-slate-100">
                 <i class="fa-solid fa-id-card text-3xl"></i>
             </div>
-            <h2 class="text-[#001E50] font-black text-3xl uppercase tracking-tighter mb-4 italic">Verificación de Atleta</h2>
-            <p class="text-slate-400 text-sm mb-10 italic">Ingresa tu cédula para verificar tu acceso y recuperar tus datos.</p>
+            <h2 class="text-[#001E50] font-black text-3xl uppercase tracking-tighter mb-4 italic">Renovación de Fundador</h2>
+            <p class="text-slate-400 text-sm mb-10 italic">Ingresa tu cédula para validar tu acceso a la 2da Edición 5K.</p>
             
-            <div class="max-w-xs mx-auto space-y-4">
+            <div class="max-w-xs mx-auto space-y-4 relative z-10">
                 <label class="text-left block text-[10px] font-bold uppercase text-slate-400 ml-2 mb-1">Cédula de Identidad <span class="req">*</span></label>
                 <input type="text" id="cedulaAtleta" placeholder="Ej: 12345678" 
-                       class="w-full border-2 border-slate-100 rounded-2xl px-6 py-4 text-center font-bold transition-all text-lg">
+                       class="w-full border-2 border-slate-200 rounded-2xl px-6 py-4 text-center font-black transition-all text-xl text-[#001E50]">
                 <button id="btnVerificar" onclick="validarAtleta()" class="w-full bg-[#001E50] text-white py-5 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-[#00D2FF] hover:text-[#001E50] transition-all shadow-xl">
                     Verificar Cédula
                 </button>
@@ -59,39 +77,40 @@
         </div>
 
         <div id="paso-fundador" class="hidden-step space-y-8 animate-fade-in mt-8">
-            <div class="bg-[#00D2FF]/10 border-2 border-[#00D2FF] p-8 rounded-[2rem] text-center text-[#001E50]">
-                <h3 class="font-black uppercase text-xl">¡Felicidades, eres Fundador!</h3>
-                <p id="textoDorsal" class="text-sm font-bold uppercase tracking-widest mt-2 bg-[#001E50] text-white inline-block px-4 py-1 rounded-full">Dorsal Asignado: #000</p>
+            <div class="bg-blue-50 border-2 border-[#00D2FF]/50 p-8 rounded-[2rem] text-center text-[#001E50] flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="text-left">
+                    <h3 class="font-black uppercase text-xl tracking-tighter">¡Atleta Verificado!</h3>
+                    <p class="text-xs font-bold text-slate-500 uppercase mt-1">Datos recuperados con éxito</p>
+                </div>
+                <p id="textoDorsal" class="text-sm font-black uppercase tracking-widest bg-[#001E50] text-white px-6 py-3 rounded-full shadow-lg">Dorsal: #000</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <label class="cursor-pointer group flex flex-col bg-white border-2 border-slate-200 p-8 rounded-[2rem] shadow-sm hover:shadow-xl hover:border-[#00D2FF] has-[:checked]:border-[#00D2FF] has-[:checked]:bg-[#00D2FF]/5 transition-all relative overflow-hidden">
-                    <input type="radio" name="paqueteBase" value="15" onchange="actualizarTotal()" class="absolute top-8 right-8 w-6 h-6 accent-[#00D2FF]" checked>
+                    <input type="radio" name="paqueteBase" value="15" onchange="evaluarRedireccion()" class="absolute top-8 right-8 w-6 h-6 accent-[#00D2FF]" checked>
                     <h4 class="font-black text-[#001E50] text-xl uppercase tracking-tighter w-5/6">Edición 5K</h4>
                     <p class="text-xs text-slate-400 font-bold uppercase mb-2">Renovación Base</p>
                     <p class="text-5xl font-black text-[#00D2FF] mt-2 mb-4">$15</p>
                     <ul class="text-[10px] text-slate-500 font-bold uppercase space-y-2 mt-auto">
                         <li><i class="fa-solid fa-check text-[#00D2FF] mr-2"></i> Medalla Acrílico 3D</li>
                         <li><i class="fa-solid fa-check text-[#00D2FF] mr-2"></i> Kit Digital y Dorsal</li>
-                        <li><i class="fa-solid fa-check text-[#00D2FF] mr-2"></i> Acceso a la carrera</li>
+                        <li><i class="fa-solid fa-check text-[#00D2FF] mr-2"></i> Acceso a la carrera 5K</li>
                     </ul>
                 </label>
 
-                <label class="cursor-pointer group flex flex-col bg-white border-2 border-slate-200 p-8 rounded-[2rem] shadow-sm hover:shadow-xl hover:border-[#00D2FF] has-[:checked]:border-[#00D2FF] has-[:checked]:bg-[#00D2FF]/5 transition-all relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#001E50] to-[#00D2FF]"></div>
-                    <input type="radio" name="paqueteBase" value="30" onchange="actualizarTotal()" class="absolute top-8 right-8 w-6 h-6 accent-[#00D2FF]">
-                    <h4 class="font-black text-[#001E50] text-xl uppercase tracking-tighter w-5/6">Edición 10K</h4>
-                    <p class="text-xs text-[#00D2FF] font-bold uppercase mb-2">Paquete Premium VIP</p>
+                <label class="cursor-pointer group flex flex-col bg-white border-2 border-slate-200 p-8 rounded-[2rem] shadow-sm hover:shadow-xl hover:border-yellow-400 has-[:checked]:border-yellow-400 has-[:checked]:bg-yellow-50/20 transition-all relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-400 to-[#00D2FF]"></div>
+                    <input type="radio" name="paqueteBase" value="30" onchange="evaluarRedireccion()" class="absolute top-8 right-8 w-6 h-6 accent-yellow-400">
+                    <h4 class="font-black text-[#001E50] text-xl uppercase tracking-tighter w-5/6">Reto 10K Especial</h4>
+                    <p class="text-xs text-yellow-600 font-bold uppercase mb-2">Cambiar de Categoría</p>
                     <p class="text-5xl font-black text-[#001E50] mt-2 mb-4">$30</p>
-                    <ul class="text-[10px] text-slate-500 font-bold uppercase space-y-2 mt-auto">
-                        <li><i class="fa-solid fa-star text-yellow-400 mr-2"></i> Medalla Metal 3D</li>
-                        <li><i class="fa-solid fa-star text-yellow-400 mr-2"></i> Franela Oficial Full Print</li>
-                        <li><i class="fa-solid fa-star text-yellow-400 mr-2"></i> Envío Preferencial</li>
-                    </ul>
+                    <p class="text-[10px] text-slate-400 font-bold uppercase mt-auto bg-slate-50 p-2 rounded-lg text-center">
+                        <i class="fa-solid fa-share-from-square mr-1"></i> Te llevará al portal 10K
+                    </p>
                 </label>
             </div>
 
-            <div class="bg-white p-8 rounded-[2.5rem] shadow-xl border border-slate-100">
+            <div id="seccion-extras" class="bg-white p-8 rounded-[2.5rem] shadow-xl border border-slate-100 transition-all">
                 <h3 class="text-[#001E50] font-black text-xl mb-6 uppercase italic">Equípate al máximo</h3>
                 <label class="cursor-pointer group flex flex-col md:flex-row gap-6 items-center border-2 border-slate-100 p-4 rounded-3xl hover:border-[#00D2FF] has-[:checked]:border-[#00D2FF] has-[:checked]:bg-blue-50/20 transition-all">
                     <div class="w-full md:w-32 h-32 bg-slate-100 rounded-2xl flex items-center justify-center relative overflow-hidden shrink-0">
@@ -126,49 +145,29 @@
                 </label>
             </div>
 
-            <div class="bg-white p-10 rounded-[2.5rem] shadow-xl border border-slate-100">
+            <div id="seccion-logistica" class="bg-white p-10 rounded-[2.5rem] shadow-xl border border-slate-100 transition-all">
                 <h3 class="text-[#001E50] font-black text-2xl mb-8 uppercase italic border-b border-slate-50 pb-4">Tus Datos Logísticos</h3>
-                <p class="text-xs text-slate-400 mb-6 font-bold">Verifica y completa los datos recuperados de tu edición anterior.</p>
+                <p class="text-xs text-slate-400 mb-6 font-bold">Verifica y completa los datos de envío y pago para finalizar.</p>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="flex flex-col gap-2">
                         <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Nombre Completo <span class="req">*</span></label>
-                        <input type="text" id="nombreEnvio" class="bg-slate-50 border-2 border-[#00D2FF]/30 rounded-2xl px-6 py-3" required>
+                        <input type="text" id="nombreEnvio" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3 font-bold" required>
                     </div>
                     <div class="flex flex-col gap-2">
                         <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Teléfono de Contacto <span class="req">*</span></label>
-                        <input type="text" id="telefonoEnvio" placeholder="0412-0000000" class="bg-slate-50 border-2 border-[#00D2FF]/30 rounded-2xl px-6 py-3" required>
-                    </div>
-
-                    <div id="contenedorTallaOficial" class="hidden flex-col gap-2 transition-all md:col-span-2">
-                        <label class="text-[10px] font-bold uppercase text-[#001E50] ml-2">Talla Franela Oficial 10K <span class="req">*</span></label>
-                        <select id="tallaFranelaOficial" class="bg-blue-50 border-2 border-[#00D2FF]/50 rounded-2xl px-6 py-3 font-bold text-[#001E50]">
-                            <option value="" disabled selected>Selecciona tu talla oficial...</option>
-                            <option value="S">S - Pequeña</option>
-                            <option value="M">M - Mediana</option>
-                            <option value="L">L - Grande</option>
-                            <option value="XL">XL - Extra Grande</option>
-                            <option value="2XL">2XL - Doble XL</option>
-                        </select>
+                        <input type="text" id="telefonoEnvio" placeholder="0412-0000000" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3 font-bold" required>
                     </div>
 
                     <div class="flex flex-col gap-2 md:col-span-2">
                         <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Usuario Instagram (Opcional)</label>
-                        <input type="text" id="igEnvio" placeholder="@usuario" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3">
+                        <input type="text" id="igEnvio" placeholder="@usuario" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3 font-bold">
                     </div>
                     
                     <div class="flex flex-col gap-2">
                         <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Estado <span class="req">*</span></label>
                         <select id="estadoEnvio" onchange="cargarCiudades()" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3 font-bold" required>
                             <option value="" disabled selected>Selecciona un estado...</option>
-                            <option value="Caracas">Distrito Capital (Caracas)</option>
-                            <option value="Falcon">Falcón</option>
-                            <option value="Zulia">Zulia</option>
-                            <option value="Carabobo">Carabobo</option>
-                            <option value="Lara">Lara</option>
-                            <option value="Miranda">Miranda</option>
-                            <option value="Aragua">Aragua</option>
-                            <option value="Otro">Otro Estado</option>
                         </select>
                     </div>
 
@@ -180,7 +179,7 @@
                     </div>
 
                     <div class="flex flex-col gap-2 md:col-span-2">
-                        <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Agencia de Envío Preferida <span class="req">*</span></label>
+                        <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Agencia de Envío <span class="req">*</span></label>
                         <div class="flex gap-4">
                             <label class="flex-1 border-2 border-slate-100 p-3 rounded-xl cursor-pointer flex items-center justify-center gap-2 has-[:checked]:border-[#00D2FF] has-[:checked]:bg-[#00D2FF]/5 transition-all">
                                 <input type="radio" name="agencia" value="ZOOM" checked> <span class="text-xs font-bold">ZOOM</span>
@@ -192,13 +191,13 @@
                     </div>
                     
                     <div class="md:col-span-2 flex flex-col gap-2">
-                        <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Dirección Exacta de Agencia o Domicilio <span class="req">*</span></label>
-                        <textarea id="direccionEnvio" rows="2" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4" placeholder="Ej: Agencia ZOOM del Centro, Calle Bolívar..." required></textarea>
+                        <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Dirección Exacta (Agencia o Casa) <span class="req">*</span></label>
+                        <textarea id="direccionEnvio" rows="2" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 font-bold" placeholder="Ej: Agencia ZOOM del Centro, Calle Bolívar..." required></textarea>
                     </div>
 
                     <div class="md:col-span-2 flex flex-col gap-2">
                         <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Punto de Referencia <span class="req">*</span></label>
-                        <input type="text" id="referenciaEnvio" placeholder="Ej: Frente a la plaza, al lado de la panadería..." class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3" required>
+                        <input type="text" id="referenciaEnvio" placeholder="Ej: Frente a la plaza..." class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3 font-bold" required>
                     </div>
 
                     <div class="md:col-span-2 border-t border-slate-100 pt-6 mt-2">
@@ -206,18 +205,18 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div class="flex flex-col gap-2">
                                 <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Número de Referencia <span class="req">*</span></label>
-                                <input type="text" id="numReferenciaPago" placeholder="Ej: 12345678" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3" required>
+                                <input type="text" id="numReferenciaPago" placeholder="Ej: 12345678" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3 font-bold" required>
                             </div>
                             <div class="flex flex-col gap-2">
                                 <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Fecha de Pago <span class="req">*</span></label>
-                                <input type="date" id="fechaPago" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3 text-sm font-bold text-slate-700" required>
+                                <input type="date" id="fechaPago" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3 text-sm font-bold text-[#001E50]" required>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-[#001E50] p-10 rounded-[3rem] text-white shadow-2xl">
+            <div id="seccion-checkout" class="bg-[#001E50] p-10 rounded-[3rem] text-white shadow-2xl transition-all">
                 <div class="flex justify-between items-center mb-6 border-b border-white/10 pb-6">
                     <div>
                         <h4 class="font-black text-2xl uppercase italic leading-none mb-2 text-white">Total a Pagar</h4>
@@ -231,19 +230,21 @@
                 
                 <div class="bg-white/5 rounded-xl p-4 mb-6 border border-white/10 flex items-center gap-4">
                     <i class="fa-solid fa-file-invoice-dollar text-[#00D2FF] text-2xl"></i>
-                    <p class="text-xs text-white/70">Al hacer clic, se abrirá WhatsApp. <b>Debes adjuntar la foto de tu comprobante de pago</b> en el chat para validar la inscripción.</p>
+                    <p class="text-xs text-white/70">Al hacer clic, se abrirá WhatsApp. <b>Debes adjuntar la foto de tu comprobante</b> en el chat para validar la inscripción.</p>
                 </div>
 
                 <button id="btnInscribir" onclick="procesarInscripcion()" class="w-full bg-[#00D2FF] text-[#001E50] py-6 rounded-2xl font-black uppercase tracking-[0.2em] hover:scale-[1.02] transition-all shadow-xl flex items-center justify-center gap-4">
-                    CONFIRMAR E INSCRIBIRME <i class="fa-brands fa-whatsapp text-xl"></i>
+                    FINALIZAR INSCRIPCIÓN 5K <i class="fa-brands fa-whatsapp text-xl"></i>
                 </button>
             </div>
         </div>
 
         <div id="paso-general" class="hidden-step space-y-8 animate-fade-in mt-8">
             <div class="bg-red-50 border-2 border-red-200 p-10 rounded-[3rem] text-center shadow-xl">
+                <i class="fa-solid fa-circle-exclamation text-4xl text-red-400 mb-4"></i>
                 <h3 class="text-[#001E50] font-black text-2xl uppercase tracking-tighter mb-2">Cédula no encontrada</h3>
-                <a href="10k.html" class="inline-block w-full bg-[#001E50] text-white py-5 rounded-2xl font-black uppercase">Ir a Inscripción General 10K</a>
+                <p class="text-slate-500 text-sm mb-6 max-w-sm mx-auto">No hallamos registros de esta cédula en la 1era Edición. Si eres un corredor nuevo, inscríbete en el formato General.</p>
+                <a href="index.html" class="inline-block w-full max-w-xs bg-[#001E50] text-white py-4 rounded-2xl font-black uppercase text-sm tracking-widest">Volver al Inicio</a>
             </div>
         </div>
 
@@ -251,62 +252,100 @@
 
     <script>
         const tasaBCV = 589.27; 
-        
-        // URL PARA VERIFICAR SI ES FUNDADOR (1ERA EDICIÓN)
         const urlCSV_Comparacion = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5yMHsenxCWE5kZBDUZ8UcYqDtdAHstfqXcvWkuYZPQ_4n2xSrfs6ptk7k21r1kcMHHLtWjz8SEHwl/pub?gid=0&single=true&output=csv";
-        
-        // LA URL DE TU APPS SCRIPT
         const urlBaseDeDatos = "https://script.google.com/macros/s/AKfycbyp-NJc2uozcF4VDYRm3_XhKiKmPwdLfB4jLxJV_L9EFpXSBI7dp1TuMG0hxWzC7dLaCg/exec"; 
 
-        document.getElementById('valor-tasa').innerText = tasaBCV;
-        
-        let dorsalActual = "000";
+        // LISTA COMPLETA DE ESTADOS Y CIUDADES (Incluyendo tu mapa de Falcón)
+        const venezuela = {
+            "Falcón": ["Punto Fijo", "Coro", "Punta Cardón", "Judibana", "Adícora", "Tucacas", "Dabajuro", "Chichiriviche", "La Vela de Coro", "Pueblo Nuevo", "Otra"],
+            "Distrito Capital": ["Caracas", "El Valle", "Catia", "Coche", "Petare"],
+            "Zulia": ["Maracaibo", "San Francisco", "Cabimas", "Ciudad Ojeda", "Machiques"],
+            "Carabobo": ["Valencia", "Puerto Cabello", "Guacara", "Naguanagua", "San Diego"],
+            "Lara": ["Barquisimeto", "Cabudare", "Carora", "El Tocuyo"],
+            "Aragua": ["Maracay", "Turmero", "Cagua", "La Victoria", "El Limón"],
+            "Anzoátegui": ["Barcelona", "Puerto La Cruz", "El Tigre", "Anaco", "Lechería"],
+            "Bolívar": ["Ciudad Guayana", "Puerto Ordaz", "Ciudad Bolívar", "Upata"],
+            "Miranda": ["Los Teques", "Guarenas", "Guatire", "Charallave", "Cúa", "San Antonio de los Altos"],
+            "Mérida": ["Mérida", "El Vigía", "Ejido", "Tovar"],
+            "Táchira": ["San Cristóbal", "Táriba", "Rubio", "San Antonio"],
+            "Portuguesa": ["Acarigua", "Guanare", "Araure"],
+            "Monagas": ["Maturín"],
+            "Sucre": ["Cumaná", "Carúpano", "Güiria"],
+            "Barinas": ["Barinas", "Socopó"],
+            "Trujillo": ["Valera", "Trujillo", "Boconó"],
+            "Yaracuy": ["San Felipe", "Yaritagua", "Chivacoa"],
+            "Nueva Esparta": ["Porlamar", "Pampatar", "La Asunción", "Juan Griego"],
+            "Guárico": ["San Juan de los Morros", "Valle de la Pascua", "Calabozo"],
+            "Apure": ["San Fernando de Apure", "Guasdualito"],
+            "Cojedes": ["Guanare", "San Carlos", "Tinaquillo"],
+            "Delta Amacuro": ["Maturín", "Tucupita"],
+            "Amazonas": ["Puerto Ayacucho"],
+            "La Guaira (Vargas)": ["La Guaira", "Maiquetía", "Catia La Mar"]
+        };
 
-        const ciudadesPorEstado = {
-            "Falcón": ["Punto Fijo", "Punta Cardón", "Judibana", "Coro", "Tucacas", "Dabajuro", "Otra"],
-            "Caracas": ["Caracas (Todas las zonas)"],
-            "Zulia": ["Maracaibo", "San Francisco", "Cabimas", "Ciudad Ojeda", "Otra"],
-            "Carabobo": ["Valencia", "Puerto Cabello", "San Diego", "Guacara", "Naguanagua", "Otra"],
-            "Lara": ["Barquisimeto", "Cabudare", "Carora", "El Tocuyo", "Otra"],
-            "Miranda": ["Los Teques", "Guarenas", "Guatire", "Charallave", "Cúa", "Otra"],
-            "Aragua": ["Maracay", "Cagua", "Turmero", "La Victoria", "Otra"],
-            "Otro": ["Indicar por texto en la dirección"]
+        document.getElementById('valor-tasa').innerText = tasaBCV;
+        let dorsalActual = "000";
+        let ciValidada = ""; // Guardamos la CI para pasarla por URL al 10K
+
+        // LLENAR SELECT DE ESTADOS AL CARGAR
+        window.onload = () => {
+            const selectEstado = document.getElementById('estadoEnvio');
+            // Ordenar alfabéticamente los estados y agregarlos
+            Object.keys(venezuela).sort().forEach(est => {
+                let opt = document.createElement('option');
+                opt.value = est;
+                opt.text = est;
+                selectEstado.add(opt);
+            });
+            actualizarTotal();
         };
 
         function cargarCiudades() {
-            const estadoSelec = document.getElementById('estadoEnvio').value;
-            const selectCiudad = document.getElementById('ciudadEnvio');
-            selectCiudad.innerHTML = '<option value="" disabled selected>Selecciona tu ciudad...</option>';
-            if(estadoSelec && ciudadesPorEstado[estadoSelec]) {
-                selectCiudad.disabled = false;
-                ciudadesPorEstado[estadoSelec].forEach(ciudad => {
-                    let option = document.createElement('option');
-                    option.value = ciudad;
-                    option.text = ciudad;
-                    selectCiudad.add(option);
+            const est = document.getElementById('estadoEnvio').value;
+            const selectCiu = document.getElementById('ciudadEnvio');
+            selectCiu.innerHTML = '<option value="" disabled selected>Elige Ciudad...</option>';
+            if(est && venezuela[est]) {
+                selectCiu.disabled = false;
+                venezuela[est].sort().forEach(ciu => {
+                    let opt = document.createElement('option');
+                    opt.value = ciu;
+                    opt.text = ciu;
+                    selectCiu.add(opt);
                 });
             } else {
-                selectCiudad.disabled = true;
+                selectCiu.disabled = true;
+            }
+        }
+
+        // FUNCIÓN QUE REDIRIGE SI ELIGEN 10K
+        function evaluarRedireccion() {
+            const paquete = document.querySelector('input[name="paqueteBase"]:checked').value;
+            
+            if (paquete === "30") {
+                // Ocultar todo el formulario de 5K para que no confunda
+                document.getElementById('seccion-extras').style.display = 'none';
+                document.getElementById('seccion-logistica').style.display = 'none';
+                document.getElementById('seccion-checkout').style.display = 'none';
+                
+                // Mostrar alerta y enviar a la página de 10K pasando la cédula en la URL
+                setTimeout(() => {
+                    alert("Has seleccionado la categoría 10K. Serás redirigido al portal de inscripción exclusivo para esta distancia.");
+                    // Redirección pasando la CI como parámetro (Ej: 10kfundador.html?ci=12345678)
+                    window.location.href = `10kfundador.html?ci=${ciValidada}`;
+                }, 300);
+            } else {
+                // Si vuelve a elegir 15, mostramos todo de nuevo
+                document.getElementById('seccion-extras').style.display = 'block';
+                document.getElementById('seccion-logistica').style.display = 'block';
+                document.getElementById('seccion-checkout').style.display = 'block';
+                actualizarTotal();
             }
         }
 
         function actualizarTotal() {
-            const paqueteBaseRadio = document.querySelector('input[name="paqueteBase"]:checked').value;
-            let total = parseInt(paqueteBaseRadio);
-            
+            let total = 15;
             const checkExtra = document.getElementById('checkFranelaExtra').checked;
             const contenedorTallaExtra = document.getElementById('contenedorTallaExtra');
-            const contenedorTallaOficial = document.getElementById('contenedorTallaOficial');
-            const selectTallaOficial = document.getElementById('tallaFranelaOficial');
-
-            if (total === 30) {
-                contenedorTallaOficial.style.display = "flex";
-                selectTallaOficial.required = true;
-            } else {
-                contenedorTallaOficial.style.display = "none";
-                selectTallaOficial.required = false;
-                selectTallaOficial.value = ""; 
-            }
 
             if(checkExtra) {
                 total += 15;
@@ -320,9 +359,6 @@
             document.getElementById('total-bs').innerText = (total * tasaBCV).toFixed(2) + " Bs.";
         }
 
-        window.onload = actualizarTotal;
-
-        // VERIFICACIÓN INTELIGENTE DE ATLETA
         async function validarAtleta() {
             const btn = document.getElementById('btnVerificar');
             const ciInput = document.getElementById('cedulaAtleta').value.replace(/\D/g, '');
@@ -336,7 +372,6 @@
                 const res = await fetch(urlCSV_Comparacion + "&nocache=" + new Date().getTime());
                 const csvText = await res.text();
                 const filas = csvText.split(/\r?\n/);
-                
                 let encontrado = false;
 
                 if (filas.length > 0) {
@@ -349,6 +384,7 @@
                         const columnas = filas[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c => c.replace(/^"|"$/g, '').trim());
                         if(columnas[idxCI] && columnas[idxCI].replace(/\D/g, '') === ciInput) {
                             encontrado = true;
+                            ciValidada = ciInput; // Guardamos la CI globalmente
                             dorsalActual = columnas[idxDorsal] || "000";
                             document.getElementById('nombreEnvio').value = columnas[idxNombre] || "";
                             document.getElementById('textoDorsal').innerText = "Dorsal Recuperado: #" + dorsalActual;
@@ -367,19 +403,15 @@
 
             } catch (e) {
                 alert("Error conectando con la base de datos.");
+            } finally {
                 btn.innerText = "Verificar Cédula";
                 btn.disabled = false;
             }
         }
 
-        // PROCESAR Y ENVIAR 
         async function procesarInscripcion() {
-            // Leer todos los campos
-            const ci = document.getElementById('cedulaAtleta').value;
             const nombre = document.getElementById('nombreEnvio').value;
             const tel = document.getElementById('telefonoEnvio').value;
-            const paqueteRadio = document.querySelector('input[name="paqueteBase"]:checked').value;
-            const tallaOficial = document.getElementById('tallaFranelaOficial').value;
             const ig = document.getElementById('igEnvio').value || "No indicó";
             const estado = document.getElementById('estadoEnvio').value;
             const ciudad = document.getElementById('ciudadEnvio').value;
@@ -388,44 +420,34 @@
             const referencia = document.getElementById('referenciaEnvio').value;
             const refPago = document.getElementById('numReferenciaPago').value;
             const fechaPago = document.getElementById('fechaPago').value;
+            
             const quiereExtra = document.getElementById('checkFranelaExtra').checked;
             const tallaExtra = document.getElementById('tallaFranelaExtra').value;
             const totalUSD = document.getElementById('total-usd').innerText;
 
-            // VALIDACIÓN ESTRICTA (El candado)
+            // CANDADO: Validar campos vacíos
             if(!nombre || !tel || !estado || !ciudad || !direccion || !referencia || !refPago || !fechaPago) {
                 return alert("⚠️ ALERTA: Faltan datos logísticos. Por favor, revisa que todos los campos con asterisco rojo (*) estén llenos.");
-            }
-
-            if(paqueteRadio === "30" && !tallaOficial) {
-                return alert("⚠️ ALERTA: Has elegido el paquete Premium de 10K. Selecciona la talla de tu franela oficial.");
             }
 
             if(quiereExtra && !tallaExtra) {
                 return alert("⚠️ ALERTA: Marcaste agregar una franela extra. Por favor, selecciona la talla.");
             }
 
-            // Textos para el Excel y WhatsApp
-            let paqueteFinal = paqueteRadio === "30" ? "10K Premium ($30)" : "5K Base ($15)";
-            let txtTallaOficial = paqueteRadio === "30" ? tallaOficial : "No Aplica";
             let txtTallaExtra = quiereExtra ? tallaExtra : "No";
 
-            const msg = `🏆 *FUNDADOR RENOVADO*%0A--------------------------------%0A🏃‍♂️ *DORSAL:* #${dorsalActual}%0A📦 *PAQUETE:* ${paqueteFinal}%0A👤 *ATLETA:* ${nombre}%0A💳 *CI:* ${ci}%0A📱 *TEL:* ${tel}%0A📸 *IG:* ${ig}%0A🏅 *TALLA OFICIAL:* ${txtTallaOficial}%0A👕 *EXTRA:* ${txtTallaExtra}%0A--------------------------------%0A📍 *ENVÍO:* ${estado}, ${ciudad} (${agencia})%0A🏠 *DIRECCIÓN:* ${direccion}%0A📌 *REF:* ${referencia}%0A--------------------------------%0A💰 *TOTAL:* ${totalUSD}%0A🧾 *Nº PAGO:* ${refPago}%0A📅 *FECHA:* ${fechaPago}%0A--------------------------------%0A_Adjunto comprobante..._`;
+            const msg = `🏆 *RENOVACIÓN 5K*%0A--------------------------------%0A🏃‍♂️ *DORSAL:* #${dorsalActual}%0A📦 *PAQUETE:* 5K Base ($15)%0A👤 *ATLETA:* ${nombre}%0A💳 *CI:* ${ciValidada}%0A📱 *TEL:* ${tel}%0A📸 *IG:* ${ig}%0A👕 *EXTRA:* ${txtTallaExtra}%0A--------------------------------%0A📍 *ENVÍO:* ${estado}, ${ciudad} (${agencia})%0A🏠 *DIRECCIÓN:* ${direccion}%0A📌 *REF:* ${referencia}%0A--------------------------------%0A💰 *TOTAL:* ${totalUSD}%0A🧾 *Nº PAGO:* ${refPago}%0A📅 *FECHA:* ${fechaPago}%0A--------------------------------%0A_Adjunto comprobante..._`;
 
-            // Enviar los datos al script para guardarlos en Excel
-            const btn = document.getElementById('btnInscribir');
-            btn.innerText = "GUARDANDO...";
-            btn.disabled = true;
+            // Mostrar el loader azul oscuro
+            document.getElementById('loader').classList.remove('hidden');
 
             try {
                 const datos = new FormData();
-                
-                // Mapeo EXACTO basado en tu captura de pantalla de la fila 1
                 datos.append("Dorsal", dorsalActual);
-                datos.append("Cedula", ci);
+                datos.append("Cedula", ciValidada);
                 datos.append("Nombre", nombre);
                 datos.append("Telefono", tel);
-                datos.append("TallaKit", txtTallaOficial); // <-- Corregido para igualar tu Excel
+                datos.append("TallaKit", "N/A"); // Porque 5K no tiene franela oficial
                 datos.append("FranelaExtra", txtTallaExtra);
                 datos.append("Estado", estado);
                 datos.append("Ciudad", ciudad);
@@ -435,20 +457,29 @@
                 datos.append("RefPago", refPago);
                 datos.append("FechaPago", fechaPago);
                 datos.append("Total", totalUSD);
-                
-                // Variables extras que podrías tener en tu tabla
                 datos.append("Instagram", ig);
-                datos.append("Paquete", paqueteFinal);
+                datos.append("Paquete", "5K Base ($15)");
 
                 await fetch(urlBaseDeDatos, { method: 'POST', body: datos, mode: 'no-cors' });
                 
-                window.open(`https://wa.me/584127732710?text=${msg}`, '_blank');
+                // Ocultar Loader y Mostrar Éxito
+                document.getElementById('loader').classList.add('hidden');
+                document.getElementById('pantalla-fundador').style.display = 'none'; // Ocultar form
+                document.getElementById('pantalla-exito').classList.remove('hidden');
+                
+                // Abrir WA después de 1 segundo
+                setTimeout(() => {
+                    window.open(`https://wa.me/584127732710?text=${msg}`, '_blank');
+                }, 1500);
+                
+                // Redirigir al inicio a los 4 segundos
+                setTimeout(() => {
+                    window.location.href = "index.html";
+                }, 4000);
 
             } catch (e) {
-                alert("Ocurrió un error guardando tu inscripción. Intenta de nuevo.");
-            } finally {
-                btn.innerText = "CONFIRMAR E INSCRIBIRME";
-                btn.disabled = false;
+                document.getElementById('loader').classList.add('hidden');
+                alert("Ocurrió un error guardando tu inscripción. Revisa tu conexión a internet.");
             }
         }
     </script>
