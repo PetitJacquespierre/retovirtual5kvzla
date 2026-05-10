@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscripción 10K Premium - Reto Virtual VZLA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        h1, h2, h3 { font-family: 'Montserrat', sans-serif; }
+        .hidden-step { display: none !important; }
+        input:focus, select:focus, textarea:focus { 
+            border-color: #00D2FF !important; 
+            box-shadow: 0 0 10px rgba(0, 210, 255, 0.1); 
+            outline: none;
+        }
+        .req { color: #ef4444; font-weight: bold; margin-left: 2px; }
+        .loader-overlay { background: rgba(0, 30, 80, 0.9); backdrop-filter: blur(5px); }
+    </style>
+</head>
+<body class="text-slate-900">
+
+    <div id="loader" class="fixed inset-0 z-[100] loader-overlay flex flex-col items-center justify-center text-white hidden">
+        <i class="fa-solid fa-circle-notch fa-spin text-5xl text-[#00D2FF] mb-4"></i>
+        <p class="font-black uppercase tracking-widest text-sm">Validando y Guardando...</p>
+    </div>
+
+    <div id="pantalla-exito" class="fixed inset-0 z-[100] bg-white flex flex-col items-center justify-center text-center p-6 hidden">
+        <div class="w-24 h-24 bg-green-100 text-green-500 rounded-full flex items-center justify-center mb-6 text-5xl shadow-inner">
+            <i class="fa-solid fa-check"></i>
+        </div>
+        <h2 class="text-3xl font-black text-[#001E50] uppercase italic mb-2 tracking-tighter">¡Inscripción Exitosa!</h2>
+        <p class="text-slate-500 mb-8 max-w-md">Tus datos han sido registrados correctamente para los 10K. Serás redirigido a WhatsApp para enviar tu comprobante.</p>
+        <button onclick="window.location.href='index.html'" class="bg-[#001E50] text-white px-10 py-4 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-[#00D2FF] hover:text-[#001E50] transition-all">
+            Volver al Inicio
+        </button>
+    </div>
+
+    <div class="bg-[#001E50] text-white py-2 text-center text-[10px] font-bold uppercase tracking-[0.4em] z-50 relative border-b border-white/10">
+        El estándar de oro del running virtual en Venezuela
+    </div>
+
+    <nav class="bg-[#001E50] sticky top-0 z-50 shadow-2xl">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20 md:h-28">
+            <!-- Logo - MOVIDO A LA IZQUIERDA con menos padding -->
+            <div class="flex items-center gap-2 md:gap-4 cursor-pointer group -ml-2 md:-ml-4" onclick="window.scrollTo(0,0)">
+                <img src="img/RV-Isotipo-sinfondo.png" alt="Reto" class="h-12 md:h-16 lg:h-20 w-auto object-contain brightness-125 transition-transform group-hover:scale-105">
+                <div class="h-8 md:h-10 lg:h-12 w-[1px] bg-white/20"></div>
+                <div class="flex flex-col">
+                    <span class="text-[7px] md:text-[8px] text-white/60 font-bold tracking-[0.2em] uppercase mb-0.5 md:mb-1">Presentado por</span>
+                    <span class="text-white font-black text-base md:text-xl lg:text-3xl tracking-tighter leading-none group-hover:text-[#00D2FF] transition-colors italic">TEAMFS</span>
+                </div>
+            </div>
+
+            <!-- Menú Desktop - SIN ÍCONO DE ROBOT -->
+            <div class="hidden lg:flex items-center space-x-4 xl:space-x-7">
+                <a href="index.html#el-reto" class="text-white/80 hover:text-[#00D2FF] text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">El Reto</a>
+                <a href="index.html#ediciones" class="text-white/80 hover:text-[#00D2FF] text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Calendario</a>
+                <a href="10k.html" class="bg-[#00D2FF] text-[#001E50] px-4 xl:px-5 py-2 rounded-full text-xs font-black uppercase tracking-widest hover:scale-105 transition-all whitespace-nowrap">Especial 10K</a>
+                <a href="resultados.html" class="text-white/80 hover:text-[#00D2FF] text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Resultados</a>
+                <a href="tienda.html" class="text-white/80 hover:text-[#00D2FF] text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">TIENDA</a>
+                <a href="faq.html" class="text-white/80 hover:text-[#00D2FF] text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">FAQ</a>
+                <a href="entrenador.html" class="text-white/80 hover:text-[#00D2FF] text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Entrenador IA</a>
+                <a href="inscripcion.html" class="border-2 border-white text-white px-5 xl:px-7 py-2.5 rounded-full font-black text-xs uppercase tracking-widest hover:bg-white hover:text-[#001E50] transition-all shadow-lg whitespace-nowrap">Inscribirme</a>
+            </div>
+
+            <!-- Botón Hamburguesa Mobile -->
+            <button id="menuToggle" class="lg:hidden text-white text-2xl md:text-3xl focus:outline-none z-50">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Menú Mobile (Overlay) - SIN ÍCONO DE ROBOT -->
+    <div id="mobileMenu" class="fixed inset-0 bg-[#001E50] z-40 transform translate-x-full transition-transform duration-300 ease-in-out lg:hidden">
+        <div class="flex flex-col items-center justify-center h-full space-y-8 px-8">
+            <a href="index.html#el-reto" class="text-white text-xl font-bold uppercase tracking-widest hover:text-[#00D2FF] transition-all">El Reto</a>
+            <a href="index.html#ediciones" class="text-white text-xl font-bold uppercase tracking-widest hover:text-[#00D2FF] transition-all">Calendario</a>
+            <a href="10k.html" class="bg-[#00D2FF] text-[#001E50] px-8 py-3 rounded-full text-lg font-black uppercase tracking-widest">Especial 10K</a>
+            <a href="resultados.html" class="text-white text-xl font-bold uppercase tracking-widest hover:text-[#00D2FF] transition-all">Resultados</a>
+            <a href="tienda.html" class="text-white text-xl font-bold uppercase tracking-widest hover:text-[#00D2FF] transition-all">TIENDA</a>
+            <a href="faq.html" class="text-white text-xl font-bold uppercase tracking-widest hover:text-[#00D2FF] transition-all">FAQ</a>
+            <a href="entrenador.html" class="text-white text-xl font-bold uppercase tracking-widest hover:text-[#00D2FF] transition-all">Entrenador IA</a>
+            <a href="inscripcion.html" class="border-2 border-white text-white px-10 py-3 rounded-full font-black text-lg uppercase tracking-widest hover:bg-white hover:text-[#001E50] transition-all mt-6">Inscribirme</a>
+        </div>
+    </div>
+</nav>
+
+    <main class="max-w-4xl mx-auto px-6 py-16">
+        
+        <div id="paso-1" class="bg-white p-10 md:p-16 rounded-[3rem] shadow-2xl border border-slate-100 text-center relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-yellow-400/10 rounded-full blur-2xl"></div>
+            <div class="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6 text-[#001E50] border-2 border-yellow-400/50">
+                <i class="fa-solid fa-crown text-3xl text-yellow-500"></i>
+            </div>
+            <h2 class="text-[#001E50] font-black text-3xl uppercase tracking-tighter mb-4 italic">Acceso VIP 10K</h2>
+            <p class="text-slate-400 text-sm mb-10 italic">Ingresa tu cédula para validar tu acceso al paquete Premium.</p>
+            
+            <div class="max-w-xs mx-auto space-y-4 relative z-10">
+                <label class="text-left block text-[10px] font-bold uppercase text-slate-400 ml-2 mb-1">Cédula de Identidad <span class="req">*</span></label>
+                <input type="text" id="cedulaAtleta" placeholder="Ej: 12345678" 
+                       class="w-full border-2 border-slate-200 rounded-2xl px-6 py-4 text-center font-black transition-all text-xl text-[#001E50]">
+                <button id="btnVerificar" onclick="validarAtleta()" class="w-full bg-[#001E50] text-white py-5 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-yellow-400 hover:text-[#001E50] transition-all shadow-xl">
+                    Verificar Cédula
+                </button>
+            </div>
+        </div>
+
+        <div id="paso-fundador" class="hidden-step space-y-8 animate-fade-in mt-8">
+            <div class="bg-yellow-50 border-2 border-yellow-400 p-8 rounded-[2rem] text-center text-[#001E50] flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="text-left">
+                    <h3 class="font-black uppercase text-xl tracking-tighter">¡Atleta VIP Confirmado!</h3>
+                    <p class="text-xs font-bold text-yellow-600 uppercase mt-1">Acceso a Edición Especial Autorizado</p>
+                </div>
+                <p id="textoDorsal" class="text-sm font-black uppercase tracking-widest bg-[#001E50] text-yellow-400 px-6 py-3 rounded-full shadow-lg">Dorsal: #000</p>
+            </div>
+
+            <div class="bg-white border-2 border-yellow-400 p-8 rounded-[2rem] shadow-xl relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-yellow-400 to-[#00D2FF]"></div>
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h4 class="font-black text-[#001E50] text-2xl uppercase tracking-tighter">Edición 10K</h4>
+                        <p class="text-xs text-yellow-600 font-bold uppercase mb-2">Paquete Premium VIP</p>
+                    </div>
+                    <p class="text-5xl font-black text-[#001E50]">$30</p>
+                </div>
+                <ul class="text-xs text-slate-500 font-bold uppercase space-y-3 mt-6 grid grid-cols-1 md:grid-cols-2">
+                    <li><i class="fa-solid fa-star text-yellow-400 mr-2"></i> Medalla Metal 3D</li>
+                    <li><i class="fa-solid fa-star text-yellow-400 mr-2"></i> Franela Oficial Full Print</li>
+                    <li><i class="fa-solid fa-star text-yellow-400 mr-2"></i> Kit Digital y Dorsal</li>
+                    <li><i class="fa-solid fa-star text-yellow-400 mr-2"></i> Envío Preferencial</li>
+                </ul>
+            </div>
+
+            <div class="bg-white p-8 rounded-[2.5rem] shadow-xl border border-slate-100 transition-all">
+                <h3 class="text-[#001E50] font-black text-xl mb-6 uppercase italic">Equípate al máximo</h3>
+                <label class="cursor-pointer group flex flex-col md:flex-row gap-6 items-center border-2 border-slate-100 p-4 rounded-3xl hover:border-[#00D2FF] has-[:checked]:border-[#00D2FF] has-[:checked]:bg-blue-50/20 transition-all">
+                    <div class="w-full md:w-32 h-32 bg-slate-100 rounded-2xl flex items-center justify-center relative overflow-hidden shrink-0">
+                        <img src="foto_franela.jpg" alt="Franela Extra" class="w-full h-full object-cover absolute z-10" onerror="this.style.opacity='0'">
+                        <div class="text-center text-slate-400 z-0">
+                            <i class="fa-solid fa-shirt text-2xl mb-1"></i>
+                            <p class="text-[9px] font-bold uppercase">Foto<br>Aquí</p>
+                        </div>
+                    </div>
+                    <div class="flex-1 w-full text-left">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h4 class="font-black text-[#001E50] text-lg uppercase">Franela Genérica Adicional</h4>
+                                <p class="text-[10px] text-slate-400 uppercase font-bold mt-1">Ideal para entrenamientos de ruta</p>
+                            </div>
+                            <input type="checkbox" id="checkFranelaExtra" onchange="actualizarTotal()" class="w-6 h-6 accent-[#00D2FF] shrink-0">
+                        </div>
+                        <p class="text-2xl font-black text-[#00D2FF] mb-3">+$15</p>
+                        
+                        <div id="contenedorTallaExtra" class="hidden flex flex-col gap-2">
+                            <label class="text-[10px] font-bold uppercase text-slate-400">Selecciona la talla <span class="req">*</span></label>
+                            <select id="tallaFranelaExtra" class="bg-white border-2 border-slate-200 rounded-xl px-4 py-2 font-bold text-sm w-full md:w-1/2">
+                                <option value="" disabled selected>Elegir talla...</option>
+                                <option value="S">S - Pequeña</option>
+                                <option value="M">M - Mediana</option>
+                                <option value="L">L - Grande</option>
+                                <option value="XL">XL - Extra Grande</option>
+                                <option value="2XL">2XL - Doble XL</option>
+                            </select>
+                        </div>
+                    </div>
+                </label>
+            </div>
+
+            <div class="bg-white p-10 rounded-[2.5rem] shadow-xl border border-slate-100 transition-all">
+                <h3 class="text-[#001E50] font-black text-2xl mb-8 uppercase italic border-b border-slate-50 pb-4">Tus Datos Logísticos</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="flex flex-col gap-2">
+                        <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Nombre Completo <span class="req">*</span></label>
+                        <input type="text" id="nombreEnvio" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3 font-bold" required>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Teléfono de Contacto <span class="req">*</span></label>
+                        <input type="text" id="telefonoEnvio" placeholder="0412-0000000" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3 font-bold" required>
+                    </div>
+
+                    <div class="flex flex-col gap-2 md:col-span-2">
+                        <label class="text-[10px] font-bold uppercase text-[#001E50] ml-2">Talla Franela Oficial 10K <span class="req">*</span></label>
+                        <select id="tallaFranelaOficial" class="bg-yellow-50 border-2 border-yellow-400 rounded-2xl px-6 py-3 font-bold text-[#001E50]" required>
+                            <option value="" disabled selected>Selecciona tu talla oficial...</option>
+                            <option value="S">S - Pequeña</option>
+                            <option value="M">M - Mediana</option>
+                            <option value="L">L - Grande</option>
+                            <option value="XL">XL - Extra Grande</option>
+                            <option value="2XL">2XL - Doble XL</option>
+                        </select>
+                    </div>
+
+                    <div class="flex flex-col gap-2 md:col-span-2">
+                        <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Usuario Instagram (Opcional)</label>
+                        <input type="text" id="igEnvio" placeholder="@usuario" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3 font-bold">
+                    </div>
+                    
+                    <div class="flex flex-col gap-2">
+                        <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Estado <span class="req">*</span></label>
+                        <select id="estadoEnvio" onchange="cargarCiudades()" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3 font-bold" required>
+                            <option value="" disabled selected>Selecciona un estado...</option>
+                        </select>
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Ciudad <span class="req">*</span></label>
+                        <select id="ciudadEnvio" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3 font-bold disabled:opacity-50" disabled required>
+                            <option value="" disabled selected>Primero selecciona un estado</option>
+                        </select>
+                    </div>
+
+                    <div class="flex flex-col gap-2 md:col-span-2">
+                        <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Agencia o Método de Envío <span class="req">*</span></label>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <label class="flex-1 border-2 border-slate-100 p-3 rounded-xl cursor-pointer flex items-center justify-center gap-2 has-[:checked]:border-yellow-400 has-[:checked]:bg-yellow-50/20 transition-all">
+                                <input type="radio" name="agencia" value="ZOOM" checked> <span class="text-xs font-bold">ZOOM</span>
+                            </label>
+                            <label class="flex-1 border-2 border-slate-100 p-3 rounded-xl cursor-pointer flex items-center justify-center gap-2 has-[:checked]:border-yellow-400 has-[:checked]:bg-yellow-50/20 transition-all">
+                                <input type="radio" name="agencia" value="MRW"> <span class="text-xs font-bold">MRW</span>
+                            </label>
+                            <label class="flex-1 border-2 border-slate-100 p-3 rounded-xl cursor-pointer flex items-center justify-center gap-2 has-[:checked]:border-yellow-400 has-[:checked]:bg-yellow-50/20 transition-all">
+                                <input type="radio" name="agencia" value="Entrega Personal"> <span class="text-xs font-bold text-center">Entrega Personal</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="md:col-span-2 flex flex-col gap-2">
+                        <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Dirección Exacta (Agencia o Casa) <span class="req">*</span></label>
+                        <textarea id="direccionEnvio" rows="2" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 font-bold" placeholder="Ej: Agencia ZOOM del Centro, Calle Bolívar..." required></textarea>
+                    </div>
+
+                    <div class="md:col-span-2 flex flex-col gap-2">
+                        <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Punto de Referencia (Opcional)</label>
+                        <input type="text" id="referenciaEnvio" placeholder="Ej: Frente a la plaza..." class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3 font-bold">
+                    </div>
+
+                    <div class="md:col-span-2 border-t border-slate-100 pt-6 mt-2">
+                        <h4 class="font-black text-[#001E50] text-sm uppercase mb-4">Verificación de Pago</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="flex flex-col gap-2">
+                                <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Número de Referencia <span class="req">*</span></label>
+                                <input type="text" id="numReferenciaPago" placeholder="Ej: 12345678" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3 font-bold" required>
+                            </div>
+                            <div class="flex flex-col gap-2">
+                                <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Fecha de Pago <span class="req">*</span></label>
+                                <input type="date" id="fechaPago" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3 text-sm font-bold text-[#001E50]" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-[#001E50] p-10 rounded-[3rem] text-white shadow-2xl transition-all border-2 border-yellow-400/20">
+                <div class="flex justify-between items-center mb-6 border-b border-white/10 pb-6">
+                    <div>
+                        <h4 class="font-black text-2xl uppercase italic leading-none mb-2 text-white">Total a Pagar</h4>
+                        <p class="text-white/30 text-[9px] uppercase tracking-[0.3em]">Tasa BCV: <span id="valor-tasa">--</span> Bs.</p>
+                    </div>
+                    <div class="text-right">
+                        <span id="total-usd" class="text-5xl font-black text-yellow-400 block tracking-tighter">$30</span>
+                        <span id="total-bs" class="text-sm font-bold text-white/50 tracking-widest">0.00 Bs.</span>
+                    </div>
+                </div>
+                
+                <div class="bg-white/5 rounded-xl p-4 mb-6 border border-white/10 flex items-center gap-4">
+                    <i class="fa-solid fa-file-invoice-dollar text-[#00D2FF] text-2xl"></i>
+                    <p class="text-xs text-white/70">Al hacer clic, se abrirá WhatsApp. <b>Debes adjuntar la foto de tu comprobante</b> en el chat para validar la inscripción.</p>
+                </div>
+
+                <button id="btnInscribir" onclick="procesarInscripcion()" class="w-full bg-yellow-400 text-[#001E50] py-6 rounded-2xl font-black uppercase tracking-[0.2em] hover:scale-[1.02] transition-all shadow-xl flex items-center justify-center gap-4">
+                    FINALIZAR INSCRIPCIÓN 10K <i class="fa-brands fa-whatsapp text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="paso-general" class="hidden-step space-y-8 animate-fade-in mt-8">
+            <div class="bg-red-50 border-2 border-red-200 p-10 rounded-[3rem] text-center shadow-xl">
+                <i class="fa-solid fa-circle-exclamation text-4xl text-red-400 mb-4"></i>
+                <h3 class="text-[#001E50] font-black text-2xl uppercase tracking-tighter mb-2">Cédula no encontrada</h3>
+                <p class="text-slate-500 text-sm mb-6 max-w-sm mx-auto">No hallamos registros de esta cédula en la 1era Edición. Si eres un corredor nuevo, inscríbete en el formato General.</p>
+                <a href="index.html" class="inline-block w-full max-w-xs bg-[#001E50] text-white py-4 rounded-2xl font-black uppercase text-sm tracking-widest">Volver al Inicio</a>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-[#001E50] py-20 px-4 border-t border-white/5">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-16 text-center md:text-left">
+            <div>
+                <img src="img/RV-Isotipo-sinfondo.png" class="h-14 mx-auto md:mx-0 mb-6 grayscale brightness-200 opacity-40">
+                <p class="text-white/30 text-[10px] uppercase tracking-[0.4em] leading-relaxed">
+                    Reto Virtual VZLA es una producción de <br>
+                    <a href="https://www.instagram.com/team_fs__/" target="_blank" class="text-white/60 hover:text-[#00D2FF] transition-colors font-bold">TeamFS</a>. <br>
+                    © 2026 THE ROAD TO GLORY.
+                </p>
+            </div>
+            <div class="flex flex-col items-center justify-center gap-6">
+                <h4 class="text-[#00D2FF] font-bold text-[10px] uppercase tracking-[0.3em]">Síguenos en la ruta</h4>
+                <div class="flex gap-8">
+                    <a href="https://wa.me/584127732710" target="_blank" class="text-white/40 hover:text-[#00D2FF] text-3xl transition-all transform hover:scale-110"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="https://www.instagram.com/retovirtual.vzla/" target="_blank" class="text-white/40 hover:text-[#00D2FF] text-3xl transition-all transform hover:scale-110"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@retovirtual.vzla" target="_blank" class="text-white/40 hover:text-[#00D2FF] text-3xl transition-all transform hover:scale-110"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="https://www.strava.com/clubs/1859944" target="_blank" class="text-white/40 hover:text-[#00D2FF] text-3xl transition-all transform hover:scale-110"><i class="fa-brands fa-strava"></i></a>
+                </div>
+            </div>
+            <div class="border-l border-white/10 pl-8 hidden md:block text-right">
+                <h4 class="text-[#00D2FF] font-bold text-[10px] uppercase tracking-[0.3em] mb-2">Presentado por</h4>
+                <a href="https://www.instagram.com/team_fs__/" target="_blank" class="group">
+                    <p class="text-white font-black text-3xl italic tracking-tighter uppercase opacity-80 group-hover:text-[#00D2FF] transition-all">TeamFS</p>
+                    <p class="text-[9px] text-white/40 uppercase tracking-widest">Socio Tecnológico Oficial</p>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const tasaBCV = 589.27; 
+        const urlCSV_Comparacion = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5yMHsenxCWE5kZBDUZ8UcYqDtdAHstfqXcvWkuYZPQ_4n2xSrfs6ptk7k21r1kcMHHLtWjz8SEHwl/pub?gid=0&single=true&output=csv";
+        const urlBaseDeDatos = "https://script.google.com/macros/s/AKfycbyp-NJc2uozcF4VDYRm3_XhKiKmPwdLfB4jLxJV_L9EFpXSBI7dp1TuMG0hxWzC7dLaCg/exec";
+
+        const venezuela = {
+            "Falcón": ["Punto Fijo", "Coro", "Punta Cardón", "Judibana", "Adícora", "Tucacas", "Dabajuro", "Chichiriviche", "La Vela de Coro", "Pueblo Nuevo", "Otra"],
+            "Distrito Capital": ["Caracas", "El Valle", "Catia", "Coche", "Petare"],
+            "Zulia": ["Maracaibo", "San Francisco", "Cabimas", "Ciudad Ojeda", "Machiques"],
+            "Carabobo": ["Valencia", "Puerto Cabello", "Guacara", "Naguanagua", "San Diego"],
+            "Lara": ["Barquisimeto", "Cabudare", "Carora", "El Tocuyo"],
+            "Aragua": ["Maracay", "Turmero", "Cagua", "La Victoria", "El Limón"],
+            "Anzoátegui": ["Barcelona", "Puerto La Cruz", "El Tigre", "Anaco", "Lechería"],
+            "Bolívar": ["Ciudad Guayana", "Puerto Ordaz", "Ciudad Bolívar", "Upata"],
+            "Miranda": ["Los Teques", "Guarenas", "Guatire", "Charallave", "Cúa", "San Antonio de los Altos"],
+            "Mérida": ["Mérida", "El Vigía", "Ejido", "Tovar"],
+            "Táchira": ["San Cristóbal", "Táriba", "Rubio", "San Antonio"],
+            "Portuguesa": ["Acarigua", "Guanare", "Araure"],
+            "Monagas": ["Maturín"],
+            "Sucre": ["Cumaná", "Carúpano", "Güiria"],
+            "Barinas": ["Barinas", "Socopó"],
+            "Trujillo": ["Valera", "Trujillo", "Boconó"],
+            "Yaracuy": ["San Felipe", "Yaritagua", "Chivacoa"],
+            "Nueva Esparta": ["Porlamar", "Pampatar", "La Asunción", "Juan Griego"],
+            "Guárico": ["San Juan de los Morros", "Valle de la Pascua", "Calabozo"],
+            "Apure": ["San Fernando de Apure", "Guasdualito"],
+            "Cojedes": ["Guanare", "San Carlos", "Tinaquillo"],
+            "Delta Amacuro": ["Maturín", "Tucupita"],
+            "Amazonas": ["Puerto Ayacucho"],
+            "La Guaira (Vargas)": ["La Guaira", "Maiquetía", "Catia La Mar"]
+        };
+
+        document.getElementById('valor-tasa').innerText = tasaBCV;
+        let dorsalActual = "000";
+        let ciValidada = ""; 
+
+        window.onload = () => {
+            const selectEstado = document.getElementById('estadoEnvio');
+            Object.keys(venezuela).sort().forEach(est => {
+                let opt = document.createElement('option');
+                opt.value = est;
+                opt.text = est;
+                selectEstado.add(opt);
+            });
+            actualizarTotal();
+
+            // AUTO-LLENADO SI VIENE REDIRIGIDO DE 5K
+            const urlParams = new URLSearchParams(window.location.search);
+            const ciParam = urlParams.get('ci');
+            if (ciParam) {
+                document.getElementById('cedulaAtleta').value = ciParam;
+                setTimeout(validarAtleta, 500); // Pequeña pausa visual antes de buscar
+            }
+        };
+
+        function cargarCiudades() {
+            const est = document.getElementById('estadoEnvio').value;
+            const selectCiu = document.getElementById('ciudadEnvio');
+            selectCiu.innerHTML = '<option value="" disabled selected>Elige Ciudad...</option>';
+            if(est && venezuela[est]) {
+                selectCiu.disabled = false;
+                venezuela[est].sort().forEach(ciu => {
+                    let opt = document.createElement('option');
+                    opt.value = ciu;
+                    opt.text = ciu;
+                    selectCiu.add(opt);
+                });
+            } else {
+                selectCiu.disabled = true;
+            }
+        }
+
+        function actualizarTotal() {
+            let total = 30; // BASE 10K
+            const checkExtra = document.getElementById('checkFranelaExtra').checked;
+            const contenedorTallaExtra = document.getElementById('contenedorTallaExtra');
+
+            if(checkExtra) {
+                total += 15;
+                contenedorTallaExtra.classList.remove('hidden');
+            } else {
+                contenedorTallaExtra.classList.add('hidden');
+                document.getElementById('tallaFranelaExtra').value = ""; 
+            }
+
+            document.getElementById('total-usd').innerText = `$${total}`;
+            document.getElementById('total-bs').innerText = (total * tasaBCV).toFixed(2) + " Bs.";
+        }
+
+        async function validarAtleta() {
+            const btn = document.getElementById('btnVerificar');
+            const ciInput = document.getElementById('cedulaAtleta').value.replace(/\D/g, '');
+            
+            if(ciInput.length < 5) return alert("Ingresa una cédula válida.");
+
+            btn.innerText = "VERIFICANDO...";
+            btn.disabled = true;
+
+            try {
+                const res = await fetch(urlCSV_Comparacion + "&nocache=" + new Date().getTime());
+                const csvText = await res.text();
+                const filas = csvText.split(/\r?\n/);
+                let encontrado = false;
+
+                if (filas.length > 0) {
+                    const headers = filas[0].split(',').map(h => h.trim().toLowerCase());
+                    const idxCI = headers.findIndex(h => h.includes('cedula') || h.includes('ci'));
+                    const idxDorsal = headers.findIndex(h => h.includes('dorsal'));
+                    const idxNombre = headers.findIndex(h => h.includes('nombre'));
+
+                    for(let i = 1; i < filas.length; i++) {
+                        const columnas = filas[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c => c.replace(/^"|"$/g, '').trim());
+                        if(columnas[idxCI] && columnas[idxCI].replace(/\D/g, '') === ciInput) {
+                            encontrado = true;
+                            ciValidada = ciInput; 
+                            dorsalActual = columnas[idxDorsal] || "000";
+                            document.getElementById('nombreEnvio').value = columnas[idxNombre] || "";
+                            document.getElementById('textoDorsal').innerText = "Dorsal: #" + dorsalActual;
+                            break;
+                        }
+                    }
+                }
+
+                if(encontrado) {
+                    document.getElementById('paso-1').classList.add('hidden-step');
+                    document.getElementById('paso-fundador').classList.remove('hidden-step');
+                } else {
+                    document.getElementById('paso-1').classList.add('hidden-step');
+                    document.getElementById('paso-general').classList.remove('hidden-step');
+                }
+
+            } catch (e) {
+                alert("Error conectando con la base de datos.");
+            } finally {
+                btn.innerText = "Verificar Cédula";
+                btn.disabled = false;
+            }
+        }
+
+        function procesarInscripcion() {
+            const nombre = document.getElementById('nombreEnvio').value;
+            const tel = document.getElementById('telefonoEnvio').value;
+            const tallaOficial = document.getElementById('tallaFranelaOficial').value;
+            const ig = document.getElementById('igEnvio').value || "No indicó";
+            const estado = document.getElementById('estadoEnvio').value;
+            const ciudad = document.getElementById('ciudadEnvio').value;
+            const agencia = document.querySelector('input[name="agencia"]:checked').value;
+            const direccion = document.getElementById('direccionEnvio').value;
+            const referencia = document.getElementById('referenciaEnvio').value || "No indicó";
+            const refPago = document.getElementById('numReferenciaPago').value;
+            const fechaPago = document.getElementById('fechaPago').value;
+            
+            const quiereExtra = document.getElementById('checkFranelaExtra').checked;
+            const tallaExtra = document.getElementById('tallaFranelaExtra').value;
+            const totalUSD = document.getElementById('total-usd').innerText;
+
+            if(!nombre || !tel || !estado || !ciudad || !direccion || !refPago || !fechaPago) {
+                return alert("⚠️ ALERTA: Faltan datos logísticos obligatorios (*).");
+            }
+
+            if(!tallaOficial) {
+                return alert("⚠️ ALERTA: Selecciona la talla de tu Franela Oficial 10K.");
+            }
+
+            if(quiereExtra && !tallaExtra) {
+                return alert("⚠️ ALERTA: Marcaste agregar una franela extra. Por favor, selecciona la talla.");
+            }
+
+            let txtTallaExtra = quiereExtra ? tallaExtra : "No";
+
+            const msg = `🏆 *RENOVACIÓN 10K VIP*%0A--------------------------------%0A🏃‍♂️ *DORSAL:* #${dorsalActual}%0A📦 *PAQUETE:* 10K Premium ($30)%0A👤 *ATLETA:* ${nombre}%0A💳 *CI:* ${ciValidada}%0A📱 *TEL:* ${tel}%0A📸 *IG:* ${ig}%0A🏅 *TALLA OFICIAL:* ${tallaOficial}%0A👕 *EXTRA:* ${txtTallaExtra}%0A--------------------------------%0A📍 *ENVÍO:* ${estado}, ${ciudad} (${agencia})%0A🏠 *DIRECCIÓN:* ${direccion}%0A📌 *REF:* ${referencia}%0A--------------------------------%0A💰 *TOTAL:* ${totalUSD}%0A🧾 *Nº PAGO:* ${refPago}%0A📅 *FECHA:* ${fechaPago}%0A--------------------------------%0A_Adjunto comprobante..._`;
+
+            document.getElementById('loader').classList.remove('hidden');
+
+            const datos = new FormData();
+            datos.append("Dorsal", dorsalActual);
+            datos.append("Cedula", ciValidada);
+            datos.append("Nombre", nombre);
+            datos.append("Telefono", tel);
+            datos.append("TallaKit", tallaOficial);
+            datos.append("FranelaExtra", txtTallaExtra);
+            datos.append("Estado", estado);
+            datos.append("Ciudad", ciudad);
+            datos.append("Agencia", agencia);
+            datos.append("Direccion", direccion);
+            datos.append("PuntoRef", referencia);
+            datos.append("RefPago", refPago);
+            datos.append("FechaPago", fechaPago);
+            datos.append("Total", totalUSD);
+            datos.append("Instagram", ig);
+            datos.append("Paquete", "10K Premium ($30)");
+            datos.append("TargetGID", "863906539");
+
+            fetch(urlBaseDeDatos, { method: 'POST', body: datos, mode: 'no-cors' })
+                .then(() => { mostrarExito(msg); })
+                .catch((e) => { 
+                    console.log("Falso error ignorado:", e); 
+                    mostrarExito(msg); 
+                });
+        }
+
+        function mostrarExito(msgTexto) {
+            document.getElementById('loader').classList.add('hidden');
+            document.getElementById('paso-fundador').style.display = 'none'; 
+            document.getElementById('pantalla-exito').classList.remove('hidden');
+            
+            setTimeout(() => {
+                window.open(`https://wa.me/584127732710?text=${msgTexto}`, '_blank');
+            }, 1500);
+            
+            setTimeout(() => {
+                window.location.href = "index.html";
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
