@@ -12,15 +12,28 @@
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
         h1, h2, h3 { font-family: 'Montserrat', sans-serif; }
         .hidden-step { display: none !important; }
-        input:focus, select:focus, textarea:focus { 
-            border-color: #00D2FF !important; 
-            box-shadow: 0 0 10px rgba(0, 210, 255, 0.1); 
-            outline: none;
-        }
         .req { color: #ef4444; font-weight: bold; margin-left: 2px; }
+        input:focus, select:focus, textarea:focus { border-color: #00D2FF !important; box-shadow: 0 0 10px rgba(0, 210, 255, 0.1); outline: none; }
+        .loader-overlay { background: rgba(0, 30, 80, 0.9); backdrop-filter: blur(5px); }
     </style>
 </head>
 <body class="text-slate-900">
+
+    <div id="loader" class="fixed inset-0 z-[100] loader-overlay flex flex-col items-center justify-center text-white hidden">
+        <i class="fa-solid fa-circle-notch fa-spin text-5xl text-[#00D2FF] mb-4"></i>
+        <p class="font-black uppercase tracking-widest text-sm">Procesando Inscripción...</p>
+    </div>
+
+    <div id="pantalla-exito" class="fixed inset-0 z-[100] bg-white flex flex-col items-center justify-center text-center p-6 hidden">
+        <div class="w-24 h-24 bg-green-100 text-green-500 rounded-full flex items-center justify-center mb-6 text-4xl">
+            <i class="fa-solid fa-check-double"></i>
+        </div>
+        <h2 class="text-3xl font-black text-[#001E50] uppercase italic mb-2">¡Inscripción Enviada!</h2>
+        <p class="text-slate-400 mb-8 max-w-sm">Tus datos han sido registrados. Ahora serás redirigido a WhatsApp para enviar tu comprobante.</p>
+        <button onclick="window.location.href='index.html'" class="bg-[#001E50] text-white px-10 py-4 rounded-2xl font-black uppercase text-xs tracking-widest">
+            Volver al Inicio
+        </button>
+    </div>
 
     <div class="bg-[#001E50] text-white py-2 text-center text-[10px] font-bold uppercase tracking-[0.4em] z-50 relative border-b border-white/10">
         El estándar de oro del running virtual en Venezuela
@@ -30,10 +43,7 @@
         <div class="max-w-7xl mx-auto px-4 md:px-12">
             <div class="flex justify-between items-center h-28">
                 <div class="flex items-center gap-6 cursor-pointer group" onclick="window.location.href='index.html'">
-                    <div class="flex flex-col text-left">
-                        <span class="text-[9px] text-white/60 font-bold tracking-[0.3em] uppercase mb-1">Presentado por</span>
-                        <span class="text-white font-black text-2xl md:text-4xl tracking-tighter leading-none group-hover:text-[#00D2FF] transition-colors italic uppercase">TEAMFS</span>
-                    </div>
+                    <span class="text-white font-black text-2xl md:text-4xl tracking-tighter italic uppercase">TEAMFS</span>
                 </div>
             </div>
         </div>
@@ -42,16 +52,10 @@
     <main class="max-w-4xl mx-auto px-6 py-16">
         
         <div id="paso-1" class="bg-white p-10 md:p-16 rounded-[3rem] shadow-2xl border border-slate-100 text-center">
-            <div class="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6 text-[#001E50]">
-                <i class="fa-solid fa-id-card text-3xl"></i>
-            </div>
+            <i class="fa-solid fa-id-card text-4xl text-[#001E50] mb-6"></i>
             <h2 class="text-[#001E50] font-black text-3xl uppercase tracking-tighter mb-4 italic">Verificación de Atleta</h2>
-            <p class="text-slate-400 text-sm mb-10 italic">Ingresa tu cédula para verificar tu acceso y recuperar tus datos.</p>
-            
             <div class="max-w-xs mx-auto space-y-4">
-                <label class="text-left block text-[10px] font-bold uppercase text-slate-400 ml-2 mb-1">Cédula de Identidad <span class="req">*</span></label>
-                <input type="text" id="cedulaAtleta" placeholder="Ej: 12345678" 
-                       class="w-full border-2 border-slate-100 rounded-2xl px-6 py-4 text-center font-bold transition-all text-lg">
+                <input type="text" id="cedulaAtleta" placeholder="Ej: 12345678" class="w-full border-2 border-slate-100 rounded-2xl px-6 py-4 text-center font-bold text-lg">
                 <button id="btnVerificar" onclick="validarAtleta()" class="w-full bg-[#001E50] text-white py-5 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-[#00D2FF] hover:text-[#001E50] transition-all shadow-xl">
                     Verificar Cédula
                 </button>
@@ -61,393 +65,212 @@
         <div id="paso-fundador" class="hidden-step space-y-8 animate-fade-in mt-8">
             <div class="bg-[#00D2FF]/10 border-2 border-[#00D2FF] p-8 rounded-[2rem] text-center text-[#001E50]">
                 <h3 class="font-black uppercase text-xl">¡Felicidades, eres Fundador!</h3>
-                <p id="textoDorsal" class="text-sm font-bold uppercase tracking-widest mt-2 bg-[#001E50] text-white inline-block px-4 py-1 rounded-full">Dorsal Asignado: #000</p>
+                <p id="textoDorsal" class="text-sm font-bold uppercase tracking-widest mt-2 bg-[#001E50] text-white inline-block px-4 py-1 rounded-full">Dorsal: #000</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <label class="cursor-pointer group flex flex-col bg-white border-2 border-slate-200 p-8 rounded-[2rem] shadow-sm hover:shadow-xl hover:border-[#00D2FF] has-[:checked]:border-[#00D2FF] has-[:checked]:bg-[#00D2FF]/5 transition-all relative overflow-hidden">
-                    <input type="radio" name="paqueteBase" value="15" onchange="actualizarTotal()" class="absolute top-8 right-8 w-6 h-6 accent-[#00D2FF]" checked>
-                    <h4 class="font-black text-[#001E50] text-xl uppercase tracking-tighter w-5/6">Edición 5K</h4>
-                    <p class="text-xs text-slate-400 font-bold uppercase mb-2">Renovación Base</p>
-                    <p class="text-5xl font-black text-[#00D2FF] mt-2 mb-4">$15</p>
-                    <ul class="text-[10px] text-slate-500 font-bold uppercase space-y-2 mt-auto">
-                        <li><i class="fa-solid fa-check text-[#00D2FF] mr-2"></i> Medalla Acrílico 3D</li>
-                        <li><i class="fa-solid fa-check text-[#00D2FF] mr-2"></i> Kit Digital y Dorsal</li>
-                        <li><i class="fa-solid fa-check text-[#00D2FF] mr-2"></i> Acceso a la carrera</li>
-                    </ul>
+                <label class="cursor-pointer group flex flex-col bg-white border-2 border-slate-200 p-8 rounded-[2rem] shadow-sm hover:border-[#00D2FF] has-[:checked]:border-[#00D2FF] has-[:checked]:bg-[#00D2FF]/5 transition-all">
+                    <input type="radio" name="paqueteBase" value="15" onchange="actualizarTotal()" class="hidden" checked>
+                    <h4 class="font-black text-[#001E50] text-xl uppercase tracking-tighter">Edición 5K ($15)</h4>
                 </label>
-
-                <label class="cursor-pointer group flex flex-col bg-white border-2 border-slate-200 p-8 rounded-[2rem] shadow-sm hover:shadow-xl hover:border-[#00D2FF] has-[:checked]:border-[#00D2FF] has-[:checked]:bg-[#00D2FF]/5 transition-all relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#001E50] to-[#00D2FF]"></div>
-                    <input type="radio" name="paqueteBase" value="30" onchange="actualizarTotal()" class="absolute top-8 right-8 w-6 h-6 accent-[#00D2FF]">
-                    <h4 class="font-black text-[#001E50] text-xl uppercase tracking-tighter w-5/6">Edición 10K</h4>
-                    <p class="text-xs text-[#00D2FF] font-bold uppercase mb-2">Paquete Premium VIP</p>
-                    <p class="text-5xl font-black text-[#001E50] mt-2 mb-4">$30</p>
-                    <ul class="text-[10px] text-slate-500 font-bold uppercase space-y-2 mt-auto">
-                        <li><i class="fa-solid fa-star text-yellow-400 mr-2"></i> Medalla Metal 3D</li>
-                        <li><i class="fa-solid fa-star text-yellow-400 mr-2"></i> Franela Oficial Full Print</li>
-                        <li><i class="fa-solid fa-star text-yellow-400 mr-2"></i> Envío Preferencial</li>
-                    </ul>
-                </label>
-            </div>
-
-            <div class="bg-white p-8 rounded-[2.5rem] shadow-xl border border-slate-100">
-                <h3 class="text-[#001E50] font-black text-xl mb-6 uppercase italic">Equípate al máximo</h3>
-                <label class="cursor-pointer group flex flex-col md:flex-row gap-6 items-center border-2 border-slate-100 p-4 rounded-3xl hover:border-[#00D2FF] has-[:checked]:border-[#00D2FF] has-[:checked]:bg-blue-50/20 transition-all">
-                    <div class="w-full md:w-32 h-32 bg-slate-100 rounded-2xl flex items-center justify-center relative overflow-hidden shrink-0">
-                        <img src="foto_franela.jpg" alt="Franela Extra" class="w-full h-full object-cover absolute z-10" onerror="this.style.opacity='0'">
-                        <div class="text-center text-slate-400 z-0">
-                            <i class="fa-solid fa-shirt text-2xl mb-1"></i>
-                            <p class="text-[9px] font-bold uppercase">Foto<br>Aquí</p>
-                        </div>
-                    </div>
-                    <div class="flex-1 w-full text-left">
-                        <div class="flex justify-between items-start mb-2">
-                            <div>
-                                <h4 class="font-black text-[#001E50] text-lg uppercase">Franela Genérica Adicional</h4>
-                                <p class="text-[10px] text-slate-400 uppercase font-bold mt-1">Ideal para entrenamientos de ruta</p>
-                            </div>
-                            <input type="checkbox" id="checkFranelaExtra" onchange="actualizarTotal()" class="w-6 h-6 accent-[#00D2FF] shrink-0">
-                        </div>
-                        <p class="text-2xl font-black text-[#00D2FF] mb-3">+$15</p>
-                        
-                        <div id="contenedorTallaExtra" class="hidden flex flex-col gap-2">
-                            <label class="text-[10px] font-bold uppercase text-slate-400">Selecciona la talla <span class="req">*</span></label>
-                            <select id="tallaFranelaExtra" class="bg-white border-2 border-slate-200 rounded-xl px-4 py-2 font-bold text-sm w-full md:w-1/2">
-                                <option value="" disabled selected>Elegir talla...</option>
-                                <option value="S">S - Pequeña</option>
-                                <option value="M">M - Mediana</option>
-                                <option value="L">L - Grande</option>
-                                <option value="XL">XL - Extra Grande</option>
-                                <option value="2XL">2XL - Doble XL</option>
-                            </select>
-                        </div>
-                    </div>
+                <label class="cursor-pointer group flex flex-col bg-white border-2 border-slate-200 p-8 rounded-[2rem] shadow-sm hover:border-[#00D2FF] has-[:checked]:border-[#00D2FF] has-[:checked]:bg-[#00D2FF]/5 transition-all">
+                    <input type="radio" name="paqueteBase" value="30" onchange="actualizarTotal()" class="hidden">
+                    <h4 class="font-black text-[#001E50] text-xl uppercase tracking-tighter text-yellow-600">Edición 10K ($30)</h4>
                 </label>
             </div>
 
             <div class="bg-white p-10 rounded-[2.5rem] shadow-xl border border-slate-100">
-                <h3 class="text-[#001E50] font-black text-2xl mb-8 uppercase italic border-b border-slate-50 pb-4">Tus Datos Logísticos</h3>
-                <p class="text-xs text-slate-400 mb-6 font-bold">Verifica y completa los datos recuperados de tu edición anterior.</p>
-                
+                <h3 class="text-[#001E50] font-black text-2xl mb-8 uppercase italic border-b pb-4">Tus Datos</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="flex flex-col gap-2">
                         <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Nombre Completo <span class="req">*</span></label>
-                        <input type="text" id="nombreEnvio" class="bg-slate-50 border-2 border-[#00D2FF]/30 rounded-2xl px-6 py-3" required>
+                        <input type="text" id="nombreEnvio" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3" required>
                     </div>
                     <div class="flex flex-col gap-2">
-                        <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Teléfono de Contacto <span class="req">*</span></label>
-                        <input type="text" id="telefonoEnvio" placeholder="0412-0000000" class="bg-slate-50 border-2 border-[#00D2FF]/30 rounded-2xl px-6 py-3" required>
+                        <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Teléfono <span class="req">*</span></label>
+                        <input type="text" id="telefonoEnvio" placeholder="04120000000" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3" required>
                     </div>
-
-                    <div id="contenedorTallaOficial" class="hidden flex-col gap-2 transition-all md:col-span-2">
-                        <label class="text-[10px] font-bold uppercase text-[#001E50] ml-2">Talla Franela Oficial 10K <span class="req">*</span></label>
-                        <select id="tallaFranelaOficial" class="bg-blue-50 border-2 border-[#00D2FF]/50 rounded-2xl px-6 py-3 font-bold text-[#001E50]">
-                            <option value="" disabled selected>Selecciona tu talla oficial...</option>
-                            <option value="S">S - Pequeña</option>
-                            <option value="M">M - Mediana</option>
-                            <option value="L">L - Grande</option>
-                            <option value="XL">XL - Extra Grande</option>
-                            <option value="2XL">2XL - Doble XL</option>
+                    <div id="contenedorTallaOficial" class="hidden flex-col gap-2 md:col-span-2">
+                        <label class="text-[10px] font-bold uppercase text-[#001E50] ml-2">Talla Franela Oficial <span class="req">*</span></label>
+                        <select id="tallaFranelaOficial" class="bg-blue-50 border-2 border-[#00D2FF]/50 rounded-2xl px-6 py-3 font-bold">
+                            <option value="" disabled selected>Elige tu talla...</option>
+                            <option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option>
                         </select>
                     </div>
-
-                    <div class="flex flex-col gap-2 md:col-span-2">
-                        <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Usuario Instagram (Opcional)</label>
-                        <input type="text" id="igEnvio" placeholder="@usuario" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3">
-                    </div>
-                    
                     <div class="flex flex-col gap-2">
                         <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Estado <span class="req">*</span></label>
                         <select id="estadoEnvio" onchange="cargarCiudades()" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3 font-bold" required>
-                            <option value="" disabled selected>Selecciona un estado...</option>
-                            <option value="Caracas">Distrito Capital (Caracas)</option>
-                            <option value="Falcon">Falcón</option>
-                            <option value="Zulia">Zulia</option>
-                            <option value="Carabobo">Carabobo</option>
-                            <option value="Lara">Lara</option>
-                            <option value="Miranda">Miranda</option>
-                            <option value="Aragua">Aragua</option>
-                            <option value="Otro">Otro Estado</option>
+                            <option value="" disabled selected>Selecciona Estado...</option>
                         </select>
                     </div>
-
                     <div class="flex flex-col gap-2">
                         <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Ciudad <span class="req">*</span></label>
                         <select id="ciudadEnvio" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3 font-bold disabled:opacity-50" disabled required>
-                            <option value="" disabled selected>Primero selecciona un estado</option>
+                            <option value="" disabled selected>Elige Ciudad...</option>
                         </select>
                     </div>
-
-                    <div class="flex flex-col gap-2 md:col-span-2">
-                        <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Agencia de Envío Preferida <span class="req">*</span></label>
-                        <div class="flex gap-4">
-                            <label class="flex-1 border-2 border-slate-100 p-3 rounded-xl cursor-pointer flex items-center justify-center gap-2 has-[:checked]:border-[#00D2FF] has-[:checked]:bg-[#00D2FF]/5 transition-all">
-                                <input type="radio" name="agencia" value="ZOOM" checked> <span class="text-xs font-bold">ZOOM</span>
-                            </label>
-                            <label class="flex-1 border-2 border-slate-100 p-3 rounded-xl cursor-pointer flex items-center justify-center gap-2 has-[:checked]:border-[#00D2FF] has-[:checked]:bg-[#00D2FF]/5 transition-all">
-                                <input type="radio" name="agencia" value="MRW"> <span class="text-xs font-bold">MRW</span>
-                            </label>
-                        </div>
-                    </div>
-                    
                     <div class="md:col-span-2 flex flex-col gap-2">
-                        <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Dirección Exacta de Agencia o Domicilio <span class="req">*</span></label>
-                        <textarea id="direccionEnvio" rows="2" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4" placeholder="Ej: Agencia ZOOM del Centro, Calle Bolívar..." required></textarea>
+                        <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Dirección Exacta (Agencia o Casa) <span class="req">*</span></label>
+                        <textarea id="direccionEnvio" rows="2" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4" required></textarea>
                     </div>
-
                     <div class="md:col-span-2 flex flex-col gap-2">
-                        <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Punto de Referencia <span class="req">*</span></label>
-                        <input type="text" id="referenciaEnvio" placeholder="Ej: Frente a la plaza, al lado de la panadería..." class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3" required>
-                    </div>
-
-                    <div class="md:col-span-2 border-t border-slate-100 pt-6 mt-2">
-                        <h4 class="font-black text-[#001E50] text-sm uppercase mb-4">Verificación de Pago</h4>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="flex flex-col gap-2">
-                                <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Número de Referencia <span class="req">*</span></label>
-                                <input type="text" id="numReferenciaPago" placeholder="Ej: 12345678" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3" required>
-                            </div>
-                            <div class="flex flex-col gap-2">
-                                <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Fecha de Pago <span class="req">*</span></label>
-                                <input type="date" id="fechaPago" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3 text-sm font-bold text-slate-700" required>
-                            </div>
-                        </div>
+                        <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Referencia de Pago <span class="req">*</span></label>
+                        <input type="text" id="numReferenciaPago" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3" required>
                     </div>
                 </div>
             </div>
 
             <div class="bg-[#001E50] p-10 rounded-[3rem] text-white shadow-2xl">
-                <div class="flex justify-between items-center mb-6 border-b border-white/10 pb-6">
-                    <div>
-                        <h4 class="font-black text-2xl uppercase italic leading-none mb-2 text-white">Total a Pagar</h4>
-                        <p class="text-white/30 text-[9px] uppercase tracking-[0.3em]">Tasa BCV: <span id="valor-tasa">--</span> Bs.</p>
-                    </div>
-                    <div class="text-right">
-                        <span id="total-usd" class="text-5xl font-black text-[#00D2FF] block tracking-tighter">$15</span>
-                        <span id="total-bs" class="text-sm font-bold text-white/50 tracking-widest">0.00 Bs.</span>
-                    </div>
+                <div class="flex justify-between items-center mb-6">
+                    <h4 class="font-black text-2xl uppercase">Total: <span id="total-usd" class="text-[#00D2FF]">$15</span></h4>
                 </div>
-                
-                <div class="bg-white/5 rounded-xl p-4 mb-6 border border-white/10 flex items-center gap-4">
-                    <i class="fa-solid fa-file-invoice-dollar text-[#00D2FF] text-2xl"></i>
-                    <p class="text-xs text-white/70">Al hacer clic, se abrirá WhatsApp. <b>Debes adjuntar la foto de tu comprobante de pago</b> en el chat para validar la inscripción.</p>
-                </div>
-
-                <button id="btnInscribir" onclick="procesarInscripcion()" class="w-full bg-[#00D2FF] text-[#001E50] py-6 rounded-2xl font-black uppercase tracking-[0.2em] hover:scale-[1.02] transition-all shadow-xl flex items-center justify-center gap-4">
-                    CONFIRMAR E INSCRIBIRME <i class="fa-brands fa-whatsapp text-xl"></i>
+                <button id="btnInscribir" onclick="procesarInscripcion()" class="w-full bg-[#00D2FF] text-[#001E50] py-6 rounded-2xl font-black uppercase tracking-widest shadow-xl">
+                    CONFIRMAR E INSCRIBIRME
                 </button>
             </div>
         </div>
 
         <div id="paso-general" class="hidden-step space-y-8 animate-fade-in mt-8">
             <div class="bg-red-50 border-2 border-red-200 p-10 rounded-[3rem] text-center shadow-xl">
-                <h3 class="text-[#001E50] font-black text-2xl uppercase tracking-tighter mb-2">Cédula no encontrada</h3>
-                <a href="10k.html" class="inline-block w-full bg-[#001E50] text-white py-5 rounded-2xl font-black uppercase">Ir a Inscripción General 10K</a>
+                <h3 class="text-[#001E50] font-black text-2xl mb-4">Cédula no encontrada</h3>
+                <a href="10k.html" class="bg-[#001E50] text-white px-8 py-4 rounded-2xl font-black uppercase">Ir a Inscripción General</a>
             </div>
         </div>
 
     </main>
 
     <script>
-        const tasaBCV = 589.27; 
-        
-        // URL PARA VERIFICAR SI ES FUNDADOR (1ERA EDICIÓN)
+        const tasaBCV = 589.27;
         const urlCSV_Comparacion = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5yMHsenxCWE5kZBDUZ8UcYqDtdAHstfqXcvWkuYZPQ_4n2xSrfs6ptk7k21r1kcMHHLtWjz8SEHwl/pub?gid=0&single=true&output=csv";
-        
-        // LA URL DE TU APPS SCRIPT
-        const urlBaseDeDatos = "https://script.google.com/macros/s/AKfycbyp-NJc2uozcF4VDYRm3_XhKiKmPwdLfB4jLxJV_L9EFpXSBI7dp1TuMG0hxWzC7dLaCg/exec"; 
+        const urlBaseDeDatos = "https://script.google.com/macros/s/AKfycbwM3zcnfLr7rLdlBqs4oos7DiPwfwvyoB26YRQMJPatsNNBnHJd1hwkQ9G_E9WLgwZDoQ/exec"; // ¡ACTUALIZA ESTA URL!
 
-        document.getElementById('valor-tasa').innerText = tasaBCV;
-        
+        const venezuela = {
+            "Falcón": ["Punto Fijo", "Coro", "Punta Cardón", "Judibana", "Tucacas", "Dabajuro", "Chichiriviche", "La Vela de Coro"],
+            "Distrito Capital": ["Caracas", "El Valle", "Catia", "Coche", "Petare"],
+            "Zulia": ["Maracaibo", "San Francisco", "Cabimas", "Ciudad Ojeda", "Machiques"],
+            "Carabobo": ["Valencia", "Puerto Cabello", "Guacara", "Naguanagua", "San Diego"],
+            "Lara": ["Barquisimeto", "Cabudare", "Carora", "El Tocuyo"],
+            "Aragua": ["Maracay", "Turmero", "Cagua", "La Victoria", "El Limón"],
+            "Anzoátegui": ["Barcelona", "Puerto La Cruz", "El Tigre", "Anaco", "Lechería"],
+            "Bolívar": ["Ciudad Guayana", "Puerto Ordaz", "Ciudad Bolívar", "Upata"],
+            "Miranda": ["Los Teques", "Guarenas", "Guatire", "Charallave", "Cúa"],
+            "Mérida": ["Mérida", "El Vigía", "Ejido"],
+            "Táchira": ["San Cristóbal", "Táriba", "Rubio"],
+            "Portuguesa": ["Acarigua", "Guanare", "Araure"],
+            "Monagas": ["Maturín"], "Sucre": ["Cumaná", "Carúpano"], "Barinas": ["Barinas"], "Trujillo": ["Valera", "Trujillo"], "Yaracuy": ["San Felipe"], "Nueva Esparta": ["Porlamar", "Pampatar"]
+        };
+
         let dorsalActual = "000";
 
-        const ciudadesPorEstado = {
-            "Falcón": ["Punto Fijo", "Punta Cardón", "Judibana", "Coro", "Tucacas", "Dabajuro", "Otra"],
-            "Caracas": ["Caracas (Todas las zonas)"],
-            "Zulia": ["Maracaibo", "San Francisco", "Cabimas", "Ciudad Ojeda", "Otra"],
-            "Carabobo": ["Valencia", "Puerto Cabello", "San Diego", "Guacara", "Naguanagua", "Otra"],
-            "Lara": ["Barquisimeto", "Cabudare", "Carora", "El Tocuyo", "Otra"],
-            "Miranda": ["Los Teques", "Guarenas", "Guatire", "Charallave", "Cúa", "Otra"],
-            "Aragua": ["Maracay", "Cagua", "Turmero", "La Victoria", "Otra"],
-            "Otro": ["Indicar por texto en la dirección"]
+        window.onload = () => {
+            const selectEstado = document.getElementById('estadoEnvio');
+            Object.keys(venezuela).sort().forEach(est => {
+                let opt = document.createElement('option'); opt.value = est; opt.text = est; selectEstado.add(opt);
+            });
+            actualizarTotal();
         };
 
         function cargarCiudades() {
-            const estadoSelec = document.getElementById('estadoEnvio').value;
-            const selectCiudad = document.getElementById('ciudadEnvio');
-            selectCiudad.innerHTML = '<option value="" disabled selected>Selecciona tu ciudad...</option>';
-            if(estadoSelec && ciudadesPorEstado[estadoSelec]) {
-                selectCiudad.disabled = false;
-                ciudadesPorEstado[estadoSelec].forEach(ciudad => {
-                    let option = document.createElement('option');
-                    option.value = ciudad;
-                    option.text = ciudad;
-                    selectCiudad.add(option);
+            const est = document.getElementById('estadoEnvio').value;
+            const selectCiu = document.getElementById('ciudadEnvio');
+            selectCiu.innerHTML = '<option value="" disabled selected>Elige Ciudad...</option>';
+            if(est && venezuela[est]) {
+                selectCiu.disabled = false;
+                venezuela[est].sort().forEach(ciu => {
+                    let opt = document.createElement('option'); opt.value = ciu; opt.text = ciu; selectCiu.add(opt);
                 });
-            } else {
-                selectCiudad.disabled = true;
             }
         }
 
         function actualizarTotal() {
-            const paqueteBaseRadio = document.querySelector('input[name="paqueteBase"]:checked').value;
-            let total = parseInt(paqueteBaseRadio);
-            
-            const checkExtra = document.getElementById('checkFranelaExtra').checked;
-            const contenedorTallaExtra = document.getElementById('contenedorTallaExtra');
-            const contenedorTallaOficial = document.getElementById('contenedorTallaOficial');
-            const selectTallaOficial = document.getElementById('tallaFranelaOficial');
-
-            if (total === 30) {
-                contenedorTallaOficial.style.display = "flex";
-                selectTallaOficial.required = true;
-            } else {
-                contenedorTallaOficial.style.display = "none";
-                selectTallaOficial.required = false;
-                selectTallaOficial.value = ""; 
-            }
-
-            if(checkExtra) {
-                total += 15;
-                contenedorTallaExtra.classList.remove('hidden');
-            } else {
-                contenedorTallaExtra.classList.add('hidden');
-                document.getElementById('tallaFranelaExtra').value = ""; 
-            }
-
-            document.getElementById('total-usd').innerText = `$${total}`;
-            document.getElementById('total-bs').innerText = (total * tasaBCV).toFixed(2) + " Bs.";
+            const precio = document.querySelector('input[name="paqueteBase"]:checked').value;
+            document.getElementById('total-usd').innerText = `$${precio}`;
+            document.getElementById('contenedorTallaOficial').style.display = (precio === "30") ? "flex" : "none";
         }
 
-        window.onload = actualizarTotal;
-
-        // VERIFICACIÓN INTELIGENTE DE ATLETA
         async function validarAtleta() {
             const btn = document.getElementById('btnVerificar');
-            const ciInput = document.getElementById('cedulaAtleta').value.replace(/\D/g, '');
-            
-            if(ciInput.length < 5) return alert("Ingresa una cédula válida.");
-
-            btn.innerText = "VERIFICANDO...";
-            btn.disabled = true;
+            const ci = document.getElementById('cedulaAtleta').value.replace(/\D/g, '');
+            if(ci.length < 5) return alert("Ingresa una cédula válida.");
+            btn.innerText = "BUSCANDO..."; btn.disabled = true;
 
             try {
-                const res = await fetch(urlCSV_Comparacion + "&nocache=" + new Date().getTime());
-                const csvText = await res.text();
-                const filas = csvText.split(/\r?\n/);
-                
-                let encontrado = false;
+                const res = await fetch(urlCSV_Comparacion + "?t=" + new Date().getTime());
+                const csv = await res.text();
+                const filas = csv.split(/\r?\n/);
+                const headers = filas[0].split(',').map(h => h.trim().toLowerCase());
+                const idxCI = headers.findIndex(h => h.includes('cedula') || h.includes('ci'));
+                const idxD = headers.findIndex(h => h.includes('dorsal'));
+                const idxN = headers.findIndex(h => h.includes('nombre'));
 
-                if (filas.length > 0) {
-                    const headers = filas[0].split(',').map(h => h.trim().toLowerCase());
-                    const idxCI = headers.findIndex(h => h.includes('cedula') || h.includes('ci'));
-                    const idxDorsal = headers.findIndex(h => h.includes('dorsal'));
-                    const idxNombre = headers.findIndex(h => h.includes('nombre'));
-
-                    for(let i = 1; i < filas.length; i++) {
-                        const columnas = filas[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c => c.replace(/^"|"$/g, '').trim());
-                        if(columnas[idxCI] && columnas[idxCI].replace(/\D/g, '') === ciInput) {
-                            encontrado = true;
-                            dorsalActual = columnas[idxDorsal] || "000";
-                            document.getElementById('nombreEnvio').value = columnas[idxNombre] || "";
-                            document.getElementById('textoDorsal').innerText = "Dorsal Recuperado: #" + dorsalActual;
-                            break;
-                        }
+                let hallado = false;
+                for(let i=1; i<filas.length; i++){
+                    const col = filas[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+                    if(col[idxCI] && col[idxCI].replace(/\D/g, '') === ci){
+                        hallado = true;
+                        dorsalActual = col[idxD] || "000";
+                        document.getElementById('nombreEnvio').value = col[idxN] || "";
+                        document.getElementById('textoDorsal').innerText = "Dorsal: #" + dorsalActual;
+                        break;
                     }
                 }
-
-                if(encontrado) {
-                    document.getElementById('paso-1').classList.add('hidden-step');
-                    document.getElementById('paso-fundador').classList.remove('hidden-step');
-                } else {
-                    document.getElementById('paso-1').classList.add('hidden-step');
-                    document.getElementById('paso-general').classList.remove('hidden-step');
-                }
-
-            } catch (e) {
-                alert("Error conectando con la base de datos.");
-                btn.innerText = "Verificar Cédula";
-                btn.disabled = false;
-            }
+                document.getElementById('paso-1').classList.add('hidden-step');
+                if(hallado) document.getElementById('paso-fundador').classList.remove('hidden-step');
+                else document.getElementById('paso-general').classList.remove('hidden-step');
+            } catch(e) { alert("Error de conexión."); }
+            finally { btn.innerText = "Verificar Cédula"; btn.disabled = false; }
         }
 
-        // PROCESAR Y ENVIAR 
         async function procesarInscripcion() {
-            // Leer todos los campos
-            const ci = document.getElementById('cedulaAtleta').value;
+            const btn = document.getElementById('btnInscribir');
+            const loader = document.getElementById('loader');
+            const paquete = document.querySelector('input[name="paqueteBase"]:checked').value;
+            
+            // Validaciones
             const nombre = document.getElementById('nombreEnvio').value;
             const tel = document.getElementById('telefonoEnvio').value;
-            const paqueteRadio = document.querySelector('input[name="paqueteBase"]:checked').value;
-            const tallaOficial = document.getElementById('tallaFranelaOficial').value;
-            const ig = document.getElementById('igEnvio').value || "No indicó";
-            const estado = document.getElementById('estadoEnvio').value;
-            const ciudad = document.getElementById('ciudadEnvio').value;
-            const agencia = document.querySelector('input[name="agencia"]:checked').value;
-            const direccion = document.getElementById('direccionEnvio').value;
-            const referencia = document.getElementById('referenciaEnvio').value;
-            const refPago = document.getElementById('numReferenciaPago').value;
-            const fechaPago = document.getElementById('fechaPago').value;
-            const quiereExtra = document.getElementById('checkFranelaExtra').checked;
-            const tallaExtra = document.getElementById('tallaFranelaExtra').value;
-            const totalUSD = document.getElementById('total-usd').innerText;
+            const est = document.getElementById('estadoEnvio').value;
+            const ciu = document.getElementById('ciudadEnvio').value;
+            const dir = document.getElementById('direccionEnvio').value;
+            const ref = document.getElementById('numReferenciaPago').value;
+            const talla = document.getElementById('tallaFranelaOficial').value;
 
-            // VALIDACIÓN ESTRICTA (El candado)
-            if(!nombre || !tel || !estado || !ciudad || !direccion || !referencia || !refPago || !fechaPago) {
-                return alert("⚠️ ALERTA: Faltan datos logísticos. Por favor, revisa que todos los campos con asterisco rojo (*) estén llenos.");
+            if(!nombre || !tel || !est || !ciu || !dir || !ref || (paquete === "30" && !talla)) {
+                return alert("⚠️ Por favor completa todos los campos obligatorios.");
             }
 
-            if(paqueteRadio === "30" && !tallaOficial) {
-                return alert("⚠️ ALERTA: Has elegido el paquete Premium de 10K. Selecciona la talla de tu franela oficial.");
-            }
-
-            if(quiereExtra && !tallaExtra) {
-                return alert("⚠️ ALERTA: Marcaste agregar una franela extra. Por favor, selecciona la talla.");
-            }
-
-            // Textos para el Excel y WhatsApp
-            let paqueteFinal = paqueteRadio === "30" ? "10K Premium ($30)" : "5K Base ($15)";
-            let txtTallaOficial = paqueteRadio === "30" ? tallaOficial : "No Aplica";
-            let txtTallaExtra = quiereExtra ? tallaExtra : "No";
-
-            const msg = `🏆 *FUNDADOR RENOVADO*%0A--------------------------------%0A🏃‍♂️ *DORSAL:* #${dorsalActual}%0A📦 *PAQUETE:* ${paqueteFinal}%0A👤 *ATLETA:* ${nombre}%0A💳 *CI:* ${ci}%0A📱 *TEL:* ${tel}%0A📸 *IG:* ${ig}%0A🏅 *TALLA OFICIAL:* ${txtTallaOficial}%0A👕 *EXTRA:* ${txtTallaExtra}%0A--------------------------------%0A📍 *ENVÍO:* ${estado}, ${ciudad} (${agencia})%0A🏠 *DIRECCIÓN:* ${direccion}%0A📌 *REF:* ${referencia}%0A--------------------------------%0A💰 *TOTAL:* ${totalUSD}%0A🧾 *Nº PAGO:* ${refPago}%0A📅 *FECHA:* ${fechaPago}%0A--------------------------------%0A_Adjunto comprobante..._`;
-
-            // Enviar los datos al script para guardarlos en Excel
-            const btn = document.getElementById('btnInscribir');
-            btn.innerText = "GUARDANDO...";
+            loader.classList.remove('hidden');
             btn.disabled = true;
 
-            try {
-                const datos = new FormData();
-                
-                // Mapeo EXACTO basado en tu captura de pantalla de la fila 1
-                datos.append("Dorsal", dorsalActual);
-                datos.append("Cedula", ci);
-                datos.append("Nombre", nombre);
-                datos.append("Telefono", tel);
-                datos.append("TallaKit", txtTallaOficial); // <-- Corregido para igualar tu Excel
-                datos.append("FranelaExtra", txtTallaExtra);
-                datos.append("Estado", estado);
-                datos.append("Ciudad", ciudad);
-                datos.append("Agencia", agencia);
-                datos.append("Direccion", direccion);
-                datos.append("PuntoRef", referencia);
-                datos.append("RefPago", refPago);
-                datos.append("FechaPago", fechaPago);
-                datos.append("Total", totalUSD);
-                
-                // Variables extras que podrías tener en tu tabla
-                datos.append("Instagram", ig);
-                datos.append("Paquete", paqueteFinal);
+            const datos = new FormData();
+            datos.append("Dorsal", dorsalActual);
+            datos.append("Cedula", document.getElementById('cedulaAtleta').value);
+            datos.append("Nombre", nombre);
+            datos.append("Telefono", tel);
+            datos.append("Estado", est);
+            datos.append("Ciudad", ciu);
+            datos.append("Direccion", dir);
+            datos.append("RefPago", ref);
+            datos.append("Total", "$" + paquete);
+            datos.append("TallaKit", paquete === "30" ? talla : "N/A");
+            datos.append("TargetGID", paquete === "30" ? "863906539" : "368824798"); // <--- DIRECCIONAMIENTO CLAVE
 
+            try {
                 await fetch(urlBaseDeDatos, { method: 'POST', body: datos, mode: 'no-cors' });
                 
-                window.open(`https://wa.me/584127732710?text=${msg}`, '_blank');
+                // Mostrar pantalla de éxito
+                loader.classList.add('hidden');
+                document.getElementById('pantalla-exito').classList.remove('hidden');
+
+                // Abrir WhatsApp después de 2 segundos
+                const msg = `*INSCRIPCIÓN RETO VIRTUAL*%0ADorsal: #${dorsalActual}%0AAtleta: ${nombre}%0APaquete: $${paquete}%0ARef: ${ref}`;
+                setTimeout(() => {
+                    window.open(`https://wa.me/584127732710?text=${msg}`, '_blank');
+                }, 2000);
 
             } catch (e) {
-                alert("Ocurrió un error guardando tu inscripción. Intenta de nuevo.");
-            } finally {
-                btn.innerText = "CONFIRMAR E INSCRIBIRME";
+                alert("Error al guardar. Intenta de nuevo.");
+                loader.classList.add('hidden');
                 btn.disabled = false;
             }
         }
