@@ -179,13 +179,16 @@
                     </div>
 
                     <div class="flex flex-col gap-2 md:col-span-2">
-                        <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Agencia de Envío <span class="req">*</span></label>
-                        <div class="flex gap-4">
+                        <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Agencia o Método de Envío <span class="req">*</span></label>
+                        <div class="flex flex-col sm:flex-row gap-4">
                             <label class="flex-1 border-2 border-slate-100 p-3 rounded-xl cursor-pointer flex items-center justify-center gap-2 has-[:checked]:border-[#00D2FF] has-[:checked]:bg-[#00D2FF]/5 transition-all">
                                 <input type="radio" name="agencia" value="ZOOM" checked> <span class="text-xs font-bold">ZOOM</span>
                             </label>
                             <label class="flex-1 border-2 border-slate-100 p-3 rounded-xl cursor-pointer flex items-center justify-center gap-2 has-[:checked]:border-[#00D2FF] has-[:checked]:bg-[#00D2FF]/5 transition-all">
                                 <input type="radio" name="agencia" value="MRW"> <span class="text-xs font-bold">MRW</span>
+                            </label>
+                            <label class="flex-1 border-2 border-slate-100 p-3 rounded-xl cursor-pointer flex items-center justify-center gap-2 has-[:checked]:border-[#00D2FF] has-[:checked]:bg-[#00D2FF]/5 transition-all">
+                                <input type="radio" name="agencia" value="Entrega Personal"> <span class="text-xs font-bold text-center">Entrega Personal</span>
                             </label>
                         </div>
                     </div>
@@ -196,8 +199,8 @@
                     </div>
 
                     <div class="md:col-span-2 flex flex-col gap-2">
-                        <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Punto de Referencia <span class="req">*</span></label>
-                        <input type="text" id="referenciaEnvio" placeholder="Ej: Frente a la plaza..." class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3 font-bold" required>
+                        <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Punto de Referencia (Opcional)</label>
+                        <input type="text" id="referenciaEnvio" placeholder="Ej: Frente a la plaza..." class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3 font-bold">
                     </div>
 
                     <div class="md:col-span-2 border-t border-slate-100 pt-6 mt-2">
@@ -255,7 +258,6 @@
         const urlCSV_Comparacion = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5yMHsenxCWE5kZBDUZ8UcYqDtdAHstfqXcvWkuYZPQ_4n2xSrfs6ptk7k21r1kcMHHLtWjz8SEHwl/pub?gid=0&single=true&output=csv";
         const urlBaseDeDatos = "https://script.google.com/macros/s/AKfycbyp-NJc2uozcF4VDYRm3_XhKiKmPwdLfB4jLxJV_L9EFpXSBI7dp1TuMG0hxWzC7dLaCg/exec";
 
-        // LISTA COMPLETA DE ESTADOS Y CIUDADES
         const venezuela = {
             "Falcón": ["Punto Fijo", "Coro", "Punta Cardón", "Judibana", "Adícora", "Tucacas", "Dabajuro", "Chichiriviche", "La Vela de Coro", "Pueblo Nuevo", "Otra"],
             "Distrito Capital": ["Caracas", "El Valle", "Catia", "Coche", "Petare"],
@@ -287,7 +289,6 @@
         let dorsalActual = "000";
         let ciValidada = ""; 
 
-        // LLENAR SELECT DE ESTADOS AL CARGAR
         window.onload = () => {
             const selectEstado = document.getElementById('estadoEnvio');
             Object.keys(venezuela).sort().forEach(est => {
@@ -316,7 +317,6 @@
             }
         }
 
-        // REDIRECCIÓN 10K
         function evaluarRedireccion() {
             const paquete = document.querySelector('input[name="paqueteBase"]:checked').value;
             if (paquete === "30") {
@@ -403,7 +403,6 @@
             }
         }
 
-        // GUARDADO FINAL CON IGNORADO DE FALSO ERROR DE CORS
         function procesarInscripcion() {
             const nombre = document.getElementById('nombreEnvio').value;
             const tel = document.getElementById('telefonoEnvio').value;
@@ -412,7 +411,7 @@
             const ciudad = document.getElementById('ciudadEnvio').value;
             const agencia = document.querySelector('input[name="agencia"]:checked').value;
             const direccion = document.getElementById('direccionEnvio').value;
-            const referencia = document.getElementById('referenciaEnvio').value;
+            const referencia = document.getElementById('referenciaEnvio').value || "No indicó";
             const refPago = document.getElementById('numReferenciaPago').value;
             const fechaPago = document.getElementById('fechaPago').value;
             
@@ -420,12 +419,12 @@
             const tallaExtra = document.getElementById('tallaFranelaExtra').value;
             const totalUSD = document.getElementById('total-usd').innerText;
 
-            if(!nombre || !tel || !estado || !ciudad || !direccion || !referencia || !refPago || !fechaPago) {
-                return alert("⚠️ ALERTA: Faltan datos logísticos. Por favor, revisa que todos los campos con asterisco rojo (*) estén llenos.");
+            if(!nombre || !tel || !estado || !ciudad || !direccion || !refPago || !fechaPago) {
+                return alert("⚠️ ALERTA: Faltan datos logísticos obligatorios (*).");
             }
 
             if(quiereExtra && !tallaExtra) {
-                return alert("⚠️ ALERTA: Marcaste agregar una franela extra. Por favor, selecciona la talla.");
+                return alert("⚠️ ALERTA: Selecciona la talla de tu franela extra.");
             }
 
             let txtTallaExtra = quiereExtra ? tallaExtra : "No";
@@ -452,7 +451,6 @@
             datos.append("Instagram", ig);
             datos.append("Paquete", "5K Base ($15)");
 
-            // Envía y asume el éxito sin importar el pánico de CORS del navegador
             fetch(urlBaseDeDatos, { method: 'POST', body: datos, mode: 'no-cors' })
                 .then(() => { mostrarExito(msg); })
                 .catch((e) => { 
