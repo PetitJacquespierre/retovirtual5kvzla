@@ -30,7 +30,7 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            animation: splash-exit 0.8s ease-out 3.2s forwards;
+            animation: splash-exit 0.8s ease-out 1.5s forwards;
         }
         @keyframes splash-exit {
             0%   { opacity: 1; }
@@ -154,8 +154,8 @@
 <nav class="bg-[#001E50] sticky top-0 z-50 shadow-2xl">
     <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
         <div class="flex justify-between items-center h-20 md:h-28">
-            <!-- Logo - MOVIDO A LA IZQUIERDA con menos padding -->
-            <div class="flex items-center gap-2 md:gap-4 cursor-pointer group -ml-2 md:-ml-4" onclick="window.scrollTo(0,0)">
+            
+            <div class="flex items-center gap-2 md:gap-4 cursor-pointer group -ml-2 md:-ml-4" onclick="location.href='index.html'">
                 <img src="img/RV-Isotipo-sinfondo.png" alt="Reto" class="h-12 md:h-16 lg:h-20 w-auto object-contain brightness-125 transition-transform group-hover:scale-105">
                 <div class="h-8 md:h-10 lg:h-12 w-[1px] bg-white/20"></div>
                 <div class="flex flex-col">
@@ -164,36 +164,53 @@
                 </div>
             </div>
 
-            <!-- Menú Desktop - SIN ÍCONO DE ROBOT -->
-            <div class="hidden lg:flex items-center space-x-4 xl:space-x-7">
-                <a href="index.html#el-reto" class="text-white/80 hover:text-[#00D2FF] text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">El Reto</a>
-                <a href="index.html#ediciones" class="text-white/80 hover:text-[#00D2FF] text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Calendario</a>
-                <a href="10k.html" class="bg-[#00D2FF] text-[#001E50] px-4 xl:px-5 py-2 rounded-full text-xs font-black uppercase tracking-widest hover:scale-105 transition-all whitespace-nowrap">Especial 10K</a>
-                <a href="resultados.html" class="text-white/80 hover:text-[#00D2FF] text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Resultados</a>
-                <a href="tienda.html" class="text-white/80 hover:text-[#00D2FF] text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">TIENDA</a>
-                <a href="faq.html" class="text-white/80 hover:text-[#00D2FF] text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">FAQ</a>
-                <a href="entrenador.html" class="text-white/80 hover:text-[#00D2FF] text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Entrenador IA</a>
-                <a href="inscripcion.html" class="border-2 border-white text-white px-5 xl:px-7 py-2.5 rounded-full font-black text-xs uppercase tracking-widest hover:bg-white hover:text-[#001E50] transition-all shadow-lg whitespace-nowrap">Inscribirme</a>
+            <div class="hidden lg:flex items-center space-x-4 xl:space-x-6">
+                <a href="index.html#ediciones" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Calendario</a>
+                
+                <a href="10k.html" class="bg-[#00D2FF] text-[#001E50] px-4 py-2 rounded-full text-[10px] xl:text-xs font-black uppercase tracking-widest hover:scale-105 transition-all shadow-lg shadow-[#00D2FF]/20">Especial 10K</a>
+                
+                <a href="resultados.html" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Resultados</a>
+                
+                <a href="aliados.html" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Aliados</a>
+                
+                <a href="tienda.html" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Tienda</a>
+
+                <div class="relative group">
+                    <button class="flex items-center text-white/80 group-hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all">
+                        Info <i class="fa-solid fa-chevron-down ml-2 text-[8px]"></i>
+                    </button>
+                    <div class="absolute right-0 mt-2 w-56 bg-[#001E50] border border-white/10 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+                        <div class="p-2">
+                            <a href="entrenador.html" class="flex items-center px-4 py-4 text-xs font-bold text-white/80 hover:text-[#00D2FF] hover:bg-white/5 rounded-lg transition-all">
+                                <i class="fa-solid fa-robot mr-3 text-sm opacity-70"></i> Entrenador IA
+                            </a>
+                            <a href="faq.html" class="flex items-center px-4 py-4 text-xs font-bold text-white/80 hover:text-[#00D2FF] hover:bg-white/5 rounded-lg transition-all">
+                                <i class="fa-solid fa-circle-question mr-3 text-sm opacity-70"></i> Preguntas Frecuentes
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="inscripcion.html" class="border-2 border-white text-white px-5 py-2.5 rounded-full font-black text-[10px] xl:text-xs uppercase tracking-widest hover:bg-white hover:text-[#001E50] transition-all shadow-lg">Inscribirme</a>
             </div>
 
-            <!-- Botón Hamburguesa Mobile -->
-            <button id="menuToggle" class="lg:hidden text-white text-2xl md:text-3xl focus:outline-none z-50">
+            <button id="menuToggle" class="lg:hidden text-white text-2xl focus:outline-none z-50">
                 <i class="fa-solid fa-bars-staggered"></i>
             </button>
         </div>
     </div>
 
-    <!-- Menú Mobile (Overlay) - SIN ÍCONO DE ROBOT -->
-    <div id="mobileMenu" class="fixed inset-0 bg-[#001E50] z-40 transform translate-x-full transition-transform duration-300 ease-in-out lg:hidden">
-        <div class="flex flex-col items-center justify-center h-full space-y-8 px-8">
-            <a href="index.html#el-reto" class="text-white text-xl font-bold uppercase tracking-widest hover:text-[#00D2FF] transition-all">El Reto</a>
-            <a href="index.html#ediciones" class="text-white text-xl font-bold uppercase tracking-widest hover:text-[#00D2FF] transition-all">Calendario</a>
-            <a href="10k.html" class="bg-[#00D2FF] text-[#001E50] px-8 py-3 rounded-full text-lg font-black uppercase tracking-widest">Especial 10K</a>
-            <a href="resultados.html" class="text-white text-xl font-bold uppercase tracking-widest hover:text-[#00D2FF] transition-all">Resultados</a>
-            <a href="tienda.html" class="text-white text-xl font-bold uppercase tracking-widest hover:text-[#00D2FF] transition-all">TIENDA</a>
-            <a href="faq.html" class="text-white text-xl font-bold uppercase tracking-widest hover:text-[#00D2FF] transition-all">FAQ</a>
-            <a href="entrenador.html" class="text-white text-xl font-bold uppercase tracking-widest hover:text-[#00D2FF] transition-all">Entrenador IA</a>
-            <a href="inscripcion.html" class="border-2 border-white text-white px-10 py-3 rounded-full font-black text-lg uppercase tracking-widest hover:bg-white hover:text-[#001E50] transition-all mt-6">Inscribirme</a>
+    <div id="mobileMenu" class="fixed inset-0 bg-[#001E50] z-40 transform translate-x-full transition-transform duration-300 lg:hidden">
+        <div class="flex flex-col items-center justify-center h-full space-y-6 px-8">
+            <a href="index.html#ediciones" class="text-white text-lg font-bold uppercase tracking-widest">Calendario</a>
+            <a href="10k.html" class="bg-[#00D2FF] text-[#001E50] px-10 py-3 rounded-full text-lg font-black uppercase tracking-widest shadow-xl shadow-[#00D2FF]/20">Especial 10K</a>
+            <a href="resultados.html" class="text-white text-lg font-bold uppercase tracking-widest">Resultados</a>
+            <a href="aliados.html" class="text-white text-lg font-bold uppercase tracking-widest">Aliados</a>
+            <a href="tienda.html" class="text-white text-lg font-bold uppercase tracking-widest">Tienda</a>
+            <div class="h-[1px] w-12 bg-white/10 my-2"></div>
+            <a href="entrenador.html" class="text-white text-base font-bold uppercase">Entrenador IA</a>
+            <a href="faq.html" class="text-white text-base font-bold uppercase">FAQ</a>
+            <a href="inscripcion.html" class="border-2 border-white text-white px-10 py-3 rounded-full font-black text-lg uppercase tracking-widest bg-white/5 transition-all mt-4">Inscribirme</a>
         </div>
     </div>
 </nav>
@@ -423,53 +440,74 @@ El running virtual más exigente de Venezuela, un legado que se corre, se siente
     </section>
 
     <section id="aliados" class="py-24 bg-slate-50 border-t border-slate-100">
-        <div class="max-w-7xl mx-auto px-4 md:px-12 text-center">
-            <span class="text-[#00D2FF] font-black text-[10px] uppercase tracking-[0.5em] mb-4 block">Alianza Estratégica</span>
-            <h2 class="text-[#001E50] text-4xl font-black uppercase mb-16 tracking-tighter italic">Nuestros <span class="text-[#00D2FF]">Aliados</span></h2>
-            <div class="mb-20">
-                <div class="max-w-md mx-auto bg-white p-10 rounded-[3rem] shadow-2xl border-2 border-[#00D2FF]/10 transition-transform hover:scale-105">
-                    <p class="text-[9px] text-slate-400 font-black uppercase tracking-[0.4em] mb-8 italic">Presentador Oficial</p>
-                    <a href="https://www.instagram.com/team_fs__/" target="_blank" class="block group">
-                        <img src="img/teamfslogo.png" alt="TeamFS Logo" class="h-38 mx-auto object-contain transition-transform group-hover:scale-110">
-                        <div class="mt-8 flex justify-center gap-2">
-                            <span class="h-1 w-8 bg-[#00D2FF] rounded-full group-hover:w-12 transition-all"></span>
-                            <span class="h-1 w-2 bg-[#00D2FF]/30 rounded-full"></span>
-                        </div>
-                        <p class="mt-4 text-[10px] text-[#00D2FF] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
-                            Ver Instagram <i class="fa-brands fa-instagram ml-1"></i>
-                        </p>
-                    </a>
-                </div>
-            </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div class="bg-white/50 p-8 rounded-2xl border border-slate-100 group transition-all hover:bg-white hover:shadow-lg">
-                    <div class="h-12 flex items-center justify-center opacity-40 group-hover:opacity-100 transition-all">
-                        <span class="text-slate-300 font-bold uppercase text-[10px] tracking-widest">Logo Aliado 1</span>
+    <div class="max-w-7xl mx-auto px-4 md:px-12 text-center">
+        <span class="text-[#00D2FF] font-black text-[10px] uppercase tracking-[0.5em] mb-4 block">Alianza Estratégica</span>
+        <h2 class="text-[#001E50] text-4xl font-black uppercase mb-16 tracking-tighter italic">Nuestros <span class="text-[#00D2FF]">Aliados</span></h2>
+        
+        <div class="mb-20">
+            <div class="max-w-sm mx-auto bg-white p-8 rounded-[3rem] shadow-2xl border-2 border-[#00D2FF]/10 transition-transform hover:scale-105">
+                <p class="text-[10px] text-slate-900 font-black uppercase tracking-[0.4em] mb-6 italic">Presentador Oficial</p>
+                
+                <a href="https://www.instagram.com/team_fs__/" target="_blank" class="block group">
+                    <img src="img/teamfslogo.png" alt="TeamFS Logo" class="h-34 mx-auto object-contain transition-transform group-hover:scale-110">
+                    
+                    <div class="mt-6">
+                        <span class="text-slate-900 font-black uppercase text-[11px] tracking-widest group-hover:text-[#00D2FF] transition-colors">Team FS</span>
+                        <p class="text-[9px] text-[#00D2FF] font-bold uppercase mt-2 opacity-0 group-hover:opacity-100 transition-all italic">Fuerza y Salud</p>
                     </div>
-                </div>
-                <div class="bg-white/50 p-8 rounded-2xl border border-slate-100 group transition-all hover:bg-white hover:shadow-lg">
-                    <div class="h-12 flex items-center justify-center opacity-40 group-hover:opacity-100 transition-all">
-                        <span class="text-slate-300 font-bold uppercase text-[10px] tracking-widest">Logo Aliado 2</span>
+
+                    <div class="mt-4 flex justify-center gap-2">
+                        <span class="h-1 w-8 bg-[#00D2FF] rounded-full group-hover:w-12 transition-all"></span>
+                        <span class="h-1 w-2 bg-[#00D2FF]/30 rounded-full"></span>
                     </div>
-                </div>
-                <div class="bg-white/50 p-8 rounded-2xl border border-slate-100 group transition-all hover:bg-white hover:shadow-lg">
-                    <div class="h-12 flex items-center justify-center opacity-40 group-hover:opacity-100 transition-all">
-                        <span class="text-slate-300 font-bold uppercase text-[10px] tracking-widest">Logo Aliado 3</span>
-                    </div>
-                </div>
-                <div class="bg-white/50 p-8 rounded-2xl border border-slate-100 group transition-all hover:bg-white hover:shadow-lg">
-                    <div class="h-12 flex items-center justify-center opacity-40 group-hover:opacity-100 transition-all">
-                        <span class="text-slate-300 font-bold uppercase text-[10px] tracking-widest">Logo Aliado 4</span>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-16">
-                <a href="https://wa.me/584127732710" class="text-slate-400 text-[10px] font-bold uppercase tracking-widest border-b border-slate-200 pb-2 hover:text-[#00D2FF] hover:border-[#00D2FF] transition-all">
-                    ¿Quieres ser aliado del Circuito 2026? Contáctanos
                 </a>
             </div>
         </div>
-    </section>
+
+        <div class="flex flex-wrap justify-center gap-6">
+            
+            <div class="w-full sm:w-64 bg-white p-8 rounded-3xl border border-slate-100 shadow-sm transition-all hover:shadow-xl hover:-translate-y-2 group">
+                <a href="https://www.instagram.com/laflacapasteles.pf/" target="_blank" class="block">
+                    <div class="h-22 flex flex-col items-center justify-center">
+                        <img src="img/laflacalogo.png" alt="La Flaca" class="h-21 w-auto object-contain transition-transform group-hover:scale-110">
+                    </div>
+                    <div class="mt-4 text-center">
+                        <span class="text-slate-900 font-black uppercase text-[10px] tracking-widest group-hover:text-[#00D2FF] transition-colors">La Flaca</span>
+                        <p class="text-[8px] text-[#00D2FF] font-bold uppercase mt-1 opacity-0 group-hover:opacity-100 transition-all">Pasteles y Tequeños</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="w-full sm:w-64 bg-white/50 p-8 rounded-3xl border border-dashed border-slate-300 flex items-center justify-center group hover:bg-white transition-all hover:-translate-y-1">
+                <div class="text-center">
+                    <i class="fa-solid fa-plus text-slate-900 mb-2 block opacity-20 group-hover:opacity-100 transition-opacity"></i>
+                    <span class="text-slate-900 font-black uppercase text-[10px] tracking-widest opacity-40 group-hover:opacity-100">Próximo Aliado</span>
+                </div>
+            </div>
+
+            <div class="w-full sm:w-64 bg-white/50 p-8 rounded-3xl border border-dashed border-slate-300 flex items-center justify-center group hover:bg-white transition-all hover:-translate-y-1">
+                <div class="text-center">
+                    <i class="fa-solid fa-plus text-slate-900 mb-2 block opacity-20 group-hover:opacity-100 transition-opacity"></i>
+                    <span class="text-slate-900 font-black uppercase text-[10px] tracking-widest opacity-40 group-hover:opacity-100">Próximo Aliado</span>
+                </div>
+            </div>
+
+            <div class="w-full sm:w-64 bg-white/50 p-8 rounded-3xl border border-dashed border-slate-300 flex items-center justify-center group hover:bg-white transition-all hover:-translate-y-1">
+                <div class="text-center">
+                    <i class="fa-solid fa-plus text-slate-900 mb-2 block opacity-20 group-hover:opacity-100 transition-opacity"></i>
+                    <span class="text-slate-900 font-black uppercase text-[10px] tracking-widest opacity-40 group-hover:opacity-100">Próximo Aliado</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="mt-20">
+            <a href="https://wa.me/584127732710" target="_blank" class="inline-block px-10 py-4 rounded-full bg-[#001E50] text-white text-[11px] font-black uppercase tracking-[0.3em] hover:bg-[#00D2FF] hover:shadow-lg transition-all transform hover:scale-105">
+                ¿Quieres ser aliado? Contáctanos
+            </a>
+        </div>
+    </div>
+</section>	
 
     <section class="py-24 bg-[#001E50] relative overflow-hidden">
         <div class="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-96 h-96 bg-[#00D2FF]/10 rounded-full blur-3xl"></div>
