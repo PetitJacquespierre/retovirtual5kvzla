@@ -101,6 +101,37 @@
 
             <!-- Selección Textil -->
             <div id="seccion-extras" class="bg-white p-8 rounded-[2.5rem] shadow-xl border border-slate-100 transition-all">
+<!-- PROMOCIÓN VIP 10K -->
+<div class="mt-8 bg-gradient-to-br from-[#001E50] to-slate-900 p-8 rounded-[2.5rem] shadow-2xl border border-[#00D2FF]/30 relative overflow-hidden group transition-all hover:border-[#00D2FF]">
+    <div class="absolute top-0 right-0 bg-[#00D2FF] text-[#001E50] text-[9px] font-black uppercase tracking-widest px-4 py-2 rounded-bl-2xl z-10">
+        OFERTA FUNDADOR
+    </div>
+    <div class="flex flex-col md:flex-row items-center gap-6 relative z-10">
+        <div class="w-20 h-20 bg-white/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+            <i class="fa-solid fa-medal text-4xl text-[#00D2FF]"></i>
+        </div>
+        <div class="flex-1 text-left w-full">
+            <h3 class="text-white font-black text-xl uppercase italic mb-1">Asegura tu Medalla 10K</h3>
+            <p class="text-white/60 text-xs mb-4">Aprovecha la preventa exclusiva de $30 antes de abrir al público general.</p>
+            
+            <!-- Opciones de Reserva -->
+            <div class="flex flex-col gap-3">
+                <label class="cursor-pointer flex items-center gap-3 bg-white/5 border border-white/20 p-3 rounded-xl hover:bg-white/10 transition-all has-[:checked]:border-[#00D2FF] has-[:checked]:bg-[#00D2FF]/10">
+                    <input type="radio" name="opcion10k" value="0" onchange="actualizarTotal()" checked class="w-5 h-5 accent-[#00D2FF]">
+                    <span class="text-sm font-bold text-white">Por ahora no, solo inscribirme en los 5K</span>
+                </label>
+                <label class="cursor-pointer flex items-center gap-3 bg-white/5 border border-white/20 p-3 rounded-xl hover:bg-white/10 transition-all has-[:checked]:border-[#00D2FF] has-[:checked]:bg-[#00D2FF]/10">
+                    <input type="radio" name="opcion10k" value="10" onchange="actualizarTotal()" class="w-5 h-5 accent-[#00D2FF]">
+                    <span class="text-sm font-bold text-white flex-1">Abonar $10 <span class="text-white/50 text-xs block font-normal">Restan $20 para julio</span></span>
+                </label>
+                <label class="cursor-pointer flex items-center gap-3 bg-white/5 border border-white/20 p-3 rounded-xl hover:bg-white/10 transition-all has-[:checked]:border-[#00D2FF] has-[:checked]:bg-[#00D2FF]/10">
+                    <input type="radio" name="opcion10k" value="30" onchange="actualizarTotal()" class="w-5 h-5 accent-[#00D2FF]">
+                    <span class="text-sm font-bold text-[#00D2FF] flex-1">Pagar Total de $30 <span class="text-white/50 text-xs block font-normal">Salir de esto de una vez</span></span>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
                 <h3 class="text-[#001E50] font-black text-xl mb-2 uppercase italic">Mejora tu Kit (Opcional)</h3>
                 <p class="text-xs text-slate-400 mb-6 font-bold">Puedes seleccionar una o ambas piezas textiles.</p>
                 
@@ -338,6 +369,10 @@
                 document.getElementById('tallaFranela').value = ""; 
             }
 
+            // NUEVO: Sumar la opción seleccionada de los 10K
+            const opcion10k = document.querySelector('input[name="opcion10k"]:checked').value;
+            total += parseInt(opcion10k); // Suma 0, 10 o 30
+
             document.getElementById('total-usd').innerText = `$${total}`;
             document.getElementById('total-bs').innerText = (total * tasaBCV).toFixed(2) + " Bs.";
         }
@@ -379,7 +414,7 @@
                     document.getElementById('paso-1').classList.add('hidden-step');
                     document.getElementById('paso-fundador').classList.remove('hidden-step');
                 } else {
-                    // AQUÍ ESTÁ LA REDIRECCIÓN SI NO EXISTE LA CÉDULA
+                    // Redirección si no existe la cédula
                     window.location.href = "10k.html";
                 }
                 
@@ -407,13 +442,13 @@
             const tallaFranelilla = document.getElementById('tallaFranelilla').value;
             const tallaFranela = document.getElementById('tallaFranela').value;
             const totalUSD = document.getElementById('total-usd').innerText;
-	    
+    
             // Validar Reglamento
-const aceptoReglamento = document.getElementById('aceptoReglamento').checked;
-if(!aceptoReglamento) {
-    return alert("⚠️ Debes aceptar el Reglamento y Descargo de Responsabilidades para poder finalizar tu inscripción.");
-}
-	
+            const aceptoReglamento = document.getElementById('aceptoReglamento').checked;
+            if(!aceptoReglamento) {
+                return alert("⚠️ Debes aceptar el Reglamento y Descargo de Responsabilidades para poder finalizar tu inscripción.");
+            }
+    
             if(!nombre || !tel || !estado || !ciudad || !direccion || !refPago || !fechaPago) {
                 return alert("⚠️ ALERTA: Faltan datos logísticos obligatorios (*).");
             }
@@ -430,7 +465,21 @@ if(!aceptoReglamento) {
 
             let txtTallaExtra = arrayExtras.length > 0 ? arrayExtras.join(" | ") : "No";
 
-            const msg = `🏆 *RENOVACIÓN 5K*%0A🏃‍♂️ *DORSAL:* #${dorsalActual}%0A👤 *ATLETA:* ${nombre}%0A👕 *TEXTIL:* ${txtTallaExtra}%0A💰 *TOTAL:* ${totalUSD}%0A🧾 *Nº PAGO:* ${refPago}%0A_Adjunto comprobante..._`;
+            // NUEVO: Validar qué opción de 10K eligió
+            const opcion10k = document.querySelector('input[name="opcion10k"]:checked').value;
+            let textoReserva = "NO";
+            let saldoPendiente = "$0";
+
+            if(opcion10k === "10") {
+                textoReserva = "SÍ - Abonó $10";
+                saldoPendiente = "$20";
+            } else if(opcion10k === "30") {
+                textoReserva = "SÍ - Pagó Completo ($30)";
+                saldoPendiente = "$0";
+            }
+
+            // NUEVO: El mensaje para WhatsApp ahora incluye el abono
+            const msg = `🏆 *RENOVACIÓN 5K*%0A🏃‍♂️ *DORSAL:* #${dorsalActual}%0A👤 *ATLETA:* ${nombre}%0A👕 *TEXTIL:* ${txtTallaExtra}%0A🏅 *10K VIP:* ${textoReserva}%0A💰 *TOTAL PAGADO:* ${totalUSD}%0A🧾 *Nº PAGO:* ${refPago}%0A_Adjunto comprobante..._`;
 
             document.getElementById('loader').classList.remove('hidden');
 
@@ -447,6 +496,10 @@ if(!aceptoReglamento) {
             datos.append("RefPago", refPago);
             datos.append("FechaPago", fechaPago);
             datos.append("Total", totalUSD);
+            
+            // NUEVAS COLUMNAS PARA GOOGLE SHEETS
+            datos.append("Reserva10K", textoReserva);      
+            datos.append("SaldoPendiente", saldoPendiente); 
 
             fetch(urlBaseDeDatos, { method: 'POST', body: datos, mode: 'no-cors' })
                 .then(() => { mostrarExito(msg); })
