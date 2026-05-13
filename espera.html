@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista VIP 10K - Reto Virtual VZLA</title>
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #000a14; }
+        h1, h2, h3 { font-family: 'Montserrat', sans-serif; }
+        input:focus, select:focus { 
+            border-color: #00D2FF !important; 
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.2); 
+            outline: none;
+        }
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+        
+        @keyframes pulse-red {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+        .alerta-cupos { animation: pulse-red 2s infinite; }
+    </style>
+</head>
+<!-- AQUI ESTA LA CORRECCIÓN: overflow-x-hidden -->
+<body class="text-slate-200 min-h-screen flex flex-col relative overflow-x-hidden">
+
+<nav class="bg-[#001E50] sticky top-0 z-50 shadow-2xl">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20 md:h-28">
+            
+            <!-- BLOQUE DEL LOGO -->
+            <div class="flex items-center gap-3 md:gap-5 cursor-pointer group -ml-2 md:-ml-4" onclick="location.href='index.html'">
+                
+                <img src="img/RV-Isotipo-sinfondo.png" alt="Reto Virtual" class="h-12 w-auto object-contain brightness-125 transition-transform group-hover:scale-105 md:hidden">
+
+                <img src="img/RV Texto Sin fondo.png" alt="Reto Virtual" class="hidden md:block h-20 lg:h-28 w-auto object-contain brightness-125 transition-transform group-hover:scale-105">
+                
+                <div class="h-10 md:h-12 lg:h-16 w-[1px] bg-white/20"></div>
+                
+                <div class="flex flex-col">
+                    <span class="text-[7px] md:text-[8px] text-white/60 font-bold tracking-[0.2em] uppercase mb-0.5 md:mb-1">Presentado por</span>
+                    <span class="text-white font-black text-base md:text-xl lg:text-2xl tracking-tighter leading-none group-hover:text-[#00D2FF] transition-colors italic">TEAMFS</span>
+                </div>
+            </div>
+
+            <!-- BOTONES DEL MENÚ -->
+            <div class="hidden lg:flex items-center space-x-4 xl:space-x-6">
+                <a href="index.html#ediciones" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Calendario</a>
+                
+                <a href="10k.html" class="bg-[#00D2FF] text-[#001E50] px-4 py-2 rounded-full text-[10px] xl:text-xs font-black uppercase tracking-widest hover:scale-105 transition-all shadow-lg shadow-[#00D2FF]/20">Especial 10K</a>
+                
+                <a href="resultados.html" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Resultados</a>
+                
+                <a href="aliados.html" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Aliados</a>
+                
+                <a href="tienda.html" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Tienda</a>
+
+                <div class="relative group">
+                    <button class="flex items-center text-white/80 group-hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all">
+                        Info <i class="fa-solid fa-chevron-down ml-2 text-[8px]"></i>
+                    </button>
+                    <div class="absolute right-0 mt-2 w-56 bg-[#001E50] border border-white/10 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+                        <div class="p-2">
+                            <a href="entrenador.html" class="flex items-center px-4 py-4 text-xs font-bold text-white/80 hover:text-[#00D2FF] hover:bg-white/5 rounded-lg transition-all">
+                                <i class="fa-solid fa-robot mr-3 text-sm opacity-70"></i> Entrenador IA
+                            </a>
+                            <a href="faq.html" class="flex items-center px-4 py-4 text-xs font-bold text-white/80 hover:text-[#00D2FF] hover:bg-white/5 rounded-lg transition-all">
+                                <i class="fa-solid fa-circle-question mr-3 text-sm opacity-70"></i> Preguntas Frecuentes
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="inscripcion.html" class="border-2 border-white text-white px-5 py-2.5 rounded-full font-black text-[10px] xl:text-xs uppercase tracking-widest hover:bg-white hover:text-[#001E50] transition-all shadow-lg">Inscribirme</a>
+            </div>
+
+            <button id="menuToggle" class="lg:hidden text-white text-2xl focus:outline-none z-50">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- MENÚ MÓVIL DESPLEGABLE -->
+    <div id="mobileMenu" class="fixed inset-0 bg-[#001E50] z-40 transform translate-x-full transition-transform duration-300 lg:hidden">
+        <div class="flex flex-col items-center justify-center h-full space-y-6 px-8">
+            <a href="index.html#ediciones" class="text-white text-lg font-bold uppercase tracking-widest">Calendario</a>
+            <a href="10k.html" class="bg-[#00D2FF] text-[#001E50] px-10 py-3 rounded-full text-lg font-black uppercase tracking-widest shadow-xl shadow-[#00D2FF]/20">Especial 10K</a>
+            <a href="resultados.html" class="text-white text-lg font-bold uppercase tracking-widest">Resultados</a>
+            <a href="aliados.html" class="text-white text-lg font-bold uppercase tracking-widest">Aliados</a>
+            <a href="tienda.html" class="text-white text-lg font-bold uppercase tracking-widest">Tienda</a>
+            <div class="h-[1px] w-12 bg-white/10 my-2"></div>
+            <a href="entrenador.html" class="text-white text-base font-bold uppercase">Entrenador IA</a>
+            <a href="faq.html" class="text-white text-base font-bold uppercase">FAQ</a>
+            <a href="inscripcion.html" class="border-2 border-white text-white px-10 py-3 rounded-full font-black text-lg uppercase tracking-widest bg-white/5 transition-all mt-4">Inscribirme</a>
+        </div>
+    </div>
+</nav>
+
+    <!-- Fondos Blur -->
+    <div class="absolute top-0 -right-[10%] w-[600px] h-[600px] bg-[#00D2FF] rounded-full blur-[150px] opacity-10 pointer-events-none z-0"></div>
+    <div class="absolute bottom-0 -left-[10%] w-[400px] h-[400px] bg-[#001E50] rounded-full blur-[100px] opacity-50 pointer-events-none z-0"></div>
+
+    <main class="flex-1 flex items-center justify-center p-4 py-12 relative z-10">
+        <div class="max-w-xl w-full bg-gradient-to-b from-[#001E50]/90 to-[#00102A]/90 backdrop-blur-md p-8 md:p-10 rounded-[3rem] shadow-[0_20px_60px_rgba(0,0,0,0.8)] border border-white/10 text-center relative mt-4">
+            
+            <div class="absolute top-0 inset-x-0 flex justify-center -mt-4">
+                <span class="alerta-cupos bg-red-600 text-white px-6 py-1.5 rounded-full text-[11px] font-black uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(220,38,38,0.5)] border border-red-400/50">
+                    <i class="fa-solid fa-fire mr-1"></i> EDICIÓN LIMITADA: SOLO 50 CUPOS
+                </span>
+            </div>
+
+            <img src="img/RV-Isotipo-sinfondo.png" alt="Reto Virtual" class="h-28 mx-auto mb-2 mt-4 drop-shadow-[0_0_15px_rgba(0,210,255,0.3)] transition-transform hover:scale-105">
+            
+            <h1 class="text-white font-black text-3xl uppercase tracking-tighter mb-2 italic">Asegura tu Cupo 10K</h1>
+            <p class="text-white/70 text-[13px] mb-6 font-medium px-2 leading-relaxed">
+                Al ser una edición especial, solo habilitaremos 50 medallas 3D. Regístrate en esta lista VIP y te enviaremos el enlace de inscripción directo a tu WhatsApp <b>horas antes de anunciarlo en Instagram.</b>
+            </p>
+
+            <div class="flex gap-4 mb-8 text-left">
+                <div class="flex-1 bg-white/5 border border-white/10 rounded-2xl p-4 hover:border-white/30 transition-all">
+                    <p class="text-slate-400 font-bold text-[10px] uppercase tracking-widest mb-1">Paquete Básico</p>
+                    <p class="text-white font-black text-2xl">$25</p>
+                    <p class="text-white/60 text-[11px] mt-1"><i class="fa-solid fa-medal text-slate-400 mr-1"></i> Medalla 3D de Metal</p>
+                </div>
+                <div class="flex-1 bg-[#00D2FF]/10 border border-[#00D2FF]/40 rounded-2xl p-4 relative overflow-hidden shadow-[0_0_15px_rgba(0,210,255,0.1)]">
+                    <div class="absolute top-0 right-0 bg-[#00D2FF] text-[#001E50] text-[9px] font-black px-3 py-1 rounded-bl-xl uppercase tracking-wider">RECOMENDADO</div>
+                    <p class="text-[#00D2FF] font-bold text-[10px] uppercase tracking-widest mb-1">Paquete Premium</p>
+                    <p class="text-[#00D2FF] font-black text-2xl">$35</p>
+                    <p class="text-white/80 text-[11px] mt-1"><i class="fa-solid fa-shirt text-[#00D2FF] mr-1"></i> Medalla + Franelilla</p>
+                </div>
+            </div>
+
+            <form id="formEspera" class="text-left space-y-4" onsubmit="enviarListaEspera(event)">
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="flex flex-col gap-1.5">
+                        <label class="text-[10px] font-bold uppercase text-[#00D2FF] ml-2 tracking-widest">Nombre Completo *</label>
+                        <input type="text" id="nombreEspera" class="bg-black/40 border border-white/10 rounded-xl px-4 py-3 font-bold text-sm text-white transition-all w-full" required>
+                    </div>
+                    <div class="flex flex-col gap-1.5">
+                        <label class="text-[10px] font-bold uppercase text-[#00D2FF] ml-2 tracking-widest">WhatsApp *</label>
+                        <input type="tel" id="whatsappEspera" class="bg-black/40 border border-white/10 rounded-xl px-4 py-3 font-bold text-sm text-white transition-all w-full" placeholder="Ej: 04121234567" required>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="flex flex-col gap-1.5">
+                        <label class="text-[10px] font-bold uppercase text-[#00D2FF] ml-2 tracking-widest">Estado *</label>
+                        <input type="text" id="estadoEspera" class="bg-black/40 border border-white/10 rounded-xl px-4 py-3 font-bold text-sm text-white transition-all w-full" required>
+                    </div>
+                    <div class="flex flex-col gap-1.5">
+                        <label class="text-[10px] font-bold uppercase text-[#00D2FF] ml-2 tracking-widest">Ciudad *</label>
+                        <input type="text" id="ciudadEspera" class="bg-black/40 border border-white/10 rounded-xl px-4 py-3 font-bold text-sm text-white transition-all w-full" required>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="flex flex-col gap-1.5">
+                        <label class="text-[10px] font-bold uppercase text-[#00D2FF] ml-2 tracking-widest">Género *</label>
+                        <select id="generoEspera" class="bg-black/40 border border-white/10 rounded-xl px-4 py-3 font-bold text-sm text-white transition-all w-full appearance-none" required>
+                            <option value="" disabled selected>Elegir...</option>
+                            <option value="Femenino">Femenino</option>
+                            <option value="Masculino">Masculino</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col gap-1.5">
+                        <label class="text-[10px] font-bold uppercase text-[#00D2FF] ml-2 tracking-widest">Edad *</label>
+                        <input type="number" id="edadEspera" class="bg-black/40 border border-white/10 rounded-xl px-4 py-3 font-bold text-sm text-white transition-all w-full text-center" min="15" max="99" required>
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-1.5">
+                    <label class="text-[10px] font-bold uppercase text-[#00D2FF] ml-2 tracking-widest">Team / Club de Running (Opcional)</label>
+                    <input type="text" id="teamEspera" class="bg-black/40 border border-white/10 rounded-xl px-4 py-3 font-bold text-sm text-white transition-all w-full" placeholder="Ej: Corredores Falcón">
+                </div>
+
+                <button type="submit" id="btnEspera" class="w-full bg-[#00D2FF] text-[#001E50] py-4 mt-4 rounded-xl font-black uppercase text-sm tracking-[0.2em] hover:scale-[1.02] transition-transform shadow-[0_0_20px_rgba(0,210,255,0.3)]">
+                    ASEGURAR MI PRIORIDAD <i class="fa-solid fa-bolt ml-2"></i>
+                </button>
+            </form>
+
+            <div id="msgExito" class="hidden mt-8 bg-[#00D2FF]/10 border border-[#00D2FF]/30 p-8 rounded-3xl">
+                <i class="fa-solid fa-lock text-[#00D2FF] text-4xl mb-4 drop-shadow-[0_0_15px_rgba(0,210,255,0.5)]"></i>
+                <h3 class="text-white font-black uppercase tracking-widest text-lg italic mb-2">¡Estás en la Lista VIP!</h3>
+                <p class="text-white/70 text-sm">Te avisaremos por WhatsApp el día de la apertura antes de anunciarlo al público en Instagram.</p>
+                <button onclick="location.href='index.html'" class="mt-6 border border-white/20 px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-[#001E50] transition-colors">Volver al Inicio</button>
+            </div>
+        </div>
+    </main>
+<footer class="bg-[#001E50] py-20 px-4 border-t border-white/5">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-16 text-center md:text-left">
+        <div>
+            <img src="img/RV-Isotipo-sinfondo.png" class="h-14 mx-auto md:mx-0 mb-6 grayscale brightness-200 opacity-40">
+            <p class="text-white/30 text-[10px] uppercase tracking-[0.4em] leading-relaxed">
+                Reto Virtual VZLA es una producción de <br>
+                <a href="https://www.instagram.com/team_fs__/" target="_blank" class="text-white/60 hover:text-[#00D2FF] transition-colors font-bold">TeamFS</a>. <br>
+                © 2026 THE ROAD TO GLORY.
+            </p>
+        </div>
+        <div class="flex flex-col items-center justify-center gap-6">
+            <h4 class="text-[#00D2FF] font-bold text-[10px] uppercase tracking-[0.3em]">Síguenos en la ruta</h4>
+            <div class="flex gap-8">
+                <a href="https://wa.me/584127732710" target="_blank" class="text-white/40 hover:text-[#00D2FF] text-3xl transition-all transform hover:scale-110"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="https://www.instagram.com/retovirtual.vzla/" target="_blank" class="text-white/40 hover:text-[#00D2FF] text-3xl transition-all transform hover:scale-110"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@retovirtual.vzla" target="_blank" class="text-white/40 hover:text-[#00D2FF] text-3xl transition-all transform hover:scale-110"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="https://www.strava.com/clubs/1859944" target="_blank" class="text-white/40 hover:text-[#00D2FF] text-3xl transition-all transform hover:scale-110"><i class="fa-brands fa-strava"></i></a>
+            </div>
+        </div>
+        <div class="border-l border-white/10 pl-8 hidden md:block text-right">
+            <h4 class="text-[#00D2FF] font-bold text-[10px] uppercase tracking-[0.3em] mb-2">Presentado por</h4>
+            <a href="https://www.instagram.com/team_fs__/" target="_blank" class="group">
+                <p class="text-white font-black text-3xl italic tracking-tighter uppercase opacity-80 group-hover:text-[#00D2FF] transition-all">TeamFS</p>
+                <p class="text-[9px] text-white/40 uppercase tracking-widest">Socio Tecnológico Oficial</p>
+            </a>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        const urlScriptEspera = "https://script.google.com/macros/s/AKfycbxlsLKFnl296kc7CABMV_rjiHPQLwBKejZebiCwU4i6bfC9PSVhFXPsZx21nQNLXptExg/exec"; 
+
+        // Script para el Menu Móvil
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            const menu = document.getElementById('mobileMenu');
+            if (menu.classList.contains('translate-x-full')) {
+                menu.classList.remove('translate-x-full');
+            } else {
+                menu.classList.add('translate-x-full');
+            }
+        });
+
+        function enviarListaEspera(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btnEspera');
+            
+            btn.innerText = "REGISTRANDO...";
+            btn.disabled = true;
+
+            const datos = new FormData();
+            datos.append("Nombre", document.getElementById('nombreEspera').value);
+            datos.append("Telefono", document.getElementById('whatsappEspera').value);
+            datos.append("Estado", document.getElementById('estadoEspera').value);
+            datos.append("Ciudad", document.getElementById('ciudadEspera').value);
+            datos.append("Genero", document.getElementById('generoEspera').value);
+            datos.append("Edad", document.getElementById('edadEspera').value);
+            datos.append("Team", document.getElementById('teamEspera').value || "Ninguno");
+
+            fetch(urlScriptEspera, { method: 'POST', body: datos, mode: 'no-cors' })
+                .then(() => {
+                    document.getElementById('formEspera').classList.add('hidden');
+                    document.getElementById('msgExito').classList.remove('hidden');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                })
+                .catch(() => {
+                    alert("Ocurrió un error de conexión. Inténtalo de nuevo.");
+                    btn.innerText = "ASEGURAR MI PRIORIDAD";
+                    btn.disabled = false;
+                });
+        }
+    </script>
+</body>
+</html>

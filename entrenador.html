@@ -76,15 +76,27 @@
     <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
         <div class="flex justify-between items-center h-20 md:h-28">
             
-            <div class="flex items-center gap-2 md:gap-4 cursor-pointer group -ml-2 md:-ml-4" onclick="location.href='index.html'">
-                <img src="img/RV-Isotipo-sinfondo.png" alt="Reto" class="h-12 md:h-16 lg:h-20 w-auto object-contain brightness-125 transition-transform group-hover:scale-105">
-                <div class="h-8 md:h-10 lg:h-12 w-[1px] bg-white/20"></div>
+            <!-- BLOQUE DEL LOGO CORREGIDO (Limpiecito y más grande) -->
+            <div class="flex items-center gap-3 md:gap-5 cursor-pointer group -ml-2 md:-ml-4" onclick="location.href='index.html'">
+                
+                <!-- 📱 Logo para Móvil (Isotipo) -->
+                <img src="img/RV-Isotipo-sinfondo.png" alt="Reto Virtual" class="h-12 w-auto object-contain brightness-125 transition-transform group-hover:scale-105 md:hidden">
+
+                <!-- 💻 Logo para Laptop (Texto) - ¡TAMAÑO AUMENTADO AQUÍ! (h-16 a h-20) -->
+                <img src="img/RV Texto Sin fondo.png" alt="Reto Virtual" class="hidden md:block h-20 lg:h-28 w-auto object-contain brightness-125 transition-transform group-hover:scale-105">
+                
+                <!-- La línea separadora (también la hice un poco más alta para que cuadre) -->
+                <div class="h-10 md:h-12 lg:h-16 w-[1px] bg-white/20"></div>
+                
+                <!-- Texto TEAMFS -->
                 <div class="flex flex-col">
                     <span class="text-[7px] md:text-[8px] text-white/60 font-bold tracking-[0.2em] uppercase mb-0.5 md:mb-1">Presentado por</span>
-                    <span class="text-white font-black text-base md:text-xl lg:text-3xl tracking-tighter leading-none group-hover:text-[#00D2FF] transition-colors italic">TEAMFS</span>
+                    <span class="text-white font-black text-base md:text-xl lg:text-2xl tracking-tighter leading-none group-hover:text-[#00D2FF] transition-colors italic">TEAMFS</span>
                 </div>
             </div>
+            <!-- FIN DEL BLOQUE DEL LOGO -->
 
+            <!-- BOTONES DEL MENÚ -->
             <div class="hidden lg:flex items-center space-x-4 xl:space-x-6">
                 <a href="index.html#ediciones" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Calendario</a>
                 
@@ -121,6 +133,7 @@
         </div>
     </div>
 
+    <!-- MENÚ MÓVIL DESPLEGABLE -->
     <div id="mobileMenu" class="fixed inset-0 bg-[#001E50] z-40 transform translate-x-full transition-transform duration-300 lg:hidden">
         <div class="flex flex-col items-center justify-center h-full space-y-6 px-8">
             <a href="index.html#ediciones" class="text-white text-lg font-bold uppercase tracking-widest">Calendario</a>
@@ -136,15 +149,20 @@
     </div>
 </nav>
 
+
+    <!-- HERO pequeño -->
     <!-- HERO pequeño -->
     <section class="relative py-20 px-4 text-center overflow-hidden">
         <div class="glow-orb w-96 h-96 bg-[#00D2FF]/15 top-0 right-0"></div>
         <div class="glow-orb w-72 h-72 bg-purple-500/10 bottom-0 left-0" style="animation-delay:4s"></div>
         <div class="relative z-10">
+            
+            <!-- Etiqueta de IA Corregida (Una sola vez) -->
             <div class="inline-flex items-center gap-2 border border-[#00D2FF]/40 bg-[#00D2FF]/5 px-5 py-2 rounded-full mb-6">
-                <i class="fa-solid fa-microchip text-[#00D2FF] text-xs"></i>
-                <span class="text-[#00D2FF] font-black text-[10px] uppercase tracking-[0.4em]">Potenciado por OpenRouter API (Global)</span>
+                <i class="fa-solid fa-robot text-[#00D2FF] text-xs"></i>
+                <span class="text-[#00D2FF] font-black text-[10px] uppercase tracking-[0.3em]">Tu Coach Deportivo con IA 24/7</span>
             </div>
+            
             <h1 class="font-heading text-4xl md:text-6xl font-black uppercase tracking-tighter leading-tight mb-4">
                 Tu Centro de <span class="text-[#00D2FF] italic">Preparación Inteligente</span>
             </h1>
@@ -221,11 +239,11 @@
                             <div>
                                 <label>Objetivo</label>
                                 <select id="ent-objetivo">
-                                    <option value="terminar">Solo terminar el 5K</option>
-                                    <option value="sub30">Bajar de 30 minutos</option>
-                                    <option value="sub25">Bajar de 25 minutos</option>
-                                    <option value="mejorar">Mejorar mi marca personal</option>
-                                </select>
+   				   <option value="Terminar el 5K">Solo terminar el 5K</option>
+                                   <option value="Mejorar tiempo en 5K">Mejorar mi tiempo en 5K</option>
+                                   <option value="Terminar mi primer 10K">Prepararme para mi primer 10K</option>
+                                   <option value="Mejorar tiempo en 10K">Mejorar mi marca personal en 10K</option>
+</select>
                             </div>
                         </div>
                     </div>
@@ -298,19 +316,18 @@
                     </div>
                     <div class="space-y-4">
                         <div>
-                            <label>Tiempo objetivo en 5K (minutos)</label>
-                            <input type="number" id="est-tiempo" placeholder="Ej: 28" min="15" max="60">
-                        </div>
-                        <div>
-                            <label>¿Has corrido un 5K antes?</label>
-                            <select id="est-experiencia">
-                                <option value="nunca">Nunca</option>
-                                <option value="1_vez">1 vez</option>
-                                <option value="varias">Varias veces</option>
-                                <option value="regularmente">Regularmente</option>
-                            </select>
-                        </div>
-                        <div>
+    <label>Tiempo objetivo en minutos (Ej: 30 para 5K / 60 para 10K)</label>
+    <input type="number" id="est-tiempo" placeholder="Ej: 30" min="15" max="120">
+</div>
+<div>
+    <label>Distancia a correr y tu experiencia</label>
+    <select id="est-experiencia">
+        <option value="5K (Es mi primera vez)">5K (Es mi primera vez)</option>
+        <option value="5K (Ya he corrido antes)">5K (Ya he corrido antes)</option>
+        <option value="10K (Es mi primer 10K)">10K (Mi primer 10K)</option>
+        <option value="10K (Ya tengo experiencia)">10K (Ya tengo experiencia)</option>
+    </select>
+</div>
                             <label>¿Cómo describes tu estado físico?</label>
                             <select id="est-estado">
                                 <option value="bajo">Bajo (poco activo)</option>
@@ -465,7 +482,8 @@
             var nivel   = document.getElementById('ent-nivel').value;
             var dias    = document.getElementById('ent-dias').value;
             var semanas = document.getElementById('ent-semanas').value;
-            var obj     = document.getElementById('ent-objetivo').value;
+            var obj     = document.getElementById('ent-objetivo').value; // Aquí va a leer si es 5K o 10K
+            
             return base + "Actúa como entrenador de running. Crea un plan de entrenamiento de " + semanas + " semanas para un atleta de nivel " + nivel + " que puede entrenar " + dias + " días por semana. Su objetivo es: " + obj + ". Incluye: qué hacer cada día de entrenamiento, días de descanso, progresión semanal y consejo final motivador.";
         }
 
@@ -474,15 +492,18 @@
             var obj        = document.getElementById('nut-objetivo').value;
             var horario    = document.getElementById('nut-horario').value;
             var restriccion= document.getElementById('nut-restriccion').value;
-            return base + "Actúa como nutricionista deportiva. El atleta pesa " + peso + "kg, su objetivo es " + obj + ", entrena en horario " + horario + " y tiene restricción: " + restriccion + ". Crea un plan nutricional para corredor venezolano con alimentos accesibles en Venezuela. Incluye: qué comer antes de correr, durante (si aplica) y después. También da tips para la semana de carrera.";
+            
+            return base + "Actúa como nutricionista deportiva. El atleta pesa " + peso + "kg, su objetivo es " + obj + ", entrena en horario " + horario + " y tiene restricción: " + restriccion + ". Crea un plan nutricional para corredor venezolano con alimentos accesibles en Venezuela. Incluye: qué comer antes de correr, durante (si aplica, especial para 10K) y después. También da tips para la semana de carrera.";
         }
 
         if (modo === 'estratega') {
             var tiempo      = document.getElementById('est-tiempo').value || '30';
-            var experiencia = document.getElementById('est-experiencia').value;
+            var experiencia = document.getElementById('est-experiencia').value; // Aquí lee 5K o 10K
             var estado      = document.getElementById('est-estado').value;
             var fallo       = document.getElementById('est-fallo').value;
-            return base + "Actúa como estratega de carrera. El atleta quiere terminar 5K en " + tiempo + " minutos, ha corrido " + experiencia + ", su estado físico es " + estado + " y su mayor problema es: " + fallo + ". Define: pace objetivo por km (min/km), estrategia km a km (1-2 conservador, 3-4 sostenido, km 5 final), cómo resolver su problema principal y 3 tips clave para el día de carrera virtual.";
+            
+            // Le quitamos el "5K" fijo y le decimos que arme la estrategia por tramos según la distancia.
+            return base + "Actúa como estratega de carrera. El atleta correrá la distancia de: " + experiencia + ". Quiere terminar en " + tiempo + " minutos, su estado físico es " + estado + " y su mayor problema es: " + fallo + ". Define: pace objetivo por km (min/km), estrategia de carrera dividida por tramos (ej: primeros kms conservadores, mitad sostenida, cierre fuerte), cómo resolver su problema principal y 3 tips clave para el día de la carrera.";
         }
     }
 

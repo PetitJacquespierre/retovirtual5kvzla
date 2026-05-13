@@ -30,15 +30,27 @@
     <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
         <div class="flex justify-between items-center h-20 md:h-28">
             
-            <div class="flex items-center gap-2 md:gap-4 cursor-pointer group -ml-2 md:-ml-4" onclick="location.href='index.html'">
-                <img src="img/RV-Isotipo-sinfondo.png" alt="Reto" class="h-12 md:h-16 lg:h-20 w-auto object-contain brightness-125 transition-transform group-hover:scale-105">
-                <div class="h-8 md:h-10 lg:h-12 w-[1px] bg-white/20"></div>
+            <!-- BLOQUE DEL LOGO CORREGIDO (Limpiecito y más grande) -->
+            <div class="flex items-center gap-3 md:gap-5 cursor-pointer group -ml-2 md:-ml-4" onclick="location.href='index.html'">
+                
+                <!-- 📱 Logo para Móvil (Isotipo) -->
+                <img src="img/RV-Isotipo-sinfondo.png" alt="Reto Virtual" class="h-12 w-auto object-contain brightness-125 transition-transform group-hover:scale-105 md:hidden">
+
+                <!-- 💻 Logo para Laptop (Texto) - ¡TAMAÑO AUMENTADO AQUÍ! (h-16 a h-20) -->
+                <img src="img/RV Texto Sin fondo.png" alt="Reto Virtual" class="hidden md:block h-20 lg:h-28 w-auto object-contain brightness-125 transition-transform group-hover:scale-105">
+                
+                <!-- La línea separadora (también la hice un poco más alta para que cuadre) -->
+                <div class="h-10 md:h-12 lg:h-16 w-[1px] bg-white/20"></div>
+                
+                <!-- Texto TEAMFS -->
                 <div class="flex flex-col">
                     <span class="text-[7px] md:text-[8px] text-white/60 font-bold tracking-[0.2em] uppercase mb-0.5 md:mb-1">Presentado por</span>
-                    <span class="text-white font-black text-base md:text-xl lg:text-3xl tracking-tighter leading-none group-hover:text-[#00D2FF] transition-colors italic">TEAMFS</span>
+                    <span class="text-white font-black text-base md:text-xl lg:text-2xl tracking-tighter leading-none group-hover:text-[#00D2FF] transition-colors italic">TEAMFS</span>
                 </div>
             </div>
+            <!-- FIN DEL BLOQUE DEL LOGO -->
 
+            <!-- BOTONES DEL MENÚ -->
             <div class="hidden lg:flex items-center space-x-4 xl:space-x-6">
                 <a href="index.html#ediciones" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Calendario</a>
                 
@@ -75,6 +87,7 @@
         </div>
     </div>
 
+    <!-- MENÚ MÓVIL DESPLEGABLE -->
     <div id="mobileMenu" class="fixed inset-0 bg-[#001E50] z-40 transform translate-x-full transition-transform duration-300 lg:hidden">
         <div class="flex flex-col items-center justify-center h-full space-y-6 px-8">
             <a href="index.html#ediciones" class="text-white text-lg font-bold uppercase tracking-widest">Calendario</a>
