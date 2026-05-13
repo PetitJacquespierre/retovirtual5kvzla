@@ -24,18 +24,19 @@
 </head>
 <body class="text-slate-900">
 
-    <!-- Loader y Pantalla de Éxito (Sin cambios) -->
+    <!-- Loader -->
     <div id="loader" class="fixed inset-0 z-[100] loader-overlay flex flex-col items-center justify-center text-white hidden">
         <i class="fa-solid fa-circle-notch fa-spin text-5xl text-[#00D2FF] mb-4"></i>
         <p class="font-black uppercase tracking-widest text-sm">Validando y Guardando...</p>
     </div>
 
+    <!-- Pantalla de Éxito -->
     <div id="pantalla-exito" class="fixed inset-0 z-[100] bg-white flex flex-col items-center justify-center text-center p-6 hidden">
         <div class="w-24 h-24 bg-green-100 text-green-500 rounded-full flex items-center justify-center mb-6 text-5xl shadow-inner">
             <i class="fa-solid fa-check"></i>
         </div>
         <h2 class="text-3xl font-black text-[#001E50] uppercase italic mb-2 tracking-tighter">¡Inscripción Exitosa!</h2>
-        <p class="text-slate-500 mb-8 max-w-md">Tus datos han sido registrados correctamente en nuestra base de datos. Serás redirigido a WhatsApp para enviar tu comprobante.</p>
+        <p class="text-slate-500 mb-8 max-w-md">Tus datos han sido registrados. Serás redirigido a WhatsApp para enviar tu comprobante.</p>
         <button onclick="window.location.href='index.html'" class="bg-[#001E50] text-white px-10 py-4 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-[#00D2FF] hover:text-[#001E50] transition-all">
             Volver al Inicio
         </button>
@@ -58,24 +59,20 @@
                 </div>
 
                 <div class="hidden lg:flex items-center space-x-4 xl:space-x-6">
-                    <a href="index.html#ediciones" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Calendario</a>
-                    <a href="10k.html" class="bg-[#00D2FF] text-[#001E50] px-4 py-2 rounded-full text-[10px] xl:text-xs font-black uppercase tracking-widest hover:scale-105 transition-all shadow-lg shadow-[#00D2FF]/20">Especial 10K</a>
-                    <a href="resultados.html" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Resultados</a>
-                    <a href="aliados.html" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Aliados</a>
-                    <a href="tienda.html" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Tienda</a>
-                    <a href="inscripcion.html" class="border-2 border-white text-white px-5 py-2.5 rounded-full font-black text-[10px] xl:text-xs uppercase tracking-widest hover:bg-white hover:text-[#001E50] transition-all shadow-lg">Inscribirme</a>
+                    <a href="index.html#ediciones" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all">Calendario</a>
+                    <a href="10k.html" class="bg-[#00D2FF] text-[#001E50] px-4 py-2 rounded-full text-[10px] xl:text-xs font-black uppercase tracking-widest hover:scale-105 transition-all shadow-lg">Especial 10K</a>
+                    <a href="resultados.html" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all">Resultados</a>
+                    <a href="aliados.html" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all">Aliados</a>
+                    <a href="tienda.html" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all">Tienda</a>
+                    <a href="inscripcion.html" class="border-2 border-white text-white px-5 py-2.5 rounded-full font-black text-[10px] xl:text-xs uppercase tracking-widest hover:bg-white hover:text-[#001E50] transition-all">Inscribirme</a>
                 </div>
-
-                <button id="menuToggle" class="lg:hidden text-white text-2xl focus:outline-none z-50">
-                    <i class="fa-solid fa-bars-staggered"></i>
-                </button>
             </div>
         </div>
     </nav>
 
     <main class="max-w-4xl mx-auto px-6 py-16">
         
-        <!-- PASO 1: VALIDACIÓN -->
+        <!-- PASO 1: VALIDACIÓN CÉDULA -->
         <div id="paso-1" class="bg-white p-10 md:p-16 rounded-[3rem] shadow-2xl border border-slate-100 text-center relative overflow-hidden">
             <h2 class="text-[#001E50] font-black text-3xl uppercase tracking-tighter mb-4 italic">ACCESO EXCLUSIVO FUNDADORES</h2>
             <p class="text-slate-400 text-sm mb-10 italic">Ingresa tu cédula para validar tu acceso a la 2da Edición 5K.</p>
@@ -90,132 +87,151 @@
             </div>
         </div>
 
-        <!-- PASO 2: FORMULARIO (Se muestra si existe) -->
         <!-- PASO 2: FORMULARIO FUNDADOR -->
-<div id="paso-fundador" class="hidden-step space-y-8 animate-fade-in mt-8">
-    
-    <!-- ENCABEZADO Y BASE 5K -->
-    <div class="bg-blue-50 border-2 border-[#00D2FF]/50 p-8 rounded-[2rem] text-[#001E50] flex flex-col items-center text-center shadow-sm">
-        <h3 class="font-black uppercase text-2xl tracking-tighter mb-2">¡Atleta Verificado!</h3>
-        <p class="text-sm font-medium text-slate-500 mb-6">Tu acceso a la 2da Edición 5K está garantizado.</p>
-        
-        <div class="flex flex-col md:flex-row items-center gap-4 bg-white px-8 py-4 rounded-3xl shadow-sm border border-slate-100 w-full justify-between">
-            <div class="text-left">
-                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Inscripción Base</p>
-                <p class="font-black text-lg">RETO VIRTUAL 5K</p>
-            </div>
-            <div class="flex items-center gap-4">
-                <p id="textoDorsal" class="text-xs font-black uppercase tracking-widest bg-[#001E50] text-white px-4 py-2 rounded-full">Dorsal: #000</p>
-                <p class="text-2xl font-black text-[#00D2FF]">$15</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- SELECCIÓN TEXTIL 5K -->
-    <div id="seccion-extras" class="bg-white p-8 md:p-10 rounded-[2.5rem] shadow-xl border border-slate-100 transition-all">
-        <h3 class="text-[#001E50] font-black text-xl mb-2 uppercase italic">Mejora tu Kit 5K (Opcional)</h3>
-        <p class="text-xs text-slate-400 mb-6 font-bold">Puedes agregar prendas textiles exclusivas a tu inscripción de los 5K.</p>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-            <label class="cursor-pointer group flex flex-col items-center text-center border-2 border-slate-200 p-6 rounded-3xl hover:border-[#00D2FF] has-[:checked]:border-[#00D2FF] has-[:checked]:bg-[#00D2FF]/5 transition-all relative overflow-hidden">
-                <input type="checkbox" id="checkFranelilla" value="10" onchange="actualizarTotal()" class="absolute top-4 right-4 w-5 h-5 accent-[#00D2FF]">
-                <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                    <i class="fa-solid fa-shirt text-[#00D2FF] text-2xl"></i>
-                </div>
-                <h4 class="font-black text-[#001E50] text-sm uppercase">Franelilla Blanca</h4>
-                <p class="text-[10px] text-slate-400 font-bold">Corte olímpico deportivo</p>
-                <p class="text-xl font-black text-[#00D2FF] mt-3">+$10</p>
-            </label>
-
-            <label class="cursor-pointer group flex flex-col items-center text-center border-2 border-slate-200 p-6 rounded-3xl hover:border-[#00D2FF] has-[:checked]:border-[#00D2FF] has-[:checked]:bg-[#00D2FF]/5 transition-all relative overflow-hidden">
-                <input type="checkbox" id="checkFranela" value="12" onchange="actualizarTotal()" class="absolute top-4 right-4 w-5 h-5 accent-[#00D2FF]">
-                <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                    <i class="fa-solid fa-tshirt text-[#00D2FF] text-2xl"></i>
-                </div>
-                <h4 class="font-black text-[#001E50] text-sm uppercase">Franela Blanca</h4>
-                <p class="text-[10px] text-slate-400 font-bold">Tela Everlast c/ mangas</p>
-                <p class="text-xl font-black text-[#00D2FF] mt-3">+$12</p>
-            </label>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div id="contenedorTallaFranelilla" class="hidden flex flex-col gap-2">
-                <label class="text-[10px] font-bold uppercase text-slate-400">Talla para Franelilla <span class="req">*</span></label>
-                <select id="tallaFranelilla" class="bg-white border-2 border-[#00D2FF] rounded-xl px-4 py-3 font-bold text-sm w-full text-[#001E50] shadow-sm">
-                    <option value="" disabled selected>Elegir talla...</option>
-                    <option value="S">S - Pequeña</option>
-                    <option value="M">M - Mediana</option>
-                    <option value="L">L - Grande</option>
-                    <option value="XL">XL - Extra Grande</option>
-                </select>
-            </div>
-
-            <div id="contenedorTallaFranela" class="hidden flex flex-col gap-2">
-                <label class="text-[10px] font-bold uppercase text-slate-400">Talla para Franela <span class="req">*</span></label>
-                <select id="tallaFranela" class="bg-white border-2 border-[#00D2FF] rounded-xl px-4 py-3 font-bold text-sm w-full text-[#001E50] shadow-sm">
-                    <option value="" disabled selected>Elegir talla...</option>
-                    <option value="S">S - Pequeña</option>
-                    <option value="M">M - Mediana</option>
-                    <option value="L">L - Grande</option>
-                    <option value="XL">XL - Extra Grande</option>
-                </select>
-            </div>
-        </div>
-    </div>
-
-    <!-- MEGA OFERTA 10K VIP -->
-    <div class="mt-12 bg-gradient-to-br from-[#00102A] via-[#001E50] to-slate-900 p-8 md:p-12 rounded-[3rem] shadow-[0_20px_50px_rgba(0,30,80,0.5)] border border-[#00D2FF]/40 relative overflow-hidden group">
-        
-        <!-- Etiqueta Flotante VIP -->
-        <div class="absolute top-0 right-0 bg-[#00D2FF] text-[#001E50] text-[10px] font-black uppercase tracking-widest px-8 py-3 rounded-bl-3xl z-10 shadow-lg">
-            🌟 UPGRADE EXCLUSIVO FUNDADOR
-        </div>
-        
-        <!-- Brillo de fondo estético -->
-        <div class="absolute -top-24 -left-24 w-64 h-64 bg-[#00D2FF] rounded-full blur-[100px] opacity-20 pointer-events-none"></div>
-
-        <div class="flex flex-col lg:flex-row items-center gap-10 relative z-10">
-            <!-- Icono Grande -->
-            <div class="w-32 h-32 bg-gradient-to-tr from-white/5 to-white/20 rounded-full flex items-center justify-center flex-shrink-0 border-2 border-white/10 shadow-[0_0_30px_rgba(0,210,255,0.2)]">
-                <i class="fa-solid fa-medal text-6xl text-[#00D2FF]"></i>
-            </div>
+        <div id="paso-fundador" class="hidden-step space-y-8 animate-fade-in mt-8">
             
-            <div class="flex-1 text-left w-full">
-                <h2 class="text-white font-black text-3xl md:text-4xl uppercase italic tracking-tighter mb-2 drop-shadow-md">Asegura tu Medalla 10K</h2>
-                <p class="text-white/70 text-sm mb-6 font-medium">Congela el precio de preventa antes de abrir al público general y llévate el paquete completo de la edición especial.</p>
+            <!-- ENCABEZADO Y BASE 5K -->
+            <div class="bg-blue-50 border-2 border-[#00D2FF]/50 p-8 rounded-[2rem] text-[#001E50] flex flex-col items-center text-center shadow-sm">
+                <h3 class="font-black uppercase text-2xl tracking-tighter mb-2">¡Atleta Verificado!</h3>
+                <p class="text-sm font-medium text-slate-500 mb-6">Tu acceso a la 2da Edición 5K está garantizado.</p>
                 
-                <!-- Lista de Beneficios -->
-                <div class="bg-black/30 p-5 rounded-2xl border border-white/5 mb-8">
-                    <p class="text-[10px] text-[#00D2FF] font-black uppercase tracking-widest mb-3">Tu pase VIP ($30) Incluye:</p>
-                    <ul class="text-white/90 text-sm space-y-3 font-medium">
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-check-circle text-[#00D2FF] text-lg"></i> <b>Medalla de Metal 3D</b> (Coleccionable de lujo)</li>
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-check-circle text-[#00D2FF] text-lg"></i> <b>Pieza Textil Oscura Premium</b> (Franelilla o Franela)</li>
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-check-circle text-[#00D2FF] text-lg"></i> Envío consolidado y acceso prioritario</li>
-                    </ul>
-                </div>
-                
-                <!-- Opciones de Reserva -->
-                <div class="flex flex-col gap-4">
-                    <label class="cursor-pointer flex items-center gap-4 bg-white/5 border border-white/20 p-4 rounded-2xl hover:bg-white/10 transition-all has-[:checked]:border-[#00D2FF] has-[:checked]:bg-[#00D2FF]/10">
-                        <input type="radio" name="opcion10k" value="0" onchange="actualizarTotal()" checked class="w-6 h-6 accent-[#00D2FF]">
-                        <span class="text-base font-bold text-white">Por ahora no, solo inscribirme en los 5K</span>
-                    </label>
-                    <label class="cursor-pointer flex items-center gap-4 bg-white/5 border border-white/20 p-4 rounded-2xl hover:bg-white/10 transition-all has-[:checked]:border-[#00D2FF] has-[:checked]:bg-[#00D2FF]/10">
-                        <input type="radio" name="opcion10k" value="10" onchange="actualizarTotal()" class="w-6 h-6 accent-[#00D2FF]">
-                        <span class="text-base font-bold text-white flex-1">Abonar $10 hoy <span class="text-[#00D2FF] text-xs block font-normal mt-1">Restan $20 para julio. Congelas la promo.</span></span>
-                    </label>
-                    <label class="cursor-pointer flex items-center gap-4 bg-[#00D2FF]/10 border border-[#00D2FF]/50 p-4 rounded-2xl hover:bg-[#00D2FF]/20 transition-all has-[:checked]:border-[#00D2FF] has-[:checked]:bg-[#00D2FF]/20">
-                        <input type="radio" name="opcion10k" value="30" onchange="actualizarTotal()" class="w-6 h-6 accent-[#00D2FF]">
-                        <span class="text-base font-black text-[#00D2FF] flex-1">Pagar Total de $30 <span class="text-white/70 text-xs block font-normal mt-1">Pagas completo y sales de esto de una vez.</span></span>
-                    </label>
+                <div class="flex flex-col md:flex-row items-center gap-4 bg-white px-8 py-4 rounded-3xl shadow-sm border border-slate-100 w-full justify-between">
+                    <div class="text-left">
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Inscripción Base</p>
+                        <p class="font-black text-lg">RETO VIRTUAL 5K</p>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <p id="textoDorsal" class="text-xs font-black uppercase tracking-widest bg-[#001E50] text-white px-4 py-2 rounded-full">Dorsal: #000</p>
+                        <p class="text-2xl font-black text-[#00D2FF]">$15</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    
-    <!-- (AQUÍ DEBAJO DEBE SEGUIR TU SECCIÓN DE DATOS LOGÍSTICOS QUE YA TIENES) -->
 
-            <!-- Datos Logísticos y Envío -->
+            <!-- SELECCIÓN TEXTIL 5K -->
+            <div id="seccion-extras" class="bg-white p-8 md:p-10 rounded-[2.5rem] shadow-xl border border-slate-100 transition-all">
+                <h3 class="text-[#001E50] font-black text-xl mb-2 uppercase italic">Mejora tu Kit 5K (Opcional)</h3>
+                <p class="text-xs text-slate-400 mb-6 font-bold">Agrega prendas textiles exclusivas a tu inscripción de los 5K.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <label class="cursor-pointer group flex flex-col items-center text-center border-2 border-slate-200 p-6 rounded-3xl hover:border-[#00D2FF] has-[:checked]:border-[#00D2FF] has-[:checked]:bg-[#00D2FF]/5 transition-all relative overflow-hidden">
+                        <input type="checkbox" id="checkFranelilla" value="10" onchange="actualizarTotal()" class="absolute top-4 right-4 w-5 h-5 accent-[#00D2FF]">
+                        <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-shirt text-[#00D2FF] text-2xl"></i>
+                        </div>
+                        <h4 class="font-black text-[#001E50] text-sm uppercase">Franelilla Blanca</h4>
+                        <p class="text-[10px] text-slate-400 font-bold">Corte olímpico</p>
+                        <p class="text-xl font-black text-[#00D2FF] mt-3">+$10</p>
+                    </label>
+
+                    <label class="cursor-pointer group flex flex-col items-center text-center border-2 border-slate-200 p-6 rounded-3xl hover:border-[#00D2FF] has-[:checked]:border-[#00D2FF] has-[:checked]:bg-[#00D2FF]/5 transition-all relative overflow-hidden">
+                        <input type="checkbox" id="checkFranela" value="12" onchange="actualizarTotal()" class="absolute top-4 right-4 w-5 h-5 accent-[#00D2FF]">
+                        <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-tshirt text-[#00D2FF] text-2xl"></i>
+                        </div>
+                        <h4 class="font-black text-[#001E50] text-sm uppercase">Franela Blanca</h4>
+                        <p class="text-[10px] text-slate-400 font-bold">Tela Everlast c/ mangas</p>
+                        <p class="text-xl font-black text-[#00D2FF] mt-3">+$12</p>
+                    </label>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div id="contenedorTallaFranelilla" class="hidden flex flex-col gap-2">
+                        <label class="text-[10px] font-bold uppercase text-slate-400">Talla para Franelilla <span class="req">*</span></label>
+                        <select id="tallaFranelilla" class="bg-white border-2 border-[#00D2FF] rounded-xl px-4 py-3 font-bold text-sm w-full text-[#001E50] shadow-sm">
+                            <option value="" disabled selected>Elegir talla...</option>
+                            <option value="S">S - Pequeña</option>
+                            <option value="M">M - Mediana</option>
+                            <option value="L">L - Grande</option>
+                            <option value="XL">XL - Extra Grande</option>
+                        </select>
+                    </div>
+
+                    <div id="contenedorTallaFranela" class="hidden flex flex-col gap-2">
+                        <label class="text-[10px] font-bold uppercase text-slate-400">Talla para Franela <span class="req">*</span></label>
+                        <select id="tallaFranela" class="bg-white border-2 border-[#00D2FF] rounded-xl px-4 py-3 font-bold text-sm w-full text-[#001E50] shadow-sm">
+                            <option value="" disabled selected>Elegir talla...</option>
+                            <option value="S">S - Pequeña</option>
+                            <option value="M">M - Mediana</option>
+                            <option value="L">L - Grande</option>
+                            <option value="XL">XL - Extra Grande</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MEGA OFERTA 10K VIP -->
+            <div class="mt-12 bg-gradient-to-br from-[#00102A] via-[#001E50] to-slate-900 p-8 md:p-12 rounded-[3rem] shadow-[0_20px_50px_rgba(0,30,80,0.5)] border border-[#00D2FF]/40 relative overflow-hidden group">
+                
+                <div class="absolute top-0 right-0 bg-[#00D2FF] text-[#001E50] text-[10px] font-black uppercase tracking-widest px-8 py-3 rounded-bl-3xl z-10 shadow-lg">
+                    🌟 UPGRADE EXCLUSIVO FUNDADOR
+                </div>
+                
+                <div class="absolute -top-24 -left-24 w-64 h-64 bg-[#00D2FF] rounded-full blur-[100px] opacity-20 pointer-events-none"></div>
+
+                <div class="flex flex-col lg:flex-row items-start gap-10 relative z-10">
+                    <div class="w-32 h-32 bg-gradient-to-tr from-white/5 to-white/20 rounded-full flex items-center justify-center flex-shrink-0 border-2 border-white/10 shadow-[0_0_30px_rgba(0,210,255,0.2)] mt-4">
+                        <i class="fa-solid fa-medal text-6xl text-[#00D2FF]"></i>
+                    </div>
+                    
+                    <div class="flex-1 text-left w-full">
+                        <h2 class="text-white font-black text-3xl md:text-4xl uppercase italic tracking-tighter mb-2 drop-shadow-md">Asegura tu Medalla 10K</h2>
+                        <p class="text-white/70 text-sm mb-6 font-medium">Congela el precio de preventa antes de abrir al público general y llévate el paquete completo de la edición especial.</p>
+                        
+                        <div class="bg-black/30 p-5 rounded-2xl border border-white/5 mb-8">
+                            <p class="text-[10px] text-[#00D2FF] font-black uppercase tracking-widest mb-3">Tu pase VIP ($30) Incluye:</p>
+                            <ul class="text-white/90 text-sm space-y-3 font-medium">
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check-circle text-[#00D2FF] text-lg"></i> <b>Medalla de Metal 3D</b> (Coleccionable de lujo)</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check-circle text-[#00D2FF] text-lg"></i> <b>Prenda Textil Oscura</b> (Franelilla incluida o Franela +$5)</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check-circle text-[#00D2FF] text-lg"></i> Envío consolidado desde fábrica</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Opciones de Reserva 10K -->
+                        <div class="flex flex-col gap-4">
+                            <label class="cursor-pointer flex items-center gap-4 bg-white/5 border border-white/20 p-4 rounded-2xl hover:bg-white/10 transition-all has-[:checked]:border-[#00D2FF] has-[:checked]:bg-[#00D2FF]/10">
+                                <input type="radio" name="opcion10k" value="0" onchange="actualizarTotal()" checked class="w-6 h-6 accent-[#00D2FF]">
+                                <span class="text-base font-bold text-white">Por ahora no, solo inscribirme en los 5K</span>
+                            </label>
+                            <label class="cursor-pointer flex items-center gap-4 bg-white/5 border border-white/20 p-4 rounded-2xl hover:bg-white/10 transition-all has-[:checked]:border-[#00D2FF] has-[:checked]:bg-[#00D2FF]/10">
+                                <input type="radio" name="opcion10k" value="10" onchange="actualizarTotal()" class="w-6 h-6 accent-[#00D2FF]">
+                                <span class="text-base font-bold text-white flex-1">Abonar $10 hoy <span class="text-[#00D2FF] text-xs block font-normal mt-1">Restan $20 para julio. Congelas la promo.</span></span>
+                            </label>
+                            <label class="cursor-pointer flex items-center gap-4 bg-[#00D2FF]/10 border border-[#00D2FF]/50 p-4 rounded-2xl hover:bg-[#00D2FF]/20 transition-all has-[:checked]:border-[#00D2FF] has-[:checked]:bg-[#00D2FF]/20">
+                                <input type="radio" name="opcion10k" value="30" onchange="actualizarTotal()" class="w-6 h-6 accent-[#00D2FF]">
+                                <span class="text-base font-black text-[#00D2FF] flex-1">Pagar Total de $30 <span class="text-white/70 text-xs block font-normal mt-1">Pagas completo y sales de esto de una vez.</span></span>
+                            </label>
+                        </div>
+
+                        <!-- SELECTOR DE TALLA 10K (Aparece solo si dicen que SI) -->
+                        <div id="selectorTextil10k" class="hidden mt-6 bg-black/40 border border-[#00D2FF]/30 p-6 rounded-2xl animate-fade-in">
+                            <h4 class="text-[#00D2FF] font-black text-xs uppercase tracking-widest mb-4">Personaliza tu prenda 10K</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="flex flex-col gap-2">
+                                    <label class="text-[10px] font-bold uppercase text-white/60">Tipo de Prenda <span class="text-[#00D2FF]">*</span></label>
+                                    <select id="tipoTextil10k" onchange="actualizarTotal()" class="bg-[#001E50] border border-white/20 rounded-xl px-4 py-3 font-bold text-sm w-full text-white outline-none focus:border-[#00D2FF]">
+                                        <option value="" disabled selected>Selecciona una opción...</option>
+                                        <option value="Franelilla Oscura">Franelilla Oscura Deportiva</option>
+                                        <option value="Franela Oscura">Franela Oscura con mangas (+$5)</option>
+                                    </select>
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <label class="text-[10px] font-bold uppercase text-white/60">Talla <span class="text-[#00D2FF]">*</span></label>
+                                    <select id="tallaTextil10k" class="bg-[#001E50] border border-white/20 rounded-xl px-4 py-3 font-bold text-sm w-full text-white outline-none focus:border-[#00D2FF]">
+                                        <option value="" disabled selected>Elegir talla...</option>
+                                        <option value="S">S - Pequeña</option>
+                                        <option value="M">M - Mediana</option>
+                                        <option value="L">L - Grande</option>
+                                        <option value="XL">XL - Extra Grande</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- LOGÍSTICA -->
             <div id="seccion-logistica" class="bg-white p-10 rounded-[2.5rem] shadow-xl border border-slate-100 transition-all">
                 <h3 class="text-[#001E50] font-black text-2xl mb-8 uppercase italic border-b border-slate-50 pb-4">Tus Datos Logísticos</h3>
                 
@@ -279,7 +295,7 @@
                 </div>
             </div>
 
-            <!-- Botón Final -->
+            <!-- CHECKOUT FINAL -->
             <div id="seccion-checkout" class="bg-[#001E50] p-10 rounded-[3rem] text-white shadow-2xl transition-all">
                 <div class="flex justify-between items-center mb-6 border-b border-white/10 pb-6">
                     <div>
@@ -291,33 +307,32 @@
                         <span id="total-bs" class="text-sm font-bold text-white/50 tracking-widest">0.00 Bs.</span>
                     </div>
                 </div>
-                <!-- Checkbox de Reglamento -->
-<div class="mb-8 flex items-start gap-4 bg-white/5 p-4 rounded-xl border border-white/10">
-    <div class="flex items-center h-5">
-        <input id="aceptoReglamento" type="checkbox" class="w-5 h-5 rounded border-slate-300 accent-[#00D2FF] cursor-pointer transition-all">
-    </div>
-    <div class="text-sm">
-        <label for="aceptoReglamento" class="font-medium text-white/90 cursor-pointer">
-            He leído y acepto el 
-            <a href="https://drive.google.com/file/d/1fvV-3WW2GPp6MX7ubdsqberHklTZp3MD/view?usp=drive_link" target="_blank" class="text-[#00D2FF] font-bold underline hover:text-white transition-colors">Reglamento y Descargo de Responsabilidades</a>.
-        </label>
-        <p class="text-white/50 text-[10px] mt-1 italic">Declaro que participo de forma voluntaria y me encuentro en condiciones físicas óptimas.</p>
-    </div>
-</div>
+                
+                <div class="mb-8 flex items-start gap-4 bg-white/5 p-4 rounded-xl border border-white/10">
+                    <div class="flex items-center h-5">
+                        <input id="aceptoReglamento" type="checkbox" class="w-5 h-5 rounded border-slate-300 accent-[#00D2FF] cursor-pointer transition-all">
+                    </div>
+                    <div class="text-sm">
+                        <label for="aceptoReglamento" class="font-medium text-white/90 cursor-pointer">
+                            He leído y acepto el 
+                            <a href="https://drive.google.com/file/d/1fvV-3WW2GPp6MX7ubdsqberHklTZp3MD/view?usp=drive_link" target="_blank" class="text-[#00D2FF] font-bold underline hover:text-white transition-colors">Reglamento y Descargo</a>.
+                        </label>
+                        <p class="text-white/50 text-[10px] mt-1 italic">Declaro que participo de forma voluntaria y estoy en condiciones físicas óptimas.</p>
+                    </div>
+                </div>
+
                 <button id="btnInscribir" onclick="procesarInscripcion()" class="w-full bg-[#00D2FF] text-[#001E50] py-6 rounded-2xl font-black uppercase tracking-[0.2em] shadow-xl flex items-center justify-center gap-4">
-                    FINALIZAR INSCRIPCIÓN 5K <i class="fa-brands fa-whatsapp text-xl"></i>
+                    FINALIZAR INSCRIPCIÓN <i class="fa-brands fa-whatsapp text-xl"></i>
                 </button>
             </div>
         </div>
     </main>
 
     <script>
-        const tasaBCV = 508.60; // Recuerda actualizarla
-        
+        const tasaBCV = 508.60; 
         const urlCSV_Comparacion = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5yMHsenxCWE5kZBDUZ8UcYqDtdAHstfqXcvWkuYZPQ_4n2xSrfs6ptk7k21r1kcMHHLtWjz8SEHwl/pub?gid=0&single=true&output=csv";
         const urlBaseDeDatos = "https://script.google.com/macros/s/AKfycbyp-NJc2uozcF4VDYRm3_XhKiKmPwdLfB4jLxJV_L9EFpXSBI7dp1TuMG0hxWzC7dLaCg/exec";
 
-        // ARRAY COMPLETO DE VENEZUELA CON CIUDADES PRINCIPALES
         const venezuela = {
             "Amazonas": ["Puerto Ayacucho", "San Fernando de Atabapo"],
             "Anzoátegui": ["Barcelona", "Puerto La Cruz", "Lechería", "El Tigre", "Anaco", "Cantaura"],
@@ -376,35 +391,38 @@
         }
 
         function actualizarTotal() {
-            let total = 15; // Precio base inscripción
+            let total = 15; // Precio base inscripción 5K
             
             const checkFranelilla = document.getElementById('checkFranelilla').checked;
             const checkFranela = document.getElementById('checkFranela').checked;
-
             const divTallaFranelilla = document.getElementById('contenedorTallaFranelilla');
             const divTallaFranela = document.getElementById('contenedorTallaFranela');
 
-            // Lógica Franelilla
-            if(checkFranelilla) {
-                total += 10;
-                divTallaFranelilla.classList.remove('hidden');
-            } else {
-                divTallaFranelilla.classList.add('hidden');
-                document.getElementById('tallaFranelilla').value = ""; 
-            }
+            if(checkFranelilla) { total += 10; divTallaFranelilla.classList.remove('hidden'); } 
+            else { divTallaFranelilla.classList.add('hidden'); document.getElementById('tallaFranelilla').value = ""; }
 
-            // Lógica Franela
-            if(checkFranela) {
-                total += 12;
-                divTallaFranela.classList.remove('hidden');
-            } else {
-                divTallaFranela.classList.add('hidden');
-                document.getElementById('tallaFranela').value = ""; 
-            }
+            if(checkFranela) { total += 12; divTallaFranela.classList.remove('hidden'); } 
+            else { divTallaFranela.classList.add('hidden'); document.getElementById('tallaFranela').value = ""; }
 
-            // NUEVO: Sumar la opción seleccionada de los 10K
+            // LÓGICA DE LOS 10K VIP
             const opcion10k = document.querySelector('input[name="opcion10k"]:checked').value;
-            total += parseInt(opcion10k); // Suma 0, 10 o 30
+            const selectorTextil10k = document.getElementById('selectorTextil10k');
+            const tipoTextil10k = document.getElementById('tipoTextil10k').value;
+            
+            let costoExtra10k = 0;
+
+            if(opcion10k === "10" || opcion10k === "30") {
+                selectorTextil10k.classList.remove('hidden');
+                if(tipoTextil10k === "Franela Oscura") {
+                    costoExtra10k = 5;
+                }
+            } else {
+                selectorTextil10k.classList.add('hidden');
+                document.getElementById('tipoTextil10k').value = "";
+                document.getElementById('tallaTextil10k').value = "";
+            }
+
+            total += parseInt(opcion10k) + costoExtra10k;
 
             document.getElementById('total-usd').innerText = `$${total}`;
             document.getElementById('total-bs').innerText = (total * tasaBCV).toFixed(2) + " Bs.";
@@ -447,7 +465,6 @@
                     document.getElementById('paso-1').classList.add('hidden-step');
                     document.getElementById('paso-fundador').classList.remove('hidden-step');
                 } else {
-                    // Redirección si no existe la cédula
                     window.location.href = "10k.html";
                 }
                 
@@ -469,17 +486,15 @@
             const refPago = document.getElementById('numReferenciaPago').value;
             const fechaPago = document.getElementById('fechaPago').value;
             
-            // Recoger datos de las franelas
             const checkFranelilla = document.getElementById('checkFranelilla').checked;
             const checkFranela = document.getElementById('checkFranela').checked;
             const tallaFranelilla = document.getElementById('tallaFranelilla').value;
             const tallaFranela = document.getElementById('tallaFranela').value;
             const totalUSD = document.getElementById('total-usd').innerText;
     
-            // Validar Reglamento
             const aceptoReglamento = document.getElementById('aceptoReglamento').checked;
             if(!aceptoReglamento) {
-                return alert("⚠️ Debes aceptar el Reglamento y Descargo de Responsabilidades para poder finalizar tu inscripción.");
+                return alert("⚠️ Debes aceptar el Reglamento y Descargo de Responsabilidades.");
             }
     
             if(!nombre || !tel || !estado || !ciudad || !direccion || !refPago || !fechaPago) {
@@ -488,31 +503,40 @@
 
             let arrayExtras = [];
             if(checkFranelilla) {
-                if(!tallaFranelilla) return alert("⚠️ Selecciona la talla de la Franelilla.");
+                if(!tallaFranelilla) return alert("⚠️ Selecciona la talla de la Franelilla de 5K.");
                 arrayExtras.push(`Franelilla (+10) Talla: ${tallaFranelilla}`);
             }
             if(checkFranela) {
-                if(!tallaFranela) return alert("⚠️ Selecciona la talla de la Franela.");
+                if(!tallaFranela) return alert("⚠️ Selecciona la talla de la Franela de 5K.");
                 arrayExtras.push(`Franela (+12) Talla: ${tallaFranela}`);
             }
-
             let txtTallaExtra = arrayExtras.length > 0 ? arrayExtras.join(" | ") : "No";
 
-            // NUEVO: Validar qué opción de 10K eligió
             const opcion10k = document.querySelector('input[name="opcion10k"]:checked').value;
             let textoReserva = "NO";
             let saldoPendiente = "$0";
+            let textoTextil10k = "N/A";
 
-            if(opcion10k === "10") {
-                textoReserva = "SÍ - Abonó $10";
-                saldoPendiente = "$20";
-            } else if(opcion10k === "30") {
-                textoReserva = "SÍ - Pagó Completo ($30)";
-                saldoPendiente = "$0";
+            if(opcion10k === "10" || opcion10k === "30") {
+                const tipo10k = document.getElementById('tipoTextil10k').value;
+                const talla10k = document.getElementById('tallaTextil10k').value;
+                
+                if(!tipo10k || !talla10k) {
+                    return alert("⚠️ Selecciona el tipo de prenda y la talla para tu kit VIP de los 10K.");
+                }
+
+                textoTextil10k = `${tipo10k} Talla: ${talla10k}`;
+                
+                if(opcion10k === "10") {
+                    textoReserva = "SÍ - Abonó $10";
+                    saldoPendiente = "$20";
+                } else if(opcion10k === "30") {
+                    textoReserva = "SÍ - Pagó Completo";
+                    saldoPendiente = "$0";
+                }
             }
 
-            // NUEVO: El mensaje para WhatsApp ahora incluye el abono
-            const msg = `🏆 *RENOVACIÓN 5K*%0A🏃‍♂️ *DORSAL:* #${dorsalActual}%0A👤 *ATLETA:* ${nombre}%0A👕 *TEXTIL:* ${txtTallaExtra}%0A🏅 *10K VIP:* ${textoReserva}%0A💰 *TOTAL PAGADO:* ${totalUSD}%0A🧾 *Nº PAGO:* ${refPago}%0A_Adjunto comprobante..._`;
+            const msg = `🏆 *RENOVACIÓN 5K + 10K*%0A🏃‍♂️ *DORSAL:* #${dorsalActual}%0A👤 *ATLETA:* ${nombre}%0A👕 *TEXTIL 5K:* ${txtTallaExtra}%0A🏅 *10K VIP:* ${textoReserva}%0A👕 *TEXTIL 10K:* ${textoTextil10k}%0A💰 *TOTAL PAGADO:* ${totalUSD}%0A🧾 *Nº PAGO:* ${refPago}%0A_Adjunto comprobante..._`;
 
             document.getElementById('loader').classList.remove('hidden');
 
@@ -530,9 +554,10 @@
             datos.append("FechaPago", fechaPago);
             datos.append("Total", totalUSD);
             
-            // NUEVAS COLUMNAS PARA GOOGLE SHEETS
+            // TRES COLUMNAS NUEVAS
             datos.append("Reserva10K", textoReserva);      
             datos.append("SaldoPendiente", saldoPendiente); 
+            datos.append("Textil10K", textoTextil10k);
 
             fetch(urlBaseDeDatos, { method: 'POST', body: datos, mode: 'no-cors' })
                 .then(() => { mostrarExito(msg); })
