@@ -380,7 +380,7 @@
                     document.getElementById('paso-fundador').classList.remove('hidden-step');
                 } else {
                     // AQUÍ ESTÁ LA REDIRECCIÓN SI NO EXISTE LA CÉDULA
-                    window.location.href = "espera.html";
+                    window.location.href = "10k.html";
                 }
                 
             } catch (e) {
@@ -407,7 +407,13 @@
             const tallaFranelilla = document.getElementById('tallaFranelilla').value;
             const tallaFranela = document.getElementById('tallaFranela').value;
             const totalUSD = document.getElementById('total-usd').innerText;
-
+	    
+            // Validar Reglamento
+const aceptoReglamento = document.getElementById('aceptoReglamento').checked;
+if(!aceptoReglamento) {
+    return alert("⚠️ Debes aceptar el Reglamento y Descargo de Responsabilidades para poder finalizar tu inscripción.");
+}
+	
             if(!nombre || !tel || !estado || !ciudad || !direccion || !refPago || !fechaPago) {
                 return alert("⚠️ ALERTA: Faltan datos logísticos obligatorios (*).");
             }
