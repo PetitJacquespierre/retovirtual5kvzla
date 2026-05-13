@@ -227,7 +227,19 @@
                         <span id="total-bs" class="text-sm font-bold text-white/50 tracking-widest">0.00 Bs.</span>
                     </div>
                 </div>
-                
+                <!-- Checkbox de Reglamento -->
+<div class="mb-8 flex items-start gap-4 bg-white/5 p-4 rounded-xl border border-white/10">
+    <div class="flex items-center h-5">
+        <input id="aceptoReglamento" type="checkbox" class="w-5 h-5 rounded border-slate-300 accent-[#00D2FF] cursor-pointer transition-all">
+    </div>
+    <div class="text-sm">
+        <label for="aceptoReglamento" class="font-medium text-white/90 cursor-pointer">
+            He leído y acepto el 
+            <a href="reglamento.html" target="_blank" class="text-[#00D2FF] font-bold underline hover:text-white transition-colors">Reglamento y Descargo de Responsabilidades</a>.
+        </label>
+        <p class="text-white/50 text-[10px] mt-1 italic">Declaro que participo de forma voluntaria y me encuentro en condiciones físicas óptimas.</p>
+    </div>
+</div>
                 <button id="btnInscribir" onclick="procesarInscripcion()" class="w-full bg-[#00D2FF] text-[#001E50] py-6 rounded-2xl font-black uppercase tracking-[0.2em] shadow-xl flex items-center justify-center gap-4">
                     FINALIZAR INSCRIPCIÓN 5K <i class="fa-brands fa-whatsapp text-xl"></i>
                 </button>
@@ -236,7 +248,7 @@
     </main>
 
     <script>
-        const tasaBCV = 589.27; // Recuerda actualizarla
+        const tasaBCV = 508.60; // Recuerda actualizarla
         
         const urlCSV_Comparacion = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5yMHsenxCWE5kZBDUZ8UcYqDtdAHstfqXcvWkuYZPQ_4n2xSrfs6ptk7k21r1kcMHHLtWjz8SEHwl/pub?gid=0&single=true&output=csv";
         const urlBaseDeDatos = "https://script.google.com/macros/s/AKfycbyp-NJc2uozcF4VDYRm3_XhKiKmPwdLfB4jLxJV_L9EFpXSBI7dp1TuMG0hxWzC7dLaCg/exec";
