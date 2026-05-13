@@ -24,6 +24,7 @@
 </head>
 <body class="text-slate-900">
 
+    <!-- Loader y Pantalla de Éxito (Sin cambios) -->
     <div id="loader" class="fixed inset-0 z-[100] loader-overlay flex flex-col items-center justify-center text-white hidden">
         <i class="fa-solid fa-circle-notch fa-spin text-5xl text-[#00D2FF] mb-4"></i>
         <p class="font-black uppercase tracking-widest text-sm">Validando y Guardando...</p>
@@ -44,36 +45,37 @@
         El estándar de oro del running virtual en Venezuela
     </div>
 
-<nav class="bg-[#001E50] sticky top-0 z-50 shadow-2xl">
-    <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-20 md:h-28">
-            <div class="flex items-center gap-2 md:gap-4 cursor-pointer group -ml-2 md:-ml-4" onclick="location.href='index.html'">
-                <img src="img/RV-Isotipo-sinfondo.png" alt="Reto" class="h-12 md:h-16 lg:h-20 w-auto object-contain brightness-125 transition-transform group-hover:scale-105">
-                <div class="h-8 md:h-10 lg:h-12 w-[1px] bg-white/20"></div>
-                <div class="flex flex-col">
-                    <span class="text-[7px] md:text-[8px] text-white/60 font-bold tracking-[0.2em] uppercase mb-0.5 md:mb-1">Presentado por</span>
-                    <span class="text-white font-black text-base md:text-xl lg:text-3xl tracking-tighter leading-none group-hover:text-[#00D2FF] transition-colors italic">TEAMFS</span>
+    <nav class="bg-[#001E50] sticky top-0 z-50 shadow-2xl">
+        <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20 md:h-28">
+                <div class="flex items-center gap-2 md:gap-4 cursor-pointer group -ml-2 md:-ml-4" onclick="location.href='index.html'">
+                    <img src="img/RV-Isotipo-sinfondo.png" alt="Reto" class="h-12 md:h-16 lg:h-20 w-auto object-contain brightness-125 transition-transform group-hover:scale-105">
+                    <div class="h-8 md:h-10 lg:h-12 w-[1px] bg-white/20"></div>
+                    <div class="flex flex-col">
+                        <span class="text-[7px] md:text-[8px] text-white/60 font-bold tracking-[0.2em] uppercase mb-0.5 md:mb-1">Presentado por</span>
+                        <span class="text-white font-black text-base md:text-xl lg:text-3xl tracking-tighter leading-none group-hover:text-[#00D2FF] transition-colors italic">TEAMFS</span>
+                    </div>
                 </div>
-            </div>
 
-            <div class="hidden lg:flex items-center space-x-4 xl:space-x-6">
-                <a href="index.html#ediciones" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Calendario</a>
-                <a href="10k.html" class="bg-[#00D2FF] text-[#001E50] px-4 py-2 rounded-full text-[10px] xl:text-xs font-black uppercase tracking-widest hover:scale-105 transition-all shadow-lg shadow-[#00D2FF]/20">Especial 10K</a>
-                <a href="resultados.html" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Resultados</a>
-                <a href="aliados.html" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Aliados</a>
-                <a href="tienda.html" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Tienda</a>
-                <a href="inscripcion.html" class="border-2 border-white text-white px-5 py-2.5 rounded-full font-black text-[10px] xl:text-xs uppercase tracking-widest hover:bg-white hover:text-[#001E50] transition-all shadow-lg">Inscribirme</a>
-            </div>
+                <div class="hidden lg:flex items-center space-x-4 xl:space-x-6">
+                    <a href="index.html#ediciones" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Calendario</a>
+                    <a href="10k.html" class="bg-[#00D2FF] text-[#001E50] px-4 py-2 rounded-full text-[10px] xl:text-xs font-black uppercase tracking-widest hover:scale-105 transition-all shadow-lg shadow-[#00D2FF]/20">Especial 10K</a>
+                    <a href="resultados.html" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Resultados</a>
+                    <a href="aliados.html" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Aliados</a>
+                    <a href="tienda.html" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Tienda</a>
+                    <a href="inscripcion.html" class="border-2 border-white text-white px-5 py-2.5 rounded-full font-black text-[10px] xl:text-xs uppercase tracking-widest hover:bg-white hover:text-[#001E50] transition-all shadow-lg">Inscribirme</a>
+                </div>
 
-            <button id="menuToggle" class="lg:hidden text-white text-2xl focus:outline-none z-50">
-                <i class="fa-solid fa-bars-staggered"></i>
-            </button>
+                <button id="menuToggle" class="lg:hidden text-white text-2xl focus:outline-none z-50">
+                    <i class="fa-solid fa-bars-staggered"></i>
+                </button>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
     <main class="max-w-4xl mx-auto px-6 py-16">
         
+        <!-- PASO 1: VALIDACIÓN -->
         <div id="paso-1" class="bg-white p-10 md:p-16 rounded-[3rem] shadow-2xl border border-slate-100 text-center relative overflow-hidden">
             <h2 class="text-[#001E50] font-black text-3xl uppercase tracking-tighter mb-4 italic">ACCESO EXCLUSIVO FUNDADORES</h2>
             <p class="text-slate-400 text-sm mb-10 italic">Ingresa tu cédula para validar tu acceso a la 2da Edición 5K.</p>
@@ -88,6 +90,7 @@
             </div>
         </div>
 
+        <!-- PASO 2: FORMULARIO (Se muestra si existe) -->
         <div id="paso-fundador" class="hidden-step space-y-8 animate-fade-in mt-8">
             <div class="bg-blue-50 border-2 border-[#00D2FF]/50 p-8 rounded-[2rem] text-center text-[#001E50] flex flex-col md:flex-row items-center justify-between gap-4">
                 <div class="text-left">
@@ -96,6 +99,7 @@
                 <p id="textoDorsal" class="text-sm font-black uppercase tracking-widest bg-[#001E50] text-white px-6 py-3 rounded-full shadow-lg">Dorsal: #000</p>
             </div>
 
+            <!-- Selección Textil -->
             <div id="seccion-extras" class="bg-white p-8 rounded-[2.5rem] shadow-xl border border-slate-100 transition-all">
                 <h3 class="text-[#001E50] font-black text-xl mb-2 uppercase italic">Mejora tu Kit (Opcional)</h3>
                 <p class="text-xs text-slate-400 mb-6 font-bold">Puedes seleccionar una o ambas piezas textiles.</p>
@@ -146,6 +150,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Datos Logísticos y Envío -->
             <div id="seccion-logistica" class="bg-white p-10 rounded-[2.5rem] shadow-xl border border-slate-100 transition-all">
                 <h3 class="text-[#001E50] font-black text-2xl mb-8 uppercase italic border-b border-slate-50 pb-4">Tus Datos Logísticos</h3>
                 
@@ -209,6 +215,7 @@
                 </div>
             </div>
 
+            <!-- Botón Final -->
             <div id="seccion-checkout" class="bg-[#001E50] p-10 rounded-[3rem] text-white shadow-2xl transition-all">
                 <div class="flex justify-between items-center mb-6 border-b border-white/10 pb-6">
                     <div>
@@ -230,14 +237,36 @@
 
     <script>
         const tasaBCV = 589.27; // Recuerda actualizarla
-        // AQUÍ SIGUEN TUS ENLACES ORIGINALES DE GOOGLE DRIVE, NO LOS BORRÉ
+        
         const urlCSV_Comparacion = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5yMHsenxCWE5kZBDUZ8UcYqDtdAHstfqXcvWkuYZPQ_4n2xSrfs6ptk7k21r1kcMHHLtWjz8SEHwl/pub?gid=0&single=true&output=csv";
         const urlBaseDeDatos = "https://script.google.com/macros/s/AKfycbyp-NJc2uozcF4VDYRm3_XhKiKmPwdLfB4jLxJV_L9EFpXSBI7dp1TuMG0hxWzC7dLaCg/exec";
 
+        // ARRAY COMPLETO DE VENEZUELA CON CIUDADES PRINCIPALES
         const venezuela = {
-            "Falcón": ["Punto Fijo", "Coro", "Punta Cardón", "Judibana", "Adícora"],
-            "Distrito Capital": ["Caracas"]
-            // Agrega el resto de los estados aquí como los tenías
+            "Amazonas": ["Puerto Ayacucho", "San Fernando de Atabapo"],
+            "Anzoátegui": ["Barcelona", "Puerto La Cruz", "Lechería", "El Tigre", "Anaco", "Cantaura"],
+            "Apure": ["San Fernando de Apure", "Guasdualito", "Elorza"],
+            "Aragua": ["Maracay", "Turmero", "La Victoria", "Cagua", "Villa de Cura", "Palo Negro"],
+            "Barinas": ["Barinas", "Socopó", "Santa Bárbara"],
+            "Bolívar": ["Ciudad Guayana (Puerto Ordaz/San Félix)", "Ciudad Bolívar", "Upata", "Tumeremo", "Callao"],
+            "Carabobo": ["Valencia", "Puerto Cabello", "Guacara", "San Diego", "Naguanagua", "Mariara"],
+            "Cojedes": ["San Carlos", "Tinaquillo", "Tinaco"],
+            "Delta Amacuro": ["Tucupita"],
+            "Distrito Capital": ["Caracas"],
+            "Falcón": ["Punto Fijo", "Coro", "Punta Cardón", "Judibana", "Tucacas", "Dabajuro", "Adícora", "Churuguara", "Santa Ana"],
+            "Guárico": ["San Juan de los Morros", "Valle de la Pascua", "Calabozo", "Zaraza"],
+            "La Guaira": ["La Guaira", "Maiquetía", "Catia La Mar", "Caraballeda", "Macuto"],
+            "Lara": ["Barquisimeto", "Cabudare", "Carora", "El Tocuyo", "Quíbor"],
+            "Mérida": ["Mérida", "El Vigía", "Tovar", "Ejido"],
+            "Miranda": ["Los Teques", "Guarenas", "Guatire", "Charallave", "Cúa", "Ocumare del Tuy", "San Antonio de los Altos"],
+            "Monagas": ["Maturín", "Punta de Mata", "Caripito"],
+            "Nueva Esparta": ["Porlamar", "Pampatar", "La Asunción", "Juan Griego"],
+            "Portuguesa": ["Acarigua", "Guanare", "Araure", "Turén"],
+            "Sucre": ["Cumaná", "Carúpano", "Güiria"],
+            "Táchira": ["San Cristóbal", "Táriba", "Rubio", "San Antonio del Táchira", "La Grita"],
+            "Trujillo": ["Valera", "Trujillo", "Boconó", "Pampán"],
+            "Yaracuy": ["San Felipe", "Yaritagua", "Chivacoa"],
+            "Zulia": ["Maracaibo", "San Francisco", "Cabimas", "Ciudad Ojeda", "Machiques", "La Villa del Rosario"]
         };
 
         document.getElementById('valor-tasa').innerText = tasaBCV;
@@ -333,10 +362,15 @@
                         }
                     }
                 }
+                
                 if(encontrado) {
                     document.getElementById('paso-1').classList.add('hidden-step');
                     document.getElementById('paso-fundador').classList.remove('hidden-step');
+                } else {
+                    // AQUÍ ESTÁ LA REDIRECCIÓN SI NO EXISTE LA CÉDULA
+                    window.location.href = "espera.html";
                 }
+                
             } catch (e) {
                 alert("Error conectando.");
             } finally {
@@ -382,13 +416,12 @@
 
             document.getElementById('loader').classList.remove('hidden');
 
-            // CONEXIÓN DIRECTA CON TU GOOGLE DRIVE
             const datos = new FormData();
             datos.append("Dorsal", dorsalActual);
             datos.append("Cedula", ciValidada);
             datos.append("Nombre", nombre);
             datos.append("Telefono", tel);
-            datos.append("FranelaExtra", txtTallaExtra); // ¡Aquí se envía "Franelilla Talla M | Franela Talla L"!
+            datos.append("FranelaExtra", txtTallaExtra); 
             datos.append("Estado", estado);
             datos.append("Ciudad", ciudad);
             datos.append("Agencia", agencia);
