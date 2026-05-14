@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acceso Restringido</title>
+    <title>Acceso Restringido - Especial 10K</title>
     <link rel="icon" type="image/png" href="img/favicon.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&family=Courier+Prime&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         body {
             background-color: #000;
             color: #fff;
             margin: 0;
-            overflow: hidden;
+            overflow-y: auto;
         }
 
         .fade-in {
@@ -42,46 +43,85 @@
         }
     </style>
 </head>
-<body class="h-screen flex flex-col items-center justify-center text-center px-4 relative">
-
-
+<body class="min-h-screen flex flex-col relative">
 
     <div class="ruido-fondo"></div>
 
-    <img src="image_0.png" alt="Logo Oculto" class="h-32 md:h-48 mb-6 opacity-30 grayscale fade-in delay-1" style="filter: brightness(0.4);">
-
-    <p class="font-['Courier_Prime'] text-gray-500 tracking-[0.5em] md:tracking-[1em] text-sm md:text-lg mb-4 fade-in delay-2">
-        PRÓXIMAMENTE
-    </p>
-
-    <h1 class="font-['Montserrat'] font-black text-5xl md:text-7xl lg:text-8xl tracking-tighter mb-4 fade-in delay-3" style="text-shadow: 0 0 20px rgba(255,255,255,0.1);">
-        RETO <span class="text-red-700">10K</span>
-    </h1>
-
-    <div class="border border-red-900/50 bg-red-900/10 px-8 py-3 rounded-sm fade-in delay-4 mb-6">
-        <p class="font-['Courier_Prime'] text-red-500 tracking-widest text-lg md:text-xl">
-            > SOLO 50 CUPOS_
-        </p>
-    </div>
-
-    <div class="fade-in delay-5 flex flex-col items-center gap-4">
-        <p class="font-['Courier_Prime'] text-gray-400 tracking-[0.2em] md:tracking-widest text-sm md:text-base border-b border-gray-800 pb-2">
-            [ ACCESO ESTRICTAMENTE POR LISTA DE ESPERA ]
-        </p>
-        <div class="fade-in mt-10 border border-gray-800 bg-black/50 p-4 max-w-md mx-auto rounded text-center shadow-[0_0_15px_rgba(239,68,68,0.1)]" style="animation-delay: 10s;">
-        <p class="font-['Courier_Prime'] text-gray-400 tracking-widest text-[10px] md:text-xs mb-3 border-b border-gray-800 pb-1">
-            > DIRECTRIZ_CLASIFICADA_
-        </p>
-        <p class="font-['Courier_Prime'] text-gray-500 text-xs md:text-sm leading-relaxed">
-            Si lograste interceptar este mensaje, hazle Capture de Pantalla y repórtalo en Instagram etiquetando a <a href="https://www.instagram.com/retovirtualvzla/" target="_blank" class="text-red-500 font-bold hover:text-white transition shadow-red-500 drop-shadow-md">@retovirtualvzla</a>
-            <br><br>
-            <span class="text-yellow-600 text-[10px] md:text-xs">> Te estamos vigilando para la selección de los 50...</span>
-        </p>
-    </div>
-
-    <a href="index.html" class="mt-12 font-['Courier_Prime'] text-gray-700 text-xs hover:text-white transition fade-in" style="animation-delay: 12s;">
-        [ Regresar al sistema principal ]
+    <a href="index.html" class="absolute top-6 left-6 text-gray-500 hover:text-white transition-all flex items-center gap-2 font-['Courier_Prime'] text-sm z-50 fade-in">
+        <i class="fa-solid fa-arrow-left"></i> [ VOLVER ]
     </a>
+
+    <main class="flex-grow flex flex-col items-center justify-center px-4 pt-20 pb-10">
+        <img src="img/RV-Isotipo-sinfondo.png" alt="Logo Oculto" class="h-24 md:h-32 mb-6 opacity-30 grayscale fade-in delay-1" style="filter: brightness(0.4);">
+
+        <p class="font-['Courier_Prime'] text-gray-500 tracking-[0.5em] md:tracking-[1em] text-sm md:text-lg mb-4 fade-in delay-2">
+            PRÓXIMAMENTE
+        </p>
+
+        <h1 class="font-['Montserrat'] font-black text-5xl md:text-7xl lg:text-8xl tracking-tighter mb-4 fade-in delay-3" style="text-shadow: 0 0 20px rgba(255,255,255,0.1);">
+            RETO <span class="text-red-700">10K</span>
+        </h1>
+
+        <div class="border border-red-900/50 bg-red-900/10 px-8 py-3 rounded-sm fade-in delay-4 mb-6">
+            <p class="font-['Courier_Prime'] text-red-500 tracking-widest text-lg md:text-xl font-bold">
+                > SOLO 50 CUPOS_
+            </p>
+        </div>
+
+        <div class="fade-in delay-5 flex flex-col items-center gap-4">
+            <p class="font-['Courier_Prime'] text-gray-400 tracking-[0.2em] md:tracking-widest text-sm md:text-base border-b border-gray-800 pb-2">
+                [ ACCESO POR LISTA DE ESPERA ]
+            </p>
+            
+            <div class="fade-in mt-10 border border-gray-800 bg-black/50 p-6 max-w-md mx-auto rounded text-left shadow-[0_0_15px_rgba(239,68,68,0.1)]" style="animation-delay: 10s;">
+                <p class="font-['Courier_Prime'] text-gray-400 tracking-widest text-[10px] md:text-xs mb-4 border-b border-gray-800 pb-2">
+                    > ARCHIVO_DESENCRIPTADO_
+                </p>
+                <p class="font-['Courier_Prime'] text-gray-400 text-xs md:text-sm leading-relaxed">
+                    Si estás leyendo esto, descubriste nuestro mayor secreto.<br><br>
+                    
+                    La Edición Especial 10K será de nivel élite. El galardón final es una <span class="text-white font-bold">poderosa medalla de metal en 3D</span>, una pieza de diseño internacional creada exclusivamente para verdaderos coleccionistas.<br><br>
+                    
+                    Para mantener la exclusividad de esta pieza, <span class="text-red-500 font-bold">solo habilitaremos 50 inscripciones en todo el país.</span><br><br>
+                    
+                    En los próximos días abriremos nuestra <span class="text-white font-bold">Lista de Espera Oficial</span>. Quienes logren anotarse primero, tendrán prioridad absoluta para asegurar su cupo el día de la inscripción.<br><br>
+                    
+                    <span class="text-yellow-600 text-[10px] md:text-xs">> Activa las notificaciones en nuestras redes sociales. El enlace de la lista se revelará muy pronto...</span>
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="w-full border-t border-gray-900 bg-black/80 py-8 relative z-20 fade-in" style="animation-delay: 11s;">
+        <div class="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center md:text-left">
+            
+            <div>
+                <img src="img/RV-Isotipo-sinfondo.png" class="h-8 mx-auto md:mx-0 mb-3 grayscale opacity-20" alt="Logo RV">
+                <p class="font-['Courier_Prime'] text-gray-600 text-[10px] uppercase tracking-widest leading-relaxed">
+                    [ SYS_RV_2026_CORE ]<br>
+                    © 2026 THE ROAD TO GLORY.
+                </p>
+            </div>
+
+            <div class="flex flex-col items-center justify-center gap-3">
+                <h4 class="font-['Courier_Prime'] text-gray-700 font-bold text-[10px] uppercase tracking-[0.3em]">>_Canales Oficiales</h4>
+                <div class="flex gap-6">
+                    <a href="https://wa.me/584127732710" target="_blank" class="text-gray-600 hover:text-red-500 text-2xl transition-all transform hover:scale-110"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="https://www.instagram.com/retovirtual.vzla/" target="_blank" class="text-gray-600 hover:text-red-500 text-2xl transition-all transform hover:scale-110"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@retovirtual.vzla" target="_blank" class="text-gray-600 hover:text-red-500 text-2xl transition-all transform hover:scale-110"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="https://www.strava.com/clubs/1859944" target="_blank" class="text-gray-600 hover:text-red-500 text-2xl transition-all transform hover:scale-110"><i class="fa-brands fa-strava"></i></a>
+                </div>
+            </div>
+
+            <div class="border-t md:border-t-0 md:border-l border-gray-900 pt-6 md:pt-0 md:pl-8 text-center md:text-right">
+                <h4 class="font-['Courier_Prime'] text-gray-700 font-bold text-[10px] uppercase tracking-[0.3em] mb-2">>_Soporte Técnico</h4>
+                <a href="https://www.instagram.com/team_fs__/" target="_blank" class="group block">
+                    <p class="font-['Montserrat'] font-black text-2xl italic tracking-tighter uppercase text-gray-500 group-hover:text-white transition-all">TeamFS</p>
+                </a>
+            </div>
+
+        </div>
+    </footer>
 
 </body>
 </html>
