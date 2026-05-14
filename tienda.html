@@ -18,49 +18,35 @@
         .border-accent { border-color: #00D2FF; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900">
+<body class="bg-slate-50 text-slate-900 flex flex-col min-h-screen">
 
     <div class="bg-[#001E50] text-white py-2 text-center text-[10px] font-bold uppercase tracking-[0.4em] z-50 relative border-b border-white/10">
         Tienda Oficial del Circuito Nacional
     </div>
 
-    <!-- Reemplaza toda la sección <nav> con esta versión -->
-
 <nav class="bg-[#001E50] sticky top-0 z-50 shadow-2xl">
     <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
         <div class="flex justify-between items-center h-20 md:h-28">
             
-            <!-- BLOQUE DEL LOGO CORREGIDO (Limpiecito y más grande) -->
             <div class="flex items-center gap-3 md:gap-5 cursor-pointer group -ml-2 md:-ml-4" onclick="location.href='index.html'">
-                
-                <!-- 📱 Logo para Móvil (Isotipo) -->
                 <img src="img/RV-Isotipo-sinfondo.png" alt="Reto Virtual" class="h-12 w-auto object-contain brightness-125 transition-transform group-hover:scale-105 md:hidden">
 
-                <!-- 💻 Logo para Laptop (Texto) - ¡TAMAÑO AUMENTADO AQUÍ! (h-16 a h-20) -->
                 <img src="img/RV Texto Sin fondo.png" alt="Reto Virtual" class="hidden md:block h-20 lg:h-28 w-auto object-contain brightness-125 transition-transform group-hover:scale-105">
                 
-                <!-- La línea separadora (también la hice un poco más alta para que cuadre) -->
                 <div class="h-10 md:h-12 lg:h-16 w-[1px] bg-white/20"></div>
                 
-                <!-- Texto TEAMFS -->
                 <div class="flex flex-col">
                     <span class="text-[7px] md:text-[8px] text-white/60 font-bold tracking-[0.2em] uppercase mb-0.5 md:mb-1">Presentado por</span>
                     <span class="text-white font-black text-base md:text-xl lg:text-2xl tracking-tighter leading-none group-hover:text-[#00D2FF] transition-colors italic">TEAMFS</span>
                 </div>
             </div>
-            <!-- FIN DEL BLOQUE DEL LOGO -->
 
-            <!-- BOTONES DEL MENÚ -->
             <div class="hidden lg:flex items-center space-x-4 xl:space-x-6">
                 <a href="index.html#ediciones" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Calendario</a>
-                
                 <a href="10k.html" class="bg-[#00D2FF] text-[#001E50] px-4 py-2 rounded-full text-[10px] xl:text-xs font-black uppercase tracking-widest hover:scale-105 transition-all shadow-lg shadow-[#00D2FF]/20">Especial 10K</a>
-                
                 <a href="resultados.html" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Resultados</a>
-                
                 <a href="aliados.html" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Aliados</a>
-                
-                <a href="tienda.html" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Tienda</a>
+                <a href="tienda.html" class="text-[#00D2FF] border-b-2 border-[#00D2FF] pb-1 text-[10px] xl:text-xs font-bold uppercase tracking-widest whitespace-nowrap">Tienda</a>
 
                 <div class="relative group">
                     <button class="flex items-center text-white/80 group-hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all">
@@ -87,14 +73,13 @@
         </div>
     </div>
 
-    <!-- MENÚ MÓVIL DESPLEGABLE -->
     <div id="mobileMenu" class="fixed inset-0 bg-[#001E50] z-40 transform translate-x-full transition-transform duration-300 lg:hidden">
         <div class="flex flex-col items-center justify-center h-full space-y-6 px-8">
             <a href="index.html#ediciones" class="text-white text-lg font-bold uppercase tracking-widest">Calendario</a>
             <a href="10k.html" class="bg-[#00D2FF] text-[#001E50] px-10 py-3 rounded-full text-lg font-black uppercase tracking-widest shadow-xl shadow-[#00D2FF]/20">Especial 10K</a>
             <a href="resultados.html" class="text-white text-lg font-bold uppercase tracking-widest">Resultados</a>
             <a href="aliados.html" class="text-white text-lg font-bold uppercase tracking-widest">Aliados</a>
-            <a href="tienda.html" class="text-white text-lg font-bold uppercase tracking-widest">Tienda</a>
+            <a href="tienda.html" class="text-[#00D2FF] text-lg font-bold uppercase tracking-widest">Tienda</a>
             <div class="h-[1px] w-12 bg-white/10 my-2"></div>
             <a href="entrenador.html" class="text-white text-base font-bold uppercase">Entrenador IA</a>
             <a href="faq.html" class="text-white text-base font-bold uppercase">FAQ</a>
@@ -103,192 +88,38 @@
     </div>
 </nav>
 
-    <section class="py-16 px-4 max-w-7xl mx-auto">
+    <main class="flex-grow relative flex items-center justify-center overflow-hidden min-h-[70vh]">
+        <video autoplay loop muted playsinline class="absolute top-0 left-0 w-full h-full object-cover z-0">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-runners-in-a-marathon-1191-large.mp4" type="video/mp4">
+        </video>
         
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
-            <div class="max-w-xl">
-                <h2 class="text-boston-navy text-4xl md:text-5xl font-black uppercase tracking-tighter italic mb-4">Official <span class="text-accent">Gear</span></h2>
-                <p class="text-slate-500 font-medium">Equípate con el estándar del Reto Virtual. Selecciona tus artículos y finaliza tu pedido vía WhatsApp.</p>
+        <div class="absolute top-0 left-0 w-full h-full bg-[#001E50]/80 z-10 backdrop-blur-[2px]"></div>
+
+        <div class="relative z-20 text-center px-6 max-w-2xl mx-auto">
+            <div class="w-20 h-20 md:w-24 md:h-24 bg-[#00D2FF]/10 text-[#00D2FF] rounded-full flex items-center justify-center mx-auto mb-8 border border-[#00D2FF]/20 shadow-lg shadow-[#00D2FF]/10">
+                <i class="fa-solid fa-store text-3xl md:text-4xl"></i>
             </div>
             
-            <div class="flex flex-col gap-4 w-full md:w-auto">
-                <div class="relative">
-                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
-                    <input type="text" id="search-input" onkeyup="filterProducts()" placeholder="Buscar equipo..." 
-                    class="w-full md:w-80 pl-12 pr-4 py-3 rounded-2xl border border-slate-200 focus:outline-none focus:border-accent shadow-sm">
-                </div>
-                <div class="flex gap-2 overflow-x-auto pb-2 no-scrollbar">
-                    <button onclick="filterCategory('all')" class="cat-btn active bg-boston-navy text-white px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest whitespace-nowrap transition-all">Todos</button>
-                    <button onclick="filterCategory('textil')" class="cat-btn bg-white text-slate-400 border border-slate-200 px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest whitespace-nowrap transition-all">Franelas</button>
-                    <button onclick="filterCategory('hidratacion')" class="cat-btn bg-white text-slate-400 border border-slate-200 px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest whitespace-nowrap transition-all">Hidratación</button>
-                    <button onclick="filterCategory('accesorios')" class="cat-btn bg-white text-slate-400 border border-slate-200 px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest whitespace-nowrap transition-all">Accesorios</button>
-                </div>
+            <h1 class="text-white font-black text-4xl md:text-6xl uppercase tracking-tighter mb-4 italic drop-shadow-lg">
+                Official <span class="text-[#00D2FF]">Gear</span>
+            </h1>
+            
+            <p class="text-white/80 font-medium mb-10 text-sm md:text-base leading-relaxed">
+                Estamos preparando la Tienda Oficial del Reto Virtual. Muy pronto podrás adquirir nuestras franelas con tecnología Dry-Fit, viseras, accesorios y todo el equipo oficial para llevar tu rendimiento al siguiente nivel.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button disabled class="bg-white/10 text-white border border-white/20 px-8 py-4 rounded-full font-black uppercase text-xs tracking-widest cursor-not-allowed">
+                    <i class="fa-solid fa-lock mr-2"></i> En Mantenimiento
+                </button>
+                <a href="inscripcion.html" class="bg-[#00D2FF] text-[#001E50] px-8 py-4 rounded-full font-black uppercase text-xs tracking-widest hover:scale-105 transition-all shadow-xl shadow-[#00D2FF]/20">
+                    Asegurar mi Inscripción
+                </a>
             </div>
         </div>
+    </main>
 
-        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            </div>
-    </section>
-
-    <div id="cart-sidebar" class="fixed inset-y-0 right-0 w-full md:w-96 bg-white shadow-2xl z-[100] translate-x-full transition-transform duration-300 flex flex-col">
-        <div class="p-6 bg-boston-navy text-white flex justify-between items-center">
-            <h3 class="font-black uppercase tracking-widest text-sm">Tu Carrito</h3>
-            <button onclick="toggleCart()" class="text-2xl hover:text-accent"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
-            <p class="text-slate-400 text-center py-10 font-medium">Tu carrito está vacío.</p>
-        </div>
-        <div class="p-8 border-t border-slate-100 bg-slate-50">
-            <div class="flex justify-between items-center mb-6">
-                <span class="font-bold text-slate-400 uppercase text-xs tracking-widest">Subtotal estimado</span>
-                <span id="cart-total" class="text-2xl font-black text-boston-navy">$0.00</span>
-            </div>
-            <button onclick="sendWhatsApp()" class="w-full bg-accent text-[#001E50] py-5 rounded-2xl font-black uppercase tracking-[0.2em] shadow-xl hover:scale-105 transition-all">
-                Cerrar Pedido (WhatsApp)
-            </button>
-        </div>
-    </div>
-
-    <script>
-
-
-// ========== MENÚ MÓVIL HAMBURGUESA ==========
-        const menuToggle = document.getElementById('menuToggle');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const menuIcon = menuToggle.querySelector('i');
-
-        menuToggle.addEventListener('click', () => {
-            mobileMenu.classList.toggle('translate-x-full');
-            
-            // Cambiar icono
-            if (mobileMenu.classList.contains('translate-x-full')) {
-                menuIcon.classList.remove('fa-xmark');
-                menuIcon.classList.add('fa-bars-staggered');
-            } else {
-                menuIcon.classList.remove('fa-bars-staggered');
-                menuIcon.classList.add('fa-xmark');
-            }
-        });
-
-        // Cerrar menú al hacer click en un enlace
-        const mobileLinks = mobileMenu.querySelectorAll('a');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('translate-x-full');
-                menuIcon.classList.remove('fa-xmark');
-                menuIcon.classList.add('fa-bars-staggered');
-            });
-        });
-
-// ========== Tienda ==========
-        const products = [
-            { id: 1, name: 'Franela Oficial 2026', price: 15, category: 'textil', img: 'https://images.unsplash.com/photo-1581655353564-df123a1eb820?q=80&w=400' },
-            { id: 2, name: 'Bidón Hidratación Pro', price: 10, category: 'hidratacion', img: 'https://images.unsplash.com/photo-1523362622666-4c59d4b0bd80?q=80&w=400' },
-            { id: 3, name: 'Visera Speed Tech', price: 12, category: 'accesorios', img: 'https://images.unsplash.com/photo-1596733430284-f7437764b1a9?q=80&w=400' },
-            { id: 4, name: 'Cinturón porta dorsal', price: 8, category: 'accesorios', img: 'https://images.unsplash.com/photo-1510017803434-a899398421b3?q=80&w=400' }
-        ];
-
-        let cart = [];
-        let currentCategory = 'all';
-
-        function renderProducts() {
-            const grid = document.getElementById('product-grid');
-            const search = document.getElementById('search-input').value.toLowerCase();
-            
-            grid.innerHTML = products
-                .filter(p => (currentCategory === 'all' || p.category === currentCategory) && p.name.toLowerCase().includes(search))
-                .map(p => `
-                    <div class="bg-white rounded-[2rem] p-4 border border-slate-100 transition-all hover:shadow-xl group">
-                        <div class="aspect-square rounded-[1.5rem] overflow-hidden mb-6 bg-slate-100">
-                            <img src="${p.img}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        </div>
-                        <h4 class="font-black text-boston-navy uppercase tracking-tighter mb-1">${p.name}</h4>
-                        <p class="text-accent font-black text-xl mb-4">$${p.price.toFixed(2)}</p>
-                        <button onclick="addToCart(${p.id})" class="w-full border-2 border-boston-navy text-boston-navy py-3 rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-boston-navy hover:text-white transition-all">
-                            Agregar al carrito
-                        </button>
-                    </div>
-                `).join('');
-        }
-
-        function filterCategory(cat) {
-            currentCategory = cat;
-            document.querySelectorAll('.cat-btn').forEach(btn => {
-                btn.classList.remove('bg-boston-navy', 'text-white', 'active');
-                btn.classList.add('bg-white', 'text-slate-400');
-            });
-            event.target.classList.replace('bg-white', 'bg-boston-navy');
-            event.target.classList.replace('text-slate-400', 'text-white');
-            renderProducts();
-        }
-
-        function filterProducts() { renderProducts(); }
-
-        function toggleCart() {
-            document.getElementById('cart-sidebar').classList.toggle('translate-x-full');
-        }
-
-        function addToCart(id) {
-            const product = products.find(p => p.id === id);
-            const inCart = cart.find(item => item.id === id);
-            if (inCart) inCart.qty++;
-            else cart.push({ ...product, qty: 1 });
-            updateCartUI();
-            if(cart.length === 1) toggleCart();
-        }
-
-        function updateCartUI() {
-            const cartItems = document.getElementById('cart-items');
-            const totalEl = document.getElementById('cart-total');
-            const countEl = document.getElementById('cart-count');
-
-            if (cart.length === 0) {
-                cartItems.innerHTML = `<p class="text-slate-400 text-center py-10 font-medium">Tu carrito está vacío.</p>`;
-            } else {
-                cartItems.innerHTML = cart.map(item => `
-                    <div class="flex items-center gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100">
-                        <img src="${item.img}" class="h-16 w-16 rounded-xl object-cover">
-                        <div class="flex-1">
-                            <h5 class="font-black text-xs uppercase text-boston-navy">${item.name}</h5>
-                            <p class="text-[10px] font-bold text-slate-400">${item.qty} x $${item.price}</p>
-                        </div>
-                        <button onclick="removeFromCart(${item.id})" class="text-slate-300 hover:text-red-500"><i class="fa-solid fa-trash-can"></i></button>
-                    </div>
-                `).join('');
-            }
-
-            const total = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
-            const count = cart.reduce((acc, item) => acc + item.qty, 0);
-            
-            totalEl.innerText = `$${total.toFixed(2)}`;
-            countEl.innerText = count;
-        }
-
-        function removeFromCart(id) {
-            cart = cart.filter(item => item.id !== id);
-            updateCartUI();
-        }
-
-        function sendWhatsApp() {
-            if (cart.length === 0) return alert("El carrito está vacío");
-            
-            let message = "🚀 *NUEVO PEDIDO - RETO VIRTUAL 2026*\n\nHola! Quiero realizar un pedido:\n\n";
-            cart.forEach(item => {
-                message += `• ${item.qty}x ${item.name} ($${item.price * item.qty})\n`;
-            });
-            
-            const total = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
-            message += `\n💰 *Total Estimado: $${total.toFixed(2)}*\n\n¿Me indican los pasos para el pago y envío?`;
-            
-            const wpUrl = `https://wa.me/584127732710?text=${encodeURIComponent(message)}`;
-            window.open(wpUrl, '_blank');
-        }
-
-        // Inicializar
-        renderProducts();
-    </script>
-
-    <footer class="bg-[#001E50] py-20 px-4 border-t border-white/5">
+    <footer class="bg-[#001E50] py-16 px-4 border-t border-white/5 relative z-20">
         <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-16 text-center md:text-left">
             <div>
                 <img src="img/RV-Isotipo-sinfondo.png" class="h-14 mx-auto md:mx-0 mb-6 grayscale brightness-200 opacity-40">
@@ -316,5 +147,35 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // ========== MENÚ MÓVIL HAMBURGUESA ==========
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuIcon = menuToggle.querySelector('i');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('translate-x-full');
+            
+            // Cambiar icono
+            if (mobileMenu.classList.contains('translate-x-full')) {
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars-staggered');
+            } else {
+                menuIcon.classList.remove('fa-bars-staggered');
+                menuIcon.classList.add('fa-xmark');
+            }
+        });
+
+        // Cerrar menú al hacer click en un enlace
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('translate-x-full');
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars-staggered');
+            });
+        });
+    </script>
 </body>
 </html>
