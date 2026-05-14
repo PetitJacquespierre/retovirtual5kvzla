@@ -150,6 +150,37 @@
     </div>
 
     <script>
+
+
+// ========== MENÚ MÓVIL HAMBURGUESA ==========
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuIcon = menuToggle.querySelector('i');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('translate-x-full');
+            
+            // Cambiar icono
+            if (mobileMenu.classList.contains('translate-x-full')) {
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars-staggered');
+            } else {
+                menuIcon.classList.remove('fa-bars-staggered');
+                menuIcon.classList.add('fa-xmark');
+            }
+        });
+
+        // Cerrar menú al hacer click en un enlace
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('translate-x-full');
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars-staggered');
+            });
+        });
+
+// ========== Tienda ==========
         const products = [
             { id: 1, name: 'Franela Oficial 2026', price: 15, category: 'textil', img: 'https://images.unsplash.com/photo-1581655353564-df123a1eb820?q=80&w=400' },
             { id: 2, name: 'Bidón Hidratación Pro', price: 10, category: 'hidratacion', img: 'https://images.unsplash.com/photo-1523362622666-4c59d4b0bd80?q=80&w=400' },
