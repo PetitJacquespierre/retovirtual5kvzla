@@ -30,7 +30,7 @@
 <body class="text-slate-200 min-h-screen flex flex-col relative overflow-x-hidden">
 
 <div class="bg-[#001E50] text-white py-2 text-center text-[10px] font-bold uppercase tracking-[0.4em] z-50 relative border-b border-white/10">
-    Alianzas de excelencia. El respaldo de los mejores.
+    DA EL PRIMER PASO. TU MEDALLA TE ESPERA.
 </div>
 
 
@@ -159,11 +159,15 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="flex flex-col gap-1.5">
                         <label class="text-[10px] font-bold uppercase text-[#00D2FF] ml-2 tracking-widest">Estado *</label>
-                        <input type="text" id="estadoEspera" class="bg-black/40 border border-white/10 rounded-xl px-4 py-3 font-bold text-sm text-white transition-all w-full" required>
+                        <select id="estadoEspera" onchange="cargarCiudadesEspera()" class="bg-black/40 border border-white/10 rounded-xl px-4 py-3 font-bold text-sm text-white transition-all w-full appearance-none" required>
+    <option value="" disabled selected class="bg-[#001E50] text-slate-400">Selecciona un estado...</option>
+</select>
                     </div>
                     <div class="flex flex-col gap-1.5">
                         <label class="text-[10px] font-bold uppercase text-[#00D2FF] ml-2 tracking-widest">Ciudad *</label>
-                        <input type="text" id="ciudadEspera" class="bg-black/40 border border-white/10 rounded-xl px-4 py-3 font-bold text-sm text-white transition-all w-full" required>
+                        <select id="ciudadEspera" class="bg-black/40 border border-white/10 rounded-xl px-4 py-3 font-bold text-sm text-white transition-all w-full appearance-none disabled:opacity-50" disabled required>
+                            <option value="" disabled selected class="bg-[#001E50] text-slate-400">Primero selecciona un estado</option>
+                        </select>
                     </div>
                 </div>
 
@@ -231,6 +235,11 @@
 
     <script>
 
+
+
+
+
+
 // ========== MENÚ MÓVIL HAMBURGUESA ==========
         const menuToggle = document.getElementById('menuToggle');
         const mobileMenu = document.getElementById('mobileMenu');
@@ -272,6 +281,64 @@
                 menu.classList.add('translate-x-full');
             }
         });
+// ========== BASE DE DATOS DE ESTADOS Y CIUDADES ==========
+        const venezuela = {
+            "Amazonas": ["Puerto Ayacucho", "San Fernando de Atabapo"],
+            "Anzoátegui": ["Barcelona", "Puerto La Cruz", "Lechería", "El Tigre", "Anaco", "Cantaura"],
+            "Apure": ["San Fernando de Apure", "Guasdualito", "Elorza"],
+            "Aragua": ["Maracay", "Turmero", "La Victoria", "Cagua", "Villa de Cura", "Palo Negro"],
+            "Barinas": ["Barinas", "Socopó", "Santa Bárbara"],
+            "Bolívar": ["Ciudad Guayana (Puerto Ordaz/San Félix)", "Ciudad Bolívar", "Upata", "Tumeremo", "Callao"],
+            "Carabobo": ["Valencia", "Puerto Cabello", "Guacara", "San Diego", "Naguanagua", "Mariara"],
+            "Cojedes": ["San Carlos", "Tinaquillo", "Tinaco"],
+            "Delta Amacuro": ["Tucupita"],
+            "Distrito Capital": ["Caracas"],
+            "Falcón": ["Punto Fijo", "Coro", "Punta Cardón", "Judibana", "Tucacas", "Dabajuro", "Adícora", "Churuguara", "Santa Ana"],
+            "Guárico": ["San Juan de los Morros", "Valle de la Pascua", "Calabozo", "Zaraza"],
+            "La Guaira": ["La Guaira", "Maiquetía", "Catia La Mar", "Caraballeda", "Macuto"],
+            "Lara": ["Barquisimeto", "Cabudare", "Carora", "El Tocuyo", "Quíbor"],
+            "Mérida": ["Mérida", "El Vigía", "Tovar", "Ejido"],
+            "Miranda": ["Los Teques", "Guarenas", "Guatire", "Charallave", "Cúa", "Ocumare del Tuy", "San Antonio de los Altos"],
+            "Monagas": ["Maturín", "Punta de Mata", "Caripito"],
+            "Nueva Esparta": ["Porlamar", "Pampatar", "La Asunción", "Juan Griego"],
+            "Portuguesa": ["Acarigua", "Guanare", "Araure", "Turén"],
+            "Sucre": ["Cumaná", "Carúpano", "Güiria"],
+            "Táchira": ["San Cristóbal", "Táriba", "Rubio", "San Antonio del Táchira", "La Grita"],
+            "Trujillo": ["Valera", "Trujillo", "Boconó", "Pampán"],
+            "Yaracuy": ["San Felipe", "Yaritagua", "Chivacoa"],
+            "Zulia": ["Maracaibo", "San Francisco", "Cabimas", "Ciudad Ojeda", "Machiques", "La Villa del Rosario"]
+        };
+
+        // Cargar los estados al abrir la página
+        window.addEventListener('DOMContentLoaded', () => {
+            const selectEstado = document.getElementById('estadoEspera');
+            Object.keys(venezuela).sort().forEach(est => {
+                let opt = document.createElement('option');
+                opt.value = est;
+                opt.text = est;
+                opt.className = "bg-[#001E50] text-white font-bold"; // <-- ESTO ARREGLA EL COLOR
+                selectEstado.add(opt);
+            });
+        });
+
+        // Cargar las ciudades cuando se selecciona un estado
+        function cargarCiudadesEspera() {
+            const est = document.getElementById('estadoEspera').value;
+            const selectCiu = document.getElementById('ciudadEspera');
+            selectCiu.innerHTML = '<option value="" disabled selected>Elige Ciudad...</option>';
+            if(est && venezuela[est]) {
+                selectCiu.disabled = false;
+                venezuela[est].sort().forEach(ciu => {
+                    let opt = document.createElement('option');
+                    opt.value = ciu;
+                    opt.text = ciu;
+                    opt.className = "bg-[#001E50] text-white font-bold"; // <-- ESTO ARREGLA EL COLOR
+                    selectCiu.add(opt);
+                });
+            }
+        }
+
+
 
         function enviarListaEspera(e) {
             e.preventDefault();
