@@ -206,4 +206,148 @@
             <h4 class="text-[#00D2FF] font-bold text-[10px] uppercase tracking-[0.3em]">Síguenos en la ruta</h4>
             <div class="flex gap-8">
                 <a href="https://wa.me/584127732710" target="_blank" class="text-white/40 hover:text-[#00D2FF] text-3xl transition-all transform hover:scale-110"><i class="fa-brands fa-whatsapp"></i></a>
-                <a href="
+                <a href="https://www.instagram.com/retovirtual.vzla/" target="_blank" class="text-white/40 hover:text-[#00D2FF] text-3xl transition-all transform hover:scale-110"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@retovirtual.vzla" target="_blank" class="text-white/40 hover:text-[#00D2FF] text-3xl transition-all transform hover:scale-110"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="https://www.strava.com/clubs/1859944" target="_blank" class="text-white/40 hover:text-[#00D2FF] text-3xl transition-all transform hover:scale-110"><i class="fa-brands fa-strava"></i></a>
+            </div>
+        </div>
+        <div class="border-l border-white/10 pl-8 hidden md:block text-right">
+            <h4 class="text-[#00D2FF] font-bold text-[10px] uppercase tracking-[0.3em] mb-2">Presentado por</h4>
+            <a href="https://www.instagram.com/team_fs__/" target="_blank" class="group">
+                <p class="text-white font-black text-3xl italic tracking-tighter uppercase opacity-80 group-hover:text-[#00D2FF] transition-all">TeamFS</p>
+                <p class="text-[9px] text-white/40 uppercase tracking-widest">Socio Tecnológico Oficial</p>
+            </a>
+        </div>
+    </div>
+</footer>
+
+    <script>
+// ========== BASE DE DATOS DE ESTADOS Y CIUDADES ==========
+        const venezuela = {
+            "Amazonas": ["Puerto Ayacucho", "San Fernando de Atabapo"],
+            "Anzoátegui": ["Barcelona", "Puerto La Cruz", "Lechería", "El Tigre", "Anaco", "Cantaura"],
+            "Apure": ["San Fernando de Apure", "Guasdualito", "Elorza"],
+            "Aragua": ["Maracay", "Turmero", "La Victoria", "Cagua", "Villa de Cura", "Palo Negro"],
+            "Barinas": ["Barinas", "Socopó", "Santa Bárbara"],
+            "Bolívar": ["Ciudad Guayana (Puerto Ordaz/San Félix)", "Ciudad Bolívar", "Upata", "Tumeremo", "Callao"],
+            "Carabobo": ["Valencia", "Puerto Cabello", "Guacara", "San Diego", "Naguanagua", "Mariara"],
+            "Cojedes": ["San Carlos", "Tinaquillo", "Tinaco"],
+            "Delta Amacuro": ["Tucupita"],
+            "Distrito Capital": ["Caracas"],
+            "Falcón": ["Punto Fijo", "Coro", "Punta Cardón", "Judibana", "Tucacas", "Dabajuro", "Adícora", "Churuguara", "Santa Ana"],
+            "Guárico": ["San Juan de los Morros", "Valle de la Pascua", "Calabozo", "Zaraza"],
+            "La Guaira": ["La Guaira", "Maiquetía", "Catia La Mar", "Caraballeda", "Macuto"],
+            "Lara": ["Barquisimeto", "Cabudare", "Carora", "El Tocuyo", "Quíbor"],
+            "Mérida": ["Mérida", "El Vigía", "Tovar", "Ejido"],
+            "Miranda": ["Los Teques", "Guarenas", "Guatire", "Charallave", "Cúa", "Ocumare del Tuy", "San Antonio de los Altos"],
+            "Monagas": ["Maturín", "Punta de Mata", "Caripito"],
+            "Nueva Esparta": ["Porlamar", "Pampatar", "La Asunción", "Juan Griego"],
+            "Portuguesa": ["Acarigua", "Guanare", "Araure", "Turén"],
+            "Sucre": ["Cumaná", "Carúpano", "Güiria"],
+            "Táchira": ["San Cristóbal", "Táriba", "Rubio", "San Antonio del Táchira", "La Grita"],
+            "Trujillo": ["Valera", "Trujillo", "Boconó", "Pampán"],
+            "Yaracuy": ["San Felipe", "Yaritagua", "Chivacoa"],
+            "Zulia": ["Maracaibo", "San Francisco", "Cabimas", "Ciudad Ojeda", "Machiques", "La Villa del Rosario"]
+        };
+
+        // Cargar los estados al abrir la página
+        window.addEventListener('DOMContentLoaded', () => {
+            const selectEstado = document.getElementById('estadoEspera');
+            Object.keys(venezuela).sort().forEach(est => {
+                let opt = document.createElement('option');
+                opt.value = est;
+                opt.text = est;
+                opt.className = "bg-[#001E50] text-white font-bold";
+                selectEstado.add(opt);
+            });
+        });
+
+        // Cargar las ciudades cuando se selecciona un estado
+        function cargarCiudadesEspera() {
+            const est = document.getElementById('estadoEspera').value;
+            const selectCiu = document.getElementById('ciudadEspera');
+            selectCiu.innerHTML = '<option value="" disabled selected class="bg-[#001E50] text-slate-400">Elige Ciudad...</option>';
+            if(est && venezuela[est]) {
+                selectCiu.disabled = false;
+                venezuela[est].sort().forEach(ciu => {
+                    let opt = document.createElement('option');
+                    opt.value = ciu;
+                    opt.text = ciu;
+                    opt.className = "bg-[#001E50] text-white font-bold";
+                    selectCiu.add(opt);
+                });
+            }
+        }
+
+// ========== MENÚ MÓVIL HAMBURGUESA ==========
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuIcon = menuToggle.querySelector('i');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('translate-x-full');
+            
+            // Cambiar icono
+            if (mobileMenu.classList.contains('translate-x-full')) {
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars-staggered');
+            } else {
+                menuIcon.classList.remove('fa-bars-staggered');
+                menuIcon.classList.add('fa-xmark');
+            }
+        });
+
+        // Cerrar menú al hacer click en un enlace
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('translate-x-full');
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars-staggered');
+            });
+        });
+
+        const urlScriptEspera = "https://script.google.com/macros/s/AKfycbzS-bh7LJzckXyLx9fnSCaskXDtEYVxJBJ04mBSiu0wRj1FkiVobTcFGjFrDOOuA4H84Q/exec"; 
+
+        // Script para el Menu Móvil
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            const menu = document.getElementById('mobileMenu');
+            if (menu.classList.contains('translate-x-full')) {
+                menu.classList.remove('translate-x-full');
+            } else {
+                menu.classList.add('translate-x-full');
+            }
+        });
+
+        function enviarListaEspera(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btnEspera');
+            
+            btn.innerText = "REGISTRANDO...";
+            btn.disabled = true;
+
+            const datos = new FormData();
+            datos.append("Nombre", document.getElementById('nombreEspera').value);
+            datos.append("Cedula", document.getElementById('cedulaEspera').value);
+            datos.append("Telefono", document.getElementById('whatsappEspera').value);
+            datos.append("Estado", document.getElementById('estadoEspera').value);
+            datos.append("Ciudad", document.getElementById('ciudadEspera').value);
+            datos.append("Genero", document.getElementById('generoEspera').value);
+            datos.append("Edad", document.getElementById('edadEspera').value);
+            datos.append("Team", document.getElementById('teamEspera').value || "Ninguno");
+
+            fetch(urlScriptEspera, { method: 'POST', body: datos, mode: 'no-cors' })
+                .then(() => {
+                    document.getElementById('formEspera').classList.add('hidden');
+                    document.getElementById('msgExito').classList.remove('hidden');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                })
+                .catch(() => {
+                    alert("Ocurrió un error de conexión. Inténtalo de nuevo.");
+                    btn.innerText = "ASEGURAR MI PRIORIDAD";
+                    btn.disabled = false;
+                });
+        }
+    </script>
+</body>
+</html>
