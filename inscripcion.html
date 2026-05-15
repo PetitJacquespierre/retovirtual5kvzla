@@ -146,6 +146,17 @@
                 <h3 class="text-[#001E50] font-black text-xl mb-2 uppercase italic">Mejora tu Kit 5K (Opcional)</h3>
                 <p class="text-xs text-slate-400 mb-6 font-bold">Agrega prendas textiles exclusivas a tu inscripción de los 5K.</p>
                 
+                <div class="mb-8 flex flex-col items-center">
+                    <button type="button" onclick="abrirModalImagen()" class="relative group overflow-hidden rounded-3xl border-2 border-slate-200 hover:border-[#00D2FF] hover:shadow-[0_0_20px_rgba(0,210,255,0.2)] transition-all cursor-pointer w-full max-w-sm h-40 bg-slate-50 flex items-center justify-center">
+                        <img src="img/franela_prototipo.jpg" alt="Prototipo Franela" class="h-full w-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-[#001E50]/30 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-all backdrop-blur-[2px]">
+                            <i class="fa-solid fa-magnifying-glass-plus text-white text-4xl drop-shadow-md"></i>
+                            <span class="text-white font-bold text-xs uppercase tracking-widest mt-2">Ampliar Diseño</span>
+                        </div>
+                    </button>
+                    <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-3"><i class="fa-solid fa-hand-pointer mr-1"></i> Toca la imagen para detallarla</p>
+                </div>
+                
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                     <label class="cursor-pointer group flex flex-col items-center text-center border-2 border-slate-200 p-6 rounded-3xl hover:border-[#00D2FF] has-[:checked]:border-[#00D2FF] has-[:checked]:bg-[#00D2FF]/5 transition-all relative overflow-hidden">
                         <input type="checkbox" id="checkFranelilla" value="10" onchange="actualizarTotal()" class="absolute top-4 right-4 w-5 h-5 accent-[#00D2FF]">
@@ -695,6 +706,23 @@
                 window.open(`https://wa.me/584127732710?text=${msgTexto}`, '_blank');
             }, 1500);
         }
+function abrirModalImagen() {
+            const modal = document.getElementById('modal-imagen');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function cerrarModalImagen() {
+            const modal = document.getElementById('modal-imagen');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
     </script>
+<div id="modal-imagen" class="fixed inset-0 z-[200] bg-black/95 hidden flex-col items-center justify-center p-4 backdrop-blur-sm transition-opacity" onclick="cerrarModalImagen()">
+        <button class="absolute top-6 right-6 text-white text-4xl hover:text-[#00D2FF] transition-colors"><i class="fa-solid fa-xmark"></i></button>
+        <img src="img/franela_prototipo.png" class="max-w-full max-h-[80vh] object-contain rounded-2xl shadow-[0_0_40px_rgba(0,210,255,0.3)] border border-white/10" onclick="event.stopPropagation()">
+        <p class="text-white mt-6 font-black tracking-widest uppercase text-sm italic">Diseño Oficial 2da Edición 5K</p>
+        <p class="text-slate-400 text-[10px] uppercase mt-2 font-bold tracking-widest">Toca cualquier parte para cerrar</p>
+    </div>
 </body>
 </html>
