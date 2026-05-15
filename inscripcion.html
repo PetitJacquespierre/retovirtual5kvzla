@@ -356,35 +356,69 @@
                         <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Dirección Exacta <span class="req">*</span></label>
                         <textarea id="direccionEnvio" rows="2" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 font-bold" required></textarea>
                     </div>
+                </div>
+            </div>
 
-                    <div class="md:col-span-2 border-t border-slate-100 pt-6 mt-2">
-                        <h4 class="font-black text-[#001E50] text-sm uppercase mb-4">Verificación de Pago</h4>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="flex flex-col gap-2">
-                                <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Número de Referencia <span class="req">*</span></label>
-                                <input type="text" id="numReferenciaPago" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3 font-bold" placeholder="Ej: 123456" required>
-                            </div>
-                            <div class="flex flex-col gap-2">
-                                <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Fecha de Pago <span class="req">*</span></label>
-                                <input type="date" id="fechaPago" class="bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3 text-sm font-bold text-[#001E50]" required>
-                            </div>
+            <div class="mt-8 bg-slate-50 p-10 rounded-[3rem] shadow-xl border border-slate-200 transition-all">
+                
+                <div class="text-center mb-10 border-b border-slate-200 pb-8">
+                    <h3 class="text-[#001E50] font-black text-3xl uppercase italic leading-none mb-2">Total a Pagar</h3>
+                    <p class="text-slate-500 text-sm mb-6">Este es el monto exacto de tu inscripción + las opciones seleccionadas.</p>
+                    
+                    <div class="inline-flex flex-col items-center bg-white border-2 border-[#00D2FF] p-6 rounded-3xl shadow-sm min-w-[250px]">
+                        <span id="total-usd" class="text-6xl font-black text-[#00D2FF] block tracking-tighter mb-1">$12</span>
+                        <span id="total-bs" class="text-sm font-bold text-slate-500 tracking-widest block mb-2">0.00 Bs.</span>
+                        <p class="text-slate-400 text-[9px] uppercase tracking-[0.3em] border-t border-slate-100 pt-2 w-full text-center mt-2">Tasa BCV: <span id="valor-tasa">--</span> Bs.</p>
+                    </div>
+                </div>
+
+                <h4 class="text-[#001E50] font-black text-lg mb-6 uppercase italic text-center">1. Elige tu método y transfiere</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+                    <div class="bg-white border-2 border-slate-200 p-6 rounded-3xl flex flex-col items-center text-center shadow-sm">
+                        <i class="fa-solid fa-mobile-screen-button text-3xl text-[#001E50] mb-3"></i>
+                        <h4 class="font-black text-[#001E50] uppercase tracking-widest text-sm mb-4">Pago Móvil</h4>
+                        <div class="text-xs text-slate-600 space-y-2 font-bold w-full bg-slate-50 p-3 rounded-xl border border-slate-100">
+                            <p>Tlf: <span class="text-[#00D2FF] text-sm">0412-7732710</span></p>
+                            <p>C.I: <span class="text-[#001E50]">14.074.229</span></p>
+                            <p>Banco: <span class="text-[#001E50]">Mercantil</span></p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border-2 border-slate-200 p-6 rounded-3xl flex flex-col items-center text-center shadow-sm">
+                        <i class="fa-brands fa-bitcoin text-3xl text-[#FCD535] mb-3"></i>
+                        <h4 class="font-black text-[#001E50] uppercase tracking-widest text-sm mb-4">Binance Pay</h4>
+                        <div class="text-[11px] text-slate-600 font-bold w-full bg-slate-50 p-3 rounded-xl border border-slate-100 break-all">
+                            <p class="mb-1 text-slate-400 uppercase tracking-widest text-[9px]">Correo (USDT)</p>
+                            <p class="text-[#001E50]">petitjacquespierre@gmail.com</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border-2 border-slate-200 p-6 rounded-3xl flex flex-col items-center text-center shadow-sm">
+                        <i class="fa-solid fa-wallet text-3xl text-purple-600 mb-3"></i>
+                        <h4 class="font-black text-[#001E50] uppercase tracking-widest text-sm mb-4">Zinli</h4>
+                        <div class="text-[11px] text-slate-600 font-bold w-full bg-slate-50 p-3 rounded-xl border border-slate-100 break-all">
+                            <p class="mb-1 text-slate-400 uppercase tracking-widest text-[9px]">Correo</p>
+                            <p class="text-[#001E50]">petitjacquespierre@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-slate-200 pt-8">
+                    <h4 class="text-[#001E50] font-black text-lg mb-6 uppercase italic text-center">2. Reporta tu Pago Aquí</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+                        <div class="flex flex-col gap-2">
+                            <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Número de Referencia <span class="req">*</span></label>
+                            <input type="text" id="numReferenciaPago" class="bg-white border-2 border-slate-200 rounded-2xl px-6 py-3 font-bold focus:border-[#00D2FF]" placeholder="Ej: 123456" required>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label class="text-[10px] font-bold uppercase text-slate-400 ml-2">Fecha de Pago <span class="req">*</span></label>
+                            <input type="date" id="fechaPago" class="bg-white border-2 border-slate-200 rounded-2xl px-6 py-3 text-sm font-bold text-[#001E50] focus:border-[#00D2FF]" required>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div id="seccion-checkout" class="bg-[#001E50] p-10 rounded-[3rem] text-white shadow-2xl transition-all">
-                <div class="flex justify-between items-center mb-6 border-b border-white/10 pb-6">
-                    <div>
-                        <h4 class="font-black text-2xl uppercase italic leading-none mb-2 text-white">Total a Pagar</h4>
-                        <p class="text-white/30 text-[9px] uppercase tracking-[0.3em]">Tasa BCV: <span id="valor-tasa">--</span> Bs.</p>
-                    </div>
-                    <div class="text-right">
-                        <span id="total-usd" class="text-5xl font-black text-[#00D2FF] block tracking-tighter">$12</span>
-                        <span id="total-bs" class="text-sm font-bold text-white/50 tracking-widest">0.00 Bs.</span>
-                    </div>
-                </div>
-                
+            <div id="seccion-checkout" class="bg-[#001E50] p-10 rounded-[3rem] text-white shadow-2xl transition-all mt-8">
                 <div class="mb-8 flex items-start gap-4 bg-white/5 p-4 rounded-xl border border-white/10">
                     <div class="flex items-center h-5">
                         <input id="aceptoReglamento" type="checkbox" class="w-5 h-5 rounded border-slate-300 accent-[#00D2FF] cursor-pointer transition-all">
@@ -398,7 +432,7 @@
                     </div>
                 </div>
 
-                <button id="btnInscribir" onclick="procesarInscripcion()" class="w-full bg-[#00D2FF] text-[#001E50] py-6 rounded-2xl font-black uppercase tracking-[0.2em] shadow-xl flex items-center justify-center gap-4">
+                <button id="btnInscribir" onclick="procesarInscripcion()" class="w-full bg-[#00D2FF] text-[#001E50] py-6 rounded-2xl font-black uppercase tracking-[0.2em] shadow-xl flex items-center justify-center gap-4 hover:scale-[1.02] transition-transform">
                     FINALIZAR INSCRIPCIÓN <i class="fa-brands fa-whatsapp text-xl"></i>
                 </button>
             </div>
