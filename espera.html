@@ -27,7 +27,6 @@
         .alerta-cupos { animation: pulse-red 2s infinite; }
     </style>
 </head>
-<!-- AQUI ESTA LA CORRECCIÓN: overflow-x-hidden -->
 <body class="text-slate-200 min-h-screen flex flex-col relative overflow-x-hidden">
 
 <div class="bg-[#001E50] text-white py-2 text-center text-[10px] font-bold uppercase tracking-[0.4em] z-50 relative border-b border-white/10">
@@ -39,7 +38,6 @@
     <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
         <div class="flex justify-between items-center h-20 md:h-28">
             
-            <!-- BLOQUE DEL LOGO -->
             <div class="flex items-center gap-3 md:gap-5 cursor-pointer group -ml-2 md:-ml-4" onclick="location.href='index.html'">
                 
                 <img src="img/RV-Isotipo-sinfondo.png" alt="Reto Virtual" class="h-12 w-auto object-contain brightness-125 transition-transform group-hover:scale-105 md:hidden">
@@ -54,7 +52,6 @@
                 </div>
             </div>
 
-            <!-- BOTONES DEL MENÚ -->
             <div class="hidden lg:flex items-center space-x-4 xl:space-x-6">
                 <a href="index.html#ediciones" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Calendario</a>
                 
@@ -91,7 +88,6 @@
         </div>
     </div>
 
-    <!-- MENÚ MÓVIL DESPLEGABLE -->
     <div id="mobileMenu" class="fixed inset-0 bg-[#001E50] z-40 transform translate-x-full transition-transform duration-300 lg:hidden">
         <div class="flex flex-col items-center justify-center h-full space-y-6 px-8">
             <a href="index.html#ediciones" class="text-white text-lg font-bold uppercase tracking-widest">Calendario</a>
@@ -107,7 +103,6 @@
     </div>
 </nav>
 
-    <!-- Fondos Blur -->
     <div class="absolute top-0 -right-[10%] w-[600px] h-[600px] bg-[#00D2FF] rounded-full blur-[150px] opacity-10 pointer-events-none z-0"></div>
     <div class="absolute bottom-0 -left-[10%] w-[400px] h-[400px] bg-[#001E50] rounded-full blur-[100px] opacity-50 pointer-events-none z-0"></div>
 
@@ -144,9 +139,16 @@
             <form id="formEspera" class="text-left space-y-4" onsubmit="enviarListaEspera(event)">
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="flex flex-col gap-1.5">
+                    <div class="flex flex-col gap-1.5 md:col-span-2">
                         <label class="text-[10px] font-bold uppercase text-[#00D2FF] ml-2 tracking-widest">Nombre Completo *</label>
                         <input type="text" id="nombreEspera" class="bg-black/40 border border-white/10 rounded-xl px-4 py-3 font-bold text-sm text-white transition-all w-full" required>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="flex flex-col gap-1.5">
+                        <label class="text-[10px] font-bold uppercase text-[#00D2FF] ml-2 tracking-widest">Cédula de Identidad *</label>
+                        <input type="text" id="cedulaEspera" class="bg-black/40 border border-white/10 rounded-xl px-4 py-3 font-bold text-sm text-white transition-all w-full" placeholder="Ej: 12345678" required>
                     </div>
                     <div class="flex flex-col gap-1.5">
                         <label class="text-[10px] font-bold uppercase text-[#00D2FF] ml-2 tracking-widest">WhatsApp *</label>
@@ -280,6 +282,8 @@
 
             const datos = new FormData();
             datos.append("Nombre", document.getElementById('nombreEspera').value);
+            // AQUÍ AGREGUÉ LA CAPTURA DEL DATO CÉDULA
+            datos.append("Cedula", document.getElementById('cedulaEspera').value);
             datos.append("Telefono", document.getElementById('whatsappEspera').value);
             datos.append("Estado", document.getElementById('estadoEspera').value);
             datos.append("Ciudad", document.getElementById('ciudadEspera').value);
