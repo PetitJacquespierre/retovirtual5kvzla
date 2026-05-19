@@ -42,45 +42,24 @@
 <body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
 
     <div class="bg-boston-navy text-white py-2 text-center text-[10px] font-bold uppercase tracking-[0.4em] z-50 relative border-b border-white/10">
-        Resultados Oficiales Auditados por TeamFS
+        Resultados Oficiales Auditados
     </div>
-
-    <!-- Reemplaza toda la sección <nav> con esta versión -->
 
 <nav class="bg-[#001E50] sticky top-0 z-50 shadow-2xl">
     <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
         <div class="flex justify-between items-center h-20 md:h-28">
             
-            <!-- BLOQUE DEL LOGO CORREGIDO (Limpiecito y más grande) -->
             <div class="flex items-center gap-3 md:gap-5 cursor-pointer group -ml-2 md:-ml-4" onclick="location.href='index.html'">
-                
-                <!-- 📱 Logo para Móvil (Isotipo) -->
                 <img src="img/RV-Isotipo-sinfondo.png" alt="Reto Virtual" class="h-12 w-auto object-contain brightness-125 transition-transform group-hover:scale-105 md:hidden">
-
-                <!-- 💻 Logo para Laptop (Texto) - ¡TAMAÑO AUMENTADO AQUÍ! (h-16 a h-20) -->
                 <img src="img/RV Texto Sin fondo.png" alt="Reto Virtual" class="hidden md:block h-20 lg:h-28 w-auto object-contain brightness-125 transition-transform group-hover:scale-105">
                 
-                <!-- La línea separadora (también la hice un poco más alta para que cuadre) -->
-                <div class="h-10 md:h-12 lg:h-16 w-[1px] bg-white/20"></div>
-                
-                <!-- Texto TEAMFS -->
-                <div class="flex flex-col">
-                    <span class="text-[7px] md:text-[8px] text-white/60 font-bold tracking-[0.2em] uppercase mb-0.5 md:mb-1">Presentado por</span>
-                    <span class="text-white font-black text-base md:text-xl lg:text-2xl tracking-tighter leading-none group-hover:text-[#00D2FF] transition-colors italic">TEAMFS</span>
                 </div>
-            </div>
-            <!-- FIN DEL BLOQUE DEL LOGO -->
 
-            <!-- BOTONES DEL MENÚ -->
             <div class="hidden lg:flex items-center space-x-4 xl:space-x-6">
                 <a href="index.html#ediciones" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Calendario</a>
-                
                 <a href="10k.html" class="bg-[#00D2FF] text-[#001E50] px-4 py-2 rounded-full text-[10px] xl:text-xs font-black uppercase tracking-widest hover:scale-105 transition-all shadow-lg shadow-[#00D2FF]/20">Especial 10K</a>
-                
                 <a href="resultados.html" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Resultados</a>
-                
                 <a href="aliados.html" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Aliados</a>
-                
                 <a href="tienda.html" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Tienda</a>
 
                 <div class="relative group">
@@ -98,7 +77,6 @@
                         </div>
                     </div>
                 </div>
-
                 <a href="inscripcion.html" class="border-2 border-white text-white px-5 py-2.5 rounded-full font-black text-[10px] xl:text-xs uppercase tracking-widest hover:bg-white hover:text-[#001E50] transition-all shadow-lg">Inscribirme</a>
             </div>
 
@@ -108,7 +86,6 @@
         </div>
     </div>
 
-    <!-- MENÚ MÓVIL DESPLEGABLE -->
     <div id="mobileMenu" class="fixed inset-0 bg-[#001E50] z-40 transform translate-x-full transition-transform duration-300 lg:hidden">
         <div class="flex flex-col items-center justify-center h-full space-y-6 px-8">
             <a href="index.html#ediciones" class="text-white text-lg font-bold uppercase tracking-widest">Calendario</a>
@@ -132,11 +109,9 @@
             Historial oficial del Reto Virtual VZLA
         </p>
 
-        <!-- SELECTOR AGRUPADO POR AÑO -->
         <div class="relative max-w-md mx-auto">
             <select id="selector-edicion" onchange="cambiarEdicion(this.value)" class="w-full bg-boston-navy text-white font-black text-center px-6 py-4 rounded-2xl border-2 border-accent shadow-xl uppercase tracking-widest cursor-pointer focus:outline-none focus:ring-4 focus:ring-accent/30 transition-all">
                 
-                <!-- GRUPO 2026 -->
                 <optgroup label="🏆 TEMPORADA 2026">
                     <option value="edicion2">5K - 2da Edición (Junio)</option>
                     <option value="edicion1">5K - 1era Edición (Marzo)</option>
@@ -145,7 +120,6 @@
                     <option value="edicion10k">10K - Edición Especial</option>
                 </optgroup>
 
-                <!-- GRUPO 2027 (Ejemplo de escalabilidad) -->
                 <optgroup label="🚀 TEMPORADA 2027">
                     <option value="edicion1_2027">5K - 1era Edición 2027</option>
                 </optgroup>
@@ -174,7 +148,6 @@
             </div>
         </div>
 
-        <!-- FILTROS DE GÉNERO -->
         <div class="flex flex-wrap justify-center lg:justify-start gap-4 mb-8">
             <button id="btn-general" onclick="cambiarFiltro('GENERAL')" class="bg-accent text-boston-navy font-black px-8 py-3 rounded-full transition-all shadow-lg text-xs uppercase tracking-widest">General</button>
             <button id="btn-masculino" onclick="cambiarFiltro('MASCULINO')" class="bg-white text-slate-400 font-bold px-8 py-3 rounded-full transition-all border border-slate-200 text-xs uppercase tracking-widest hover:border-accent">Masculino</button>
@@ -198,13 +171,11 @@
                         </tr>
                     </thead>
                     <tbody id="tabla-corredores" class="text-slate-600 divide-y divide-slate-50">
-                        <!-- Datos -->
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <!-- SECCIÓN CERTIFICADO -->
         <div class="bg-boston-navy rounded-[3rem] p-12 text-center relative overflow-hidden shadow-2xl">
             <div class="absolute top-0 right-0 w-64 h-64 bg-accent/10 rounded-full blur-3xl"></div>
             
@@ -238,8 +209,8 @@
             <div>
                 <img src="img/RV-Isotipo-sinfondo.png" class="h-14 mx-auto md:mx-0 mb-6 grayscale brightness-200 opacity-40">
                 <p class="text-white/30 text-[10px] uppercase tracking-[0.4em] leading-relaxed">
-                    Reto Virtual VZLA es una producción de <br>
-                    <a href="https://www.instagram.com/team_fs__/" target="_blank" class="text-white/60 hover:text-[#00D2FF] transition-colors font-bold">TeamFS</a>. <br>
+                    Reto Virtual VZLA es una producción <br>
+                    <span class="text-white/60 font-bold">Nacional</span>. <br>
                     © 2026 THE ROAD TO GLORY.
                 </p>
             </div>
@@ -252,27 +223,17 @@
                     <a href="https://www.strava.com/clubs/1859944" target="_blank" class="text-white/40 hover:text-[#00D2FF] text-3xl transition-all transform hover:scale-110"><i class="fa-brands fa-strava"></i></a>
                 </div>
             </div>
-            <div class="border-l border-white/10 pl-8 hidden md:block text-right">
-                <h4 class="text-[#00D2FF] font-bold text-[10px] uppercase tracking-[0.3em] mb-2">Presentado por</h4>
-                <a href="https://www.instagram.com/team_fs__/" target="_blank" class="group">
-                    <p class="text-white font-black text-3xl italic tracking-tighter uppercase opacity-80 group-hover:text-[#00D2FF] transition-all">TeamFS</p>
-                    <p class="text-[9px] text-white/40 uppercase tracking-widest">Socio Tecnológico Oficial</p>
-                </a>
+            
             </div>
-        </div>
     </footer>
 
     <script>
-
-// ========== MENÚ MÓVIL HAMBURGUESA ==========
         const menuToggle = document.getElementById('menuToggle');
         const mobileMenu = document.getElementById('mobileMenu');
         const menuIcon = menuToggle.querySelector('i');
 
         menuToggle.addEventListener('click', () => {
             mobileMenu.classList.toggle('translate-x-full');
-            
-            // Cambiar icono
             if (mobileMenu.classList.contains('translate-x-full')) {
                 menuIcon.classList.remove('fa-xmark');
                 menuIcon.classList.add('fa-bars-staggered');
@@ -282,7 +243,6 @@
             }
         });
 
-        // Cerrar menú al hacer click en un enlace
         const mobileLinks = mobileMenu.querySelectorAll('a');
         mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
@@ -292,13 +252,9 @@
             });
         });
 
-        // ====================================================================
-        // CONFIGURADOR MAESTRO DE EDICIONES POR AÑO
-        // ====================================================================
         const enlaceBase = "https://docs.google.com/spreadsheets/d/1vg9nwhkFxwN4qVzjkfmXTrIVoHVYxeMH3-PXjqzeWao/gviz/tq?tqx=out:csv&gid=";
         
         const BASE_DE_DATOS = {
-            // TEMPORADA 2026
             "edicion2": {
                 gid: "316140127", 
                 titulo: "Fase de Inscripciones",
@@ -339,7 +295,6 @@
                 nombreCorto: "2026_Ed10K",
                 imagenCertificado: "fondo-certificado-10k.png"
             },
-            // TEMPORADA 2027
             "edicion1_2027": {
                 gid: "PENDIENTE", 
                 titulo: "Próximamente",
@@ -349,7 +304,6 @@
                 imagenCertificado: "fondo-certificado-2027.png"
             }
         };
-        // ====================================================================
 
         let corredores = [];
         let filtroActual = 'GENERAL'; 
@@ -513,8 +467,8 @@
                 
                 const imgFondo = document.getElementById('img-fondo-cert');
                 imgFondo.onerror = function() {
-                     this.onerror = null;
-                     this.src = "fondo-certificado.png";
+                       this.onerror = null;
+                       this.src = "fondo-certificado.png";
                 };
 
                 document.getElementById('mi-certificado-objetivo').style.display = 'block';
