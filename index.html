@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reto Virtual VZLA 2026 | El Circuito Nacional</title>
-<link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="icon" type="image/png" href="img/favicon.png">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -63,7 +63,7 @@
         }
         @keyframes divider-pulse {
             0%, 100% { opacity: 0.4; transform: scaleY(0.85); }
-            50%       { opacity: 1;   transform: scaleY(1); }
+            50%        { opacity: 1;   transform: scaleY(1); }
         }
         .teamfs-splash {
             width: clamp(120px, 20vw, 180px); flex-shrink: 0;
@@ -107,7 +107,7 @@
         }
         @keyframes text-fade {
             0%, 100% { opacity: 0.3; }
-            50%       { opacity: 0.7; }
+            50%        { opacity: 0.7; }
         }
         .splash-progress {
             position: absolute; bottom: 0; left: 0;
@@ -128,7 +128,6 @@
 </head>
 <body class="bg-white text-slate-900">
 
-    <!-- ===================== SPLASH SCREEN ===================== -->
     <div id="splash">
         <div class="splash-scene">
             <div class="splash-particles">
@@ -141,46 +140,25 @@
             <div class="rv-logo">
                 <img src="img/RV-Isotipo-sinfondo.png" alt="Reto Virtual VZLA" />
             </div>
-            <div class="splash-divider"></div>
-            <img class="teamfs-splash" id="teamfs-splash" src="img/teamfslogo.png" alt="Team FS" />
-            <div class="collab-text">Reto Virtual VZLA × Team FS</div>
-        </div>
+            
+            <div class="collab-text">Reto Virtual VZLA 2026</div> </div>
         <div class="splash-progress"></div>
     </div>
-    <!-- ================== FIN SPLASH SCREEN =================== -->
-
-
     <div class="bg-[#001E50] text-white py-2 text-center text-[10px] font-bold uppercase tracking-[0.4em] z-50 relative border-b border-white/10">
         Tu Ruta. Tu Ritmo. Tu Medalla.
     </div>
 
-    <!-- Reemplaza toda la sección <nav> con esta versión -->
-
-<nav class="bg-[#001E50] sticky top-0 z-50 shadow-2xl">
+    <nav class="bg-[#001E50] sticky top-0 z-50 shadow-2xl">
     <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
         <div class="flex justify-between items-center h-20 md:h-28">
             
-            <!-- BLOQUE DEL LOGO CORREGIDO (Limpiecito y más grande) -->
             <div class="flex items-center gap-3 md:gap-5 cursor-pointer group -ml-2 md:-ml-4" onclick="location.href='index.html'">
                 
-                <!-- 📱 Logo para Móvil (Isotipo) -->
                 <img src="img/RV-Isotipo-sinfondo.png" alt="Reto Virtual" class="h-12 w-auto object-contain brightness-125 transition-transform group-hover:scale-105 md:hidden">
 
-                <!-- 💻 Logo para Laptop (Texto) - ¡TAMAÑO AUMENTADO AQUÍ! (h-16 a h-20) -->
                 <img src="img/RV Texto Sin fondo.png" alt="Reto Virtual" class="hidden md:block h-20 lg:h-28 w-auto object-contain brightness-125 transition-transform group-hover:scale-105">
                 
-                <!-- La línea separadora (también la hice un poco más alta para que cuadre) -->
-                <div class="h-10 md:h-12 lg:h-16 w-[1px] bg-white/20"></div>
-                
-                <!-- Texto TEAMFS -->
-                <div class="flex flex-col">
-                    <span class="text-[7px] md:text-[8px] text-white/60 font-bold tracking-[0.2em] uppercase mb-0.5 md:mb-1">Presentado por</span>
-                    <span class="text-white font-black text-base md:text-xl lg:text-2xl tracking-tighter leading-none group-hover:text-[#00D2FF] transition-colors italic">TEAMFS</span>
                 </div>
-            </div>
-            <!-- FIN DEL BLOQUE DEL LOGO -->
-
-            <!-- BOTONES DEL MENÚ -->
             <div class="hidden lg:flex items-center space-x-4 xl:space-x-6">
                 <a href="index.html#ediciones" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Calendario</a>
                 
@@ -217,7 +195,6 @@
         </div>
     </div>
 
-    <!-- MENÚ MÓVIL DESPLEGABLE -->
     <div id="mobileMenu" class="fixed inset-0 bg-[#001E50] z-40 transform translate-x-full transition-transform duration-300 lg:hidden">
         <div class="flex flex-col items-center justify-center h-full space-y-6 px-8">
             <a href="index.html#ediciones" class="text-white text-lg font-bold uppercase tracking-widest">Calendario</a>
@@ -283,11 +260,13 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <div>
                     <span class="text-[#00D2FF] font-black text-[10px] uppercase tracking-[0.5em] mb-4 block">Nuestra Visión</span>
+                    
                     <h2 class="text-[#001E50] text-4xl md:text-6xl font-black uppercase leading-[0.9] tracking-tighter mb-8">
-                        RETO VIRTUAL <br> <span class="text-[#00D2FF] italic">x TEAMFS</span>
+                        RETO VIRTUAL <br> <span class="text-[#00D2FF] italic">VENEZUELA</span>
                     </h2>
+                    
                     <p class="text-slate-600 text-lg leading-relaxed mb-8 font-light">
-                        Hemos unido la pasión por el running con el <b>respaldo y la trayectoria de TeamFS</b> para redefinir la meta en Venezuela. No solo organizamos carreras; construimos la plataforma donde cada kilómetro cuenta y cada corredor compite bajo estándares de clase mundial.
+                        Hemos unido la pasión por el running con el <b>compromiso de nuestra comunidad</b> para redefinir la meta en Venezuela. No solo organizamos carreras; construimos la plataforma donde cada kilómetro cuenta y cada corredor compite bajo estándares de clase mundial.
                     </p>
                     <div class="flex items-center gap-4 border-l-4 border-[#00D2FF] pl-6 py-2">
                         <p class="text-[#001E50] font-bold italic text-sm">"Uniendo al país, un latido a la vez."</p>
@@ -319,7 +298,7 @@
                         En el <b>Reto Virtual VZLA</b>, la distancia la pones tú, pero la gloria es compartida. Hemos diseñado un circuito de 4 etapas donde cada medalla es una pieza de un rompecabezas nacional único en su clase.
                     </p>
                     <ul class="space-y-4">
-                        <li class="flex items-center gap-3 font-semibold text-[#001E50]"><i class="fa-solid fa-check-double text-[#00D2FF]"></i> Cronometraje validado por TeamFS</li>
+                        <li class="flex items-center gap-3 font-semibold text-[#001E50]"><i class="fa-solid fa-check-double text-[#00D2FF]"></i> Cronometraje validado y clasificado</li>
                         <li class="flex items-center gap-3 font-semibold text-[#001E50]"><i class="fa-solid fa-check-double text-[#00D2FF]"></i> Medallas de acrílico de alta densidad</li>
                         <li class="flex items-center gap-3 font-semibold text-[#001E50]"><i class="fa-solid fa-check-double text-[#00D2FF]"></i> Ranking nacional en tiempo real</li>
                     </ul>
@@ -424,12 +403,8 @@
                             <span class="text-[#00D2FF] text-3xl font-black mb-1 leading-none italic">ELITE</span>
                             <span class="text-white/50 text-[9px] font-bold uppercase tracking-[0.2em]">Ranking Oficial</span>
                         </div>
-                        <div class="h-10 w-[1px] bg-white/10 hidden md:block"></div>
-                        <div class="flex flex-col items-center lg:items-start">
-                            <span class="text-[#00D2FF] text-3xl font-black mb-1 leading-none italic">#1</span>
-                            <span class="text-white/50 text-[9px] font-bold uppercase tracking-[0.2em]">Socio: TeamFS</span>
+                        
                         </div>
-                    </div>
                 </div>
                 <div class="lg:w-2/5 w-full">
                     <div class="relative group">
@@ -453,26 +428,6 @@
         <span class="text-[#00D2FF] font-black text-[10px] uppercase tracking-[0.5em] mb-4 block">Alianza Estratégica</span>
         <h2 class="text-[#001E50] text-4xl font-black uppercase mb-16 tracking-tighter italic">Nuestros <span class="text-[#00D2FF]">Aliados</span></h2>
         
-        <div class="mb-20">
-            <div class="max-w-sm mx-auto bg-white p-8 rounded-[3rem] shadow-2xl border-2 border-[#00D2FF]/10 transition-transform hover:scale-105">
-                <p class="text-[10px] text-slate-900 font-black uppercase tracking-[0.4em] mb-6 italic">Presentador Oficial</p>
-                
-                <a href="https://www.instagram.com/team_fs__/" target="_blank" class="block group">
-                    <img src="img/teamfslogo.png" alt="TeamFS Logo" class="h-34 mx-auto object-contain transition-transform group-hover:scale-110">
-                    
-                    <div class="mt-6">
-                        <span class="text-slate-900 font-black uppercase text-[11px] tracking-widest group-hover:text-[#00D2FF] transition-colors">Team FS</span>
-                        <p class="text-[9px] text-[#00D2FF] font-bold uppercase mt-2 opacity-0 group-hover:opacity-100 transition-all italic">Fuerza y Salud</p>
-                    </div>
-
-                    <div class="mt-4 flex justify-center gap-2">
-                        <span class="h-1 w-8 bg-[#00D2FF] rounded-full group-hover:w-12 transition-all"></span>
-                        <span class="h-1 w-2 bg-[#00D2FF]/30 rounded-full"></span>
-                    </div>
-                </a>
-            </div>
-        </div>
-
         <div class="flex flex-wrap justify-center gap-6">
             
             <div class="w-full sm:w-64 bg-white p-8 rounded-3xl border border-slate-100 shadow-sm transition-all hover:shadow-xl hover:-translate-y-2 group">
@@ -521,7 +476,7 @@
             </a>
         </div>
     </div>
-</section>	
+</section>  
 
     <section class="py-24 bg-[#001E50] relative overflow-hidden">
         <div class="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-96 h-96 bg-[#00D2FF]/10 rounded-full blur-3xl"></div>
@@ -537,8 +492,8 @@
         <div>
             <img src="img/RV-Isotipo-sinfondo.png" class="h-14 mx-auto md:mx-0 mb-6 grayscale brightness-200 opacity-40">
             <p class="text-white/30 text-[10px] uppercase tracking-[0.4em] leading-relaxed">
-                Reto Virtual VZLA es una producción de <br>
-                <a href="https://www.instagram.com/team_fs__/" target="_blank" class="text-white/60 hover:text-[#00D2FF] transition-colors font-bold">TeamFS</a>. <br>
+                Reto Virtual VZLA es una producción <br>
+                <span class="text-white/60 font-bold">Nacional</span>. <br>
                 © 2026 THE ROAD TO GLORY.
             </p>
         </div>
@@ -551,19 +506,11 @@
                 <a href="https://www.strava.com/clubs/1859944" target="_blank" class="text-white/40 hover:text-[#00D2FF] text-3xl transition-all transform hover:scale-110"><i class="fa-brands fa-strava"></i></a>
             </div>
         </div>
-        <div class="border-l border-white/10 pl-8 hidden md:block text-right">
-            <h4 class="text-[#00D2FF] font-bold text-[10px] uppercase tracking-[0.3em] mb-2">Presentado por</h4>
-            <a href="https://www.instagram.com/team_fs__/" target="_blank" class="group">
-                <p class="text-white font-black text-3xl italic tracking-tighter uppercase opacity-80 group-hover:text-[#00D2FF] transition-all">TeamFS</p>
-                <p class="text-[9px] text-white/40 uppercase tracking-widest">Socio Tecnológico Oficial</p>
-            </a>
+        
         </div>
-    </div>
 </footer>
 
-        <!-- Tu contenido HTML termina aquí -->
-
-    <script>
+        <script>
         // ========== MENÚ MÓVIL HAMBURGUESA ==========
         const menuToggle = document.getElementById('menuToggle');
         const mobileMenu = document.getElementById('mobileMenu');
@@ -618,7 +565,7 @@
         })();
 
         // ========== SPLASH SCREEN ==========
-        // Activa float del Team FS después del entrance
+        // Activa float del Team FS después del entrance (El código no dará error aunque la imagen esté comentada gracias al "if(el)")
         setTimeout(function() {
             var el = document.getElementById("teamfs-splash");
             if (el) el.classList.add("floating");
