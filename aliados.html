@@ -26,13 +26,27 @@
     <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
         <div class="flex justify-between items-center h-20 md:h-28">
             
+            <!-- BLOQUE DEL LOGO CORREGIDO (Limpiecito y más grande) -->
             <div class="flex items-center gap-3 md:gap-5 cursor-pointer group -ml-2 md:-ml-4" onclick="location.href='index.html'">
                 
+                <!-- 📱 Logo para Móvil (Isotipo) -->
                 <img src="img/RV-Isotipo-sinfondo.png" alt="Reto Virtual" class="h-12 w-auto object-contain brightness-125 transition-transform group-hover:scale-105 md:hidden">
 
+                <!-- 💻 Logo para Laptop (Texto) - ¡TAMAÑO AUMENTADO AQUÍ! (h-16 a h-20) -->
                 <img src="img/RV Texto Sin fondo.png" alt="Reto Virtual" class="hidden md:block h-20 lg:h-28 w-auto object-contain brightness-125 transition-transform group-hover:scale-105">
                 
+                <!-- La línea separadora (también la hice un poco más alta para que cuadre) -->
+                <div class="h-10 md:h-12 lg:h-16 w-[1px] bg-white/20"></div>
+                
+                <!-- Texto TEAMFS -->
+                <div class="flex flex-col">
+                    <span class="text-[7px] md:text-[8px] text-white/60 font-bold tracking-[0.2em] uppercase mb-0.5 md:mb-1">Presentado por</span>
+                    <span class="text-white font-black text-base md:text-xl lg:text-2xl tracking-tighter leading-none group-hover:text-[#00D2FF] transition-colors italic">TEAMFS</span>
                 </div>
+            </div>
+            <!-- FIN DEL BLOQUE DEL LOGO -->
+
+            <!-- BOTONES DEL MENÚ -->
             <div class="hidden lg:flex items-center space-x-4 xl:space-x-6">
                 <a href="index.html#ediciones" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Calendario</a>
                 
@@ -69,6 +83,7 @@
         </div>
     </div>
 
+    <!-- MENÚ MÓVIL DESPLEGABLE -->
     <div id="mobileMenu" class="fixed inset-0 bg-[#001E50] z-40 transform translate-x-full transition-transform duration-300 lg:hidden">
         <div class="flex flex-col items-center justify-center h-full space-y-6 px-8">
             <a href="index.html#ediciones" class="text-white text-lg font-bold uppercase tracking-widest">Calendario</a>
@@ -97,6 +112,31 @@
         </div>
     </section>
 
+    <section class="py-24 bg-white">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <div class="bg-slate-50 p-12 rounded-[4rem] border-2 border-[#00D2FF]/20 relative">
+                <div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-[#001E50] text-white px-8 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.3em]">
+                    Presentador Oficial
+                </div>
+                
+                <div class="flex flex-col md:flex-row items-center gap-12">
+                    <div class="w-full md:w-1/2">
+                        <img src="img/teamfslogo1.png" alt="Team FS" class="w-64 mx-auto object-contain transition-transform hover:scale-105 duration-500">
+                    </div>
+                    <div class="w-full md:w-1/2 text-left">
+                        <h2 class="text-3xl font-black uppercase italic mb-4">Team <span class="text-[#00D2FF]">FS</span></h2>
+                        <p class="text-slate-600 mb-6 leading-relaxed">
+                            Líderes en entrenamiento de alto rendimiento y salud integral. Team FS es el pilar fundamental que hace posible el Circuito del Reto Virtual VZLA 2026.
+                        </p>
+                        <a href="https://www.instagram.com/team_fs__/" target="_blank" class="inline-flex items-center gap-3 text-[#00D2FF] font-black uppercase text-xs tracking-widest border-b-2 border-[#00D2FF] pb-1 hover:gap-5 transition-all">
+                            Visitar Comunidad <i class="fa-brands fa-instagram text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="py-24 bg-slate-50">
 
     <div class="max-w-7xl mx-auto px-4">
@@ -113,9 +153,13 @@
 
             
 
+            <!-- PATROCINANTE 1: La Flaca -->
+
             <div class="bg-white p-10 rounded-3xl border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all group">
 
                 <div class="h-32 flex items-center justify-center mb-6">
+
+                    <!-- Ajuste de tamaño: se cambió h-24 por h-28 -->
 
                     <img src="img/laflacalogo.png" alt="La Flaca" class="h-28 w-auto object-contain transition-transform group-hover:scale-110">
 
@@ -139,9 +183,13 @@
 
 
 
+            <!-- PATROCINANTE 2: Nuevo Patrocinante -->
+
             <div class="bg-white p-10 rounded-3xl border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all group">
 
                 <div class="h-32 flex items-center justify-center mb-6">
+
+                    <!-- Logo del nuevo patrocinante -->
 
                     <img src="img/JoseColinaCOACHLOGO.jpeg" alt="José Colina" class="h-28 w-auto object-contain transition-transform group-hover:scale-110">
 
@@ -165,14 +213,18 @@
 
 
 
-            <a href="https://wa.me/584127732710?text=Quiero%20ser%20patrocinante%20del%20Reto%20Virtual%20Vzla%202026" target="_blank" rel="noopener noreferrer" class="bg-white/50 p-10 rounded-3xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center group hover:bg-white transition-all cursor-pointer block text-decoration-none">
+            <!-- ESPACIO DISPONIBLE (Llamado a la acción) -->
+<a href="https://wa.me/584127732710?text=Quiero%20ser%20patrocinante%20del%20Reto%20Virtual%20Vzla%202026" target="_blank" rel="noopener noreferrer" class="bg-white/50 p-10 rounded-3xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center group hover:bg-white transition-all cursor-pointer block text-decoration-none">
     <div class="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center mb-4 group-hover:bg-[#00D2FF]/10 transition-colors">
+        <!-- Opcional: Podrías cambiar el ícono de 'fa-plus' a 'fa-whatsapp' si prefieres que sea más evidente el contacto -->
         <i class="fa-solid fa-plus text-slate-300 group-hover:text-[#00D2FF] text-2xl transition-colors"></i>
     </div>
     <span class="text-[10px] text-slate-400 font-black uppercase tracking-widest text-center">Conviértete en<br>Patrocinador</span>
 </a>
 
 
+
+            <!-- RESERVA TU LUGAR -->
 
             <div class="bg-white/50 p-10 rounded-3xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center opacity-60">
 
@@ -210,8 +262,8 @@
         <div>
             <img src="img/RV-Isotipo-sinfondo.png" class="h-14 mx-auto md:mx-0 mb-6 grayscale brightness-200 opacity-40">
             <p class="text-white/30 text-[10px] uppercase tracking-[0.4em] leading-relaxed">
-                Reto Virtual VZLA es una producción <br>
-                <span class="text-white/60 font-bold">Nacional</span>. <br>
+                Reto Virtual VZLA es una producción de <br>
+                <a href="https://www.instagram.com/team_fs__/" target="_blank" class="text-white/60 hover:text-[#00D2FF] transition-colors font-bold">TeamFS</a>. <br>
                 © 2026 THE ROAD TO GLORY.
             </p>
         </div>
@@ -224,8 +276,14 @@
                 <a href="https://www.strava.com/clubs/1859944" target="_blank" class="text-white/40 hover:text-[#00D2FF] text-3xl transition-all transform hover:scale-110"><i class="fa-brands fa-strava"></i></a>
             </div>
         </div>
-        
+        <div class="border-l border-white/10 pl-8 hidden md:block text-right">
+            <h4 class="text-[#00D2FF] font-bold text-[10px] uppercase tracking-[0.3em] mb-2">Presentado por</h4>
+            <a href="https://www.instagram.com/team_fs__/" target="_blank" class="group">
+                <p class="text-white font-black text-3xl italic tracking-tighter uppercase opacity-80 group-hover:text-[#00D2FF] transition-all">TeamFS</p>
+                <p class="text-[9px] text-white/40 uppercase tracking-widest">Socio Tecnológico Oficial</p>
+            </a>
         </div>
+    </div>
 </footer>
 <script>
 
