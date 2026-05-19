@@ -75,36 +75,20 @@
 <body class="bg-[#001E50] text-white min-h-screen">
 
 <div class="bg-[#001E50] text-white py-2 text-center text-[10px] font-bold uppercase tracking-[0.4em] z-50 relative border-b border-white/10">
-    Entrenamiento Inteligente. Impulsado por Team FS.
+    Entrenamiento Inteligente
 </div>
 
-
-   <!-- Reemplaza toda la sección <nav> con esta versión -->
 <nav class="bg-[#001E50] sticky top-0 z-50 shadow-2xl">
     <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
         <div class="flex justify-between items-center h-20 md:h-28">
             
-            <!-- BLOQUE DEL LOGO CORREGIDO (Limpiecito y más grande) -->
             <div class="flex items-center gap-3 md:gap-5 cursor-pointer group -ml-2 md:-ml-4" onclick="location.href='index.html'">
                 
-                <!-- 📱 Logo para Móvil (Isotipo) -->
                 <img src="img/RV-Isotipo-sinfondo.png" alt="Reto Virtual" class="h-12 w-auto object-contain brightness-125 transition-transform group-hover:scale-105 md:hidden">
 
-                <!-- 💻 Logo para Laptop (Texto) - ¡TAMAÑO AUMENTADO AQUÍ! (h-16 a h-20) -->
                 <img src="img/RV Texto Sin fondo.png" alt="Reto Virtual" class="hidden md:block h-20 lg:h-28 w-auto object-contain brightness-125 transition-transform group-hover:scale-105">
                 
-                <!-- La línea separadora (también la hice un poco más alta para que cuadre) -->
-                <div class="h-10 md:h-12 lg:h-16 w-[1px] bg-white/20"></div>
-                
-                <!-- Texto TEAMFS -->
-                <div class="flex flex-col">
-                    <span class="text-[7px] md:text-[8px] text-white/60 font-bold tracking-[0.2em] uppercase mb-0.5 md:mb-1">Presentado por</span>
-                    <span class="text-white font-black text-base md:text-xl lg:text-2xl tracking-tighter leading-none group-hover:text-[#00D2FF] transition-colors italic">TEAMFS</span>
                 </div>
-            </div>
-            <!-- FIN DEL BLOQUE DEL LOGO -->
-
-            <!-- BOTONES DEL MENÚ -->
             <div class="hidden lg:flex items-center space-x-4 xl:space-x-6">
                 <a href="index.html#ediciones" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Calendario</a>
                 
@@ -141,7 +125,6 @@
         </div>
     </div>
 
-    <!-- MENÚ MÓVIL DESPLEGABLE -->
     <div id="mobileMenu" class="fixed inset-0 bg-[#001E50] z-40 transform translate-x-full transition-transform duration-300 lg:hidden">
         <div class="flex flex-col items-center justify-center h-full space-y-6 px-8">
             <a href="index.html#ediciones" class="text-white text-lg font-bold uppercase tracking-widest">Calendario</a>
@@ -158,14 +141,11 @@
 </nav>
 
 
-    <!-- HERO pequeño -->
-    <!-- HERO pequeño -->
     <section class="relative py-20 px-4 text-center overflow-hidden">
         <div class="glow-orb w-96 h-96 bg-[#00D2FF]/15 top-0 right-0"></div>
         <div class="glow-orb w-72 h-72 bg-purple-500/10 bottom-0 left-0" style="animation-delay:4s"></div>
         <div class="relative z-10">
             
-            <!-- Etiqueta de IA Corregida (Una sola vez) -->
             <div class="inline-flex items-center gap-2 border border-[#00D2FF]/40 bg-[#00D2FF]/5 px-5 py-2 rounded-full mb-6">
                 <i class="fa-solid fa-robot text-[#00D2FF] text-xs"></i>
                 <span class="text-[#00D2FF] font-black text-[10px] uppercase tracking-[0.3em]">Tu Coach Deportivo con IA 24/7</span>
@@ -180,10 +160,8 @@
         </div>
     </section>
 
-    <!-- MAIN -->
     <section class="max-w-6xl mx-auto px-4 md:px-8 pb-24">
 
-        <!-- TABS -->
         <div class="flex gap-3 justify-center mb-10 flex-wrap">
             <button class="tab-btn active px-7 py-3 rounded-full text-xs font-black uppercase tracking-widest border border-white/10"
                     onclick="switchTab('entrenador', this)">
@@ -199,13 +177,10 @@
             </button>
         </div>
 
-        <!-- GRID: formulario + resultado -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-            <!-- COLUMNA IZQUIERDA: formularios -->
             <div class="bg-white/5 border border-white/10 rounded-3xl p-8">
 
-                <!-- TAB: ENTRENADOR -->
                 <div id="tab-entrenador" class="tab-content active space-y-5">
                     <div>
                         <div class="flex items-center gap-3 mb-6">
@@ -247,7 +222,7 @@
                             <div>
                                 <label>Objetivo</label>
                                 <select id="ent-objetivo">
-   				   <option value="Terminar el 5K">Solo terminar el 5K</option>
+                   <option value="Terminar el 5K">Solo terminar el 5K</option>
                                    <option value="Mejorar tiempo en 5K">Mejorar mi tiempo en 5K</option>
                                    <option value="Terminar mi primer 10K">Prepararme para mi primer 10K</option>
                                    <option value="Mejorar tiempo en 10K">Mejorar mi marca personal en 10K</option>
@@ -261,7 +236,6 @@
                     </button>
                 </div>
 
-                <!-- TAB: NUTRICIONISTA -->
                 <div id="tab-nutricionista" class="tab-content space-y-5">
                     <div class="flex items-center gap-3 mb-6">
                         <div class="w-10 h-10 bg-[#00D2FF]/10 border border-[#00D2FF]/30 rounded-xl flex items-center justify-center">
@@ -311,7 +285,6 @@
                     </button>
                 </div>
 
-                <!-- TAB: ESTRATEGA -->
                 <div id="tab-estratega" class="tab-content space-y-5">
                     <div class="flex items-center gap-3 mb-6">
                         <div class="w-10 h-10 bg-[#00D2FF]/10 border border-[#00D2FF]/30 rounded-xl flex items-center justify-center">
@@ -362,10 +335,8 @@
 
             </div>
 
-            <!-- COLUMNA DERECHA: resultado -->
             <div class="bg-white/5 border border-white/10 rounded-3xl p-8 flex flex-col">
 
-                <!-- Header resultado -->
                 <div class="flex items-center gap-3 mb-6 pb-4 border-b border-white/10">
                     <div class="w-8 h-8 rounded-full bg-gradient-to-br from-[#00D2FF] to-purple-500 flex items-center justify-center flex-shrink-0">
                         <i class="fa-solid fa-robot text-white text-xs"></i>
@@ -380,10 +351,8 @@
                     </button>
                 </div>
 
-                <!-- Área de resultado -->
                 <div id="resultado-area" class="flex-1 flex flex-col">
 
-                    <!-- Estado vacío -->
                     <div id="estado-vacio" class="flex-1 flex flex-col items-center justify-center text-center py-12">
                         <div class="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-4">
                             <i class="fa-solid fa-robot text-white/10 text-3xl"></i>
@@ -394,7 +363,6 @@
                         </p>
                     </div>
 
-                    <!-- Loading -->
                     <div id="estado-loading" class="hidden flex-1 flex flex-col items-center justify-center text-center py-12">
                         <div class="flex gap-1.5 mb-4">
                             <div class="w-2 h-2 rounded-full bg-[#00D2FF] animate-bounce" style="animation-delay:0s"></div>
@@ -404,14 +372,12 @@
                         <p class="text-white/40 text-sm">Analizando tu perfil e historial...</p>
                     </div>
 
-                    <!-- Texto resultado -->
                     <div id="estado-resultado" class="hidden flex-1 overflow-y-auto">
                         <div id="resultado-texto" class="text-sm leading-relaxed cursor"></div>
                     </div>
 
                 </div>
 
-                <!-- Footer resultado -->
                 <p class="text-white/15 text-[9px] uppercase tracking-widest mt-6 text-center">
                     Las recomendaciones son orientativas · Consulta a un profesional de salud
                 </p>
@@ -419,7 +385,6 @@
             </div>
         </div>
 
-        <!-- Disclaimer -->
         <div class="mt-6 text-center">
             <p class="text-white/20 text-[10px] uppercase tracking-widest">
                 <i class="fa-solid fa-shield-halved mr-1 text-[#00D2FF]/30"></i>
@@ -429,14 +394,13 @@
 
     </section>
 
-    <!-- FOOTER -->
     <footer class="bg-[#001E50] py-20 px-4 border-t border-white/5">
         <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-16 text-center md:text-left">
             <div>
                 <img src="img/RV-Isotipo-sinfondo.png" class="h-14 mx-auto md:mx-0 mb-6 grayscale brightness-200 opacity-40">
                 <p class="text-white/30 text-[10px] uppercase tracking-[0.4em] leading-relaxed">
-                    Reto Virtual VZLA es una producción de <br>
-                    <a href="https://www.instagram.com/team_fs__/" target="_blank" class="text-white/60 hover:text-[#00D2FF] transition-colors font-bold">TeamFS</a>. <br>
+                    Reto Virtual VZLA es una producción <br>
+                    <span class="text-white/60 font-bold">Nacional</span>. <br>
                     © 2026 THE ROAD TO GLORY.
                 </p>
             </div>
@@ -449,20 +413,12 @@
                     <a href="https://www.strava.com/clubs/1859944" target="_blank" class="text-white/40 hover:text-[#00D2FF] text-3xl transition-all transform hover:scale-110"><i class="fa-brands fa-strava"></i></a>
                 </div>
             </div>
-            <div class="border-l border-white/10 pl-8 hidden md:block text-right">
-                <h4 class="text-[#00D2FF] font-bold text-[10px] uppercase tracking-[0.3em] mb-2">Presentado por</h4>
-                <a href="https://www.instagram.com/team_fs__/" target="_blank" class="group">
-                    <p class="text-white font-black text-3xl italic tracking-tighter uppercase opacity-80 group-hover:text-[#00D2FF] transition-all">TeamFS</p>
-                    <p class="text-[9px] text-white/40 uppercase tracking-widest">Socio Tecnológico Oficial</p>
-                </a>
+            
             </div>
-        </div>
     </footer>
 
     <script>
-
-
-// ========== MENÚ MÓVIL HAMBURGUESA ==========
+        // ========== MENÚ MÓVIL HAMBURGUESA ==========
         const menuToggle = document.getElementById('menuToggle');
         const mobileMenu = document.getElementById('mobileMenu');
         const menuIcon = menuToggle.querySelector('i');
