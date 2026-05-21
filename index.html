@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reto Virtual VZLA 2026 | El Circuito Nacional</title>
 <link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="manifest" href="manifest.json">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -229,6 +230,9 @@
             <a href="entrenador.html" class="text-white text-base font-bold uppercase">Entrenador IA</a>
             <a href="faq.html" class="text-white text-base font-bold uppercase">FAQ</a>
             <a href="inscripcion.html" class="border-2 border-white text-white px-10 py-3 rounded-full font-black text-lg uppercase tracking-widest bg-white/5 transition-all mt-4">Inscribirme</a>
+            <button id="btnInstalarApp" class="hidden w-full bg-[#00D2FF] text-[#001E50] px-12 py-4 rounded-full text-xl font-black uppercase tracking-widest shadow-xl shadow-[#00D2FF]/20 mt-4 animate-bounce">
+    📥 Instalar App Oficial
+</button>
         </div>
     </div>
 </nav>
@@ -630,6 +634,58 @@
             var splash = document.getElementById("splash");
             if (splash) splash.remove();
         }, 4100);
+
+ // ========= ACTIVAR LA INSTALACION DE LA APP ============
+
+// 1. REGISTRAR EL SERVICE WORKER
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+            .then(reg => console.log('Service Worker registrado con éxito'))
+            .catch(err => console.error('Error al registrar el SW', err));
+    });
+}
+
+// 2. CAPTURAR EL EVENTO DE INSTALACIÓN
+let eventoInstalacion;
+const botonInstalar = document.getElementById('btnInstalarApp');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    // Evitar que el navegador muestre su propio aviso aburrido
+    e.preventDefault();
+    // Guardar el evento para usarlo después
+    eventoInstalacion = e;
+    // Mostrar nuestro botón personalizado gordo de Tailwind
+    if (botonInstalar) {
+        botonInstalar.classList.remove('hidden');
+    }
+});
+
+// 3. LOGICA AL HACER CLIC EN EL BOTÓN
+if (botonInstalar) {
+    botonInstalar.addEventListener('click', async () => {
+        if (!eventoInstalacion) return;
+        
+        // Mostrar la ventana nativa de instalación del celular
+        eventoInstalacion.prompt();
+        
+        // Saber si el usuario aceptó o canceló
+        const { outcome } = await eventoInstalacion.userChoice;
+        console.log(`El usuario eligió: ${outcome}`);
+        
+        // Limpiar la variable y ocultar el botón
+        eventoInstalacion = null;
+        botonInstalar.classList.add('hidden');
+    });
+}
+
+// Ocultar el botón si la app ya fue instalada con éxito
+window.addEventListener('appinstalled', () => {
+    console.log('¡Aplicación instalada con éxito en el teléfono!');
+    if (botonInstalar) {
+        botonInstalar.classList.add('hidden');
+    }
+});
     </script>
 
 </body>
