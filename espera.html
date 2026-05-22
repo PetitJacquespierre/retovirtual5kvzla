@@ -345,15 +345,7 @@
 
         const urlScriptEspera = "https://script.google.com/macros/s/AKfycbzS-bh7LJzckXyLx9fnSCaskXDtEYVxJBJ04mBSiu0wRj1FkiVobTcFGjFrDOOuA4H84Q/exec"; 
 
-        // Script para el Menu Móvil
-        document.getElementById('menuToggle').addEventListener('click', function() {
-            const menu = document.getElementById('mobileMenu');
-            if (menu.classList.contains('translate-x-full')) {
-                menu.classList.remove('translate-x-full');
-            } else {
-                menu.classList.add('translate-x-full');
-            }
-        });
+        
 
         function enviarListaEspera(e) {
             e.preventDefault();
@@ -374,9 +366,18 @@
 
             fetch(urlScriptEspera, { method: 'POST', body: datos, mode: 'no-cors' })
                 .then(() => {
+                    // 1. Ocultar formulario y mostrar éxito
                     document.getElementById('formEspera').classList.add('hidden');
                     document.getElementById('msgExito').classList.remove('hidden');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                    // 2. AVISAR A GOOGLE ANALYTICS DEL REGISTRO EXITOSO
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'registro_lista_espera', {
+                            'event_category': 'Conversiones',
+                            'paquete_elegido': '10K VIP'
+                        });
+                    }
                 })
                 .catch(() => {
                     alert("Ocurrió un error de conexión. Inténtalo de nuevo.");
