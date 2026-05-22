@@ -677,6 +677,14 @@ window.addEventListener('beforeinstallprompt', (e) => {
 // 3. LOGICA AL HACER CLIC EN EL BOTÓN
 if (botonInstalar) {
     botonInstalar.addEventListener('click', async () => {
+        
+        // EVENTO 1: Le avisamos a Google que alguien tocó el botón
+        if (typeof gtag === 'function') {
+            gtag('event', 'clic_boton_instalar', {
+                'event_category': 'Interaccion PWA'
+            });
+        }
+
         if (!eventoInstalacion) return;
         
         // Mostrar la ventana nativa de instalación del celular
@@ -684,7 +692,13 @@ if (botonInstalar) {
         
         // Saber si el usuario aceptó o canceló
         const { outcome } = await eventoInstalacion.userChoice;
-        console.log(`El usuario eligió: ${outcome}`);
+        
+        // EVENTO 2: Le avisamos a Google qué decidió el corredor
+        if (typeof gtag === 'function') {
+            gtag('event', 'decision_instalacion', {
+                'resultado': outcome // Guardará 'accepted' o 'dismissed'
+            });
+        }
         
         // Limpiar la variable y ocultar el botón
         eventoInstalacion = null;
@@ -692,14 +706,21 @@ if (botonInstalar) {
     });
 }
 
-// Ocultar el botón si la app ya fue instalada con éxito
+// Ocultar el botón si la app ya fue instalada con éxito en el sistema
 window.addEventListener('appinstalled', () => {
+    
+    // EVENTO 3: Confirmación absoluta de que la app se instaló
+    if (typeof gtag === 'function') {
+        gtag('event', 'app_instalada_exitosamente', {
+            'event_category': 'Conversiones'
+        });
+    }
+
     console.log('¡Aplicación instalada con éxito en el teléfono!');
     if (botonInstalar) {
         botonInstalar.classList.add('hidden');
     }
 });
-
     </script>
 
 </body>
