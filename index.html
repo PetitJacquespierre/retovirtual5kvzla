@@ -725,45 +725,8 @@ window.addEventListener('appinstalled', () => {
 });
 
 
-// (AQUÍ TERMINABA TU CÓDIGO DE LA APP)
-    console.log('¡Aplicación instalada con éxito en el teléfono!');
-    if (botonInstalar) {
-        botonInstalar.classList.add('hidden');
-    }
-}); // Fin del evento de app instalada
 
-
-// ========================================================
-// RASTREADORES DE GOOGLE ANALYTICS (EMBUDO DE VENTAS)
-// ========================================================
-
-// 1. Rastrear clic en el botón del MENÚ MÓVIL
-const botonInscribirmeMovil = document.getElementById('btnInscribirmeMovil');
-if (botonInscribirmeMovil) {
-    botonInscribirmeMovil.addEventListener('click', () => {
-        if (typeof gtag === 'function') {
-            gtag('event', 'clic_boton_inscribirme', {
-                'event_category': 'Embudo de Ventas',
-                'ubicacion': 'Menu Movil' 
-            });
-        }
-    });
-}
-
-// 2. Rastrear clic en el BOTÓN PRINCIPAL (El grande de la página)
-const botonInscribirmePrincipal = document.getElementById('btnInscribirmePrincipal');
-if (botonInscribirmePrincipal) {
-    botonInscribirmePrincipal.addEventListener('click', () => {
-        if (typeof gtag === 'function') {
-            gtag('event', 'clic_boton_inscribirme', {
-                'event_category': 'Embudo de Ventas',
-                'ubicacion': 'Boton Principal Inicio'
-            });
-        }
-    });
-}
-
-</script>
+    </script>
 
 </body>
 </html>
