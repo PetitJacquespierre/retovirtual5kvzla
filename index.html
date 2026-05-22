@@ -244,7 +244,9 @@
             <div class="h-[1px] w-12 bg-white/10 my-2"></div>
             <a href="entrenador.html" class="text-white text-base font-bold uppercase">Entrenador IA</a>
             <a href="faq.html" class="text-white text-base font-bold uppercase">FAQ</a>
-            <a href="inscripcion.html" class="border-2 border-white text-white px-10 py-3 rounded-full font-black text-lg uppercase tracking-widest bg-white/5 transition-all mt-4">Inscribirme</a>
+            <a id="btnInscribirmeMovil" href="inscripcion.html" class="border-2 border-white text-white px-10 py-3 rounded-full font-black text-lg uppercase tracking-widest bg-white/5 transition-all mt-4">
+    Inscribirme
+</a>
             
         </div>
     </div>
@@ -545,7 +547,7 @@
         <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
             <h2 class="text-white text-4xl md:text-6xl font-black uppercase mb-6 leading-none">Tu próxima meta <br> <span class="text-[#00D2FF] italic">empieza aquí.</span></h2>
             <p class="text-white/70 text-lg mb-10">No dejes para después la medalla que puedes ganar hoy. La Edición 2 de Junio te espera.</p>
-            <a href="inscripcion.html" class="inline-block bg-[#00D2FF] text-[#001E50] px-16 py-5 rounded-full font-black text-lg uppercase tracking-widest hover:scale-110 transition-transform shadow-2xl">¡INSCRIBIRME AHORA!</a>
+            <a id="btnInscribirmePrincipal" href="inscripcion.html" class="inline-block bg-[#00D2FF] text-[#001E50] px-16 py-5 rounded-full font-black text-lg uppercase tracking-widest hover:scale-110 transition-transform shadow-2xl">¡INSCRIBIRME AHORA!</a>
         </div>
     </section>
 
@@ -721,7 +723,47 @@ window.addEventListener('appinstalled', () => {
         botonInstalar.classList.add('hidden');
     }
 });
-    </script>
+
+
+// (AQUÍ TERMINABA TU CÓDIGO DE LA APP)
+    console.log('¡Aplicación instalada con éxito en el teléfono!');
+    if (botonInstalar) {
+        botonInstalar.classList.add('hidden');
+    }
+}); // Fin del evento de app instalada
+
+
+// ========================================================
+// RASTREADORES DE GOOGLE ANALYTICS (EMBUDO DE VENTAS)
+// ========================================================
+
+// 1. Rastrear clic en el botón del MENÚ MÓVIL
+const botonInscribirmeMovil = document.getElementById('btnInscribirmeMovil');
+if (botonInscribirmeMovil) {
+    botonInscribirmeMovil.addEventListener('click', () => {
+        if (typeof gtag === 'function') {
+            gtag('event', 'clic_boton_inscribirme', {
+                'event_category': 'Embudo de Ventas',
+                'ubicacion': 'Menu Movil' 
+            });
+        }
+    });
+}
+
+// 2. Rastrear clic en el BOTÓN PRINCIPAL (El grande de la página)
+const botonInscribirmePrincipal = document.getElementById('btnInscribirmePrincipal');
+if (botonInscribirmePrincipal) {
+    botonInscribirmePrincipal.addEventListener('click', () => {
+        if (typeof gtag === 'function') {
+            gtag('event', 'clic_boton_inscribirme', {
+                'event_category': 'Embudo de Ventas',
+                'ubicacion': 'Boton Principal Inicio'
+            });
+        }
+    });
+}
+
+</script>
 
 </body>
 </html>
