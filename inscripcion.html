@@ -614,18 +614,23 @@
                     const idxNombre = headers.findIndex(h => h.includes('nombre'));
 
                     for(let i = 1; i < filas.length; i++) {
-                        // LÍNEA DE PROTECCIÓN: Si la fila está vacía en el Excel, se la salta y continúa buscando
                         if(!filas[i].trim()) continue;
 
                         const columnas = filas[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c => c.replace(/^"|"$/g, '').trim());
                         
-                        if(columnas[idxCI] && columnas[idxCI].replace(/\D/g, '').trim() === ciInput) {
-                            encontrado = true;
-                            ciValidada = ciInput; 
-                            dorsalActual = columnas[idxDorsal] || "000";
-                            document.getElementById('nombreEnvio').value = columnas[idxNombre] || "";
-                            document.getElementById('textoDorsal').innerText = "Dorsal Recuperado: #" + dorsalActual;
-                            break;
+                        if(columnas[idxCI]) {
+                            // Limpiamos la cédula del excel quitando todo lo que no sea número
+                            const ciExcelLimpia = columnas[idxCI].replace(/\D/g, '').trim();
+                            
+                            // COMPARACIÓN FLEXIBLE: Verifica si se incluyen mutuamente para saltar formatos raros de celda
+                            if(ciExcelLimpia === ciInput || ciExcelLimpia.includes(ciInput) || ciInput.includes(ciExcelLimpia)) {
+                                encontrado = true;
+                                ciValidada = ciInput; 
+                                dorsalActual = columnas[idxDorsal] || "000";
+                                document.getElementById('nombreEnvio').value = columnas[idxNombre] || "";
+                                document.getElementById('textoDorsal').innerText = "Dorsal Recuperado: #" + dorsalActual;
+                                break;
+                            }
                         }
                     }
                 }
