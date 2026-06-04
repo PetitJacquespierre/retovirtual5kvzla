@@ -743,8 +743,9 @@
             datos.append("SaldoPendiente", saldoPendiente); 
             datos.append("Textil10K", textoTextil10k);
 
-            // Reemplaza la línea del fetch por esta que fuerza la actualización real:
-const res = await fetch(urlCSV_Comparacion + "&t=" + new Date().getTime(), { cache: "no-store" });
+            fetch(urlBaseDeDatos, { method: 'POST', body: datos, mode: 'no-cors' })
+                .then(() => { mostrarExito(msg); })
+                .catch(() => { mostrarExito(msg); });
         }
 
         function mostrarExito(msgTexto) {
