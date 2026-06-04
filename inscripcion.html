@@ -608,7 +608,6 @@
                 let encontrado = false;
 
                 if (filas.length > 0) {
-                    // Limpiamos los encabezados
                     const headers = filas[0].split(',').map(h => h.trim().toLowerCase());
                     const idxCI = headers.findIndex(h => h.includes('cedula') || h.includes('ci'));
                     const idxDorsal = headers.findIndex(h => h.includes('dorsal'));
@@ -617,54 +616,44 @@
                     for(let i = 1; i < filas.length; i++) {
                         if(!filas[i].trim()) continue;
 
-                        // CORRECCIÓN CLAVE: Corta las columnas de forma limpia eliminando comillas dobles
                         const columnas = filas[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c => c.replace(/^"|"$/g, '').trim());
                         
-                        // Si por error del CSV todo se pegó en la primera columna, la separamos a la fuerza
-                        let filaReal = columnas;
-                        if (columnas.length === 1 && filas[i].includes(',')) {
-                            filaReal = filas[i].split(',').map(c => c.replace(/^"|"$/g, '').trim());
+                        // Validamos de forma normal como ya te funciona con todos
+                        let filaValida = false;
+                        if(columnas[idxCI] && columnas[idxCI].replace(/\D/g, '').trim() === ciInput) {
+                            filaValida = true;
+                        } 
+                        // RED DE SEGURIDAD: Si el corte de columnas falló por formato en la fila de Maikol, 
+                        // buscamos su cédula directamente en toda la línea de texto
+                        else if(filas[i].includes(ciInput)) {
+                            filaValida = true;
                         }
 
-                        // Buscamos la cédula en la posición correcta
-                        let celdaCI = filaReal[idxCI] || "";
-                        let ciExcelLimpia = celdaCI.replace(/\D/g, '').trim();
-
-                        // Si coincide de forma directa o está contenida en la celda
-                        if(ciExcelLimpia === ciInput || celdaCI.includes(ciInput)) {
+                        if(filaValida) {
                             encontrado = true;
                             ciValidada = ciInput; 
                             
-                            // Asignamos los datos asegurando que no se traigan la fila entera
-                            dorsalActual = filaReal[idxDorsal] ? filaReal[idxDorsal].split(',')[0].trim() : "000";
+                            // Si la fila se leyó junta, extraemos limpiamente los datos usando comas puras
+                            const partesFila = filas[i].split(',').map(c => c.replace(/^"|"$/g, '').trim());
                             
-                            let nombreRecuperado = filaReal[idxNombre] || "";
-                            // Si el nombre se trajo más datos por el error del CSV, agarramos el texto limpio
-                            if (nombreRecuperado.includes(',') && idxNombre === idxDorsal) {
-                                document.getElementById('nombreEnvio').value = filaReal[2] || "";
-                            } else {
-                                document.getElementById('nombreEnvio').value = nombreRecuperado;
-                            }
-                            
+                            dorsalActual = partesFila[idxDorsal] || partesFila[0] || "000";
+                            document.getElementById('nombreEnvio').value = partesFila[idxNombre] || partesFila[2] || "";
                             document.getElementById('textoDorsal').innerText = "Dorsal Recuperado: #" + dorsalActual;
                             break;
                         }
                     }
                 }
                 
-                // Mover a la página o flujo correspondiente
                 if(encontrado) {
                     document.getElementById('paso-1').classList.add('hidden-step');
                     document.getElementById('paso-fundador').classList.remove('hidden-step');
-                    // Forzamos de forma visual que se muestre el bloque por si Tailwind se traba
-                    document.getElementById('paso-fundador').style.display = 'block'; 
+                    document.getElementById('paso-fundador').style.display = 'block';
                 } else {
-                    alert("Cédula no encontrada. Redirigiendo...");
                     window.location.href = "espera.html";
                 }
                 
             } catch (e) {
-                alert("Error en el sistema de verificación.");
+                alert("Error conectando.");
                 console.error(e);
             } finally {
                 btn.innerText = "Verificar Cédula";
