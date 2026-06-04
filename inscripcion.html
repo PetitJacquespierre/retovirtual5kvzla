@@ -607,18 +607,19 @@
                 const filas = csvText.split(/\r?\n/);
                 let encontrado = false;
 
-                if (filas.length > 0) {
-                    const headers = filas[0].split(',').map(h => h.trim().toLowerCase());
-                    const idxCI = headers.findIndex(h => h.includes('cedula') || h.includes('ci'));
-                    const idxDorsal = headers.findIndex(h => h.includes('dorsal'));
-                    const idxNombre = headers.findIndex(h => h.includes('nombre'));
+                // Definimos las posiciones fijas según la imagen de tu base de datos
+                const idxDorsal = 1; // Columna B (Dorsal)
+                const idxNombre = 2; // Columna C (Nombre)
+                const idxCI = 3;     // Columna D (Cédula de Identidad)
 
+                if (filas.length > 1) {
                     for(let i = 1; i < filas.length; i++) {
                         if(!filas[i].trim()) continue;
                         
+                        // Separar por comas respetando los textos entrecomillados
                         const columnas = filas[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c => c.replace(/^"|"$/g, '').trim());
                         
-                        // LIMPIEZA ULTRA AGRESIVA DE LA CÉDULA DEL EXCEL
+                        // Verificamos que la columna de la cédula exista en esta fila
                         if(columnas[idxCI]) {
                             const ciExcelLimpia = columnas[idxCI].replace(/\D/g, '').trim();
                             
@@ -638,7 +639,7 @@
                     document.getElementById('paso-1').classList.add('hidden-step');
                     document.getElementById('paso-fundador').classList.remove('hidden-step');
                 } else {
-                    alert("Cédula no encontrada en el registro de Fundadores. Serás redirigido.");
+                    alert("Cédula no encontrada en el registro de Fundadores. Serás redirigido a la zona general.");
                     window.location.href = "10k.html";
                 }
                 
