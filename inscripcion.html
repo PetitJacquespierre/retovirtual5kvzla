@@ -619,15 +619,32 @@
                         const columnas = filas[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c => c.replace(/^"|"$/g, '').trim());
                         
                         if(columnas[idxCI]) {
-                            // Limpiamos la cédula del excel quitando todo lo que no sea número
                             const ciExcelLimpia = columnas[idxCI].replace(/\D/g, '').trim();
                             
-                            // COMPARACIÓN FLEXIBLE: Verifica si se incluyen mutuamente para saltar formatos raros de celda
-                            if(ciExcelLimpia === ciInput || ciExcelLimpia.includes(ciInput) || ciInput.includes(ciExcelLimpia)) {
+                            // Si la celda viene corrupta con toda la fila pegada, extraemos la cédula real buscando el patrón
+                            if(ciExcelLimpia === ciInput || columnas[idxCI].includes(ciInput)) {
                                 encontrado = true;
                                 ciValidada = ciInput; 
-                                dorsalActual = columnas[idxDorsal] || "000";
-                                document.getElementById('nombreEnvio').value = columnas[idxNombre] || "";
+                                
+                                // PROTECCIÓN ULTRA: Si el dorsal viene mezclado con comas, extraemos solo el primer elemento (el número)
+                                let dorsalSucio = columnas[idxDorsal] || "000";
+                                if(dorsalSucio.includes(',')) {
+                                    dorsalActual = dorsalSucio.split(',')[0].trim();
+                                } else {
+                                    dorsalActual = dorsalSucio;
+                                }
+
+                                // Lo mismo para el nombre si se llega a mezclar
+                                let nombreSucio = columnas[idxNombre] || "";
+                                if(nombreSucio.includes(',') && idxNombre === idxDorsal) {
+                                    // Si las columnas se solaparon por completo en el error del CSV:
+                                    let partesFila = filas[i].split(',');
+                                    dorsalActual = partesFila[0] ? partesFila[0].replace(/^"|"$/g, '').trim() : "000";
+                                    document.getElementById('nombreEnvio').value = partesFila[2] ? partesFila[2].replace(/^"|"$/g, '').trim() : "";
+                                } else {
+                                    document.getElementById('nombreEnvio').value = nombreSucio;
+                                }
+                                
                                 document.getElementById('textoDorsal').innerText = "Dorsal Recuperado: #" + dorsalActual;
                                 break;
                             }
