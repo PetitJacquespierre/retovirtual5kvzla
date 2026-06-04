@@ -595,7 +595,7 @@
 
         async function validarAtleta() {
             const btn = document.getElementById('btnVerificar');
-            const ciInput = document.getElementById('cedulaAtleta').value.replace(/\D/g, '');
+            const ciInput = document.getElementById('cedulaAtleta').value.replace(/\D/g, '').trim();
             if(ciInput.length < 5) return alert("Ingresa una cédula válida.");
 
             btn.innerText = "VERIFICANDO...";
@@ -614,14 +614,22 @@
                     const idxNombre = headers.findIndex(h => h.includes('nombre'));
 
                     for(let i = 1; i < filas.length; i++) {
+                        if(!filas[i].trim()) continue;
+                        
                         const columnas = filas[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c => c.replace(/^"|"$/g, '').trim());
-                        if(columnas[idxCI] && columnas[idxCI].replace(/\D/g, '') === ciInput) {
-                            encontrado = true;
-                            ciValidada = ciInput; 
-                            dorsalActual = columnas[idxDorsal] || "000";
-                            document.getElementById('nombreEnvio').value = columnas[idxNombre] || "";
-                            document.getElementById('textoDorsal').innerText = "Dorsal Recuperado: #" + dorsalActual;
-                            break;
+                        
+                        // LIMPIEZA ULTRA AGRESIVA DE LA CÉDULA DEL EXCEL
+                        if(columnas[idxCI]) {
+                            const ciExcelLimpia = columnas[idxCI].replace(/\D/g, '').trim();
+                            
+                            if(ciExcelLimpia === ciInput) {
+                                encontrado = true;
+                                ciValidada = ciInput; 
+                                dorsalActual = columnas[idxDorsal] || "000";
+                                document.getElementById('nombreEnvio').value = columnas[idxNombre] || "";
+                                document.getElementById('textoDorsal').innerText = "Dorsal Recuperado: #" + dorsalActual;
+                                break;
+                            }
                         }
                     }
                 }
@@ -630,11 +638,12 @@
                     document.getElementById('paso-1').classList.add('hidden-step');
                     document.getElementById('paso-fundador').classList.remove('hidden-step');
                 } else {
+                    alert("Cédula no encontrada en el registro de Fundadores. Serás redirigido.");
                     window.location.href = "10k.html";
                 }
                 
             } catch (e) {
-                alert("Error conectando.");
+                alert("Error conectando con el servidor de verificación. Inténtalo de nuevo.");
             } finally {
                 btn.innerText = "Verificar Cédula";
                 btn.disabled = false;
