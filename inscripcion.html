@@ -608,6 +608,7 @@
                 let encontrado = false;
 
                 if (filas.length > 0) {
+                    // Limpiamos los encabezados
                     const headers = filas[0].split(',').map(h => h.trim().toLowerCase());
                     const idxCI = headers.findIndex(h => h.includes('cedula') || h.includes('ci'));
                     const idxDorsal = headers.findIndex(h => h.includes('dorsal'));
@@ -616,51 +617,55 @@
                     for(let i = 1; i < filas.length; i++) {
                         if(!filas[i].trim()) continue;
 
+                        // CORRECCIÓN CLAVE: Corta las columnas de forma limpia eliminando comillas dobles
                         const columnas = filas[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c => c.replace(/^"|"$/g, '').trim());
                         
-                        if(columnas[idxCI]) {
-                            const ciExcelLimpia = columnas[idxCI].replace(/\D/g, '').trim();
-                            
-                            // Si la celda viene corrupta con toda la fila pegada, extraemos la cédula real buscando el patrón
-                            if(ciExcelLimpia === ciInput || columnas[idxCI].includes(ciInput)) {
-                                encontrado = true;
-                                ciValidada = ciInput; 
-                                
-                                // PROTECCIÓN ULTRA: Si el dorsal viene mezclado con comas, extraemos solo el primer elemento (el número)
-                                let dorsalSucio = columnas[idxDorsal] || "000";
-                                if(dorsalSucio.includes(',')) {
-                                    dorsalActual = dorsalSucio.split(',')[0].trim();
-                                } else {
-                                    dorsalActual = dorsalSucio;
-                                }
+                        // Si por error del CSV todo se pegó en la primera columna, la separamos a la fuerza
+                        let filaReal = columnas;
+                        if (columnas.length === 1 && filas[i].includes(',')) {
+                            filaReal = filas[i].split(',').map(c => c.replace(/^"|"$/g, '').trim());
+                        }
 
-                                // Lo mismo para el nombre si se llega a mezclar
-                                let nombreSucio = columnas[idxNombre] || "";
-                                if(nombreSucio.includes(',') && idxNombre === idxDorsal) {
-                                    // Si las columnas se solaparon por completo en el error del CSV:
-                                    let partesFila = filas[i].split(',');
-                                    dorsalActual = partesFila[0] ? partesFila[0].replace(/^"|"$/g, '').trim() : "000";
-                                    document.getElementById('nombreEnvio').value = partesFila[2] ? partesFila[2].replace(/^"|"$/g, '').trim() : "";
-                                } else {
-                                    document.getElementById('nombreEnvio').value = nombreSucio;
-                                }
-                                
-                                document.getElementById('textoDorsal').innerText = "Dorsal Recuperado: #" + dorsalActual;
-                                break;
+                        // Buscamos la cédula en la posición correcta
+                        let celdaCI = filaReal[idxCI] || "";
+                        let ciExcelLimpia = celdaCI.replace(/\D/g, '').trim();
+
+                        // Si coincide de forma directa o está contenida en la celda
+                        if(ciExcelLimpia === ciInput || celdaCI.includes(ciInput)) {
+                            encontrado = true;
+                            ciValidada = ciInput; 
+                            
+                            // Asignamos los datos asegurando que no se traigan la fila entera
+                            dorsalActual = filaReal[idxDorsal] ? filaReal[idxDorsal].split(',')[0].trim() : "000";
+                            
+                            let nombreRecuperado = filaReal[idxNombre] || "";
+                            // Si el nombre se trajo más datos por el error del CSV, agarramos el texto limpio
+                            if (nombreRecuperado.includes(',') && idxNombre === idxDorsal) {
+                                document.getElementById('nombreEnvio').value = filaReal[2] || "";
+                            } else {
+                                document.getElementById('nombreEnvio').value = nombreRecuperado;
                             }
+                            
+                            document.getElementById('textoDorsal').innerText = "Dorsal Recuperado: #" + dorsalActual;
+                            break;
                         }
                     }
                 }
                 
+                // Mover a la página o flujo correspondiente
                 if(encontrado) {
                     document.getElementById('paso-1').classList.add('hidden-step');
                     document.getElementById('paso-fundador').classList.remove('hidden-step');
+                    // Forzamos de forma visual que se muestre el bloque por si Tailwind se traba
+                    document.getElementById('paso-fundador').style.display = 'block'; 
                 } else {
+                    alert("Cédula no encontrada. Redirigiendo...");
                     window.location.href = "espera.html";
                 }
                 
             } catch (e) {
-                alert("Error conectando.");
+                alert("Error en el sistema de verificación.");
+                console.error(e);
             } finally {
                 btn.innerText = "Verificar Cédula";
                 btn.disabled = false;
