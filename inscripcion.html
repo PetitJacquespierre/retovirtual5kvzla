@@ -176,66 +176,68 @@
             </div>
 
             <div id="seccion-extras" class="bg-white p-8 md:p-10 rounded-[2.5rem] shadow-xl border border-slate-100 transition-all">
-                <h3 class="text-[#001E50] font-black text-xl mb-2 uppercase italic">Mejora tu Kit 5K (Opcional)</h3>
-                <p class="text-xs text-slate-400 mb-6 font-bold">Agrega prendas textiles exclusivas a tu inscripción de los 5K.</p>
-                
-                <div class="mb-8 flex flex-col items-center">
-                    <button type="button" onclick="abrirModalImagen()" class="relative group overflow-hidden rounded-3xl border-2 border-slate-200 hover:border-[#00D2FF] hover:shadow-[0_0_20px_rgba(0,210,255,0.2)] transition-all cursor-pointer w-full max-w-sm h-40 bg-slate-50 flex items-center justify-center">
-                        <img src="img/franela_prototipo.png" alt="Prototipo Franela" class="h-full w-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-[#001E50]/30 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-all backdrop-blur-[2px]">
-                            <i class="fa-solid fa-magnifying-glass-plus text-white text-4xl drop-shadow-md"></i>
-                            <span class="text-white font-bold text-xs uppercase tracking-widest mt-2">Ampliar Diseño</span>
-                        </div>
-                    </button>
-                    <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-3"><i class="fa-solid fa-hand-pointer mr-1"></i> Toca la imagen para detallarla</p>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                    <label class="cursor-pointer group flex flex-col items-center text-center border-2 border-slate-200 p-6 rounded-3xl hover:border-[#00D2FF] has-[:checked]:border-[#00D2FF] has-[:checked]:bg-[#00D2FF]/5 transition-all relative overflow-hidden">
-                        <input type="checkbox" id="checkFranelilla" value="10" onchange="actualizarTotal()" class="absolute top-4 right-4 w-5 h-5 accent-[#00D2FF]">
-                        <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-shirt text-[#00D2FF] text-2xl"></i>
-                        </div>
-                        <h4 class="font-black text-[#001E50] text-sm uppercase">Franelilla Blanca</h4>
-                        <p class="text-[10px] text-slate-400 font-bold">Corte olímpico</p>
-                        <p class="text-xl font-black text-[#00D2FF] mt-3">+$10</p>
-                    </label>
-
-                    <label class="cursor-pointer group flex flex-col items-center text-center border-2 border-slate-200 p-6 rounded-3xl hover:border-[#00D2FF] has-[:checked]:border-[#00D2FF] has-[:checked]:bg-[#00D2FF]/5 transition-all relative overflow-hidden">
-                        <input type="checkbox" id="checkFranela" value="12" onchange="actualizarTotal()" class="absolute top-4 right-4 w-5 h-5 accent-[#00D2FF]">
-                        <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-tshirt text-[#00D2FF] text-2xl"></i>
-                        </div>
-                        <h4 class="font-black text-[#001E50] text-sm uppercase">Franela Blanca</h4>
-                        <p class="text-[10px] text-slate-400 font-bold">Tela Everlast c/ mangas</p>
-                        <p class="text-xl font-black text-[#00D2FF] mt-3">+$12</p>
-                    </label>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div id="contenedorTallaFranelilla" class="hidden flex flex-col gap-2">
-                        <label class="text-[10px] font-bold uppercase text-slate-400">Talla para Franelilla <span class="req">*</span></label>
-                        <select id="tallaFranelilla" class="bg-white border-2 border-[#00D2FF] rounded-xl px-4 py-3 font-bold text-sm w-full text-[#001E50] shadow-sm">
-                            <option value="" disabled selected>Elegir talla...</option>
-                            <option value="S">S - Pequeña</option>
-                            <option value="M">M - Mediana</option>
-                            <option value="L">L - Grande</option>
-                            <option value="XL">XL - Extra Grande</option>
-                        </select>
-                    </div>
-
-                    <div id="contenedorTallaFranela" class="hidden flex flex-col gap-2 md:col-start-2">
-                        <label class="text-[10px] font-bold uppercase text-slate-400">Talla para Franela <span class="req">*</span></label>
-                        <select id="tallaFranela" class="bg-white border-2 border-[#00D2FF] rounded-xl px-4 py-3 font-bold text-sm w-full text-[#001E50] shadow-sm">
-                            <option value="" disabled selected>Elegir talla...</option>
-                            <option value="S">S - Pequeña</option>
-                            <option value="M">M - Mediana</option>
-                            <option value="L">L - Grande</option>
-                            <option value="XL">XL - Extra Grande</option>
-                        </select>
-                    </div>
-                </div>
+    <h3 class="text-[#001E50] font-black text-xl mb-2 uppercase italic">Mejora tu Kit 5K (Opcional)</h3>
+    <p class="text-xs text-slate-400 mb-6 font-bold">Agrega prendas textiles exclusivas a tu inscripción de los 5K.</p>
+    
+    <div class="mb-8 flex flex-col items-center">
+        <button type="button" onclick="abrirModalImagen()" class="relative group overflow-hidden rounded-3xl border-2 border-slate-200 hover:border-[#00D2FF] hover:shadow-[0_0_20px_rgba(0,210,255,0.2)] transition-all cursor-pointer w-full max-w-sm h-40 bg-slate-50 flex items-center justify-center">
+            <img src="img/franela_prototipo.png" alt="Prototipo Franela" class="h-full w-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-transform duration-500">
+            <div class="absolute inset-0 bg-[#001E50]/30 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-all backdrop-blur-[2px]">
+                <i class="fa-solid fa-magnifying-glass-plus text-white text-4xl drop-shadow-md"></i>
+                <span class="text-white font-bold text-xs uppercase tracking-widest mt-2">Ampliar Diseño</span>
             </div>
+        </button>
+        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-3"><i class="fa-solid fa-hand-pointer mr-1"></i> Toca la imagen para detallarla</p>
+    </div>
+    
+    <!-- PRENDAS BLOQUEADAS / AGOTADAS -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <label class="cursor-not-allowed opacity-60 flex flex-col items-center text-center border-2 border-slate-200 bg-slate-100 p-6 rounded-3xl relative overflow-hidden">
+            <input type="checkbox" id="checkFranelilla" value="10" disabled class="absolute top-4 right-4 w-5 h-5">
+            <div class="w-16 h-16 bg-slate-200 rounded-full flex items-center justify-center mb-3">
+                <i class="fa-solid fa-shirt text-slate-400 text-2xl"></i>
+            </div>
+            <h4 class="font-black text-[#001E50] text-sm uppercase">Franelilla Blanca</h4>
+            <p class="text-[10px] text-slate-400 font-bold">Corte olímpico</p>
+            <span class="bg-red-100 text-red-600 px-3 py-1 rounded-full text-xs font-black uppercase tracking-widest mt-3 border border-red-200">Agotada</span>
+        </label>
+
+        <label class="cursor-not-allowed opacity-60 flex flex-col items-center text-center border-2 border-slate-200 bg-slate-100 p-6 rounded-3xl relative overflow-hidden">
+            <input type="checkbox" id="checkFranela" value="12" disabled class="absolute top-4 right-4 w-5 h-5">
+            <div class="w-16 h-16 bg-slate-200 rounded-full flex items-center justify-center mb-3">
+                <i class="fa-solid fa-tshirt text-slate-400 text-2xl"></i>
+            </div>
+            <h4 class="font-black text-[#001E50] text-sm uppercase">Franela Blanca</h4>
+            <p class="text-[10px] text-slate-400 font-bold">Tela Everlast c/ mangas</p>
+            <span class="bg-red-100 text-red-600 px-3 py-1 rounded-full text-xs font-black uppercase tracking-widest mt-3 border border-red-200">Agotada</span>
+        </label>
+    </div>
+
+    <!-- SELECTORES DE TALLA (Ocultos por defecto) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div id="contenedorTallaFranelilla" class="hidden flex flex-col gap-2">
+            <label class="text-[10px] font-bold uppercase text-slate-400">Talla para Franelilla <span class="req">*</span></label>
+            <select id="tallaFranelilla" class="bg-white border-2 border-[#00D2FF] rounded-xl px-4 py-3 font-bold text-sm w-full text-[#001E50] shadow-sm">
+                <option value="" disabled selected>Elegir talla...</option>
+                <option value="S">S - Pequeña</option>
+                <option value="M">M - Mediana</option>
+                <option value="L">L - Grande</option>
+                <option value="XL">XL - Extra Grande</option>
+            </select>
+        </div>
+
+        <div id="contenedorTallaFranela" class="hidden flex flex-col gap-2 md:col-start-2">
+            <label class="text-[10px] font-bold uppercase text-slate-400">Talla para Franela <span class="req">*</span></label>
+            <select id="tallaFranela" class="bg-white border-2 border-[#00D2FF] rounded-xl px-4 py-3 font-bold text-sm w-full text-[#001E50] shadow-sm">
+                <option value="" disabled selected>Elegir talla...</option>
+                <option value="S">S - Pequeña</option>
+                <option value="M">M - Mediana</option>
+                <option value="L">L - Grande</option>
+                <option value="XL">XL - Extra Grande</option>
+            </select>
+        </div>
+    </div>
+</div>
 
             <div class="mt-12 bg-gradient-to-br from-[#00102A] via-[#001E50] to-slate-900 p-8 md:p-12 rounded-[3rem] shadow-[0_20px_50px_rgba(0,30,80,0.5)] border border-[#00D2FF]/40 relative overflow-hidden group">
                 
