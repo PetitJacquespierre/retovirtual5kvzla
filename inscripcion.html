@@ -145,14 +145,22 @@
             <p class="text-slate-400 text-sm mb-10 italic">Ingresa tu cédula para validar tu acceso a la 2da Edición 5K.</p>
             
             <div class="max-w-xs mx-auto space-y-4 relative z-10">
-                <label class="text-left block text-[10px] font-bold uppercase text-slate-400 ml-2 mb-1">Cédula de Identidad <span class="req">*</span></label>
-                <input type="text" id="cedulaAtleta" placeholder="Ej: 12345678" 
-                       class="w-full border-2 border-slate-200 rounded-2xl px-6 py-4 text-center font-black transition-all text-xl text-[#001E50]">
-                <button id="btnVerificar" onclick="validarAtleta()" class="w-full bg-[#001E50] text-white py-5 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-[#00D2FF] hover:text-[#001E50] transition-all shadow-xl">
-                    Verificar Cédula
-                </button>
-            </div>
-        </div>
+    <label class="text-left block text-[10px] font-bold uppercase text-slate-400 ml-2 mb-1">Cédula de Identidad <span class="req">*</span></label>
+    <input type="text" id="cedulaAtleta" placeholder="Ej: 12345678" 
+           class="w-full border-2 border-slate-200 rounded-2xl px-6 py-4 text-center font-black transition-all text-xl text-[#001E50]">
+    
+    <button id="btnVerificar" onclick="validarAtleta()" class="w-full bg-[#001E50] text-white py-5 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-[#00D2FF] hover:text-[#001E50] transition-all shadow-xl">
+        Verificar Cédula
+    </button>
+
+    <!-- NUEVO BOTÓN PARA CUPOS LIBERADOS -->
+    <div class="pt-6 mt-4 border-t border-slate-200">
+        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3">¿No participaste en la 1ra edición?</p>
+        <button type="button" onclick="irALiberados()" class="w-full bg-white border-2 border-[#00D2FF] text-[#001E50] py-4 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-[#00D2FF] hover:text-[#001E50] transition-all shadow-sm">
+            Cupos Liberados (Nuevos)
+        </button>
+    </div>
+</div>
 
         <div id="paso-fundador" class="hidden-step space-y-8 animate-fade-in mt-8">
             
@@ -770,6 +778,16 @@ function abrirModalImagen() {
             modal.classList.add('hidden');
             modal.classList.remove('flex');
         }
+
+
+function irALiberados() {
+    const ciInput = document.getElementById('cedulaAtleta').value.replace(/\D/g, '').trim();
+    if(ciInput.length < 5) return alert("Ingresa tu cédula primero para tomar un cupo liberado.");
+    window.location.href = `liberados.html?ci=${ciInput}`;
+}
+
+
+
     </script>
 <div id="modal-imagen" class="fixed inset-0 z-[200] bg-black/95 hidden flex-col items-center justify-center p-4 backdrop-blur-sm transition-opacity" onclick="cerrarModalImagen()">
         <button class="absolute top-6 right-6 text-white text-4xl hover:text-[#00D2FF] transition-colors"><i class="fa-solid fa-xmark"></i></button>
