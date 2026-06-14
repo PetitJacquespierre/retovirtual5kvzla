@@ -516,19 +516,26 @@
         // Función dedicada a consultar la tasa BCV actualizada en tiempo real
         async function obtenerTasaBCV() {
             try {
-                // Usamos un servicio proxy abierto confiable que parsea el BCV directamente sin problemas de CORS
-                const respuesta = await fetch("https://ve.descubriendo.org/api/bcv", { cache: "no-store" });
-                const datos = await respuesta.json();
+                // Usamos un proxy de respaldo ultra-estable que extrae la información directa del BCV
+                const respuesta = await fetch("https://api.allorigins.win/get?url=" + encodeURIComponent("https://bcv-api.vercel.app/api/v1/exchange-rates"), { cache: "no-store" });
+                const json = await respuesta.json();
                 
-                if (datos && datos.usd) {
-                    // Convertimos el resultado a número float por seguridad
-                    tasaBCV = parseFloat(datos.usd);
-                    console.log("Tasa BCV sintonizada con éxito: " + tasaBCV);
+                // Parseamos los datos que vienen del puente seguro
+                if (json && json.contents) {
+                    const datos = JSON.parse(json.contents);
+                    
+                    // Buscamos el valor del dólar oficial en el formato de la API pública
+                    if (datos && datos.data && datos.data.usd) {
+                        tasaBCV = parseFloat(datos.data.usd);
+                        console.log("¡Tasa oficial del BCV sincronizada en vivo!: " + tasaBCV);
+                    } else if (datos && datos.usd) {
+                        tasaBCV = parseFloat(datos.usd);
+                    }
                 }
             } catch (error) {
-                console.error("No se pudo conectar al BCV en vivo, utilizando tasa de respaldo corporativa.", error);
+                console.error("Fallo el servidor externo. Usando tasa base de contingencia.", error);
             } finally {
-                // Actualizamos la interfaz visual con la tasa obtenida
+                // Imprimimos el valor final de forma visual en tu HTML
                 document.getElementById('valor-tasa').innerText = tasaBCV.toFixed(2);
                 actualizarTotal();
             }
