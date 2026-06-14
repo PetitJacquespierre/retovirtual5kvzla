@@ -477,8 +477,9 @@
             });
         });
 
-// ========== TASA BCV ==========
-        const tasaBCV = 587.41;
+// ========== TASA BCV AUTOMATIZADA ==========
+        // Dejamos un valor base por si la API externa llega a fallar un día
+        let tasaBCV = 587.50; 
         const urlCSV_Comparacion = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5yMHsenxCWE5kZBDUZ8UcYqDtdAHstfqXcvWkuYZPQ_4n2xSrfs6ptk7k21r1kcMHHLtWjz8SEHwl/pub?gid=0&single=true&output=csv";
         const urlBaseDeDatos = "https://script.google.com/macros/s/AKfycbyp-NJc2uozcF4VDYRm3_XhKiKmPwdLfB4jLxJV_L9EFpXSBI7dp1TuMG0hxWzC7dLaCg/exec";
 
@@ -509,32 +510,54 @@
             "Zulia": ["Maracaibo", "San Francisco", "Cabimas", "Ciudad Ojeda", "Machiques", "La Villa del Rosario"]
         };
 
-        document.getElementById('valor-tasa').innerText = tasaBCV;
         let dorsalActual = "000";
         let ciValidada = ""; 
 
-        window.onload = () => {
-    const selectEstado = document.getElementById('estadoEnvio');
-    Object.keys(venezuela).sort().forEach(est => {
-        let opt = document.createElement('option');
-        opt.value = est;
-        opt.text = est;
-        selectEstado.add(opt);
-    });
+        // Función dedicada a consultar la tasa BCV actualizada en tiempo real
+        async function obtenerTasaBCV() {
+            try {
+                // Usamos un servicio proxy abierto confiable que parsea el BCV directamente sin problemas de CORS
+                const respuesta = await fetch("https://ve.descubriendo.org/api/bcv", { cache: "no-store" });
+                const datos = await respuesta.json();
+                
+                if (datos && datos.usd) {
+                    // Convertimos el resultado a número float por seguridad
+                    tasaBCV = parseFloat(datos.usd);
+                    console.log("Tasa BCV sintonizada con éxito: " + tasaBCV);
+                }
+            } catch (error) {
+                console.error("No se pudo conectar al BCV en vivo, utilizando tasa de respaldo corporativa.", error);
+            } finally {
+                // Actualizamos la interfaz visual con la tasa obtenida
+                document.getElementById('valor-tasa').innerText = tasaBCV.toFixed(2);
+                actualizarTotal();
+            }
+        }
 
-    // Capturar cédula desde la URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const ciURL = urlParams.get('ci');
-    if(ciURL) {
-        ciValidada = ciURL;
-    } else {
-        alert("⚠️ No se detectó cédula. Redirigiendo al inicio.");
-        window.location.href = "inscripcion.html";
-    }
+        window.onload = async () => {
+            const selectEstado = document.getElementById('estadoEnvio');
+            Object.keys(venezuela).sort().forEach(est => {
+                let opt = document.createElement('option');
+                opt.value = est;
+                opt.text = est;
+                selectEstado.add(opt);
+            });
 
-    dorsalActual = "NUEVO"; // Esto hace que Google asigne el 052 en adelante
-    actualizarTotal();
-};
+            // Capturar cédula desde la URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const ciURL = urlParams.get('ci');
+            if(ciURL) {
+                ciValidada = ciURL;
+            } else {
+                alert("⚠️ No se detectó cédula. Redirigiendo al inicio.");
+                window.location.href = "inscripcion.html";
+            }
+
+            dorsalActual = "NUEVO"; 
+            
+            // Llamamos a la API para traer la tasa del BCV antes de calcular totales
+            await obtenerTasaBCV();
+        };
 
         function cargarCiudades() {
             const est = document.getElementById('estadoEnvio').value;
