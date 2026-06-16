@@ -523,16 +523,18 @@
                 const datos = await respuesta.json();
                 
                 if (datos && datos.usd) {
+                    // Tomamos el valor matemático directo enviado por tu API nueva
                     tasaBCV = parseFloat(datos.usd);
-                    console.log("¡API Centralizada conectada con éxito al BCV!: " + tasaBCV);
+                    console.log("¡API Nueva Sincronizada con éxito!: " + tasaBCV);
                 }
             } catch (error) {
                 console.error("Fallo la conexión con la API central, usando tasa base de contingencia.", error);
             } finally {
-                // Al recibir el número completo, toFixed(2) aproximará el 516 a 52 automáticamente
+                // Pintamos de forma visual en tu HTML el número exacto con 2 decimales
                 document.getElementById('valor-tasa').innerText = tasaBCV.toFixed(2);
                 actualizarTotal();
             }
+        }
         }
 
         window.onload = async () => {
