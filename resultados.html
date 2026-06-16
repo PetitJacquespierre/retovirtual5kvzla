@@ -204,10 +204,10 @@
                 <table class="w-full text-left border-collapse">
                     <thead>
                         <tr class="bg-slate-100 text-slate-700 text-[11px] font-black uppercase tracking-[0.2em] border-b border-slate-200">
-                            <th class="py-5 px-4 text-center w-20">Pos</th>
+                            <th class="py-5 px-4 text-center w-16">Pos</th>
                             <th class="py-5 px-4 text-center w-20">Dorsal</th>
-                            <th class="py-5 px-4 text-left">Corredor</th>
-                            <th class="py-5 px-4 text-center hidden sm:table-cell" id="col-cat">Cat.</th>
+                            <th class="py-5 px-4 text-left max-w-xs">Corredor</th>
+                            <th class="py-5 px-4 text-center hidden sm:table-cell w-24" id="col-cat">Cat.</th>
                             <th class="py-5 px-6 text-right w-28">Tiempo</th>
                         </tr>
                     </thead>
@@ -488,7 +488,7 @@
                     <tr class="hover:bg-slate-50 transition-colors border-b border-slate-100">
                         <td class="py-4 px-4 text-center">${posHtml}</td>
                         <td class="py-4 px-4 text-center font-black text-accent text-sm">${c.dorsal}</td>
-                        <td class="py-4 px-4 font-bold text-boston-navy uppercase tracking-tighter text-sm">${c.nombre}</td>
+                        <td class="py-4 px-4 font-bold text-boston-navy uppercase tracking-tighter text-sm max-w-xs truncate">${c.nombre}</td>
                         <td class="py-4 px-4 text-center hidden sm:table-cell text-slate-800 font-extrabold text-xs uppercase">${c.genero}</td>
                         <td class="py-4 px-6 text-right font-mono font-bold text-boston-navy text-sm">${c.tiempo}</td>
                     </tr>`;
