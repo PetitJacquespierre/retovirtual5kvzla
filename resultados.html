@@ -203,12 +203,12 @@
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
                     <thead>
-                        <tr class="bg-slate-50 text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] border-b border-slate-100">
-                            <th class="p-8 text-center w-24">Pos</th>
-                            <th class="p-8 text-center w-24">Dorsal</th>
-                            <th class="p-8">Corredor</th>
-                            <th class="p-8 text-center hidden sm:table-cell" id="col-cat">Cat.</th>
-                            <th class="p-8 text-right">Tiempo</th>
+                        <tr class="bg-slate-100 text-slate-700 text-[11px] font-black uppercase tracking-[0.2em] border-b border-slate-200">
+                            <th class="py-5 px-4 text-center w-20">Pos</th>
+                            <th class="py-5 px-4 text-center w-20">Dorsal</th>
+                            <th class="py-5 px-4 text-left">Corredor</th>
+                            <th class="py-5 px-4 text-center hidden sm:table-cell" id="col-cat">Cat.</th>
+                            <th class="py-5 px-6 text-right w-28">Tiempo</th>
                         </tr>
                     </thead>
                     <tbody id="tabla-corredores" class="text-slate-600 divide-y divide-slate-50">
@@ -474,23 +474,23 @@
             });
 
             if (filtrados.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" class="p-8 text-center text-slate-400">No hay corredores registrados en esta categoría/edición.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="5" class="p-8 text-center text-slate-500 font-bold">No hay corredores registrados en esta categoría/edición.</td></tr>`;
                 return;
             }
 
             filtrados.forEach((c, i) => {
                 const esPendiente = c.tiempo === "Pendiente";
                 const pos = esPendiente ? "-" : i + 1;
-                let posHtml = `<span class="font-bold text-slate-300 text-lg">${pos}</span>`;
+                let posHtml = `<span class="font-bold text-slate-400 text-base">${pos}</span>`;
                 if(pos === 1 && !esPendiente) posHtml = '🥇'; else if(pos === 2 && !esPendiente) posHtml = '🥈'; else if(pos === 3 && !esPendiente) posHtml = '🥉';
 
                 const fila = `
-                    <tr class="hover:bg-slate-50 transition-colors border-b border-slate-50">
-                        <td class="p-8 text-center">${posHtml}</td>
-                        <td class="p-8 text-center font-black text-accent">${c.dorsal}</td>
-                        <td class="p-8 font-bold text-boston-navy uppercase tracking-tighter">${c.nombre}</td>
-                        <td class="p-8 text-center hidden sm:table-cell text-slate-400 text-xs uppercase">${c.genero}</td>
-                        <td class="p-8 text-right font-mono font-bold text-boston-navy">${c.tiempo}</td>
+                    <tr class="hover:bg-slate-50 transition-colors border-b border-slate-100">
+                        <td class="py-4 px-4 text-center">${posHtml}</td>
+                        <td class="py-4 px-4 text-center font-black text-accent text-sm">${c.dorsal}</td>
+                        <td class="py-4 px-4 font-bold text-boston-navy uppercase tracking-tighter text-sm">${c.nombre}</td>
+                        <td class="py-4 px-4 text-center hidden sm:table-cell text-slate-800 font-extrabold text-xs uppercase">${c.genero}</td>
+                        <td class="py-4 px-6 text-right font-mono font-bold text-boston-navy text-sm">${c.tiempo}</td>
                     </tr>`;
                 tbody.innerHTML += fila;
             });
@@ -537,7 +537,7 @@
             } else { alert("Dorsal no encontrado en esta edición."); }
         }
 
-        function descargarCertificado() {
+        function descargarCertificadaaaaaaaaaaaaado() {
             const cert = document.getElementById('mi-certificado-objetivo');
             let numDorsal = document.getElementById('cert-dorsal').innerText;
             let sufijo = BASE_DE_DATOS[edicionActiva].nombreCorto; 
