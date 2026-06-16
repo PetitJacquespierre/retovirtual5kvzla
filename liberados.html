@@ -529,8 +529,8 @@
             } catch (error) {
                 console.error("Fallo la conexión con la API central, usando tasa base de contingencia.", error);
             } finally {
-                // Imprimimos el valor final de forma visual en tu HTML
-                document.getElementById('valor-tasa').innerText = tasaBCV.toFixed(2);
+                // Cambiado a 3 decimales para capturar la precisión exacta del BCV
+                document.getElementById('valor-tasa').innerText = tasaBCV.toFixed(3);
                 actualizarTotal();
             }
         }
