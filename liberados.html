@@ -477,9 +477,12 @@
             });
         });
 
-// ========== TASA BCV AUTOMATIZADA ==========
-        // Dejamos un valor base por si la API externa llega a fallar un día
+// ========== TASA BCV AUTOMATIZADA MAESTRA ==========
         let tasaBCV = 592.51; 
+        
+        // TU NUEVA API PROPIA CENTRALIZADA
+        const urlApiDolarBCV = "https://script.google.com/macros/s/AKfycby7sSA2AC3FowYSv6VtXkBxqXjDdQJ6oGnCgf9c1G5shg-pBCQH8MmRlOozDVtvjcu6Aw/exec";
+
         const urlCSV_Comparacion = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5yMHsenxCWE5kZBDUZ8UcYqDtdAHstfqXcvWkuYZPQ_4n2xSrfs6ptk7k21r1kcMHHLtWjz8SEHwl/pub?gid=0&single=true&output=csv";
         const urlBaseDeDatos = "https://script.google.com/macros/s/AKfycbyp-NJc2uozcF4VDYRm3_XhKiKmPwdLfB4jLxJV_L9EFpXSBI7dp1TuMG0hxWzC7dLaCg/exec";
 
@@ -513,27 +516,18 @@
         let dorsalActual = "000";
         let ciValidada = ""; 
 
-        // Función dedicada a consultar la tasa BCV actualizada en tiempo real
+        // Función dedicada a consultar tu propia API centralizada en Google Apps Script
         async function obtenerTasaBCV() {
             try {
-                // Usamos un proxy de respaldo ultra-estable que extrae la información directa del BCV
-                const respuesta = await fetch("https://api.allorigins.win/get?url=" + encodeURIComponent("https://bcv-api.vercel.app/api/v1/exchange-rates"), { cache: "no-store" });
-                const json = await respuesta.json();
+                const respuesta = await fetch(urlApiDolarBCV);
+                const datos = await respuesta.json();
                 
-                // Parseamos los datos que vienen del puente seguro
-                if (json && json.contents) {
-                    const datos = JSON.parse(json.contents);
-                    
-                    // Buscamos el valor del dólar oficial en el formato de la API pública
-                    if (datos && datos.data && datos.data.usd) {
-                        tasaBCV = parseFloat(datos.data.usd);
-                        console.log("¡Tasa oficial del BCV sincronizada en vivo!: " + tasaBCV);
-                    } else if (datos && datos.usd) {
-                        tasaBCV = parseFloat(datos.usd);
-                    }
+                if (datos && datos.usd) {
+                    tasaBCV = parseFloat(datos.usd);
+                    console.log("¡API Centralizada conectada con éxito al BCV!: " + tasaBCV);
                 }
             } catch (error) {
-                console.error("Fallo el servidor externo. Usando tasa base de contingencia.", error);
+                console.error("Fallo la conexión con la API central, usando tasa base de contingencia.", error);
             } finally {
                 // Imprimimos el valor final de forma visual en tu HTML
                 document.getElementById('valor-tasa').innerText = tasaBCV.toFixed(2);
@@ -562,7 +556,7 @@
 
             dorsalActual = "NUEVO"; 
             
-            // Llamamos a la API para traer la tasa del BCV antes de calcular totales
+            // Llamamos a tu API maestra para traer la tasa del BCV en vivo
             await obtenerTasaBCV();
         };
 
