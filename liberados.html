@@ -520,18 +520,21 @@
         async function obtenerTasaBCV() {
             try {
                 const respuesta = await fetch(urlApiDolarBCV);
-                const datos = await respuesta.json();
-                
-                if (datos && datos.usd) {
-                    // Tomamos el valor de precisión enviado por tu API
-                    tasaBCV = parseFloat(datos.usd);
-                    console.log("¡API Sincronizada con éxito!: " + tasaBCV);
+                if (respuesta.ok) {
+                    const datos = await respuesta.json();
+                    if (datos && datos.usd) {
+                        // Aquí toma el valor de precisión enviado por tu API
+                        tasaBCV = parseFloat(datos.usd);
+                        console.log("¡API Sincronizada con éxito!: " + tasaBCV);
+                    }
                 }
             } catch (error) {
-                console.error("Fallo la conexión con la API central, usando tasa base de contingencia.", error);
+                console.error("Falló la conexión con la API central, usando tasa base de contingencia.", error);
             } finally {
-                // Al aplicar .toFixed(2), JavaScript aproxima matemáticamente hacia arriba (ej: 516 pasa a 52)
-                document.getElementById('valor-tasa').innerText = tasaBCV.toFixed(2);
+                // Este bloque SE EJECUTA SÍ O SÍ, evitando que se quede estancado
+                if (document.getElementById('valor-tasa')) {
+                    document.getElementById('valor-tasa').innerText = tasaBCV.toFixed(2);
+                }
                 actualizarTotal();
             }
         }
