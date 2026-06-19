@@ -529,6 +529,7 @@
         }
 
         function procesarInscripcion() {
+            // 1. Extraemos los valores idénticos de los campos del formulario
             const cedulaFinal = document.getElementById('cedulaCampos').value.replace(/\D/g, '').trim();
             const nombre = document.getElementById('nombreEnvio').value;
             const genero = document.getElementById('generoAtleta').value;
@@ -542,16 +543,22 @@
             const totalUSD = document.getElementById('total-usd').innerText;
             const acepto = document.getElementById('aceptoReglamento').checked;
 
+            // 2. Validaciones obligatorias de seguridad en la web
             if(!acepto) return alert("⚠️ Acepta el reglamento.");
-            if(!cedulaFinal || !nombre || !genero || !tel || !estado || !ciudad || !direccion || !refPago || !fechaPago) return alert("⚠️ Faltan datos obligatorios.");
+            if(!cedulaFinal || !nombre || !genero || !tel || !estado || !ciudad || !direccion || !refPago || !fechaPago) {
+                return alert("⚠️ Faltan datos obligatorios para procesar tu registro.");
+            }
 
             ciValidada = cedulaFinal; 
 
+            // 3. Lógica para procesar los textos de Reserva, Saldo y Textil según la carrera
             let reservaText = "NO"; 
             let saldoText = "SOLVENTE";
+            let txtTallaExtra = "No"; // Variable para mantener la compatibilidad con tu columna de 5K
             let preTextil = document.getElementById('tipoTextil10k').value;
             let tallTextil = document.getElementById('tallaTextil10k').value;
 
+            // Calculamos el dorsal correlativo en base al contador que lee tu CSV en vivo
             totalDorsalesRegistrados++;
             let dorsalFormateado = String(totalDorsalesRegistrados).padStart(3, '0');
 
@@ -574,16 +581,17 @@
                 saldoText = "SOLVENTE";
             }
 
+            // 4. Encendemos el cargador visual
             document.getElementById('loader-texto').innerText = "Guardando Reporte...";
             document.getElementById('loader').classList.remove('hidden');
 
+            // 5. Empaquetamos el FormData con las llaves exactas que lee tu Apps Script original
             const datos = new FormData();
             datos.append("Dorsal", dorsalFormateado); 
             datos.append("Cedula", ciValidada);
             datos.append("Nombre", nombre); 
-            datos.append("Genero", genero); 
             datos.append("Telefono", tel);
-            datos.append("FranelaExtra", "No"); 
+            datos.append("FranelaExtra", txtTallaExtra); // Columna E de tu Excel
             datos.append("Estado", estado);
             datos.append("Ciudad", ciudad); 
             datos.append("Agencia", agencia);
@@ -593,11 +601,14 @@
             datos.append("Total", totalUSD);
             datos.append("Reserva10K", reservaText); 
             datos.append("SaldoPendiente", saldoText);
-            datos.append("Textil10K", `${preTextil} Talla: ${tallTextil}`);
+            datos.append("Textil10K", preTextil ? `${preTextil} Talla: ${tallTextil}` : "N/A");
+            datos.append("Genero", genero); // Envía la M o la F limpia a tu columna P sin acento
 
+            // 6. Enviamos los datos directo a tu Google Apps Script de confianza
             fetch(urlBaseDeDatos, { method: 'POST', body: datos, mode: 'no-cors' })
-                .then(() => { salirYRedirigir(nombre, totalUSD, refPago, dorsalFormateado); });
-        }
+                .then(() => { salirYRedirigir(nombre, totalUSD, refPago, dorsalFormateado); })
+                .catch(() => { salirYRedirigir(nombre, totalUSD, refPago, dorsalFormateado); });
+}
 
         function salirYRedirigir(nombre, total, ref, dorsal) {
             document.getElementById('loader').classList.add('hidden');

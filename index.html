@@ -169,84 +169,74 @@
     <!-- Reemplaza toda la sección <nav> con esta versión -->
 
 <nav class="bg-[#001E50] sticky top-0 z-50 shadow-2xl">
-    <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-20 md:h-28">
-            
-            <!-- BLOQUE DEL LOGO CORREGIDO (Limpiecito y más grande) -->
-            <div class="flex items-center gap-3 md:gap-5 cursor-pointer group -ml-2 md:-ml-4" onclick="location.href='index.html'">
+        <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20 md:h-28">
                 
-                <!-- 📱 Logo para Móvil (Isotipo) -->
-                <img src="img/RV-Isotipo-sinfondo.png" alt="Reto Virtual" class="h-12 w-auto object-contain brightness-125 transition-transform group-hover:scale-105 md:hidden">
+                <div class="flex items-center gap-3 md:gap-5 cursor-pointer group -ml-2 md:-ml-4" onclick="location.href='index.html'">
+                    <img src="img/RV-Isotipo-sinfondo.png" alt="Reto Virtual" class="h-12 w-auto object-contain brightness-125 md:hidden">
+                    <img src="img/RV Texto Sin fondo.png" alt="Reto Virtual" class="hidden md:block h-20 lg:h-28 w-auto object-contain brightness-125">
+                </div>
 
-                <!-- 💻 Logo para Laptop (Texto) - ¡TAMAÑO AUMENTADO AQUÍ! (h-16 a h-20) -->
-                <img src="img/RV Texto Sin fondo.png" alt="Reto Virtual" class="hidden md:block h-20 lg:h-28 w-auto object-contain brightness-125 transition-transform group-hover:scale-105">
-                
-                <!-- La línea separadora (también la hice un poco más alta para que cuadre) -->
-                <!-- <div class="h-10 md:h-12 lg:h-16 w-[1px] bg-white/20"></div> -->
-                
-                <!-- Texto TEAMFS -->
-                <!-- <div class="flex flex-col">
-                    <span class="text-[7px] md:text-[8px] text-white/60 font-bold tracking-[0.2em] uppercase mb-0.5 md:mb-1">Presentado por</span>
-                    <span class="text-white font-black text-base md:text-xl lg:text-2xl tracking-tighter leading-none group-hover:text-[#00D2FF] transition-colors italic">TEAMFS</span>
-                </div> -->
-            </div>
-            <!-- FIN DEL BLOQUE DEL LOGO -->
+                <div class="hidden lg:flex items-center space-x-4 xl:space-x-6">
+                    <a href="index.html#ediciones" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all">Calendario</a>
+                    <a href="evidencias2.html" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all">Evidencia</a>
+                    <a href="resultados.html" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all">Resultados</a>
+                    <a href="aliados.html" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all">Aliados</a>
+                    <a href="tienda.html" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all">Tienda</a>
 
-            <!-- BOTONES DEL MENÚ -->
-            <div class="hidden lg:flex items-center space-x-4 xl:space-x-6">
-                <a href="index.html#ediciones" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Calendario</a>
-                
-                <a href="espera.html" class="bg-[#00D2FF] text-[#001E50] px-4 py-2 rounded-full text-[10px] xl:text-xs font-black uppercase tracking-widest hover:scale-105 transition-all shadow-lg shadow-[#00D2FF]/20">Especial 10K</a>
+                    <div class="relative group">
+                        <button class="flex items-center text-white/80 group-hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all">
+                            Info <i class="fa-solid fa-chevron-down ml-2 text-[8px]"></i>
+                        </button>
+                        <div class="absolute right-0 mt-2 w-56 bg-[#001E50] border border-white/10 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                            <div class="p-2">
+                                <a href="entrenador.html" class="flex items-center px-4 py-4 text-xs font-bold text-white/80 hover:text-[#00D2FF] hover:bg-white/5 rounded-lg transition-all">
+                                    <i class="fa-solid fa-robot mr-3 text-sm opacity-70"></i> Entrenador IA
+                                </a>
+                                <a href="faq.html" class="flex items-center px-4 py-4 text-xs font-bold text-white/80 hover:text-[#00D2FF] hover:bg-white/5 rounded-lg transition-all">
+                                    <i class="fa-solid fa-circle-question mr-3 text-sm opacity-70"></i> Preguntas Frecuentes
+                                </a>
+                            </div>
+                        </div>
+                    </div>
 
-		<a href="evidencias2.html" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Evidencia</a>
-                
-                <a href="resultados.html" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Resultados</a>
-                
-                <a href="aliados.html" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Aliados</a>
-                
-                <a href="tienda.html" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap">Tienda</a>
-
-                <div class="relative group">
-                    <button class="flex items-center text-white/80 group-hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all">
-                        Info <i class="fa-solid fa-chevron-down ml-2 text-[8px]"></i>
-                    </button>
-                    <div class="absolute right-0 mt-2 w-56 bg-[#001E50] border border-white/10 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 translate-y-2 group-hover:translate-y-0">
-                        <div class="p-2">
-                            <a href="entrenador.html" class="flex items-center px-4 py-4 text-xs font-bold text-white/80 hover:text-[#00D2FF] hover:bg-white/5 rounded-lg transition-all">
-                                <i class="fa-solid fa-robot mr-3 text-sm opacity-70"></i> Entrenador IA
-                            </a>
-                            <a href="faq.html" class="flex items-center px-4 py-4 text-xs font-bold text-white/80 hover:text-[#00D2FF] hover:bg-white/5 rounded-lg transition-all">
-                                <i class="fa-solid fa-circle-question mr-3 text-sm opacity-70"></i> Preguntas Frecuentes
-                            </a>
+                    <div class="relative group">
+                        <button class="border-2 border-white text-white px-5 py-2.5 rounded-full font-black text-[10px] xl:text-xs uppercase tracking-widest hover:bg-white hover:text-[#001E50] transition-all shadow-lg flex items-center gap-2">
+                            INSCRIBIRME <i class="fa-solid fa-chevron-down text-[8px]"></i>
+                        </button>
+                        <div class="absolute right-0 mt-2 w-64 bg-[#001E50] border border-white/10 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                            <div class="p-2 space-y-1">
+                                <button onclick="activarFlujo('5K')" class="w-full flex items-center px-4 py-3 text-xs font-bold text-white/80 hover:text-[#00D2FF] hover:bg-white/5 rounded-lg text-left transition-all">
+                                    <i class="fa-solid fa-person-running mr-3 text-sm"></i> Segunda Edición 5K
+                                </button>
+                                <button onclick="activarFlujo('10K')" class="w-full flex items-center px-4 py-3 text-xs font-bold text-white/80 hover:text-[#00D2FF] hover:bg-white/5 rounded-lg text-left transition-all">
+                                    <i class="fa-solid fa-medal mr-3 text-sm"></i> Edición Especial 10K
+                                </button>
+                                <button onclick="activarFlujo('ABONO')" class="w-full flex items-center px-4 py-3 text-xs font-bold text-[#00D2FF] hover:bg-white/5 rounded-lg text-left transition-all border-t border-white/10 pt-2">
+                                    <i class="fa-solid fa-money-bill-wave mr-3 text-sm"></i> Consultar Saldo / Abonar
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <a href="inscripcion.html" class="border-2 border-white text-white px-5 py-2.5 rounded-full font-black text-[10px] xl:text-xs uppercase tracking-widest hover:bg-white hover:text-[#001E50] transition-all shadow-lg">Inscribirme</a>
+                <button id="menuToggle" class="lg:hidden text-white text-2xl focus:outline-none z-50">
+                    <i class="fa-solid fa-bars-staggered"></i>
+                </button>
             </div>
-
-            <button id="menuToggle" class="lg:hidden text-white text-2xl focus:outline-none z-50">
-                <i class="fa-solid fa-bars-staggered"></i>
-            </button>
         </div>
-    </div>
 
-    <!-- MENÚ MÓVIL DESPLEGABLE -->
-    <div id="mobileMenu" class="fixed inset-0 bg-[#001E50] z-40 transform translate-x-full transition-transform duration-300 lg:hidden">
-        <div class="flex flex-col items-center justify-center h-full space-y-6 px-8">
-            <a href="index.html#ediciones" class="text-white text-lg font-bold uppercase tracking-widest">Calendario</a>
-            <a href="espera.html" class="bg-[#00D2FF] text-[#001E50] px-10 py-3 rounded-full text-lg font-black uppercase tracking-widest shadow-xl shadow-[#00D2FF]/20">Especial 10K</a>
-	    <a href="evidencias2.html" class="text-white text-lg font-bold uppercase tracking-widest">Evidencia</a>
-            <a href="resultados.html" class="text-white text-lg font-bold uppercase tracking-widest">Resultados</a>
-            <a href="aliados.html" class="text-white text-lg font-bold uppercase tracking-widest">Aliados</a>
-            <a href="tienda.html" class="text-white text-lg font-bold uppercase tracking-widest">Tienda</a>
-            <div class="h-[1px] w-12 bg-white/10 my-2"></div>
-            <a href="entrenador.html" class="text-white text-base font-bold uppercase">Entrenador IA</a>
-            <a href="faq.html" class="text-white text-base font-bold uppercase">FAQ</a>
-            <a href="inscripcion.html" class="border-2 border-white text-white px-10 py-3 rounded-full font-black text-lg uppercase tracking-widest bg-white/5 transition-all mt-4">Inscribirme</a>
+        <div id="mobileMenu" class="fixed inset-0 bg-[#001E50] z-40 transform translate-x-full transition-transform duration-300 lg:hidden">
+            <div class="flex flex-col items-center justify-center h-full space-y-6 px-8">
+                <a href="index.html#ediciones" class="text-white text-lg font-bold uppercase tracking-widest">Calendario</a>
+                <a href="evidencias2.html" class="text-white text-lg font-bold uppercase tracking-widest">Evidencia</a>
+                <button onclick="activarFlujo('5K')" class="border-2 border-white text-white px-10 py-3 rounded-full font-black text-lg uppercase tracking-widest w-full">Segunda Edición 5K</button>
+                <button onclick="activarFlujo('10K')" class="bg-[#00D2FF] text-[#001E50] px-10 py-3 rounded-full text-lg font-black uppercase w-full">Edición Especial 10K</button>
+                <button onclick="activarFlujo('ABONO')" class="text-[#00D2FF] text-base font-bold uppercase tracking-widest w-full text-center">Consultar / Abonar Saldo</button>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
+
 
 
     <section class="relative h-[85vh] flex items-center justify-center overflow-hidden bg-black">
@@ -266,32 +256,12 @@
             4 ediciones. 4 medallas. 1 rompecabezas nacional. El running virtual más exigente de Venezuela, un legado que se corre, se siente y se lleva puesto.
         </p>
 
-        <div class="flex items-center justify-center gap-4 md:gap-10">
-            <div class="text-center">
-                <span id="cd-dias" class="block text-5xl md:text-7xl font-black text-white leading-none tracking-tighter tabular-nums">00</span>
-                <span class="text-[#00D2FF] text-[9px] font-black uppercase tracking-[0.35em] mt-2 block">Días</span>
-            </div>
-            <span class="text-[#00D2FF]/30 text-5xl font-black pb-6">:</span>
-            <div class="text-center">
-                <span id="cd-horas" class="block text-5xl md:text-7xl font-black text-white leading-none tracking-tighter tabular-nums">00</span>
-                <span class="text-[#00D2FF] text-[9px] font-black uppercase tracking-[0.35em] mt-2 block">Horas</span>
-            </div>
-            <span class="text-[#00D2FF]/30 text-5xl font-black pb-6">:</span>
-            <div class="text-center">
-                <span id="cd-min" class="block text-5xl md:text-7xl font-black text-white leading-none tracking-tighter tabular-nums">00</span>
-                <span class="text-[#00D2FF] text-[9px] font-black uppercase tracking-[0.35em] mt-2 block">Min</span>
-            </div>
-            <span class="text-[#00D2FF]/30 text-5xl font-black pb-6">:</span>
-            <div class="text-center">
-                <span id="cd-seg" class="block text-5xl md:text-7xl font-black text-white leading-none tracking-tighter tabular-nums">00</span>
-                <span class="text-[#00D2FF] text-[9px] font-black uppercase tracking-[0.35em] mt-2 block">Seg</span>
-            </div>
-        </div>
-        <p class="text-white/25 text-[9px] uppercase tracking-[0.4em] mt-5">
-            ⏱ Edición 2 · Junio 05, 2026
-        </p>
-
-    </div>
+        <div class="flex flex-col items-center justify-center mt-4">
+    <span class="bg-[#00D2FF] text-[#001E50] px-8 py-3 rounded-full text-xl md:text-2xl font-black uppercase tracking-widest shadow-[0_0_30px_rgba(0,210,255,0.5)] animate-pulse">
+        ¡EVENTO EN CURSO!
+    </span>
+    <p class="text-white font-bold mt-4 tracking-[0.3em] uppercase text-xs md:text-sm"><i class="fa-solid fa-fire text-[#00D2FF] mr-2"></i> Acumulando Kilómetros</p>
+</div>
 </section>
 
     <section id="nosotros" class="py-24 bg-white">
@@ -366,16 +336,33 @@
                         <span class="border-2 border-white/50 px-5 py-1.5 rounded-full text-[11px] font-bold bg-white/10 backdrop-blur-sm shadow-lg">Marzo 06 - 15</span>
                     </div>
                 </div>
-                <div class="bg-[#001E50] p-8 rounded-3xl shadow-2xl border-b-8 border-[#00D2FF] transform scale-105 relative flex flex-col justify-between">
-                    <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#00D2FF] text-[#001E50] text-[10px] font-black px-6 py-2 rounded-full uppercase shadow-xl tracking-tighter">Apertura: 15 Mayo</div>
-                    <div class="mt-4">
-                        <h4 class="font-black text-3xl text-white mb-2 uppercase tracking-tighter">Edición 2</h4>
-                        <p class="text-[#00D2FF] text-xs font-bold uppercase tracking-[0.2em] mb-6 italic">Pieza: La Conquista</p>
-                        <div class="bg-white/5 py-4 rounded-xl border border-white/10 mb-6">
-                            <p class="text-white font-bold text-lg leading-none mb-1">Junio 05 - 14</p>
-                            <p class="text-white/40 text-[9px] uppercase tracking-widest font-bold">Fecha de Carrera</p>
-                        </div>
-                    </div>
+                <div class="bg-[#001E50] p-6 md:p-8 rounded-3xl shadow-2xl border-b-8 border-[#00D2FF] transform scale-105 relative flex flex-col justify-between">
+    
+    <!-- Píldora de estado actualizada -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#00D2FF] text-[#001E50] text-[10px] font-black px-6 py-2 rounded-full uppercase shadow-[0_0_15px_rgba(0,210,255,0.6)] tracking-tighter animate-pulse">
+        En Curso
+    </div>
+    
+    <div class="mt-4">
+        <h4 class="font-black text-3xl text-white mb-1 uppercase tracking-tighter">Edición 2</h4>
+        <p class="text-[#00D2FF] text-[10px] font-bold uppercase tracking-[0.2em] mb-4 italic">Pieza: La Conquista</p>
+        
+        <!-- CONTENEDOR DE LA MEDALLA 2 -->
+        <div class="relative w-full flex justify-center items-center py-4 mb-4 group cursor-pointer">
+            <!-- Efecto de luz de fondo (Glow) -->
+            <div class="absolute w-28 h-28 bg-[#00D2FF]/20 blur-2xl rounded-full group-hover:bg-[#00D2FF]/40 transition-all duration-500"></div>
+            <!-- Imagen de la medalla -->
+            <img src="img/medalla2.png" alt="Medalla La Conquista" class="relative w-36 md:w-44 h-auto object-contain drop-shadow-[0_15px_25px_rgba(0,0,0,0.5)] transform group-hover:scale-110 group-hover:-translate-y-2 transition-all duration-500 z-10">
+        </div>
+
+        <div class="bg-white/5 py-3 rounded-xl border border-white/10 mb-6">
+            <p class="text-white font-bold text-lg leading-none mb-1">Junio 05 - 14</p>
+            <p class="text-white/40 text-[9px] uppercase tracking-widest font-bold">Fecha de Carrera</p>
+        </div>
+    </div>
+    
+    <a href="https://www.retovirtualvzla.com/inscripcion.html" class="block bg-white text-[#001E50] py-4 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-[#00D2FF] hover:text-white transition-all shadow-lg">Inscribirme Ahora</a>
+</div>
                   
 
   <a href="https://www.retovirtualvzla.com/inscripcion.html" class="block bg-white text-[#001E50] py-4 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-[#00D2FF] hover:text-white transition-all shadow-lg">Reservar Mi Cupo</a>
@@ -609,30 +596,7 @@
             });
         });
 
-        // ========== COUNTDOWN EDICIÓN 2 ==========
-        (function() {
-            var meta = new Date("2026-06-05T07:00:00");
-
-            function tick() {
-                var diff = meta - new Date();
-
-                if (diff <= 0) {
-                    document.getElementById("cd-dias").textContent = "00";
-                    document.getElementById("cd-horas").textContent = "00";
-                    document.getElementById("cd-min").textContent = "00";
-                    document.getElementById("cd-seg").textContent = "00";
-                    return;
-                }
-
-                document.getElementById("cd-dias").textContent  = String(Math.floor(diff / 86400000)).padStart(2, "0");
-                document.getElementById("cd-horas").textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, "0");
-                document.getElementById("cd-min").textContent   = String(Math.floor((diff % 3600000) / 60000)).padStart(2, "0");
-                document.getElementById("cd-seg").textContent   = String(Math.floor((diff % 60000) / 1000)).padStart(2, "0");
-            }
-
-            tick();
-            setInterval(tick, 1000);
-        })();
+        
 
         // ========== SPLASH SCREEN ==========
         // Activa float del Team FS después del entrance
