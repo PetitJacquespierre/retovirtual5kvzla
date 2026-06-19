@@ -619,8 +619,15 @@
             datos.append("SaldoPendiente", saldoText);
             datos.append("Textil10K", `${preTextil} Talla: ${tallTextil}`);
 
-            fetch(urlBaseDeDatos, { method: 'POST', body: datos, mode: 'no-cors' })
-                .then(() => { salirYRedirigir(nombre, totalUSD, refPago, dorsalFormateado); });
+            // Cambiar el fetch agregando la propiedad de control de caché
+fetch(urlBaseDeDatos, { 
+    method: 'POST', 
+    body: datos, 
+    mode: 'no-cors',
+    cache: 'no-store' // 🌟 ESTO EVITA QUE EL NAVEGADOR RE-ENVIÉ LOS DATOS SOLO
+})
+.then(() => { salirYRedirigir(nombre, totalUSD, refPago, dorsalFormateado); });
+
         }
 
         function salirYRedirigir(nombre, total, ref, dorsal) {
