@@ -309,7 +309,7 @@
 
         const urlApiDolarBCV = "https://script.google.com/macros/s/AKfycbwsoD8ahtAQUqfY0TQWf3-dDs29HL8kEJa2t-mjDR3PAo3exTTmtSwXqYuNB2ob5dFpgw/exec";
         const urlCSV_Comparacion = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5yMHsenxCWE5kZBDUZ8UcYqDtdAHstfqXcvWkuYZPQ_4n2xSrfs6ptk7k21r1kcMHHLtWjz8SEHwl/pub?gid=0&single=true&output=csv";
-        const urlBaseDeDatos = "https://script.google.com/macros/s/AKfycbzs5PJsfuiFh7CEE25hd52PdDn11ciWPoZS-TJi7myLKVR6Rog4KOxhRHZPeggFn9Co4g/exec";
+        const urlBaseDeDatos = "https://script.google.com/macros/s/AKfycbyp-NJc2uozcF4VDYRm3_XhKiKmPwdLfB4jLxJV_L9EFpXSBI7dp1TuMG0hxWzC7dLaCg/exec";
 
         const venezuela = {
             "Amazonas": ["Puerto Ayacucho"], "Anzoátegui": ["Barcelona", "Puerto La Cruz"], "Apure": ["San Fernando"], "Aragua": ["Maracay", "Cagua"], "Barinas": ["Barinas"], "Bolívar": ["Ciudad Guayana"], "Carabobo": ["Valencia", "Puerto Cabello"], "Cojedes": ["San Carlos"], "Delta Amacuro": ["Tucupita"], "Distrito Capital": ["Caracas"], "Falcón": ["Punto Fijo", "Coro"], "Guárico": ["San Juan"], "La Guaira": ["La Guaira"], "Lara": ["Barquisimeto"], "Mérida": ["Mérida"], "Miranda": ["Los Teques"], "Monagas": ["Maturín"], "Nueva Esparta": ["Porlamar"], "Portuguesa": ["Guanare"], "Sucre": ["Cumaná"], "Táchira": ["San Cristóbal"], "Trujillo": ["Valera"], "Yaracuy": ["San Felipe"], "Zulia": ["Maracaibo", "Cabimas"]
@@ -317,9 +317,11 @@
 
         window.onload = async () => {
             const selectEstado = document.getElementById('estadoEnvio');
-            Object.keys(venezuela).sort().forEach(est => {
-                let opt = document.createElement('option'); opt.value = est; opt.text = est; selectEstado.add(opt);
-            });
+            if(selectEstado) {
+                Object.keys(venezuela).sort().forEach(est => {
+                    let opt = document.createElement('option'); opt.value = est; opt.text = est; selectEstado.add(opt);
+                });
+            }
             await obtenerTasaBCV();
             await actualizarContadorSilencioso();
             activarFlujo('5K');
@@ -408,7 +410,8 @@
                 const tipoTextil = document.getElementById('tipoTextil10k').value;
                 if (tipoTextil === "Franela Oscura") { costoKitCompleto += 5; } 
 
-                const tipoPago = document.querySelector('input[name="opcion10k"]:checked').value;
+                const radioPago = document.querySelector('input[name="opcion10k"]:checked');
+                const tipoPago = radioPago ? radioPago.value : "50";
                 let netoUSD = 0;
                 const campoNota = document.getElementById('notaInformativaPago');
 
@@ -419,7 +422,7 @@
                 } else {
                     netoUSD = costoKitCompleto / 2; 
                     document.getElementById('label-abono-dinamico').innerText = `Pagas $${netoUSD.toFixed(2)} hoy y restarán $${netoUSD.toFixed(2)} antes del evento.`;
-                    campoNota.innerText = `⚠️ Estás abonando el 50%. Los $${netoUSD.toFixed(2)} restantes deberán ser cancelados antes del ${FECHA_LIMITE_PAGO}.`;
+                    campoNota.innerText = `⚠️ Estás abonando el 50%. Los $${netoUSD.toFixed(2)} restantes deberán ser cancelados antes del ${FECHA_LIMIT_PAGO}.`;
                     campoNota.classList.remove('hidden');
                 }
 
@@ -505,7 +508,7 @@
 
                     for(let i = 1; i < filas.length; i++) {
                         if(!filas[i].trim()) continue;
-                        const columnas = filas[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c => c.replace(/^"|"$/g, '').trim());
+                        const columnas = filas[i].split(/,(?=(?:(?:[^"]*"){2})*[^**]*$)/).map(c => c.replace(/^"|"$/g, '').trim());
                         if((columnas[idxCI] && columnas[idxCI].replace(/\D/g, '').trim() === ciInput) || filas[i].includes(ciInput)) {
                             encontrado = true;
                             ciValidada = ciInput;
@@ -529,7 +532,6 @@
         }
 
         function procesarInscripcion() {
-            // 1. Extraemos los valores idénticos de los campos del formulario
             const cedulaFinal = document.getElementById('cedulaCampos').value.replace(/\D/g, '').trim();
             const nombre = document.getElementById('nombreEnvio').value;
             const genero = document.getElementById('generoAtleta').value;
@@ -543,30 +545,27 @@
             const totalUSD = document.getElementById('total-usd').innerText;
             const acepto = document.getElementById('aceptoReglamento').checked;
 
-            // 2. Validaciones obligatorias de seguridad en la web
             if(!acepto) return alert("⚠️ Acepta el reglamento.");
             if(!cedulaFinal || !nombre || !genero || !tel || !estado || !ciudad || !direccion || !refPago || !fechaPago) {
-                return alert("⚠️ Faltan datos obligatorios para procesar tu registro.");
+                return alert("⚠️ Faltan datos obligatorios.");
             }
 
             ciValidada = cedulaFinal; 
 
-            // 3. Lógica para procesar los textos de Reserva, Saldo y Textil según la carrera
             let reservaText = "NO"; 
             let saldoText = "SOLVENTE";
-            let txtTallaExtra = "No"; // Variable para mantener la compatibilidad con tu columna de 5K
-            let preTextil = document.getElementById('tipoTextil10k').value;
-            let tallTextil = document.getElementById('tallaTextil10k').value;
+            let txtTallaExtra = "No"; 
+            let preTextil = "N/A";
+            let tallTextil = "N/A";
 
-            // Calculamos el dorsal correlativo en base al contador que lee tu CSV en vivo
-            totalDorsalesRegistrados++;
-            let dorsalFormateado = String(totalDorsalesRegistrados).padStart(3, '0');
-
+            // Control de variables según la carrera activa para evitar errores fantasmas
             if (flujoActual === "10K") {
-                const op = document.querySelector('input[name="opcion10k"]:checked').value;
+                preTextil = document.getElementById('tipoTextil10k').value;
+                tallTextil = document.getElementById('tallaTextil10k').value;
                 if(!tallTextil) return alert("⚠️ Selecciona tu talla textil.");
                 
                 let costoKitCompleto = (preTextil === "Franela Oscura") ? 40 : 35;
+                const op = document.querySelector('input[name="opcion10k"]:checked').value;
 
                 if (op === "50") { 
                     let mitad = costoKitCompleto / 2;
@@ -581,17 +580,18 @@
                 saldoText = "SOLVENTE";
             }
 
-            // 4. Encendemos el cargador visual
+            totalDorsalesRegistrados++;
+            let dorsalFormateado = String(totalDorsalesRegistrados).padStart(3, '0');
+
             document.getElementById('loader-texto').innerText = "Guardando Reporte...";
             document.getElementById('loader').classList.remove('hidden');
 
-            // 5. Empaquetamos el FormData con las llaves exactas que lee tu Apps Script original
             const datos = new FormData();
             datos.append("Dorsal", dorsalFormateado); 
             datos.append("Cedula", ciValidada);
             datos.append("Nombre", nombre); 
             datos.append("Telefono", tel);
-            datos.append("FranelaExtra", txtTallaExtra); // Columna E de tu Excel
+            datos.append("FranelaExtra", txtTallaExtra); 
             datos.append("Estado", estado);
             datos.append("Ciudad", ciudad); 
             datos.append("Agencia", agencia);
@@ -601,14 +601,13 @@
             datos.append("Total", totalUSD);
             datos.append("Reserva10K", reservaText); 
             datos.append("SaldoPendiente", saldoText);
-            datos.append("Textil10K", preTextil ? `${preTextil} Talla: ${tallTextil}` : "N/A");
-            datos.append("Genero", genero); // Envía la M o la F limpia a tu columna P sin acento
+            datos.append("Textil10K", flujoActual === "10K" ? `${preTextil} Talla: ${tallTextil}` : "N/A");
+            datos.append("Genero", genero); 
 
-            // 6. Enviamos los datos directo a tu Google Apps Script de confianza
             fetch(urlBaseDeDatos, { method: 'POST', body: datos, mode: 'no-cors' })
                 .then(() => { salirYRedirigir(nombre, totalUSD, refPago, dorsalFormateado); })
                 .catch(() => { salirYRedirigir(nombre, totalUSD, refPago, dorsalFormateado); });
-}
+        }
 
         function salirYRedirigir(nombre, total, ref, dorsal) {
             document.getElementById('loader').classList.add('hidden');
