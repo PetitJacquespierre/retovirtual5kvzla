@@ -307,6 +307,7 @@
         let flujoActual = "5K"; 
         let ciValidada = "";
         let totalDorsalesRegistrados = 22; 
+        let bloqueoCuposActivo = false; // Candado inteligente para el límite de 100
 
         const urlApiDolarBCV = "https://script.google.com/macros/s/AKfycbwsoD8ahtAQUqfY0TQWf3-dDs29HL8kEJa2t-mjDR3PAo3exTTmtSwXqYuNB2ob5dFpgw/exec";
         const urlCSV_Comparacion = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5yMHsenxCWE5kZBDUZ8UcYqDtdAHstfqXcvWkuYZPQ_4n2xSrfs6ptk7k21r1kcMHHLtWjz8SEHwl/pub?gid=0&single=true&output=csv";
@@ -329,6 +330,7 @@
             flujoActual = modo;
             document.getElementById('mobileMenu').classList.add('translate-x-full');
             
+            // 1. Limpiamos y reseteamos los contenedores de la pantalla
             document.getElementById('paso-1').classList.add('hidden-step');
             document.getElementById('seccion-busqueda-abono').classList.add('hidden-step');
             document.getElementById('paso-fundador').classList.add('hidden-step');
@@ -336,6 +338,7 @@
             document.getElementById('beneficios-kit-10k').classList.add('hidden-step');
             document.getElementById('notaInformativaPago').classList.add('hidden');
 
+            // 2. Evaluamos qué botón presionó el usuario
             if (modo === '5K') {
                 document.getElementById('paso-1').classList.remove('hidden-step');
                 document.getElementById('tituloRuta').innerText = "RETO VIRTUAL 5K";
@@ -346,8 +349,26 @@
                 document.getElementById('textoBannerSecundario').innerText = "Valida tu Cédula y Completa tu Inscripción Regular";
             } 
             else if (modo === '10K') {
+                // 🚪 CANDADO INTELIGENTE: Validamos si ya se llegó al límite de las 100 medallas
+                if (totalDorsalesRegistrados >= 100) {
+                    bloqueoCuposActivo = true;
+                    document.getElementById('textoBannerPrincipal').innerText = "¡CUPOS COMPLETADOS!";
+                    document.getElementById('textoBannerSecundario').innerText = "Las 100 medallas exclusivas de la Edición Especial 10K han sido agotadas.";
+                    
+                    // Mostramos el recuadro de cierre solo en el espacio del formulario
+                    document.getElementById('paso-fundador').classList.remove('hidden-step');
+                    document.getElementById('paso-fundador').innerHTML = `
+                        <div class="bg-red-50 border-2 border-red-500 p-8 rounded-[2.5rem] text-center max-w-lg mx-auto my-8 animate-fade-in">
+                            <i class="fa-solid fa-circle-xmark text-5xl text-red-500 mb-4"></i>
+                            <h3 class="text-red-950 font-black text-xl uppercase italic">Inscripciones Cerradas</h3>
+                            <p class="text-xs text-red-700 font-bold mt-2">Lo sentimos, la Edición Especial 10K ha llegado a su límite estricto de 100 cupos con medalla de metal 3D. ¡Gracias por formar parte del Reto Virtual Venezuela!</p>
+                        </div>`;
+                    return; // Frenamos la ejecución para que no pinte el formulario de pago
+                }
+
+                // Si hay cupo libre menor a 100, el formulario abre de manera normal y limpia
                 document.getElementById('paso-fundador').classList.remove('hidden-step');
-                document.getElementById('seccion-upgrade-10k').classList.remove('hidden-step'); // ENCIENDE EL APARTADO DE ESQUEMA DE PAGO
+                document.getElementById('seccion-upgrade-10k').classList.remove('hidden-step');
                 document.getElementById('beneficios-kit-10k').classList.remove('hidden-step');
                 document.getElementById('tituloRuta').innerText = "EDICIÓN ESPECIAL 10K";
                 document.getElementById('labelCarreraActual').innerText = "Kit General 10K";
@@ -433,12 +454,22 @@
             document.getElementById('loader').classList.remove('hidden');
 
             try {
-                const res = await fetch(urlCSV_Comparacion + "&nocache=" + new Date().getTime());
-                const csvText = await res.text();
-                const filas = csvText.split(/\r?\n/);
-                let encontrado = null;
+            const res = await fetch(urlCSV_Comparacion + "&nocache=" + new Date().getTime());
+            const csvText = await res.text();
+            const filas = csvText.split(/\r?\n/);
 
-                if (filas.length > 0) {
+            // ==========================================
+            // ¡TU CÓDIGO NUEVO AQUÍ! ACTUALIZA EL CONTADOR EN VIVO
+            if(filas.length > 1) {
+                totalDorsalesRegistrados = filas.length - 1;
+            }
+            // ==========================================
+
+            let encontrado = null; // O let encontrado = false; (dependiendo de la función)
+            
+            if (filas.length > 0) {
+                // Aquí sigue el resto de tu lógica normal que recorre las filas...
+
                     const headers = filas[0].split(',').map(h => h.trim().toLowerCase());
                     const idxCI = headers.findIndex(h => h.includes('cedula') || h.includes('ci'));
                     
@@ -516,6 +547,13 @@
         }
 
         function procesarInscripcion() {
+            // CANDADO MAESTRO DE SEGURIDAD INTERNA
+            if (bloqueoCuposActivo || totalDorsalesRegistrados >= 100) {
+                alert("❌ ¡ALERTA! Las inscripciones se han cerrado automáticamente. Se alcanzó el límite estricto de 100 medallas físicas.");
+                window.location.reload();
+                return;
+            }
+
             const cedulaFinal = document.getElementById('cedulaCampos').value.replace(/\D/g, '').trim();
             const nombre = document.getElementById('nombreEnvio').value;
             const genero = document.getElementById('generoAtleta').value;
@@ -539,6 +577,7 @@
             let preTextil = document.getElementById('tipoTextil10k').value;
             let tallTextil = document.getElementById('tallaTextil10k').value;
 
+            // Incrementamos el total y formateamos el dorsal correlativo en vivo
             totalDorsalesRegistrados++;
             let dorsalFormateado = String(totalDorsalesRegistrados).padStart(3, '0');
 
@@ -568,7 +607,7 @@
             datos.append("Dorsal", dorsalFormateado); 
             datos.append("Cedula", ciValidada);
             datos.append("Nombre", nombre); 
-            datos.append("Genero", genero); 
+            datos.append("Genero", genero); // Envía 'M' o 'F' en perfecta sincronía con tu columna P sin acento
             datos.append("Telefono", tel);
             datos.append("FranelaExtra", "No"); 
             datos.append("Estado", estado);
@@ -584,15 +623,28 @@
 
             fetch(urlBaseDeDatos, { method: 'POST', body: datos, mode: 'no-cors' })
                 .then(() => { salirYRedirigir(nombre, totalUSD, refPago, dorsalFormateado); });
-        }
+}
 
         function salirYRedirigir(nombre, total, ref, dorsal) {
-            document.getElementById('loader').classList.add('hidden');
-            document.getElementById('paso-fundador').classList.add('hidden-step');
-            document.getElementById('pantalla-exito').classList.remove('hidden');
-            const msgText = `🏆 *REPORTE DE PAGO RECOLECTADO*%0A👤 *ATLETA:* ${nombre}%0A🆔 *C.I:* ${ciValidada}%0A🎫 *DORSAL:* #${dorsal}%0A⚙️ *MODO:* ${flujoActual}%0A💰 *MONTO:* ${total}%0A| 🧾 *REF:* ${ref}`;
-            setTimeout(() => { window.open(`https://wa.me/584127732710?text=${msgText}`, '_blank'); }, 1500);
-        }
+    document.getElementById('loader').classList.add('hidden');
+    document.getElementById('paso-fundador').classList.add('hidden-step');
+    document.getElementById('pantalla-exito').classList.remove('hidden');
+    
+    let telefonoAtleta = document.getElementById('telefonoEnvio').value.replace(/\D/g, '').trim();
+    
+    if (telefonoAtleta.startsWith('0')) {
+        telefonoAtleta = '58' + telefonoAtleta.substring(1);
+    }
+    else if (!telefonoAtleta.startsWith('58')) {
+        telefonoAtleta = '58' + telefonoAtleta;
+    }
+
+    const msgText = `🏆 *¡BIENVENIDO AL RETO VIRTUAL VZLA 10K!* 🏆%0A%0A¡Hola, *${nombre.toUpperCase()}*! 👋%0A%0ATu reporte de pago por un monto de *${total}* (Ref: #${ref}) ha sido recibido con éxito en nuestro sistema. ⚙️%0A%0A🎫 *TU NÚMERO DE DORSAL OFICIAL ES:* %0A👉 *#${dorsal}* 👈%0A%0A¡Ya estás oficialmente en la ruta hacia la gloria! Prepara los tenis y mantente atento a nuestras redes para los próximos pasos. 🏁🔥`;
+    
+    setTimeout(() => { 
+        window.open(`https://wa.me/${telefonoAtleta}?text=${msgText}`, '_blank'); 
+    }, 1500);
+}
 
         const menuToggle = document.getElementById('menuToggle');
         menuToggle.addEventListener('click', () => document.getElementById('mobileMenu').classList.toggle('translate-x-full'));
