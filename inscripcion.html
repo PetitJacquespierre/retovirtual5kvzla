@@ -9,7 +9,7 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-CQ0KVLFL1W"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+      function gtag()){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-CQ0KVLFL1W');
     </script>
@@ -306,7 +306,6 @@
         let flujoActual = "5K"; 
         let ciValidada = "";
         let totalDorsalesRegistrados = 22; 
-        let bloqueoCuposActivo = false;
 
         const urlApiDolarBCV = "https://script.google.com/macros/s/AKfycbwsoD8ahtAQUqfY0TQWf3-dDs29HL8kEJa2t-mjDR3PAo3exTTmtSwXqYuNB2ob5dFpgw/exec";
         const urlCSV_Comparacion = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5yMHsenxCWE5kZBDUZ8UcYqDtdAHstfqXcvWkuYZPQ_4n2xSrfs6ptk7k21r1kcMHHLtWjz8SEHwl/pub?gid=0&single=true&output=csv";
@@ -322,7 +321,6 @@
                 let opt = document.createElement('option'); opt.value = est; opt.text = est; selectEstado.add(opt);
             });
             await obtenerTasaBCV();
-            // Disparar una consulta silenciosa del CSV inicial para actualizar el contador real de dorsales antes de que el usuario haga clic en nada
             await actualizarContadorSilencioso();
             activarFlujo('5K');
         };
@@ -359,24 +357,8 @@
                 document.getElementById('textoBannerSecundario').innerText = "Valida tu Cédula y Completa tu Inscripción Regular";
             } 
             else if (modo === '10K') {
-                // CANDADO INTELIGENTE EXACTO EN LA PESTAÑA 10K
-                if (totalDorsalesRegistrados >= 100) {
-                    bloqueoCuposActivo = true;
-                    document.getElementById('textoBannerPrincipal').innerText = "¡CUPOS COMPLETADOS!";
-                    document.getElementById('textoBannerSecundario').innerText = "Las 100 medallas exclusivas de la Edición Especial 10K han sido agotadas.";
-                    
-                    document.getElementById('paso-fundador').classList.remove('hidden-step');
-                    document.getElementById('paso-fundador').innerHTML = `
-                        <div class="bg-red-50 border-2 border-red-500 p-8 rounded-[2.5rem] text-center max-w-lg mx-auto my-8 animate-fade-in">
-                            <i class="fa-solid fa-circle-xmark text-5xl text-red-500 mb-4"></i>
-                            <h3 class="text-red-950 font-black text-xl uppercase italic">Inscripciones Cerradas</h3>
-                            <p class="text-xs text-red-700 font-bold mt-2">Lo sentimos, la Edición Especial 10K ha llegado a su límite estricto de 100 cupos con medalla de metal 3D. ¡Gracias por formar parte del Reto Virtual Venezuela!</p>
-                        </div>`;
-                    return; 
-                }
-
                 document.getElementById('paso-fundador').classList.remove('hidden-step');
-                document.getElementById('seccion-upgrade-10k').classList.remove('hidden-step');
+                document.getElementById('seccion-upgrade-10k').classList.remove('hidden-step'); 
                 document.getElementById('beneficios-kit-10k').classList.remove('hidden-step');
                 document.getElementById('tituloRuta').innerText = "EDICIÓN ESPECIAL 10K";
                 document.getElementById('labelCarreraActual').innerText = "Kit General 10K";
@@ -547,12 +529,6 @@
         }
 
         function procesarInscripcion() {
-            if (bloqueoCuposActivo || totalDorsalesRegistrados >= 100) {
-                alert("❌ ¡ALERTA! Las inscripciones se han cerrado automáticamente. Se alcanzó el límite estricto de 100 medallas físicas.");
-                window.location.reload();
-                return;
-            }
-
             const cedulaFinal = document.getElementById('cedulaCampos').value.replace(/\D/g, '').trim();
             const nombre = document.getElementById('nombreEnvio').value;
             const genero = document.getElementById('generoAtleta').value;
@@ -605,7 +581,7 @@
             datos.append("Dorsal", dorsalFormateado); 
             datos.append("Cedula", ciValidada);
             datos.append("Nombre", nombre); 
-            datos.append("Genero", genero); // El truco está aquí: la G es mayúscula en tu Excel, viaja como "Genero"
+            datos.append("Genero", genero); 
             datos.append("Telefono", tel);
             datos.append("FranelaExtra", "No"); 
             datos.append("Estado", estado);
@@ -619,15 +595,8 @@
             datos.append("SaldoPendiente", saldoText);
             datos.append("Textil10K", `${preTextil} Talla: ${tallTextil}`);
 
-            // Cambiar el fetch agregando la propiedad de control de caché
-fetch(urlBaseDeDatos, { 
-    method: 'POST', 
-    body: datos, 
-    mode: 'no-cors',
-    cache: 'no-store' // 🌟 ESTO EVITA QUE EL NAVEGADOR RE-ENVIÉ LOS DATOS SOLO
-})
-.then(() => { salirYRedirigir(nombre, totalUSD, refPago, dorsalFormateado); });
-
+            fetch(urlBaseDeDatos, { method: 'POST', body: datos, mode: 'no-cors' })
+                .then(() => { salirYRedirigir(nombre, totalUSD, refPago, dorsalFormateado); });
         }
 
         function salirYRedirigir(nombre, total, ref, dorsal) {
