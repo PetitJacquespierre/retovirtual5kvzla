@@ -338,7 +338,7 @@
         // ¡RECUERDA PEGAR TU LINK DE TU CSV NUEVO (Pestaña Inscripciones_10K) AQUÍ!
         const urlCSV_Comparacion = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5yMHsenxCWE5kZBDUZ8UcYqDtdAHstfqXcvWkuYZPQ_4n2xSrfs6ptk7k21r1kcMHHLtWjz8SEHwl/pub?gid=244601533&single=true&output=csv";
         
-        const urlBaseDeDatos = "https://script.google.com/macros/s/AKfycbzpf5W67kgKrBs9XKSCRRuO9dTNejwdTUalJhnIxqkJEjvaKUvHa1JvWwk3VpGycP9k1w/exec"; 
+        const urlBaseDeDatos = "https://script.google.com/macros/s/AKfycbyO9tDp2GreaVR-PVRIUS7zbJRQYydOv2S6mgPcYwyqHVM6-v0-TSQ1y-5UlWk6KVN8CA/exec"; 
 
         const venezuela = {
             "Amazonas": ["Puerto Ayacucho"], "Anzoátegui": ["Barcelona", "Puerto La Cruz"], "Apure": ["San Fernando"], "Aragua": ["Maracay", "Cagua"], "Barinas": ["Barinas"], "Bolívar": ["Ciudad Guayana"], "Carabobo": ["Valencia", "Puerto Cabello"], "Cojedes": ["San Carlos"], "Delta Amacuro": ["Tucupita"], "Distrito Capital": ["Caracas"], "Falcón": ["Punto Fijo", "Coro"], "Guárico": ["San Juan"], "La Guaira": ["La Guaira"], "Lara": ["Barquisimeto"], "Mérida": ["Mérida"], "Miranda": ["Los Teques"], "Monagas": ["Maturín"], "Nueva Esparta": ["Porlamar"], "Portuguesa": ["Guanare"], "Sucre": ["Cumaná"], "Táchira": ["San Cristóbal"], "Trujillo": ["Valera"], "Yaracuy": ["San Felipe"], "Zulia": ["Maracaibo", "Cabimas"]
@@ -618,9 +618,9 @@
                     const op = document.querySelector('input[name="opcion10k"]:checked').value;
 
                     if (op === "50") { 
-                        let mitad = costoKitCompleto / 2;
-                        reservaText = `SÍ - Abonó 50% ($${mitad})`; 
-                        saldoText = `$${mitad.toFixed(2)}`; 
+    let mitad = costoKitCompleto / 2;
+    reservaText = `SÍ - Abonó 50% ($${mitad})`; 
+    saldoText = mitad.toFixed(2); // ← CORRECTO: guarda "17.50" sin símbolo 
                     } else { 
                         reservaText = "SÍ - Pagó 100% Completo"; 
                     }
@@ -650,12 +650,18 @@
             datos.append("SaldoPendiente", saldoText);
             datos.append("Textil10K", kitTextilFinal);
             datos.append("Genero", genero); 
-            datos.append("Carrera", flujoActual); // Envía '5K', '10K' o 'ABONO'
+                        datos.append("Carrera", flujoActual);
 
-            fetch(urlBaseDeDatos, { method: 'POST', body: datos, mode: 'no-cors' })
-                .then(() => { salirYRedirigir(nombre, totalUSD, refPago, dorsalFormateado); })
-                .catch(() => { salirYRedirigir(nombre, totalUSD, refPago, dorsalFormateado); });
-        }
+     fetch(urlBaseDeDatos, {
+    method: 'POST',
+    body: datos,
+    mode: 'no-cors'
+})
+.then(() => salirYRedirigir(nombre, totalUSD, refPago, dorsalFormateado))
+.catch(() => salirYRedirigir(nombre, totalUSD, refPago, dorsalFormateado));
+
+
+        } // ← cierre de procesarInscripcion
 
         function salirYRedirigir(nombre, total, ref, dorsal) {
             document.getElementById('loader').classList.add('hidden');
@@ -668,7 +674,9 @@
             if (telefonoAtleta.startsWith('0')) telefonoAtleta = '58' + telefonoAtleta.substring(1);
             else if (!telefonoAtleta.startsWith('58')) telefonoAtleta = '58' + telefonoAtleta;
 
-            let extraMsg = (flujoActual === 'ABONO') ? "Tu ABONO ha sido procesado con éxito y tu cuenta ha sido actualizada." : `🎫 *TU NÚMERO DE DORSAL ES:* 👉 *#${dorsal}* 👈`;
+            let extraMsg = (flujoActual === 'ABONO') 
+                ? "Tu ABONO ha sido procesado con éxito y tu cuenta ha sido actualizada." 
+                : `🎫 *TU NÚMERO DE DORSAL ES:* 👉 *#${dorsal}* 👈`;
 
             const msgText = `🏆 *¡HOLA, ${nombre.toUpperCase()}!* 👋%0A%0AHemos recibido tu reporte por *${total}* (Ref: #${ref}). ⚙️%0A%0A${extraMsg}%0A%0A¡Nos vemos en la ruta! 🏁🔥`;
             
