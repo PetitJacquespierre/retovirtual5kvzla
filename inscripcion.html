@@ -517,7 +517,7 @@
                     
                     document.getElementById('tituloRuta').innerText = `LIQUIDAR CUENTA - ${encontrado.nombre}`;
                     
-                    lconst valorSaldo = String(encontrado.saldo || '').trim().toUpperCase();
+                    const valorSaldo = String(encontrado.saldo || '').trim().toUpperCase();
 const esSolvente = valorSaldo === 'SOLVENTE' || valorSaldo === '0' || valorSaldo === '0.00' || valorSaldo === '$0' || valorSaldo === '$0.00' || valorSaldo === '';
 const numSaldo = esSolvente ? 0 : (parseFloat(valorSaldo.replace(/[^0-9.]/g, '')) || 0);
 const btnEnviar = document.querySelector('button[onclick="procesarInscripcion()"]');
