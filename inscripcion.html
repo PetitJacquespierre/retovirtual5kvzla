@@ -508,20 +508,19 @@
                     
                     document.getElementById('tituloRuta').innerText = `LIQUIDAR CUENTA - ${encontrado.nombre}`;
                     
-                    let numSaldo = parseFloat(String(encontrado.saldo).replace(/[^0-9.]/g, '')) || 0;
-let esSolvente = numSaldo <= 0 || String(encontrado.saldo).toUpperCase().includes('SOLVENTE');
+                    lconst valorSaldo = String(encontrado.saldo || '').trim().toUpperCase();
+const esSolvente = valorSaldo === 'SOLVENTE' || valorSaldo === '0' || valorSaldo === '0.00' || valorSaldo === '$0' || valorSaldo === '$0.00' || valorSaldo === '';
+const numSaldo = esSolvente ? 0 : (parseFloat(valorSaldo.replace(/[^0-9.]/g, '')) || 0);
+const btnEnviar = document.querySelector('button[onclick="procesarInscripcion()"]');
 
-if (esSolvente) {
-    // Mostrar SOLVENTE en grande
+if (esSolvente || numSaldo <= 0) {
     document.getElementById('total-usd').innerHTML = `<span style="color:#16a34a; font-size:2rem; font-weight:900; letter-spacing:0.1em;">✅ SOLVENTE</span>`;
     document.getElementById('total-bs').innerText = 'No tienes deuda pendiente';
-    // Deshabilitar el botón de enviar
-    document.querySelector('button[onclick="procesarInscripcion"]').disabled = true;
-    document.querySelector('button[onclick="procesarInscripcion"]').style.opacity = '0.4';
-    document.querySelector('button[onclick="procesarInscripcion"]').innerText = 'CUENTA SALDADA ✓';
+    if (btnEnviar) { btnEnviar.disabled = true; btnEnviar.style.opacity = '0.4'; btnEnviar.style.cursor = 'not-allowed'; btnEnviar.innerText = 'CUENTA SALDADA ✓'; }
 } else {
     document.getElementById('total-usd').innerText = numSaldo.toFixed(2);
     document.getElementById('total-bs').innerText = (numSaldo * tasaBCV).toFixed(2) + ' Bs.';
+    if (btnEnviar) { btnEnviar.disabled = false; btnEnviar.style.opacity = '1'; btnEnviar.style.cursor = 'pointer'; btnEnviar.innerText = 'ENVIAR REPORTE AL SISTEMA'; }
 }
 
                     document.getElementById('seccion-busqueda-abono').classList.add('hidden-step');
