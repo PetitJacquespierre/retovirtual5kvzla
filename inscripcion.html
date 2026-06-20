@@ -104,11 +104,20 @@
             </div>
         </div>
         <div id="mobileMenu" class="fixed inset-0 bg-[#001E50] z-40 transform translate-x-full transition-transform duration-300 lg:hidden">
-            <div class="flex flex-col items-center justify-center h-full space-y-6 px-8">
-                <a href="index.html#ediciones" class="text-white text-lg font-bold uppercase tracking-widest">Calendario</a>
-                <a href="evidencias2.html" class="text-white text-lg font-bold uppercase tracking-widest">Evidencia</a>
-            </div>
-        </div>
+    <div class="flex flex-col items-center justify-center h-full space-y-6 px-8">
+        <a href="index.html#ediciones" class="text-white text-lg font-bold uppercase tracking-widest">Calendario</a>
+        <a href="evidencias2.html" class="text-white text-lg font-bold uppercase tracking-widest">Evidencia</a>
+        <button onclick="activarFlujo('5K')" class="text-white text-lg font-bold uppercase tracking-widest">
+            Segunda Edición 5K
+        </button>
+        <button onclick="activarFlujo('10K')" class="text-white text-lg font-bold uppercase tracking-widest">
+            Edición Especial 10K
+        </button>
+        <button onclick="activarFlujo('ABONO')" class="text-[#00D2FF] text-lg font-bold uppercase tracking-widest">
+            Consultar Saldo / Abonar
+        </button>
+    </div>
+</div>
     </nav>
 
     <div class="w-full h-48 md:h-64 relative overflow-hidden bg-[#001E50]">
