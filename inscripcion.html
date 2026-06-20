@@ -9,7 +9,7 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-CQ0KVLFL1W"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag()){dataLayer.push(arguments);}
+      function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-CQ0KVLFL1W');
     </script>
@@ -311,11 +311,11 @@
         const urlApiDolarBCV = "https://script.google.com/macros/s/AKfycbwsoD8ahtAQUqfY0TQWf3-dDs29HL8kEJa2t-mjDR3PAo3exTTmtSwXqYuNB2ob5dFpgw/exec";
         const urlCSV_Comparacion = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5yMHsenxCWE5kZBDUZ8UcYqDtdAHstfqXcvWkuYZPQ_4n2xSrfs6ptk7k21r1kcMHHLtWjz8SEHwl/pub?gid=0&single=true&output=csv";
         
-        // 🌟 EL ENLACE ÚNICO DE TU APPS SCRIPT CON EL FILTRO INTELIGENTE
+        // EL ENLACE ÚNICO DE TU APPS SCRIPT CON EL FILTRO INTELIGENTE
         const urlBaseDeDatos = "https://script.google.com/macros/s/AKfycbzs5PJsfuiFh7CEE25hd52PdDn11ciWPoZS-TJi7myLKVR6Rog4KOxhRHZPeggFn9Co4g/exec"; 
 
         const venezuela = {
-            "Amazonas": ["Puerto Ayacucho"], "Anzoátegui": ["Barcelona", "Puerto La Cruz"], "Apure": ["San Fernando"], "Aragua": ["Maracay", "Cagua"], "Barinas": ["Barinas"], "Bolívar": ["Ciudad Guayana"], "Carabobo": ["Valencia", "Puerto Cabello"], "Cojedes": ["San Carlos"], "Delta Amacuro": ["Tucupita"], "Distrito Capital": ["Caracas"], "Falcón": ["Punto Fijo", "Coro"], "Guárico": ["San Juan"], "La Guaira": ["La Guaira"], "Lara": ["Barquisimeto"], "Mérida": ["Mérida"], "Miranda": ["Los Terques"], "Monagas": ["Maturín"], "Nueva Esparta": ["Porlamar"], "Portuguesa": ["Guanare"], "Sucre": ["Cumaná"], "Táchira": ["San Cristóbal"], "Trujillo": ["Valera"], "Yaracuy": ["San Felipe"], "Zulia": ["Maracaibo", "Cabimas"]
+            "Amazonas": ["Puerto Ayacucho"], "Anzoátegui": ["Barcelona", "Puerto La Cruz"], "Apure": ["San Fernando"], "Aragua": ["Maracay", "Cagua"], "Barinas": ["Barinas"], "Bolívar": ["Ciudad Guayana"], "Carabobo": ["Valencia", "Puerto Cabello"], "Cojedes": ["San Carlos"], "Delta Amacuro": ["Tucupita"], "Distrito Capital": ["Caracas"], "Falcón": ["Punto Fijo", "Coro"], "Guárico": ["San Juan"], "La Guaira": ["La Guaira"], "Lara": ["Barquisimeto"], "Mérida": ["Mérida"], "Miranda": ["Los Teques"], "Monagas": ["Maturín"], "Nueva Esparta": ["Porlamar"], "Portuguesa": ["Guanare"], "Sucre": ["Cumaná"], "Táchira": ["San Cristóbal"], "Trujillo": ["Valera"], "Yaracuy": ["San Felipe"], "Zulia": ["Maracaibo", "Cabimas"]
         };
 
         window.onload = async () => {
@@ -567,7 +567,6 @@
 
             let reservaText = "NO"; 
             let saldoText = "SOLVENTE";
-            let txtTallaExtra = "No"; 
             let kitTextilFinal = "N/A";
 
             if (flujoActual === "10K") {
@@ -603,7 +602,7 @@
             datos.append("Cedula", cedulaFinal);
             datos.append("Nombre", nombre); 
             datos.append("Telefono", tel);
-            datos.append("FranelaExtra", txtTallaExtra); 
+            datos.append("FranelaExtra", "No"); 
             datos.append("Estado", estado);
             datos.append("Ciudad", ciudad); 
             datos.append("Agencia", agencia);
@@ -615,7 +614,7 @@
             datos.append("SaldoPendiente", saldoText);
             datos.append("Textil10K", kitTextilFinal);
             datos.append("Genero", genero); 
-            datos.append("Carrera", flujoActual); // 🌟 ¡AQUÍ ESTÁ EL FIX! Envía "5K" o "10K" para que Apps Script divida las aguas
+            datos.append("Carrera", flujoActual); // Se le avisa al Apps Script qué carrera es
 
             fetch(urlBaseDeDatos, { method: 'POST', body: datos, mode: 'no-cors' })
                 .then(() => { salirYRedirigir(nombre, totalUSD, refPago, dorsalFormateado); })
