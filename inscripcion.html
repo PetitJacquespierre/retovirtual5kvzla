@@ -508,9 +508,21 @@
                     
                     document.getElementById('tituloRuta').innerText = `LIQUIDAR CUENTA - ${encontrado.nombre}`;
                     
-                    let numSaldo = parseFloat(encontrado.saldo.replace('$', '').trim()) || 0;
-                    document.getElementById('total-usd').innerText = `$${numSaldo}`;
-                    document.getElementById('total-bs').innerText = (numSaldo * tasaBCV).toFixed(2) + " Bs.";
+                    let numSaldo = parseFloat(String(encontrado.saldo).replace(/[^0-9.]/g, '')) || 0;
+let esSolvente = numSaldo <= 0 || String(encontrado.saldo).toUpperCase().includes('SOLVENTE');
+
+if (esSolvente) {
+    // Mostrar SOLVENTE en grande
+    document.getElementById('total-usd').innerHTML = `<span style="color:#16a34a; font-size:2rem; font-weight:900; letter-spacing:0.1em;">✅ SOLVENTE</span>`;
+    document.getElementById('total-bs').innerText = 'No tienes deuda pendiente';
+    // Deshabilitar el botón de enviar
+    document.querySelector('button[onclick="procesarInscripcion"]').disabled = true;
+    document.querySelector('button[onclick="procesarInscripcion"]').style.opacity = '0.4';
+    document.querySelector('button[onclick="procesarInscripcion"]').innerText = 'CUENTA SALDADA ✓';
+} else {
+    document.getElementById('total-usd').innerText = numSaldo.toFixed(2);
+    document.getElementById('total-bs').innerText = (numSaldo * tasaBCV).toFixed(2) + ' Bs.';
+}
 
                     document.getElementById('seccion-busqueda-abono').classList.add('hidden-step');
                     document.getElementById('paso-fundador').classList.remove('hidden-step');
