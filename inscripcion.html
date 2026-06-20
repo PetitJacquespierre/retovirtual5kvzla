@@ -472,87 +472,71 @@
         }
 
         async function consultarSaldoServidor() {
-    const ci = document.getElementById('cedulaConsulta').value.replace(/\D/g, '').trim();
-    if (ci.length < 5) return alert("⚠️ Ingresa una cédula válida.");
+            const ci = document.getElementById('cedulaConsulta').value.replace(/\D/g, '').trim();
+            if (ci.length < 5) return alert("⚠️ Ingresa una cédula válida.");
 
-    document.getElementById('loader-texto').innerText = "Consultando...";
-    document.getElementById('loader').classList.remove('hidden');
+            document.getElementById('loader-texto').innerText = "Consultando...";
+            document.getElementById('loader').classList.remove('hidden');
 
-    try {
-        const res = await fetch(urlCSVComparacion + "&nocache=" + new Date().getTime());
-        const csvText = await res.text();
-        const filas = csvText.split(/\r?\n/);
+            try {
+                const res = await fetch(urlCSV_Comparacion + "&nocache=" + new Date().getTime());
+                const csvText = await res.text();
+                const filas = csvText.split(/\r?\n/);
 
-        let encontrado = null;
-        if (filas.length > 0) {
-            const headers = filas[0].split(',').map(h => h.trim().toLowerCase());
-            const idxCI = headers.findIndex(h => h.includes('cedula') || h.includes('ci'));
-
-            for (let i = 1; i < filas.length; i++) {
-                if (!filas[i].trim()) continue;
-                const col = filas[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c => c.replace(/^"|"$/g, '').trim());
-                if (col[idxCI] && col[idxCI].replace(/\D/g, '') === ci) {
-                    encontrado = { dorsal: col[0], nombre: col[2], tel: col[3], saldo: col[13] || "0" };
-                    break;
+                let encontrado = null; 
+                if (filas.length > 0) {
+                    const headers = filas[0].split(',').map(h => h.trim().toLowerCase());
+                    const idxCI = headers.findIndex(h => h.includes('cedula') || h.includes('ci'));
+                    
+                    for(let i = 1; i < filas.length; i++) {
+                        if(!filas[i].trim()) continue;
+                        const col = filas[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c => c.replace(/^"|"$/g, '').trim());
+                        if (col[idxCI] && col[idxCI].replace(/\D/g, '') === ci) {
+                            encontrado = { dorsal: col[0], nombre: col[2], tel: col[3], saldo: col[13] || "$20.00" };
+                            break;
+                        }
+                    }
                 }
-            }
-        }
 
-        if (encontrado) {
-            ciValidada = ci;
+                if (encontrado) {
+                    ciValidada = ci;
+                    
+                    // Llenar campos cortos para Abono
+                    document.getElementById('cedulaAbono').value = ci;
+                    document.getElementById('nombreAbono').value = encontrado.nombre;
+                    document.getElementById('telefonoAbono').value = encontrado.tel;
+                    
+                    document.getElementById('tituloRuta').innerText = `LIQUIDAR CUENTA - ${encontrado.nombre}`;
+                    
+                    let numSaldo = parseFloat(String(encontrado.saldo).replace(/[^0-9.]/g, '')) || 0;
+let esSolvente = numSaldo <= 0 || String(encontrado.saldo).toUpperCase().includes('SOLVENTE');
 
-            // Llenar campos del formulario de abono
-            document.getElementById('cedulaAbono').value = ci;
-            document.getElementById('nombreAbono').value = encontrado.nombre;
-            document.getElementById('telefonoAbono').value = encontrado.tel;
-            document.getElementById('tituloRuta').innerText = `LIQUIDAR CUENTA - ${encontrado.nombre}`;
-
-            // ── Lógica de saldo mejorada ──────────────────────────────
-            const valorSaldo = String(encontrado.saldo || '').trim().toUpperCase();
-            const esSolvente = ['SOLVENTE', '0', '0.00', '$0', '$0.00', ''].includes(valorSaldo)
-                               || valorSaldo.includes('SOLVENTE');
-            const numSaldo = esSolvente ? 0 : (parseFloat(valorSaldo.replace(/[^0-9.]/g, '')) || 0);
-
-            const btnEnviar = document.querySelector('button[onclick="procesarInscripcion"]');
-
-            if (esSolvente || numSaldo <= 0) {
-                document.getElementById('total-usd').innerHTML =
-                    `<span style="color:#16a34a; font-size:2rem; font-weight:900; letter-spacing:0.1em;">✅ SOLVENTE</span>`;
-                document.getElementById('total-bs').innerText = 'No tienes deuda pendiente';
-                if (btnEnviar) {
-                    btnEnviar.disabled = true;
-                    btnEnviar.style.opacity = '0.4';
-                    btnEnviar.style.cursor = 'not-allowed';
-                    btnEnviar.innerText = 'CUENTA SALDADA ✓';
-                }
-            } else {
-                document.getElementById('total-usd').innerText = numSaldo.toFixed(2);
-                document.getElementById('total-bs').innerText = (numSaldo * tasaBCV).toFixed(2) + ' Bs.';
-                if (btnEnviar) {
-                    btnEnviar.disabled = false;
-                    btnEnviar.style.opacity = '1';
-                    btnEnviar.style.cursor = 'pointer';
-                    btnEnviar.innerText = 'ENVIAR REPORTE AL SISTEMA';
-                }
-            }
-            // ─────────────────────────────────────────────────────────
-
-            document.getElementById('seccion-busqueda-abono').classList.add('hidden-step');
-            document.getElementById('paso-fundador').classList.remove('hidden-step');
-            document.getElementById('seccion-logistica').classList.add('hidden-step');
-            document.getElementById('campos-abono-solo').classList.remove('hidden-step');
-
-        } else {
-            alert("❌ Tu cédula no registra saldos pendientes en el sistema.");
-        }
-
-    } catch (e) {
-        alert("⚠️ Error al conectar con el servidor. Intenta de nuevo.");
-        console.error("consultarSaldoServidor:", e);
-    } finally {
-        document.getElementById('loader').classList.add('hidden');
-    }
+if (esSolvente) {
+    // Mostrar SOLVENTE en grande
+    document.getElementById('total-usd').innerHTML = `<span style="color:#16a34a; font-size:2rem; font-weight:900; letter-spacing:0.1em;">✅ SOLVENTE</span>`;
+    document.getElementById('total-bs').innerText = 'No tienes deuda pendiente';
+    // Deshabilitar el botón de enviar
+    document.querySelector('button[onclick="procesarInscripcion"]').disabled = true;
+    document.querySelector('button[onclick="procesarInscripcion"]').style.opacity = '0.4';
+    document.querySelector('button[onclick="procesarInscripcion"]').innerText = 'CUENTA SALDADA ✓';
+} else {
+    document.getElementById('total-usd').innerText = numSaldo.toFixed(2);
+    document.getElementById('total-bs').innerText = (numSaldo * tasaBCV).toFixed(2) + ' Bs.';
 }
+
+                    document.getElementById('seccion-busqueda-abono').classList.add('hidden-step');
+                    document.getElementById('paso-fundador').classList.remove('hidden-step');
+
+                    // LA MAGIA: OCULTAR LOGÍSTICA COMPLETA Y MOSTRAR SOLO CAMPOS CORTOS
+                    document.getElementById('seccion-logistica').classList.add('hidden-step');
+                    document.getElementById('campos-abono-solo').classList.remove('hidden-step');
+
+                } else {
+                    alert("❌ Tu cédula no registra saldos pendientes.");
+                }
+            } catch (e) { alert("Error al conectar."); }
+            finally { document.getElementById('loader').classList.add('hidden'); }
+        }
 
         async function validarAtleta() {
             const btn = document.getElementById('btnVerificar');
