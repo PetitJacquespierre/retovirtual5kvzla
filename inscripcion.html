@@ -384,24 +384,33 @@
         }
 
         function activarFlujo(modo) {
-            flujoActual = modo;
-            document.getElementById('mobileMenu').classList.add('translate-x-full');
-            document.getElementById('pantalla-bienvenida').classList.add('hidden-step');
-            document.getElementById('paso-1').classList.add('hidden-step');
-            document.getElementById('seccion-busqueda-abono').classList.add('hidden-step');
-            document.getElementById('paso-fundador').classList.add('hidden-step');
-            document.getElementById('seccion-upgrade-10k').classList.add('hidden-step');
-            document.getElementById('contenedor-visual-kit').classList.add('hidden-step');
-            document.getElementById('notaInformativaPago').classList.add('hidden');
-            
-            // Restablecer vistas lógicas
-            document.getElementById('seccion-logistica').classList.remove('hidden-step');
-            document.getElementById('campos-abono-solo').classList.add('hidden-step');
+    flujoActual = modo;
+    document.getElementById('mobileMenu').classList.add('translate-x-full');
+    document.getElementById('pantalla-bienvenida').classList.add('hidden-step');
+    document.getElementById('paso-1').classList.add('hidden-step');
+    document.getElementById('seccion-busqueda-abono').classList.add('hidden-step');
+    document.getElementById('paso-fundador').classList.add('hidden-step');
+    document.getElementById('seccion-upgrade-10k').classList.add('hidden-step');
+    document.getElementById('contenedor-visual-kit').classList.add('hidden-step');
+    document.getElementById('notaInformativaPago').classList.add('hidden');
+    
+    // ✅ RESET DEL BOTÓN AL CAMBIAR FLUJO
+    const btnEnviar = document.querySelector('button[onclick="procesarInscripcion()"]');
+    if (btnEnviar) {
+        btnEnviar.disabled = false;
+        btnEnviar.style.opacity = '1';
+        btnEnviar.style.cursor = 'pointer';
+        btnEnviar.innerText = 'ENVIAR INSCRIPCIÓN';
+    }
 
-            if (modo === '5K') {
-                document.getElementById('paso-1').classList.remove('hidden-step');
-                document.getElementById('textoBannerPrincipal').innerText = "SEGUNDA EDICIÓN 5K";
-                document.getElementById('textoBannerSecundario').innerText = "Valida tu Cédula e Inicia tu Inscripción";
+    // Restablecer vistas lógicas
+    document.getElementById('seccion-logistica').classList.remove('hidden-step');
+    document.getElementById('campos-abono-solo').classList.add('hidden-step');
+
+    if (modo === '5K') {
+        document.getElementById('paso-1').classList.remove('hidden-step');
+        document.getElementById('textoBannerPrincipal').innerText = "SEGUNDA EDICIÓN 5K";
+        document.getElementById('textoBannerSecundario').innerText = "Valida tu Cédula e Inicia tu Inscripción";
             } 
             else if (modo === '10K') {
                 document.getElementById('paso-fundador').classList.remove('hidden-step');
