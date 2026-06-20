@@ -52,68 +52,26 @@
     <nav class="bg-[#001E50] sticky top-0 z-50 shadow-2xl">
         <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20 md:h-28">
-                
                 <div class="flex items-center gap-3 md:gap-5 cursor-pointer group -ml-2 md:-ml-4" onclick="location.href='index.html'">
                     <img src="img/RV-Isotipo-sinfondo.png" alt="Reto Virtual" class="h-12 w-auto object-contain brightness-125 md:hidden">
                     <img src="img/RV Texto Sin fondo.png" alt="Reto Virtual" class="hidden md:block h-20 lg:h-28 w-auto object-contain brightness-125">
                 </div>
-
                 <div class="hidden lg:flex items-center space-x-4 xl:space-x-6">
                     <a href="index.html#ediciones" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all">Calendario</a>
                     <a href="evidencias2.html" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all">Evidencia</a>
                     <a href="resultados.html" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all">Resultados</a>
                     <a href="aliados.html" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all">Aliados</a>
                     <a href="tienda.html" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all">Tienda</a>
-
-                    <div class="relative group">
-                        <button class="flex items-center text-white/80 group-hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all">
-                            Info <i class="fa-solid fa-chevron-down ml-2 text-[8px]"></i>
-                        </button>
-                        <div class="absolute right-0 mt-2 w-56 bg-[#001E50] border border-white/10 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-                            <div class="p-2">
-                                <a href="entrenador.html" class="flex items-center px-4 py-4 text-xs font-bold text-white/80 hover:text-[#00D2FF] hover:bg-white/5 rounded-lg transition-all">
-                                    <i class="fa-solid fa-robot mr-3 text-sm opacity-70"></i> Entrenador IA
-                                </a>
-                                <a href="faq.html" class="flex items-center px-4 py-4 text-xs font-bold text-white/80 hover:text-[#00D2FF] hover:bg-white/5 rounded-lg transition-all">
-                                    <i class="fa-solid fa-circle-question mr-3 text-sm opacity-70"></i> Preguntas Frecuentes
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="relative group">
-                        <button class="border-2 border-white text-white px-5 py-2.5 rounded-full font-black text-[10px] xl:text-xs uppercase tracking-widest hover:bg-white hover:text-[#001E50] transition-all shadow-lg flex items-center gap-2">
-                            INSCRIBIRME <i class="fa-solid fa-chevron-down text-[8px]"></i>
-                        </button>
-                        <div class="absolute right-0 mt-2 w-64 bg-[#001E50] border border-white/10 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-                            <div class="p-2 space-y-1">
-                                <button onclick="activarFlujo('5K')" class="w-full flex items-center px-4 py-3 text-xs font-bold text-white/80 hover:text-[#00D2FF] hover:bg-white/5 rounded-lg text-left transition-all">
-                                    <i class="fa-solid fa-person-running mr-3 text-sm"></i> Segunda Edición 5K
-                                </button>
-                                <button onclick="activarFlujo('10K')" class="w-full flex items-center px-4 py-3 text-xs font-bold text-white/80 hover:text-[#00D2FF] hover:bg-white/5 rounded-lg text-left transition-all">
-                                    <i class="fa-solid fa-medal mr-3 text-sm"></i> Edición Especial 10K
-                                </button>
-                                <button onclick="activarFlujo('ABONO')" class="w-full flex items-center px-4 py-3 text-xs font-bold text-[#00D2FF] hover:bg-white/5 rounded-lg text-left transition-all border-t border-white/10 pt-2">
-                                    <i class="fa-solid fa-money-bill-wave mr-3 text-sm"></i> Consultar Saldo / Abonar
-                                </button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-
                 <button id="menuToggle" class="lg:hidden text-white text-2xl focus:outline-none z-50">
                     <i class="fa-solid fa-bars-staggered"></i>
                 </button>
             </div>
         </div>
-
         <div id="mobileMenu" class="fixed inset-0 bg-[#001E50] z-40 transform translate-x-full transition-transform duration-300 lg:hidden">
             <div class="flex flex-col items-center justify-center h-full space-y-6 px-8">
                 <a href="index.html#ediciones" class="text-white text-lg font-bold uppercase tracking-widest">Calendario</a>
                 <a href="evidencias2.html" class="text-white text-lg font-bold uppercase tracking-widest">Evidencia</a>
-                <button onclick="activarFlujo('5K')" class="border-2 border-white text-white px-10 py-3 rounded-full font-black text-lg uppercase tracking-widest w-full">Segunda Edición 5K</button>
-                <button onclick="activarFlujo('10K')" class="bg-[#00D2FF] text-[#001E50] px-10 py-3 rounded-full text-lg font-black uppercase w-full">Edición Especial 10K</button>
-                <button onclick="activarFlujo('ABONO')" class="text-[#00D2FF] text-base font-bold uppercase tracking-widest w-full text-center">Consultar / Abonar Saldo</button>
             </div>
         </div>
     </nav>
@@ -129,7 +87,34 @@
 
     <main class="max-w-4xl mx-auto px-6 py-12">
         
-        <div id="paso-1" class="bg-white p-10 md:p-12 rounded-[2.5rem] shadow-xl border border-slate-100 text-center max-w-md mx-auto">
+        <div id="pantalla-bienvenida" class="space-y-6 animate-fade-in max-w-2xl mx-auto">
+            <h2 class="text-center text-[#001E50] font-black text-2xl uppercase tracking-tighter mb-8 italic">Selecciona tu Trámite</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <button onclick="activarFlujo('5K')" class="bg-white p-8 rounded-[2rem] shadow-lg border border-slate-100 text-center hover:border-[#00D2FF] hover:shadow-[#00D2FF]/20 transition-all group">
+                    <div class="w-16 h-16 bg-[#001E50] group-hover:bg-[#00D2FF] text-white rounded-full flex items-center justify-center mx-auto mb-4 text-2xl transition-all">
+                        <i class="fa-solid fa-person-running"></i>
+                    </div>
+                    <h3 class="font-black text-[#001E50] uppercase text-sm mb-2">Segunda Edición 5K</h3>
+                    <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Inscripción Regular</p>
+                </button>
+                <button onclick="activarFlujo('10K')" class="bg-[#001E50] p-8 rounded-[2rem] shadow-lg border border-slate-100 text-center hover:bg-[#002a70] transition-all group relative overflow-hidden">
+                    <div class="w-16 h-16 bg-[#00D2FF] text-[#001E50] rounded-full flex items-center justify-center mx-auto mb-4 text-2xl transition-all">
+                        <i class="fa-solid fa-medal"></i>
+                    </div>
+                    <h3 class="font-black text-white uppercase text-sm mb-2">Edición 10K</h3>
+                    <p class="text-[10px] text-[#00D2FF] font-bold uppercase tracking-widest">Pase Fundador</p>
+                </button>
+                <button onclick="activarFlujo('ABONO')" class="bg-white p-8 rounded-[2rem] shadow-lg border border-slate-100 text-center hover:border-[#00D2FF] hover:shadow-[#00D2FF]/20 transition-all group">
+                    <div class="w-16 h-16 bg-slate-100 group-hover:bg-[#001E50] text-[#001E50] group-hover:text-white rounded-full flex items-center justify-center mx-auto mb-4 text-2xl transition-all">
+                        <i class="fa-solid fa-money-bill-wave"></i>
+                    </div>
+                    <h3 class="font-black text-[#001E50] uppercase text-sm mb-2">Reportar Abono</h3>
+                    <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Saldar Deuda 10K</p>
+                </button>
+            </div>
+        </div>
+
+        <div id="paso-1" class="hidden-step bg-white p-10 md:p-12 rounded-[2.5rem] shadow-xl border border-slate-100 text-center max-w-md mx-auto mt-8">
             <h2 class="text-[#001E50] font-black text-2xl uppercase tracking-tighter mb-2 italic">VALIDAR ACCESO 5K</h2>
             <p class="text-slate-400 text-xs mb-6 font-medium">Ingresa tu cédula para verificar acceso o iniciar inscripción.</p>
             <div class="space-y-4">
@@ -137,10 +122,11 @@
                 <button id="btnVerificar" onclick="validarAtleta()" class="w-full bg-[#001E50] text-white py-4 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-[#00D2FF] transition-all">
                     Verificar Cédula
                 </button>
+                <button onclick="volverInicio()" class="w-full text-slate-400 text-xs font-bold uppercase mt-2 hover:text-[#001E50]">Cancelar</button>
             </div>
         </div>
 
-        <div id="seccion-busqueda-abono" class="space-y-6 animate-fade-in hidden-step max-w-lg mx-auto">
+        <div id="seccion-busqueda-abono" class="hidden-step space-y-6 animate-fade-in max-w-lg mx-auto mt-8">
             <div class="bg-white p-8 md:p-10 rounded-[2.5rem] shadow-xl border border-slate-100 text-center">
                 <i class="fa-solid fa-magnifying-glass text-3xl text-[#00D2FF] mb-4"></i>
                 <h3 class="text-[#001E50] font-black text-2xl uppercase italic mb-2">Portal de Abonos</h3>
@@ -150,11 +136,12 @@
                     <button onclick="consultarSaldoServidor()" class="w-full bg-[#001E50] text-white py-4 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-[#00D2FF] transition-all">
                         Consultar Deuda y Abonar
                     </button>
+                    <button onclick="volverInicio()" class="w-full text-center text-slate-400 text-xs font-bold uppercase hover:text-[#001E50]">Cancelar</button>
                 </div>
             </div>
         </div>
 
-        <div id="paso-fundador" class="hidden-step space-y-8 animate-fade-in">
+        <div id="paso-fundador" class="hidden-step space-y-8 animate-fade-in mt-8">
             <div class="bg-blue-50 border-2 border-[#00D2FF]/50 p-6 rounded-[2rem] text-[#001E50] text-center shadow-sm">
                 <h3 id="tituloRuta" class="font-black uppercase text-xl tracking-tighter">RETO VIRTUAL VZLA</h3>
                 <p id="labelCarreraActual" class="font-black text-sm text-slate-500 mt-1">Procesando...</p>
@@ -162,22 +149,11 @@
 
             <div id="contenedor-visual-kit" class="bg-white p-8 md:p-10 rounded-[2.5rem] shadow-xl border border-slate-100">
                 <h3 class="text-[#001E50] font-black text-xl mb-6 uppercase italic text-center">Detalles del Kit Oficial</h3>
-                
-                <div id="beneficios-kit-10k" class="hidden max-w-md mx-auto bg-slate-50 p-6 rounded-2xl border border-slate-200 mb-8 text-center space-y-4">
-                    <p class="text-[10px] text-[#001E50] font-black uppercase tracking-widest border-b pb-2">Tu pase de Competidor de Lujo incluye:</p>
-                    <div class="grid grid-cols-1 gap-3 font-semibold text-slate-700 text-sm">
-                        <div class="flex items-center justify-center gap-2"><i class="fa-solid fa-cube text-[#00D2FF]"></i> Medalla de Metal 3D Premium</div>
-                        <div class="flex items-center justify-center gap-2"><i class="fa-solid fa-shirt text-[#00D2FF]"></i> Prenda Oficial Sublimada</div>
-                        <div class="flex items-center justify-center gap-2"><i class="fa-solid fa-id-card text-[#00D2FF]"></i> Dorsal Virtual Personalizado</div>
-                    </div>
-                </div>
-
                 <div class="mb-6 flex flex-col items-center">
                     <button type="button" onclick="abrirModalImagen()" class="rounded-3xl border overflow-hidden max-w-xs h-40 bg-slate-50 flex items-center justify-center">
-                        <img id="imgPrototipo" src="img/franela_prototipo.png" class="h-full w-full object-cover">
+                        <img id="imgPrototipo" src="img/10k_franela.png" class="h-full w-full object-cover">
                     </button>
                 </div>
-
                 <div id="selectorTextil10k" class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-slate-50 p-4 rounded-xl border">
                     <div class="flex flex-col gap-2">
                         <label class="text-[10px] font-bold uppercase text-slate-400">Tipo de Prenda <span class="req">*</span></label>
@@ -217,16 +193,16 @@
                     <div class="flex flex-col gap-1"><label class="text-[10px] font-bold text-slate-400">Nombre Completo <span class="req">*</span></label><input type="text" id="nombreEnvio" class="bg-slate-50 border rounded-xl px-4 py-2.5 font-bold" required></div>
                     
                     <div class="flex flex-col gap-1"><label class="text-[10px] font-bold text-slate-400">Género / Sexo <span class="req">*</span></label>
-                        <select id="generoAtleta" class="bg-slate-50 border rounded-xl px-4 py-2.5 font-bold" required>
+                        <select id="generoAtleta" class="bg-slate-50 border rounded-xl px-4 py-2.5 font-bold">
                             <option value="" disabled selected>Elegir...</option>
                             <option value="M">M</option>
                             <option value="F">F</option>
                         </select>
                     </div>
 
-                    <div class="flex flex-col gap-1"><label class="text-[10px] font-bold text-slate-400">Teléfono Móvil <span class="req">*</span></label><input type="text" id="telefonoEnvio" placeholder="0412-0000000" class="bg-slate-50 border rounded-xl px-4 py-2.5 font-bold" required></div>
-                    <div class="flex flex-col gap-1 md:col-span-2"><label class="text-[10px] font-bold text-slate-400">Estado <span class="req">*</span></label><select id="estadoEnvio" onchange="cargarCiudades()" class="bg-slate-50 border rounded-xl px-4 py-2.5 font-bold" required><option value="" disabled selected>Selecciona Estado</option></select></div>
-                    <div class="flex flex-col gap-1 md:col-span-2"><label class="text-[10px] font-bold text-slate-400">Ciudad <span class="req">*</span></label><select id="ciudadEnvio" class="bg-slate-50 border rounded-xl px-4 py-2.5 font-bold" disabled required><option value="" disabled selected>Elige Ciudad</option></select></div>
+                    <div class="flex flex-col gap-1"><label class="text-[10px] font-bold text-slate-400">Teléfono Móvil <span class="req">*</span></label><input type="text" id="telefonoEnvio" placeholder="0412-0000000" class="bg-slate-50 border rounded-xl px-4 py-2.5 font-bold"></div>
+                    <div class="flex flex-col gap-1 md:col-span-2"><label class="text-[10px] font-bold text-slate-400">Estado <span class="req">*</span></label><select id="estadoEnvio" onchange="cargarCiudades()" class="bg-slate-50 border rounded-xl px-4 py-2.5 font-bold"><option value="" disabled selected>Selecciona Estado</option></select></div>
+                    <div class="flex flex-col gap-1 md:col-span-2"><label class="text-[10px] font-bold text-slate-400">Ciudad <span class="req">*</span></label><select id="ciudadEnvio" class="bg-slate-50 border rounded-xl px-4 py-2.5 font-bold" disabled><option value="" disabled selected>Elige Ciudad</option></select></div>
                     <div class="flex flex-col gap-1 md:col-span-2">
                         <label class="text-[10px] font-bold text-slate-400">Agencia de Envío / Despacho <span class="req">*</span></label>
                         <div class="flex gap-4">
@@ -235,7 +211,16 @@
                             <label class="flex-1 border p-2.5 rounded-xl cursor-pointer text-center font-bold text-xs"><input type="radio" name="agencia" value="Entrega Personal"> Personal (Punto Fijo)</label>
                         </div>
                     </div>
-                    <div class="md:col-span-2 flex flex-col gap-1"><label class="text-[10px] font-bold text-slate-400">Dirección de la Agencia u Oficina Comercial <span class="req">*</span></label><textarea id="direccionEnvio" rows="2" class="bg-slate-50 border rounded-xl px-4 py-3 font-bold" required></textarea></div>
+                    <div class="md:col-span-2 flex flex-col gap-1"><label class="text-[10px] font-bold text-slate-400">Dirección Agencia <span class="req">*</span></label><textarea id="direccionEnvio" rows="2" class="bg-slate-50 border rounded-xl px-4 py-3 font-bold"></textarea></div>
+                </div>
+            </div>
+
+            <div id="campos-abono-solo" class="hidden-step bg-white p-8 rounded-[2.5rem] shadow-xl border border-slate-100">
+                <h3 class="text-[#001E50] font-black text-xl mb-4 uppercase italic border-b pb-2">Confirmar Datos</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="flex flex-col gap-1"><label class="text-[10px] font-bold text-slate-400">Cédula</label><input type="text" id="cedulaAbono" class="bg-slate-100 border rounded-xl px-4 py-2.5 font-bold text-slate-500" readonly></div>
+                    <div class="flex flex-col gap-1"><label class="text-[10px] font-bold text-slate-400">Nombre</label><input type="text" id="nombreAbono" class="bg-slate-50 border rounded-xl px-4 py-2.5 font-bold" required></div>
+                    <div class="flex flex-col gap-1 md:col-span-2"><label class="text-[10px] font-bold text-slate-400">Teléfono Móvil (WhatsApp)</label><input type="text" id="telefonoAbono" class="bg-slate-50 border rounded-xl px-4 py-2.5 font-bold" required></div>
                 </div>
             </div>
 
@@ -273,45 +258,20 @@
         </div>
     </main>
 
-    <footer class="bg-[#001E50] py-20 px-4 border-t border-white/5">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-16 text-center md:text-left">
-            <div>
-                <img src="img/RV-Isotipo-sinfondo.png" class="h-14 mx-auto md:mx-0 mb-6 grayscale brightness-200 opacity-40">
-                <p class="text-white/30 text-[10px] uppercase tracking-[0.4em] leading-relaxed">
-                    Reto Virtual VZLA es una producción <br>
-                    <span class="text-white/60 font-bold">Nacional Independiente</span>. <br>
-                    © 2026 THE ROAD TO GLORY.
-                </p>
-            </div>
-            <div class="flex flex-col items-center justify-center gap-6">
-                <h4 class="text-[#00D2FF] font-bold text-[10px] uppercase tracking-[0.3em]">Síguenos en la ruta</h4>
-                <div class="flex gap-8">
-                    <a href="https://wa.me/584127732710" target="_blank" class="text-white/40 hover:text-[#00D2FF] text-3xl transition-all transform hover:scale-110"><i class="fa-brands fa-whatsapp"></i></a>
-                    <a href="https://www.instagram.com/retovirtual.vzla/" target="_blank" class="text-white/40 hover:text-[#00D2FF] text-3xl transition-all transform hover:scale-110"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="https://www.tiktok.com/@retovirtual.vzla" target="_blank" class="text-white/40 hover:text-[#00D2FF] text-3xl transition-all transform hover:scale-110"><i class="fa-brands fa-tiktok"></i></a>
-                    <a href="https://www.strava.com/clubs/1859944" target="_blank" class="text-white/40 hover:text-[#00D2FF] text-3xl transition-all transform hover:scale-110"><i class="fa-brands fa-strava"></i></a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <div id="modal-imagen" class="fixed inset-0 z-[200] bg-black/95 hidden flex-col items-center justify-center p-4" onclick="cerrarModalImagen()">
-        <img id="imgModal" src="img/franela_prototipo.png" class="max-w-full max-h-[80vh] object-contain rounded-xl">
-    </div>
-
     <script>
         const FECHA_LIMITE_PAGO = "15 de Julio de 2026";
 
         let tasaBCV = 46.50; 
-        let flujoActual = "5K"; 
+        let flujoActual = ""; 
         let ciValidada = "";
         let totalDorsalesRegistrados = 22; 
 
-        // CONFIGURACIÓN DE CONEXIONES INDEPENDIENTES DE GOOGLE APPS SCRIPT
+        // CONFIGURACIÓN DE CONEXIONES
         const urlApiDolarBCV = "https://script.google.com/macros/s/AKfycbwsoD8ahtAQUqfY0TQWf3-dDs29HL8kEJa2t-mjDR3PAo3exTTmtSwXqYuNB2ob5dFpgw/exec";
-        const urlCSV_Comparacion = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5yMHsenxCWE5kZBDUZ8UcYqDtdAHstfqXcvWkuYZPQ_4n2xSrfs6ptk7k21r1kcMHHLtWjz8SEHwl/pub?gid=244601533&single=true&output=csv";
         
-        // EL ENLACE ÚNICO DE TU APPS SCRIPT CON EL FILTRO INTELIGENTE
+        // ¡RECUERDA PEGAR TU LINK DE TU CSV NUEVO (Pestaña Inscripciones_10K) AQUÍ!
+        const urlCSV_Comparacion = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5yMHsenxCWE5kZBDUZ8UcYqDtdAHstfqXcvWkuYZPQ_4n2xSrfs6ptk7k21r1kcMHHLtWjz8SEHwl/pub?gid=0&single=true&output=csv";
+        
         const urlBaseDeDatos = "https://script.google.com/macros/s/AKfycbzs5PJsfuiFh7CEE25hd52PdDn11ciWPoZS-TJi7myLKVR6Rog4KOxhRHZPeggFn9Co4g/exec"; 
 
         const venezuela = {
@@ -327,7 +287,6 @@
             }
             await obtenerTasaBCV();
             await actualizarContadorSilencioso();
-            activarFlujo('5K');
         };
 
         async function actualizarContadorSilencioso() {
@@ -335,46 +294,55 @@
                 const res = await fetch(urlCSV_Comparacion + "&nocache=" + new Date().getTime());
                 const csvText = await res.text();
                 const filas = csvText.split(/\r?\n/);
-                if(filas.length > 1) {
-                    totalDorsalesRegistrados = filas.length - 1;
-                }
-            } catch(e) { console.error("Error cargando contador base", e); }
+                if(filas.length > 1) { totalDorsalesRegistrados = filas.length - 1; }
+            } catch(e) {}
+        }
+
+        function volverInicio() {
+            flujoActual = "";
+            document.getElementById('pantalla-bienvenida').classList.remove('hidden-step');
+            document.getElementById('paso-1').classList.add('hidden-step');
+            document.getElementById('seccion-busqueda-abono').classList.add('hidden-step');
+            document.getElementById('paso-fundador').classList.add('hidden-step');
+            document.getElementById('textoBannerPrincipal').innerText = "PORTAL DE INSCRIPCIONES";
+            document.getElementById('textoBannerSecundario').innerText = "Reto Virtual Venezuela 2026";
         }
 
         function activarFlujo(modo) {
             flujoActual = modo;
             document.getElementById('mobileMenu').classList.add('translate-x-full');
-            
+            document.getElementById('pantalla-bienvenida').classList.add('hidden-step');
             document.getElementById('paso-1').classList.add('hidden-step');
             document.getElementById('seccion-busqueda-abono').classList.add('hidden-step');
             document.getElementById('paso-fundador').classList.add('hidden-step');
             document.getElementById('seccion-upgrade-10k').classList.add('hidden-step');
-            document.getElementById('beneficios-kit-10k').classList.add('hidden-step');
             document.getElementById('contenedor-visual-kit').classList.add('hidden-step');
             document.getElementById('notaInformativaPago').classList.add('hidden');
+            
+            // Restablecer vistas lógicas
+            document.getElementById('seccion-logistica').classList.remove('hidden-step');
+            document.getElementById('campos-abono-solo').classList.add('hidden-step');
 
             if (modo === '5K') {
                 document.getElementById('paso-1').classList.remove('hidden-step');
                 document.getElementById('textoBannerPrincipal').innerText = "SEGUNDA EDICIÓN 5K";
-                document.getElementById('textoBannerSecundario').innerText = "Valida tu Cédula e Inicia tu Inscripción Regular";
+                document.getElementById('textoBannerSecundario').innerText = "Valida tu Cédula e Inicia tu Inscripción";
             } 
             else if (modo === '10K') {
                 document.getElementById('paso-fundador').classList.remove('hidden-step');
                 document.getElementById('seccion-upgrade-10k').classList.remove('hidden-step'); 
-                document.getElementById('beneficios-kit-10k').classList.remove('hidden-step');
                 document.getElementById('contenedor-visual-kit').classList.remove('hidden-step');
                 document.getElementById('tituloRuta').innerText = "EDICIÓN ESPECIAL 10K";
                 document.getElementById('labelCarreraActual').innerText = "Kit General 10K";
                 document.getElementById('imgPrototipo').src = "img/10k_franela.png";
-                document.getElementById('imgModal').src = "img/10k_franela.png";
                 document.getElementById('textoBannerPrincipal').innerText = "EDICIÓN ESPECIAL 10K";
-                document.getElementById('textoBannerSecundario').innerText = "Adquiere tu Prenda Oficial y Medalla 3D";
+                document.getElementById('textoBannerSecundario').innerText = "Adquiere tu Prenda Oficial y Medalla";
                 actualizarTotal();
             } 
             else if (modo === 'ABONO') {
                 document.getElementById('seccion-busqueda-abono').classList.remove('hidden-step');
-                document.getElementById('textoBannerPrincipal').innerText = "PORTAL DE ABONOS EN LÍNEA";
-                document.getElementById('textoBannerSecundario').innerText = "Consulta tus Saldos Pendientes y Liquida tu Cuenta";
+                document.getElementById('textoBannerPrincipal').innerText = "PORTAL DE ABONOS";
+                document.getElementById('textoBannerSecundario').innerText = "Consulta y Liquida tu Cuenta";
             }
         }
 
@@ -385,7 +353,7 @@
                     const datos = await res.json();
                     if (datos && datos.usd) { tasaBCV = parseFloat(datos.usd); }
                 }
-            } catch (e) { console.error(e); }
+            } catch (e) {}
             document.getElementById('valor-tasa').innerText = tasaBCV.toFixed(2);
             actualizarTotal();
         }
@@ -408,7 +376,6 @@
             if (flujoActual === "5K") {
                 document.getElementById('total-usd').innerText = "$12.00";
                 document.getElementById('total-bs').innerText = (12 * tasaBCV).toFixed(2) + " Bs.";
-                document.getElementById('notaInformativaPago').classList.add('hidden');
                 return;
             }
 
@@ -442,7 +409,7 @@
             const ci = document.getElementById('cedulaConsulta').value.replace(/\D/g, '').trim();
             if (ci.length < 5) return alert("⚠️ Ingresa una cédula válida.");
 
-            document.getElementById('loader-texto').innerText = "Consultando Saldos...";
+            document.getElementById('loader-texto').innerText = "Consultando...";
             document.getElementById('loader').classList.remove('hidden');
 
             try {
@@ -450,12 +417,7 @@
                 const csvText = await res.text();
                 const filas = csvText.split(/\r?\n/);
 
-                if(filas.length > 1) {
-                    totalDorsalesRegistrados = filas.length - 1;
-                }
-
                 let encontrado = null; 
-                
                 if (filas.length > 0) {
                     const headers = filas[0].split(',').map(h => h.trim().toLowerCase());
                     const idxCI = headers.findIndex(h => h.includes('cedula') || h.includes('ci'));
@@ -463,8 +425,8 @@
                     for(let i = 1; i < filas.length; i++) {
                         if(!filas[i].trim()) continue;
                         const col = filas[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c => c.replace(/^"|"$/g, '').trim());
-                        if (col[idxCI] && col[idxCI].replace(/\D/g, '') === ci || filas[i].includes(ci)) {
-                            encontrado = { dorsal: col[0], nombre: col[2], tel: col[3], saldo: col[13] || "$25.00" };
+                        if (col[idxCI] && col[idxCI].replace(/\D/g, '') === ci) {
+                            encontrado = { dorsal: col[0], nombre: col[2], tel: col[3], saldo: col[13] || "$20.00" };
                             break;
                         }
                     }
@@ -472,9 +434,12 @@
 
                 if (encontrado) {
                     ciValidada = ci;
-                    document.getElementById('nombreEnvio').value = encontrado.nombre;
-                    document.getElementById('telefonoEnvio').value = encontrado.tel;
-                    document.getElementById('cedulaCampos').value = ci;
+                    
+                    // Llenar campos cortos para Abono
+                    document.getElementById('cedulaAbono').value = ci;
+                    document.getElementById('nombreAbono').value = encontrado.nombre;
+                    document.getElementById('telefonoAbono').value = encontrado.tel;
+                    
                     document.getElementById('tituloRuta').innerText = `LIQUIDAR CUENTA - ${encontrado.nombre}`;
                     
                     let numSaldo = parseFloat(encontrado.saldo.replace('$', '').trim()) || 0;
@@ -483,6 +448,11 @@
 
                     document.getElementById('seccion-busqueda-abono').classList.add('hidden-step');
                     document.getElementById('paso-fundador').classList.remove('hidden-step');
+
+                    // LA MAGIA: OCULTAR LOGÍSTICA COMPLETA Y MOSTRAR SOLO CAMPOS CORTOS
+                    document.getElementById('seccion-logistica').classList.add('hidden-step');
+                    document.getElementById('campos-abono-solo').classList.remove('hidden-step');
+
                 } else {
                     alert("❌ Tu cédula no registra saldos pendientes.");
                 }
@@ -493,7 +463,7 @@
         async function validarAtleta() {
             const btn = document.getElementById('btnVerificar');
             const ciInput = document.getElementById('cedulaAtleta').value.replace(/\D/g, '').trim();
-            if(ciInput.length < 5) return alert("Ingresa una cédula válida.");
+            if(ciInput.length < 5) return alert("Ingresa una cédula.");
 
             btn.innerText = "VERIFICANDO..."; btn.disabled = true;
 
@@ -501,13 +471,8 @@
                 const res = await fetch(urlCSV_Comparacion + "&nocache=" + new Date().getTime());
                 const csvText = await res.text();
                 const filas = csvText.split(/\r?\n/);
-                
-                if(filas.length > 1) {
-                    totalDorsalesRegistrados = filas.length - 1;
-                }
 
                 let encontrado = false;
-
                 if (filas.length > 0) {
                     const headers = filas[0].split(',').map(h => h.trim().toLowerCase());
                     const idxCI = headers.findIndex(h => h.includes('cedula') || h.includes('ci'));
@@ -516,11 +481,10 @@
                     for(let i = 1; i < filas.length; i++) {
                         if(!filas[i].trim()) continue;
                         const columnas = filas[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c => c.replace(/^"|"$/g, '').trim());
-                        if((columnas[idxCI] && columnas[idxCI].replace(/\D/g, '').trim() === ciInput) || filas[i].includes(ciInput)) {
+                        if(columnas[idxCI] && columnas[idxCI].replace(/\D/g, '').trim() === ciInput) {
                             encontrado = true;
                             ciValidada = ciInput;
-                            const partes = filas[i].split(',').map(c => c.replace(/^"|"$/g, '').trim());
-                            document.getElementById('nombreEnvio').value = partes[idxNombre] || partes[2] || "";
+                            document.getElementById('nombreEnvio').value = columnas[idxNombre] || "";
                             document.getElementById('cedulaCampos').value = ciInput;
                             break;
                         }
@@ -529,73 +493,79 @@
                 
                 ciValidada = ciInput;
                 document.getElementById('cedulaCampos').value = ciInput;
-                if(!encontrado) {
-                    document.getElementById('nombreEnvio').value = "";
-                }
+                if(!encontrado) document.getElementById('nombreEnvio').value = "";
 
                 document.getElementById('paso-1').classList.add('hidden-step');
                 document.getElementById('paso-fundador').classList.remove('hidden-step');
-                
-                if(flujoActual === '5K') {
-                    document.getElementById('tituloRuta').innerText = "FORMULARIO DE INSCRIPCIÓN 5K";
-                    document.getElementById('labelCarreraActual').innerText = "Reportando Pago Regular de 5K";
-                }
+                document.getElementById('tituloRuta').innerText = "FORMULARIO 5K";
+                document.getElementById('labelCarreraActual').innerText = "Reportando Pago Regular";
                 actualizarTotal();
 
-            } catch (e) { alert("Error de conexión al verificar."); }
+            } catch (e) { }
             finally { btn.innerText = "Verificar Cédula"; btn.disabled = false; }
         }
 
         function procesarInscripcion() {
-            const cedulaFinal = document.getElementById('cedulaCampos').value.replace(/\D/g, '').trim();
-            const nombre = document.getElementById('nombreEnvio').value;
-            const genero = document.getElementById('generoAtleta').value;
-            const tel = document.getElementById('telefonoEnvio').value;
-            const estado = document.getElementById('estadoEnvio').value;
-            const ciudad = document.getElementById('ciudadEnvio').value;
-            const agencia = document.querySelector('input[name="agencia"]:checked').value;
-            const direccion = document.getElementById('direccionEnvio').value;
             const refPago = document.getElementById('numReferenciaPago').value;
             const fechaPago = document.getElementById('fechaPago').value;
             const totalUSD = document.getElementById('total-usd').innerText;
             const acepto = document.getElementById('aceptoReglamento').checked;
 
             if(!acepto) return alert("⚠️ Acepta el reglamento.");
-            if(!cedulaFinal || !nombre || !genero || !tel || !estado || !ciudad || !direccion || !refPago || !fechaPago) {
-                return alert("⚠️ Faltan datos obligatorios en el formulario.");
-            }
+            if(!refPago || !fechaPago) return alert("⚠️ Faltan datos de pago.");
 
+            let cedulaFinal, nombre, tel, genero, estado, ciudad, agencia, direccion;
             let reservaText = "NO"; 
             let saldoText = "SOLVENTE";
             let kitTextilFinal = "N/A";
 
-            if (flujoActual === "10K") {
-                let preTextil = document.getElementById('tipoTextil10k').value;
-                let tallTextil = document.getElementById('tallaTextil10k').value;
-                if(!tallTextil) return alert("⚠️ Selecciona tu talla textil.");
+            // SI ES ABONO, IGNORAMOS LOS CAMPOS DE LOGÍSTICA
+            if (flujoActual === "ABONO") {
+                cedulaFinal = document.getElementById('cedulaAbono').value;
+                nombre = document.getElementById('nombreAbono').value;
+                tel = document.getElementById('telefonoAbono').value;
+                if(!nombre || !tel) return alert("⚠️ Faltan datos en confirmar datos.");
                 
-                kitTextilFinal = `${preTextil} Talla: ${tallTextil}`;
-                let costoKitCompleto = (preTextil === "Franela Oscura") ? 40 : 35;
-                const op = document.querySelector('input[name="opcion10k"]:checked').value;
+                genero = "N/A"; estado = "N/A"; ciudad = "N/A"; agencia = "N/A"; direccion = "N/A";
+            } else {
+                // SI ES INSCRIPCIÓN NORMAL, EXIGIMOS LOGÍSTICA
+                cedulaFinal = document.getElementById('cedulaCampos').value.replace(/\D/g, '').trim();
+                nombre = document.getElementById('nombreEnvio').value;
+                genero = document.getElementById('generoAtleta').value;
+                tel = document.getElementById('telefonoEnvio').value;
+                estado = document.getElementById('estadoEnvio').value;
+                ciudad = document.getElementById('ciudadEnvio').value;
+                agencia = document.querySelector('input[name="agencia"]:checked').value;
+                direccion = document.getElementById('direccionEnvio').value;
 
-                if (op === "50") { 
-                    let mitad = costoKitCompleto / 2;
-                    reservaText = `SÍ - Abonó 50% ($${mitad})`; 
-                    saldoText = `$${mitad.toFixed(2)}`; 
-                } else { 
-                    reservaText = "SÍ - Pagó 100% Completo"; 
-                    saldoText = "SOLVENTE"; 
+                if(!cedulaFinal || !nombre || !genero || !tel || !estado || !ciudad || !direccion) {
+                    return alert("⚠️ Faltan datos obligatorios logísticos.");
                 }
-            } else if(flujoActual === "ABONO") {
-                reservaText = "ABONO EN LÍNEA"; 
-                saldoText = "SOLVENTE";
-            }
 
-            totalDorsalesRegistrados++;
-            let dorsalFormateado = String(totalDorsalesRegistrados).padStart(3, '0');
+                if (flujoActual === "10K") {
+                    let preTextil = document.getElementById('tipoTextil10k').value;
+                    let tallTextil = document.getElementById('tallaTextil10k').value;
+                    if(!tallTextil) return alert("⚠️ Selecciona tu talla textil.");
+                    
+                    kitTextilFinal = `${preTextil} Talla: ${tallTextil}`;
+                    let costoKitCompleto = (preTextil === "Franela Oscura") ? 40 : 35;
+                    const op = document.querySelector('input[name="opcion10k"]:checked').value;
+
+                    if (op === "50") { 
+                        let mitad = costoKitCompleto / 2;
+                        reservaText = `SÍ - Abonó 50% ($${mitad})`; 
+                        saldoText = `$${mitad.toFixed(2)}`; 
+                    } else { 
+                        reservaText = "SÍ - Pagó 100% Completo"; 
+                    }
+                }
+            }
 
             document.getElementById('loader-texto').innerText = "Guardando Reporte...";
             document.getElementById('loader').classList.remove('hidden');
+
+            totalDorsalesRegistrados++;
+            let dorsalFormateado = String(totalDorsalesRegistrados).padStart(3, '0');
 
             const datos = new FormData();
             datos.append("Dorsal", dorsalFormateado); 
@@ -614,7 +584,7 @@
             datos.append("SaldoPendiente", saldoText);
             datos.append("Textil10K", kitTextilFinal);
             datos.append("Genero", genero); 
-            datos.append("Carrera", flujoActual); // Se le avisa al Apps Script qué carrera es
+            datos.append("Carrera", flujoActual); // Envía '5K', '10K' o 'ABONO'
 
             fetch(urlBaseDeDatos, { method: 'POST', body: datos, mode: 'no-cors' })
                 .then(() => { salirYRedirigir(nombre, totalUSD, refPago, dorsalFormateado); })
@@ -626,20 +596,17 @@
             document.getElementById('paso-fundador').classList.add('hidden-step');
             document.getElementById('pantalla-exito').classList.remove('hidden');
             
-            let telefonoAtleta = document.getElementById('telefonoEnvio').value.replace(/\D/g, '').trim();
-            
-            if (telefonoAtleta.startsWith('0')) {
-                telefonoAtleta = '58' + telefonoAtleta.substring(1);
-            }
-            else if (!telefonoAtleta.startsWith('58')) {
-                telefonoAtleta = '58' + telefonoAtleta;
-            }
+            let telefonoAtleta = document.getElementById('telefonoEnvio') ? document.getElementById('telefonoEnvio').value.replace(/\D/g, '').trim() : "584120000000";
+            if (flujoActual === 'ABONO') telefonoAtleta = document.getElementById('telefonoAbono').value.replace(/\D/g, '').trim();
 
-            const msgText = `🏆 *¡BIENVENIDO AL RETO VIRTUAL VZLA!* 🏆%0A%0A¡Hola, *${nombre.toUpperCase()}*! 👋%0A%0ATu reporte de pago por un monto de *${total}* (Ref: #${ref}) ha sido recibido con éxito en nuestro sistema. ⚙️%0A%0A🎫 *TU NÚMERO DE DORSAL OFICIAL ES:* %0A👉 *#${dorsal}* 👈%0A%0A¡Ya estás oficialmente en la ruta hacia la gloria! Prepara los tenis y mantente atento a nuestras redes para los próximos pasos. 🏁🔥`;
+            if (telefonoAtleta.startsWith('0')) telefonoAtleta = '58' + telefonoAtleta.substring(1);
+            else if (!telefonoAtleta.startsWith('58')) telefonoAtleta = '58' + telefonoAtleta;
+
+            let extraMsg = (flujoActual === 'ABONO') ? "Tu ABONO ha sido procesado con éxito y tu cuenta ha sido actualizada." : `🎫 *TU NÚMERO DE DORSAL ES:* 👉 *#${dorsal}* 👈`;
+
+            const msgText = `🏆 *¡HOLA, ${nombre.toUpperCase()}!* 👋%0A%0AHemos recibido tu reporte por *${total}* (Ref: #${ref}). ⚙️%0A%0A${extraMsg}%0A%0A¡Nos vemos en la ruta! 🏁🔥`;
             
-            setTimeout(() => { 
-                window.open(`https://wa.me/${telefonoAtleta}?text=${msgText}`, '_blank'); 
-            }, 1500);
+            setTimeout(() => { window.open(`https://wa.me/${telefonoAtleta}?text=${msgText}`, '_blank'); }, 1500);
         }
 
         const menuToggle = document.getElementById('menuToggle');
