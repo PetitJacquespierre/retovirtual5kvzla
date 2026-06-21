@@ -683,12 +683,12 @@ if (esSolvente || numSaldo <= 0) {
 
      if (flujoActual === '5K') {
     fetch(urlBaseDeDatos, { method: 'POST', body: datos })
-    .then(r => r.text())
-    .then(dorsalReal => {
-        let dorsalFormateado = String(dorsalReal.trim()).padStart(3, '0');
-        salirYRedirigir(nombre, totalUSD, refPago, dorsalFormateado);
-    })
-    .catch(() => salirYRedirigir(nombre, totalUSD, refPago, '???'));
+.then(r => r.text())
+.then(dorsalReal => {
+    let dorsalFormateado = String(dorsalReal.trim()).padStart(3, '0');
+    salirYRedirigir(nombre, totalUSD, refPago, dorsalFormateado);
+})
+.catch(() => salirYRedirigir(nombre, totalUSD, refPago, '???'));
 } else {
     fetch(urlBaseDeDatos, { method: 'POST', body: datos, mode: 'no-cors' })
     .then(() => salirYRedirigir(nombre, totalUSD, refPago, dorsalFormateado))
