@@ -123,18 +123,21 @@
 
     <!-- MENÚ MÓVIL DESPLEGABLE -->
     <div id="mobileMenu" class="fixed inset-0 bg-[#001E50] z-40 transform translate-x-full transition-transform duration-300 lg:hidden">
-        <div class="flex flex-col items-center justify-center h-full space-y-6 px-8">
-            <a href="index.html#ediciones" class="text-white text-lg font-bold uppercase tracking-widest">Calendario</a>
-            <a href="10k.html" class="bg-[#00D2FF] text-[#001E50] px-10 py-3 rounded-full text-lg font-black uppercase tracking-widest shadow-xl shadow-[#00D2FF]/20">Especial 10K</a>
-            <a href="resultados.html" class="text-white text-lg font-bold uppercase tracking-widest">Resultados</a>
-            <a href="aliados.html" class="text-white text-lg font-bold uppercase tracking-widest">Aliados</a>
-            <a href="tienda.html" class="text-white text-lg font-bold uppercase tracking-widest">Tienda</a>
-            <div class="h-[1px] w-12 bg-white/10 my-2"></div>
-            <a href="entrenador.html" class="text-white text-base font-bold uppercase">Entrenador IA</a>
-            <a href="faq.html" class="text-white text-base font-bold uppercase">FAQ</a>
-            <a href="inscripcion.html" class="border-2 border-white text-white px-10 py-3 rounded-full font-black text-lg uppercase tracking-widest bg-white/5 transition-all mt-4">Inscribirme</a>
+    <div class="flex flex-col items-center justify-center h-full space-y-5 px-8">
+        <a href="index.html#ediciones" class="text-white text-lg font-bold uppercase tracking-widest">Calendario</a>
+        <a href="evidencias2.html" class="text-white text-lg font-bold uppercase tracking-widest">Evidencia</a>
+        <a href="resultados.html" class="text-white text-lg font-bold uppercase tracking-widest">Resultados</a>
+        <a href="entrenador.html" class="text-white text-lg font-bold uppercase tracking-widest">Entrenador IA</a>
+        <a href="faq.html" class="text-white text-lg font-bold uppercase tracking-widest">Preguntas Frecuentes</a>
+        <a href="aliados.html" class="text-white text-lg font-bold uppercase tracking-widest">Aliados</a>
+        <a href="tienda.html" class="text-white text-lg font-bold uppercase tracking-widest">Tienda</a>
+        <div class="border-t border-white/20 w-full pt-5 flex flex-col gap-3">
+            <button onclick="activarFlujo('5K')" class="text-white text-lg font-bold uppercase tracking-widest">Segunda Edición 5K</button>
+            <button onclick="activarFlujo('10K')" class="text-white text-lg font-bold uppercase tracking-widest">Edición Especial 10K</button>
+            <button onclick="activarFlujo('ABONO')" class="text-[#00D2FF] text-lg font-bold uppercase tracking-widest">Consultar Saldo / Abonar</button>
         </div>
     </div>
+</div>
 </nav>
 
 
