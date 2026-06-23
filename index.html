@@ -442,7 +442,7 @@
   <div class="shine-dot w-1 h-1 bg-[#00D2FF]/60 bottom-1/3 left-2/3" style="animation-delay:.6s"></div>
 
   <div class="max-w-7xl mx-auto px-4 md:px-12 relative z-10">
-    <div class="flex flex-col lg:flex-row items-center gap-14 lg:gap-20">
+    <div class="flex flex-col lg:flex-row items-center gap-10 lg:gap-14">
 
       <!-- TEXTO -->
       <div class="lg:w-3/5 text-center lg:text-left r10k">
@@ -497,14 +497,14 @@
       </div>
 
       <!-- MEDALLA FLIP 3D -->
-      <div class="lg:w-2/5 w-full flex flex-col items-center gap-5 r10k" style="animation-delay:.15s">
+      <div class="lg:w-2/5 w-full flex flex-col items-center gap-4 r10k" style="animation-delay:.15s">
 
         <div class="text-center">
           <p class="text-white/25 text-[10px] font-bold uppercase tracking-[0.4em] mb-1">Medalla Oficial</p>
           <p class="text-[#00D2FF]/50 text-[9px] font-bold uppercase tracking-widest">Diseño 2 Caras · Hover para girar</p>
         </div>
 
-        <div class="medal-flip-container w-full relative" style="max-width:360px;aspect-ratio:1/1.05;"
+        <div class="medal-flip-container w-full relative" style="max-width:460px;aspect-ratio:1/1.05;"
              id="medalFlip" onclick="this.classList.toggle('flipped')">
 
           <div class="medal-glow-ring absolute inset-0 pointer-events-none" style="z-index:0;"></div>
@@ -515,7 +515,7 @@
             <div class="medal-face bg-[#001840]">
               <img src="img/medalla-frente.png"
                    alt="Medalla Especial 10K cara frontal"
-                   class="w-full h-full object-contain"
+                   class="w-full h-full object-cover"
                    width="360" height="378"
                    loading="lazy" />
             </div>
@@ -524,7 +524,7 @@
             <div class="medal-face medal-face-back bg-[#001840]">
               <img src="img/medalla-trasera.png"
                    alt="Medalla Especial 10K cara trasera"
-                   class="w-full h-full object-contain"
+                   class="w-full h-full object-cover"
                    width="360" height="378"
                    loading="lazy" />
             </div>
