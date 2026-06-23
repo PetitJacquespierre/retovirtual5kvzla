@@ -518,34 +518,86 @@ const heroCarousel = (function() {
 </script>
 <!-- =================== FIN HERO CARRUSEL =================== -->
 
-    <section id="nosotros" class="py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-6 md:px-12">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div>
-                    <span class="text-[#00D2FF] font-black text-[10px] uppercase tracking-[0.5em] mb-4 block">Nuestra Visión</span>
-                    <h2 class="text-[#001E50] text-4xl md:text-6xl font-black uppercase leading-[0.9] tracking-tighter mb-8">
-                        RETO VIRTUAL <br> <!-- <span class="text-[#00D2FF] italic">x TEAMFS</span> -->
-                    </h2>
-                    <p class="text-slate-600 text-lg leading-relaxed mb-8 font-light">
-                        Nuestra meta es transformar el running en Venezuela a través de una plataforma accesible, innovadora y de alto rendimiento. Creamos el espacio donde cada kilómetro cuenta y donde cada corredor, sin importar dónde se encuentre, vive una experiencia deportiva única bajo estándares internacionales.
-                    </p>
-                    <div class="flex items-center gap-4 border-l-4 border-[#00D2FF] pl-6 py-2">
-                        <p class="text-[#001E50] font-bold italic text-sm">"Uniendo al país, un latido a la vez."</p>
-                    </div>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div class="bg-slate-50 p-10 rounded-[2rem] border border-slate-100">
-                        <span class="text-5xl font-black text-[#001E50] block mb-2 tracking-tighter">500+</span>
-                        <span class="text-[#00D2FF] font-bold text-[10px] uppercase tracking-widest leading-tight block">Atletas <br> Impulsados</span>
-                    </div>
-                    <div class="bg-[#001E50] p-10 rounded-[2rem] shadow-xl">
-                        <span class="text-5xl font-black text-[#00D2FF] block mb-2 tracking-tighter">6+</span>
-                        <span class="text-white/50 font-bold text-[10px] uppercase tracking-widest italic leading-tight block">Estados <br> Alcanzados</span>
-                    </div>
-                </div>
-            </div>
+    <!-- ===================== CÓMO FUNCIONA ===================== -->
+<section id="como-funciona" class="py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4 md:px-12">
+
+    <div class="text-center mb-14">
+      <span class="text-[#00D2FF] font-bold text-[10px] uppercase tracking-[0.5em] mb-3 block">Así se vive el reto</span>
+      <h2 class="text-[#001E50] text-4xl md:text-5xl font-black uppercase tracking-tighter mt-2 mb-4 leading-tight">
+        Cómo Funciona<br>el Circuito
+      </h2>
+      <p class="text-slate-400 max-w-xl mx-auto text-sm md:text-base font-light leading-relaxed">
+        Desde que te inscribes hasta que recibes tu medalla — así es la experiencia completa del Reto Virtual VZLA.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+      <!-- Paso 1 -->
+      <div class="relative bg-slate-50 rounded-3xl p-8 border border-slate-100 hover:border-[#00D2FF]/30 hover:shadow-lg transition-all duration-300">
+        <div class="absolute -top-4 left-8 bg-[#001E50] text-[#00D2FF] font-black text-xs w-8 h-8 rounded-full flex items-center justify-center border-2 border-[#00D2FF]/30">01</div>
+        <div class="w-12 h-12 rounded-2xl bg-[#00D2FF]/10 flex items-center justify-center mb-5 mt-2">
+          <i class="fa-solid fa-user-plus text-[#00D2FF] text-lg"></i>
         </div>
-    </section>
+        <h3 class="text-[#001E50] font-black uppercase text-base tracking-tight mb-2">Inscríbete</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">
+          Elige tu edición, completa el formulario y asegura tu cupo. Recibes confirmación por WhatsApp.
+        </p>
+      </div>
+
+      <!-- Paso 2 -->
+      <div class="relative bg-slate-50 rounded-3xl p-8 border border-slate-100 hover:border-[#00D2FF]/30 hover:shadow-lg transition-all duration-300">
+        <div class="absolute -top-4 left-8 bg-[#001E50] text-[#00D2FF] font-black text-xs w-8 h-8 rounded-full flex items-center justify-center border-2 border-[#00D2FF]/30">02</div>
+        <div class="w-12 h-12 rounded-2xl bg-[#00D2FF]/10 flex items-center justify-center mb-5 mt-2">
+          <i class="fa-solid fa-person-running text-[#00D2FF] text-lg"></i>
+        </div>
+        <h3 class="text-[#001E50] font-black uppercase text-base tracking-tight mb-2">Corre tu 5K</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">
+          Durante las fechas oficiales, corre tu distancia desde cualquier lugar del país. Tú decides la ruta.
+        </p>
+      </div>
+
+      <!-- Paso 3 -->
+      <div class="relative bg-slate-50 rounded-3xl p-8 border border-slate-100 hover:border-[#00D2FF]/30 hover:shadow-lg transition-all duration-300">
+        <div class="absolute -top-4 left-8 bg-[#001E50] text-[#00D2FF] font-black text-xs w-8 h-8 rounded-full flex items-center justify-center border-2 border-[#00D2FF]/30">03</div>
+        <div class="w-12 h-12 rounded-2xl bg-[#00D2FF]/10 flex items-center justify-center mb-5 mt-2">
+          <i class="fa-solid fa-stopwatch text-[#00D2FF] text-lg"></i>
+        </div>
+        <h3 class="text-[#001E50] font-black uppercase text-base tracking-tight mb-2">Reporta tu tiempo</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">
+          Envía tu evidencia con tiempo y distancia. Tu resultado entra al ranking nacional oficial en tiempo real.
+        </p>
+      </div>
+
+      <!-- Paso 4 -->
+      <div class="relative bg-[#001E50] rounded-3xl p-8 border border-[#00D2FF]/20 hover:border-[#00D2FF]/50 hover:shadow-xl transition-all duration-300">
+        <div class="absolute -top-4 left-8 bg-[#00D2FF] text-[#001E50] font-black text-xs w-8 h-8 rounded-full flex items-center justify-center">04</div>
+        <div class="w-12 h-12 rounded-2xl bg-[#00D2FF]/15 flex items-center justify-center mb-5 mt-2">
+          <i class="fa-solid fa-medal text-[#00D2FF] text-lg"></i>
+        </div>
+        <h3 class="text-white font-black uppercase text-base tracking-tight mb-2">Recibe tu medalla</h3>
+        <p class="text-white/50 text-sm leading-relaxed">
+          Tu medalla coleccionable llega a tu puerta. Cada edición es una pieza del rompecabezas nacional.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- CTA inferior -->
+    <div class="text-center mt-12">
+      <a href="inscripcion.html?modo=5K"
+         class="inline-flex items-center gap-2 bg-[#001E50] text-white font-black text-xs uppercase tracking-widest px-8 py-4 rounded-full hover:bg-[#00D2FF] hover:text-[#001E50] transition-all duration-300 shadow-lg">
+        <i class="fa-solid fa-flag-checkered"></i>
+        Quiero participar
+      </a>
+    </div>
+
+  </div>
+</section>
+<!-- ================ FIN CÓMO FUNCIONA ================ -->
+
+
 
     <section id="el-reto" class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 md:px-12">
