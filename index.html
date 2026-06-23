@@ -574,66 +574,171 @@ const heroCarousel = (function() {
     </section>
 
     <section id="ediciones" class="py-24 bg-slate-50">
-        <div class="max-w-7xl mx-auto px-4 md:px-12 text-center">
-            <span class="text-[#00D2FF] font-bold text-xs uppercase tracking-[0.4em]">Temporada 2026</span>
-            <h2 class="text-[#001E50] text-5xl font-black uppercase mt-2 mb-16">Ruta a la Gloria</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="group relative aspect-[3/4] overflow-hidden rounded-2xl shadow-xl transition-all hover:scale-[1.02]">
-                    <img src="img/Medalla1web.png" class="absolute inset-0 w-full h-full object-cover" alt="Pieza 1">
-                    <div class="absolute inset-0 bg-black/50 bg-gradient-to-t from-black/90 via-black/10 to-black/40"></div>
-                    <div class="absolute inset-0 flex flex-col items-center justify-center p-6 text-white z-10">
-                        <div class="mb-3 bg-[#00D2FF]/20 backdrop-blur-sm border border-[#00D2FF] p-2 rounded-full shadow-lg">
-                            <i class="fa-solid fa-lock-open text-[#00D2FF] text-sm"></i>
-                        </div>
-                        <h4 class="font-black text-2xl uppercase mb-1 tracking-tighter">Edición 1</h4>
-                        <p class="text-[#00D2FF] text-[11px] font-bold uppercase tracking-[0.3em] mb-5">Misión Completada</p>
-                        <span class="border-2 border-white/50 px-5 py-1.5 rounded-full text-[11px] font-bold bg-white/10 backdrop-blur-sm shadow-lg">Marzo 06 - 15</span>
-                    </div>
-                </div>
-                <div class="bg-[#001E50] p-6 md:p-8 rounded-3xl shadow-2xl border-b-8 border-[#00D2FF] transform scale-105 relative flex flex-col justify-between">
-    
-    <!-- Píldora de estado actualizada -->
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#00D2FF] text-[#001E50] text-[10px] font-black px-6 py-2 rounded-full uppercase shadow-[0_0_15px_rgba(0,210,255,0.6)] tracking-tighter animate-pulse">
-        En Curso
+  <div class="max-w-7xl mx-auto px-4 md:px-12">
+
+    <!-- Encabezado -->
+    <div class="text-center mb-16">
+      <span class="text-[#00D2FF] font-bold text-xs uppercase tracking-[0.4em]">Temporada 2026</span>
+      <h2 class="text-[#001E50] text-5xl font-black uppercase mt-2 mb-2 tracking-tighter">Ruta a la Gloria</h2>
+      <p class="text-slate-400 font-bold text-sm uppercase tracking-[0.3em]">Circuito Virtual 5K · 4 Ediciones · 1 Rompecabezas Nacional</p>
     </div>
-    
-    <div class="mt-4">
-        <h4 class="font-black text-3xl text-white mb-1 uppercase tracking-tighter">Edición 2</h4>
-        <p class="text-[#00D2FF] text-[10px] font-bold uppercase tracking-[0.2em] mb-4 italic">Pieza: La Conquista</p>
-        
-        <!-- CONTENEDOR DE LA MEDALLA 2 -->
-        <div class="relative w-full flex justify-center items-center py-4 mb-4 group cursor-pointer">
-            <!-- Efecto de luz de fondo (Glow) -->
-            <div class="absolute w-28 h-28 bg-[#00D2FF]/20 blur-2xl rounded-full group-hover:bg-[#00D2FF]/40 transition-all duration-500"></div>
-            <!-- Imagen de la medalla -->
-            <img src="img/medalla2.png" alt="Medalla La Conquista" class="relative w-36 md:w-44 h-auto object-contain drop-shadow-[0_15px_25px_rgba(0,0,0,0.5)] transform group-hover:scale-110 group-hover:-translate-y-2 transition-all duration-500 z-10">
+
+    <!-- Grid de ediciones -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-start">
+
+      <!-- EDICIÓN 1 — Completada -->
+      <div class="group relative aspect-[3/4] overflow-hidden rounded-2xl shadow-xl transition-all hover:scale-[1.02]">
+        <img src="img/Medalla1web.png" class="absolute inset-0 w-full h-full object-cover" alt="Medalla Edición 1" loading="lazy">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/40"></div>
+        <div class="absolute inset-0 flex flex-col items-center justify-center p-6 text-white z-10">
+          <div class="mb-3 bg-[#00D2FF]/20 backdrop-blur-sm border border-[#00D2FF] p-2 rounded-full shadow-lg">
+            <i class="fa-solid fa-lock-open text-[#00D2FF] text-sm"></i>
+          </div>
+          <h4 class="font-black text-2xl uppercase mb-1 tracking-tighter">Edición 1</h4>
+          <p class="text-[#00D2FF] text-[11px] font-bold uppercase tracking-[0.3em] mb-5">Misión Completada</p>
+          <span class="border-2 border-white/50 px-5 py-1.5 rounded-full text-[11px] font-bold bg-white/10 backdrop-blur-sm">Marzo 06 - 15</span>
+        </div>
+      </div>
+
+      <!-- EDICIÓN 2 — En curso (destacada) -->
+      <div class="bg-[#001E50] p-6 md:p-8 rounded-3xl shadow-2xl border-b-8 border-[#00D2FF] transform lg:scale-105 relative flex flex-col justify-between min-h-[380px]">
+        <!-- Badge En Curso -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#00D2FF] text-[#001E50] text-[10px] font-black px-6 py-2 rounded-full uppercase shadow-[0_0_15px_rgba(0,210,255,0.6)] tracking-tighter animate-pulse">
+          En Curso
         </div>
 
-        <div class="bg-white/5 py-3 rounded-xl border border-white/10 mb-6">
+        <div class="mt-4">
+          <h4 class="font-black text-3xl text-white mb-1 uppercase tracking-tighter">Edición 2</h4>
+          <p class="text-[#00D2FF] text-[10px] font-bold uppercase tracking-[0.2em] mb-4 italic">Pieza: La Conquista</p>
+
+          <!-- Medalla 2 con glow -->
+          <div class="relative w-full flex justify-center items-center py-4 mb-4 group cursor-pointer">
+            <div class="absolute w-28 h-28 bg-[#00D2FF]/20 blur-2xl rounded-full group-hover:bg-[#00D2FF]/40 transition-all duration-500"></div>
+            <img src="img/Medalla2web.png"
+                 alt="Medalla La Conquista"
+                 class="relative w-36 md:w-44 h-auto object-contain drop-shadow-[0_15px_25px_rgba(0,0,0,0.5)] transform group-hover:scale-110 group-hover:-translate-y-2 transition-all duration-500 z-10"
+                 loading="lazy"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <!-- Fallback si la imagen falla -->
+            <div style="display:none;" class="relative z-10 w-36 h-36 rounded-full border-2 border-[#00D2FF]/30 flex-col items-center justify-center text-center">
+              <i class="fa-solid fa-medal text-5xl text-[#00D2FF]/40 mb-2"></i>
+              <p class="text-white/40 text-[9px] uppercase tracking-widest">La Conquista</p>
+            </div>
+          </div>
+
+          <div class="bg-white/5 py-3 rounded-xl border border-white/10 mb-6 text-center">
             <p class="text-white font-bold text-lg leading-none mb-1">Junio 05 - 14</p>
             <p class="text-white/40 text-[9px] uppercase tracking-widest font-bold">Fecha de Carrera</p>
+          </div>
         </div>
-    </div>
-    
-    <a href="https://www.retovirtualvzla.com/inscripcion.html" class="block bg-white text-[#001E50] py-4 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-[#00D2FF] hover:text-white transition-all shadow-lg">Inscribirme Ahora</a>
-</div>
-                  
 
-  <a href="https://www.retovirtualvzla.com/inscripcion.html" class="block bg-white text-[#001E50] py-4 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-[#00D2FF] hover:text-white transition-all shadow-lg">Reservar Mi Cupo</a>
-                </div>
-                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 flex flex-col justify-center">
-                    <h4 class="font-black text-2xl text-slate-300 mb-2 uppercase tracking-tighter">Edición 3</h4>
-                    <p class="text-slate-400 font-bold text-sm mb-4">Septiembre 04 - 13</p>
-                    <p class="text-[10px] text-slate-300 font-bold uppercase tracking-widest">Inscripciones Ago 15</p>
-                </div>
-                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 flex flex-col justify-center">
-                    <h4 class="font-black text-2xl text-slate-300 mb-2 uppercase tracking-tighter">Edición 4</h4>
-                    <p class="text-slate-400 font-bold text-sm mb-4">Diciembre 04 - 13</p>
-                    <p class="text-[#00D2FF] text-[9px] font-black uppercase tracking-widest italic">La Gran Final</p>
-                </div>
-            </div>
+        <a href="inscripcion.html?modo=5K"
+           class="block bg-white text-[#001E50] py-4 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-[#00D2FF] hover:text-white transition-all shadow-lg text-center">
+          Inscribirme Ahora
+        </a>
+      </div>
+
+      <!-- EDICIÓN 3 — Próximamente -->
+      <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 flex flex-col justify-between min-h-[380px] relative overflow-hidden">
+        <!-- Candado decorativo de fondo -->
+        <div class="absolute top-4 right-4 opacity-5">
+          <i class="fa-solid fa-lock text-6xl text-slate-900"></i>
         </div>
-    </section>
+        <div>
+          <div class="inline-flex items-center gap-1.5 bg-slate-100 px-3 py-1 rounded-full mb-4">
+            <i class="fa-solid fa-clock text-slate-300 text-[10px]"></i>
+            <span class="text-slate-400 text-[9px] font-bold uppercase tracking-widest">Próximamente</span>
+          </div>
+          <h4 class="font-black text-2xl text-slate-300 mb-2 uppercase tracking-tighter">Edición 3</h4>
+          <p class="text-slate-300 text-sm font-bold italic mb-1">Pieza: El Ascenso</p>
+          <p class="text-slate-400 font-bold text-sm mb-6">Septiembre 04 - 13</p>
+          <!-- Barra de cuenta regresiva visual -->
+          <div class="w-full bg-slate-100 rounded-full h-1.5 mb-2">
+            <div class="bg-gradient-to-r from-slate-200 to-[#00D2FF]/30 h-1.5 rounded-full" style="width:35%"></div>
+          </div>
+          <p class="text-slate-300 text-[9px] uppercase tracking-widest font-bold">Inscripciones: Ago 15</p>
+        </div>
+        <div class="border border-dashed border-slate-200 rounded-xl py-4 text-center mt-4">
+          <p class="text-slate-300 text-[10px] font-bold uppercase tracking-widest">Disponible pronto</p>
+        </div>
+      </div>
+
+      <!-- EDICIÓN 4 — La Gran Final -->
+      <div class="bg-[#001E50] p-8 rounded-3xl shadow-sm border border-white/5 flex flex-col justify-between min-h-[380px] relative overflow-hidden">
+        <!-- Destello decorativo -->
+        <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#00D2FF]/5 rounded-full blur-2xl"></div>
+        <div>
+          <div class="inline-flex items-center gap-1.5 bg-[#00D2FF]/10 border border-[#00D2FF]/20 px-3 py-1 rounded-full mb-4">
+            <i class="fa-solid fa-crown text-[#00D2FF] text-[10px]"></i>
+            <span class="text-[#00D2FF] text-[9px] font-bold uppercase tracking-widest">La Gran Final</span>
+          </div>
+          <h4 class="font-black text-2xl text-white mb-2 uppercase tracking-tighter">Edición 4</h4>
+          <p class="text-white/40 text-sm font-bold italic mb-1">Pieza: El Legado</p>
+          <p class="text-white/40 font-bold text-sm mb-6">Diciembre 04 - 13</p>
+          <p class="text-white/30 text-xs leading-relaxed">El cierre épico del circuito. Completa las 4 piezas y sé parte de la historia del running venezolano.</p>
+        </div>
+        <div class="border border-white/10 rounded-xl py-4 text-center mt-4">
+          <p class="text-white/20 text-[10px] font-bold uppercase tracking-widest">Detalles próximamente</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Sección "Completa la Serie" rediseñada -->
+    <div class="mt-20 bg-white rounded-[2.5rem] shadow-sm border border-slate-100 overflow-hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-0 items-center">
+
+        <!-- Imagen del rompecabezas / piezas unidas -->
+        <div class="bg-slate-50 flex items-center justify-center p-12 min-h-[280px]">
+          <!-- 
+            OPCIÓN A: Cuando tengas pieza1-2.png lista:
+            <img src="img/pieza1-2.png" alt="Rompecabezas Ediciones 1 y 2" class="max-w-xs w-full object-contain drop-shadow-xl">
+            
+            OPCIÓN B (placeholder actual):
+          -->
+          <div class="text-center">
+            <div class="flex items-center justify-center gap-1 mb-4">
+              <i class="fa-solid fa-puzzle-piece text-5xl text-[#00D2FF]/60 -rotate-12"></i>
+              <i class="fa-solid fa-puzzle-piece text-5xl text-[#001E50]/30 rotate-6"></i>
+              <i class="fa-solid fa-puzzle-piece text-4xl text-slate-200 rotate-3"></i>
+              <i class="fa-solid fa-puzzle-piece text-4xl text-slate-100"></i>
+            </div>
+            <p class="text-slate-300 text-[10px] uppercase tracking-widest font-bold">Agrega img/pieza1-2.png</p>
+          </div>
+        </div>
+
+        <!-- Texto -->
+        <div class="p-10 md:p-14">
+          <span class="text-[#00D2FF] font-bold text-[10px] uppercase tracking-[0.5em] mb-3 block">Circuito Virtual 5K</span>
+          <h3 class="text-[#001E50] text-3xl md:text-4xl font-black uppercase leading-tight tracking-tighter mb-4">
+            Completa el<br><span class="text-[#00D2FF] italic">Rompecabezas</span><br>Nacional
+          </h3>
+          <p class="text-slate-500 text-sm leading-relaxed mb-6">
+            Cada edición es una pieza del mapa de Venezuela. <strong class="text-[#001E50]">Cuatro carreras, un solo destino.</strong> Cada medalla que ganes encaja con la siguiente — al terminar las 4, tendrás una obra única en tus manos.
+          </p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-center gap-3 text-sm text-[#001E50] font-semibold">
+              <i class="fa-solid fa-check-double text-[#00D2FF]"></i> Cronometraje validado oficialmente
+            </li>
+            <li class="flex items-center gap-3 text-sm text-[#001E50] font-semibold">
+              <i class="fa-solid fa-check-double text-[#00D2FF]"></i> Medallas de acrílico de alta densidad
+            </li>
+            <li class="flex items-center gap-3 text-sm text-[#001E50] font-semibold">
+              <i class="fa-solid fa-check-double text-[#00D2FF]"></i> Ranking nacional en tiempo real
+            </li>
+          </ul>
+          <a href="inscripcion.html?modo=5K"
+             class="inline-flex items-center gap-2 bg-[#001E50] text-white font-black text-xs uppercase tracking-widest px-7 py-3.5 rounded-full hover:bg-[#00D2FF] hover:text-[#001E50] transition-all duration-300">
+            <i class="fa-solid fa-person-running"></i>
+            Unirme al Circuito
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
 
     <section class="py-24 bg-white overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 md:px-12 text-center">
