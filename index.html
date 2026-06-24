@@ -639,10 +639,19 @@ const heroCarousel = (function() {
       <div class="lg:w-1/2 w-full flex justify-center">
         <div class="relative">
           <!-- Etiqueta flotante -->
-          <div class="absolute -top-4 -right-4 z-20 px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest"
-               style="background:linear-gradient(135deg,#00D2FF,#0090b3);color:#001E50;box-shadow:0 4px 20px rgba(0,210,255,0.4);">
-            <i class="fa-solid fa-star mr-1"></i> Edición 10K 2026
-          </div>
+          <div class="absolute -top-4 -left-4 z-20 flex flex-col items-end gap-2">
+  <!-- Badge edición (existente) -->
+  <div class="px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest"
+       style="background:linear-gradient(135deg,#00D2FF,#0090b3);color:#001E50;box-shadow:0 4px 20px rgba(0,210,255,0.4);">
+    <i class="fa-solid fa-star mr-1"></i> Edición 10K 2026
+  </div>
+  <!-- Badge FOMO nuevo -->
+  <div class="px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5"
+       style="background:rgba(255,68,68,0.15);border:1px solid rgba(255,68,68,0.4);color:#ff6b6b;">
+    <i class="fa-solid fa-fire-flame-curved text-[10px]"></i>
+    ¡Últimos cupos!
+  </div>
+</div>
 
           <!-- Marco con glow pulsante -->
           <div class="kit-photo-glow rounded-3xl overflow-hidden border"
@@ -742,21 +751,33 @@ const heroCarousel = (function() {
         </div>
 
         <!-- Separador + CTA -->
-        <div class="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
-          <a href="#registro"
-             class="kit-cta-btn inline-flex items-center gap-2.5 font-black text-sm uppercase tracking-[0.2em] px-8 py-4 rounded-full"
-             style="background:#00D2FF;color:#001E50;">
-            <i class="fa-solid fa-flag-checkered text-xs"></i>
-            Asegurar mi kit
-          </a>
-          <div class="flex items-center gap-2">
-            <i class="fa-solid fa-circle-check text-xs" style="color:#00D2FF;opacity:0.7;"></i>
-            <span class="text-white/35 text-xs uppercase tracking-[0.2em]">Cupos limitados</span>
-          </div>
-        </div>
+        <!-- Separador + CTA -->
+<div class="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
+  <a href="#registro"
+     class="kit-cta-btn inline-flex items-center gap-2.5 font-black text-sm uppercase tracking-[0.2em] px-8 py-4 rounded-full"
+     style="background:#00D2FF;color:#001E50;">
+    <i class="fa-solid fa-flag-checkered text-xs"></i>
+    Asegurar mi kit
+  </a>
 
-      </div>
+  <!-- FOMO — contador de cupos -->
+  <div class="flex flex-col items-center sm:items-start gap-0.5">
+    <div class="flex items-center gap-1.5">
+      <span class="relative flex h-2 w-2">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
+              style="background:#ff4444;"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2"
+              style="background:#ff4444;"></span>
+      </span>
+      <span class="text-white font-black text-sm" id="cupos-restantes">--</span>
+      <span class="text-white/50 text-xs">cupos restantes</span>
     </div>
+    <div class="rounded-full overflow-hidden" style="height:3px;width:120px;background:rgba(255,255,255,0.08);">
+      <div id="cupos-barra" class="h-full rounded-full"
+           style="width:0%;background:linear-gradient(90deg,#ff4444,#ff6b6b);transition:width 1s ease;"></div>
+    </div>
+  </div>
+</div>
 
     <!-- Franja inferior de stats -->
     <div class="mt-14 pt-8 grid grid-cols-3 gap-4"
@@ -778,7 +799,24 @@ const heroCarousel = (function() {
   </div>
 </section>
 <!-- ═══════ FIN BANNER KIT ═══════ -->
+<script>
+(function(){
+  const CUPOS_ACTUALES = 22  // ← CAMBIA ESTE número (cupos reales disponibles hoy)
+  const CUPOS_TOTALES  = 100 // ← CAMBIA ESTE número (total de inscritos que aceptas)
 
+  const stored = parseInt(sessionStorage.getItem('rvkupos') || CUPOS_ACTUALES);
+  const cupos = Math.max(stored - Math.floor(Math.random() * 2), 8);
+  sessionStorage.setItem('rvkupos', cupos);
+
+  const el    = document.getElementById('cupos-restantes');
+  const barra = document.getElementById('cupos-barra');
+  if (el) el.textContent = cupos;
+  if (barra) {
+    const pct = Math.min(Math.round((cupos / CUPOS_TOTALES) * 100), 100);
+    setTimeout(() => { barra.style.width = pct + '%'; }, 300);
+  }
+})();
+</script>
 
 <section id="especial-10k" class="py-24 md:py-32 bg-[#001E50] relative overflow-hidden border-y border-white/5">
 
