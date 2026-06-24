@@ -522,6 +522,264 @@ const heroCarousel = (function() {
 <!-- =================== FIN HERO CARRUSEL =================== -->
 
 
+<!-- ═══════════════════════════════════════════
+     BANNER KIT DE CARRERA 10K — OPCIÓN B
+     Coloca este bloque DESPUÉS del carrusel
+     y ANTES de la sección #especial-10k
+════════════════════════════════════════════ -->
+<style>
+  /* Shimmer en el título del banner */
+  @keyframes shimmer-kit {
+    0%   { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+  .kit-shimmer-text {
+    background: linear-gradient(90deg, #ffffff 0%, #00D2FF 40%, #ffffff 60%, #ffffff 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer-kit 3.5s linear infinite;
+  }
+
+  /* Pulso del borde de la foto */
+  @keyframes border-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(0,210,255,0.0), 0 0 40px rgba(0,210,255,0.15); }
+    50%       { box-shadow: 0 0 0 6px rgba(0,210,255,0.12), 0 0 80px rgba(0,210,255,0.30); }
+  }
+  .kit-photo-glow {
+    animation: border-pulse 3s ease-in-out infinite;
+  }
+
+  /* Entrada de los items con stagger */
+  @keyframes slide-in-right {
+    from { opacity: 0; transform: translateX(30px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  .kit-item-1 { animation: slide-in-right 0.5s ease 0.1s both; }
+  .kit-item-2 { animation: slide-in-right 0.5s ease 0.25s both; }
+  .kit-item-3 { animation: slide-in-right 0.5s ease 0.4s both; }
+
+  /* Hover en los items */
+  .kit-item {
+    transition: background 0.3s, border-color 0.3s, transform 0.3s;
+    cursor: default;
+  }
+  .kit-item:hover {
+    background: rgba(0,210,255,0.08) !important;
+    border-color: rgba(0,210,255,0.4) !important;
+    transform: translateX(6px);
+  }
+
+  /* Línea animada decorativa */
+  @keyframes line-grow {
+    from { width: 0; }
+    to   { width: 100%; }
+  }
+  .kit-line-animated {
+    animation: line-grow 1.2s cubic-bezier(0.16,1,0.3,1) 0.3s both;
+  }
+
+  /* Glow en el CTA */
+  .kit-cta-btn {
+    transition: all 0.3s ease;
+    box-shadow: 0 0 0 0 rgba(0,210,255,0.4);
+  }
+  .kit-cta-btn:hover {
+    transform: scale(1.04);
+    box-shadow: 0 0 30px rgba(0,210,255,0.45), 0 0 60px rgba(0,210,255,0.2);
+    background: white !important;
+    color: #001E50 !important;
+  }
+
+  /* Badge VIP flicker */
+  @keyframes vip-flicker {
+    0%,100% { opacity: 1; }
+    92%      { opacity: 1; }
+    93%      { opacity: 0.4; }
+    94%      { opacity: 1; }
+    96%      { opacity: 0.6; }
+    97%      { opacity: 1; }
+  }
+  .vip-badge { animation: vip-flicker 4s ease-in-out infinite; }
+</style>
+
+<section id="kit-carrera" class="relative overflow-hidden border-y border-white/5"
+  style="background: linear-gradient(135deg, #000d24 0%, #001433 40%, #000a1e 100%);">
+
+  <!-- Fondo textura carbon -->
+  <div class="absolute inset-0 opacity-10 pointer-events-none"
+       style="background-image:url('https://www.transparenttextures.com/patterns/carbon-fibre.png')"></div>
+
+  <!-- Blobs decorativos -->
+  <div class="absolute pointer-events-none"
+       style="top:-80px;left:-60px;width:420px;height:420px;background:radial-gradient(circle,rgba(0,210,255,0.12),transparent 70%);border-radius:50%;filter:blur(40px);"></div>
+  <div class="absolute pointer-events-none"
+       style="bottom:-60px;right:-40px;width:360px;height:360px;background:radial-gradient(circle,rgba(0,100,200,0.10),transparent 70%);border-radius:50%;filter:blur(60px);"></div>
+
+  <div class="max-w-7xl mx-auto px-4 md:px-12 py-16 md:py-20 relative z-10">
+
+    <!-- Eyebrow -->
+    <div class="flex items-center gap-3 mb-10 justify-center md:justify-start">
+      <div style="height:1px;width:40px;background:linear-gradient(90deg,transparent,rgba(0,210,255,0.6));"
+           class="kit-line-animated hidden md:block"></div>
+      <span class="vip-badge inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.5em]"
+            style="border:1px solid rgba(0,210,255,0.4);color:#00D2FF;background:rgba(0,210,255,0.06);">
+        <i class="fa-solid fa-box-open text-[10px]"></i>
+        Kit de Carrera Oficial
+      </span>
+      <div style="height:1px;flex:1;background:linear-gradient(90deg,rgba(0,210,255,0.3),transparent);"
+           class="kit-line-animated hidden md:block"></div>
+    </div>
+
+    <!-- Layout principal: foto + contenido -->
+    <div class="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
+
+      <!-- ── FOTO DEL KIT ── -->
+      <div class="lg:w-1/2 w-full flex justify-center">
+        <div class="relative">
+          <!-- Etiqueta flotante -->
+          <div class="absolute -top-4 -right-4 z-20 px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest"
+               style="background:linear-gradient(135deg,#00D2FF,#0090b3);color:#001E50;box-shadow:0 4px 20px rgba(0,210,255,0.4);">
+            <i class="fa-solid fa-star mr-1"></i> Edición 10K 2026
+          </div>
+
+          <!-- Marco con glow pulsante -->
+          <div class="kit-photo-glow rounded-3xl overflow-hidden border"
+               style="border-color:rgba(0,210,255,0.25);max-width:480px;">
+            <img
+              src="img/10k_franela.png"
+              alt="Kit de carrera oficial 10K 2026 — camiseta, dorsal y medalla"
+              width="480"
+              height="480"
+              loading="lazy"
+              class="w-full h-full object-cover block"
+              style="aspect-ratio:1/1;"
+            />
+          </div>
+
+          <!-- Nota inferior -->
+          <p class="text-center mt-3 text-white/25 text-[9px] uppercase tracking-[0.3em]">
+            Diseño referencial · Sujeto a disponibilidad
+          </p>
+        </div>
+      </div>
+
+      <!-- ── CONTENIDO DERECHO ── -->
+      <div class="lg:w-1/2 w-full text-center lg:text-left">
+
+        <h2 class="font-black uppercase tracking-tighter leading-none mb-3"
+            style="font-size:clamp(2.2rem,5.5vw,4.2rem);">
+          <span class="text-white block">Lo Que</span>
+          <span class="kit-shimmer-text block">Recibes</span>
+        </h2>
+
+        <p class="mb-8 font-light leading-relaxed"
+           style="color:rgba(255,255,255,0.55);font-size:clamp(0.95rem,1.5vw,1.1rem);max-width:460px;">
+          Cada participante de la <strong class="text-white font-semibold">Edición Especial 10K</strong>
+          recibe un kit físico de colección. Tres piezas. Una sola oportunidad.
+        </p>
+
+        <!-- Items del kit -->
+        <div class="flex flex-col gap-4 mb-10">
+
+          <!-- Item 1 -->
+          <div class="kit-item kit-item-1 flex items-center gap-5 rounded-2xl px-6 py-4"
+               style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);">
+            <div class="flex-shrink-0 w-11 h-11 rounded-xl flex items-center justify-center"
+                 style="background:rgba(0,210,255,0.12);border:1px solid rgba(0,210,255,0.2);">
+              <i class="fa-solid fa-shirt" style="color:#00D2FF;font-size:1rem;"></i>
+            </div>
+            <div class="text-left">
+              <p class="font-black text-white text-sm uppercase tracking-wider">Camiseta Técnica Oficial</p>
+              <p class="text-white/40 text-xs mt-0.5">Tela deportiva sublimada · Diseño exclusivo 10K 2026</p>
+            </div>
+            <div class="ml-auto flex-shrink-0">
+              <span class="text-[#00D2FF] font-black text-xs uppercase tracking-widest">INC.</span>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="kit-item kit-item-2 flex items-center gap-5 rounded-2xl px-6 py-4"
+               style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);">
+            <div class="flex-shrink-0 w-11 h-11 rounded-xl flex items-center justify-center"
+                 style="background:rgba(0,210,255,0.12);border:1px solid rgba(0,210,255,0.2);">
+              <i class="fa-solid fa-id-card" style="color:#00D2FF;font-size:1rem;"></i>
+            </div>
+            <div class="text-left">
+              <p class="font-black text-white text-sm uppercase tracking-wider">Dorsal Numerado Oficial</p>
+              <p class="text-white/40 text-xs mt-0.5">Número personalizado · Diseño 10K · 2026</p>
+            </div>
+            <div class="ml-auto flex-shrink-0">
+              <span class="text-[#00D2FF] font-black text-xs uppercase tracking-widest">INC.</span>
+            </div>
+          </div>
+
+          <!-- Item 3 — destacado -->
+          <div class="kit-item kit-item-3 flex items-center gap-5 rounded-2xl px-6 py-4 relative overflow-hidden"
+               style="background:linear-gradient(135deg,rgba(0,210,255,0.10),rgba(0,210,255,0.04));border:1px solid rgba(0,210,255,0.25);">
+            <!-- Brillo diagonal -->
+            <div class="absolute inset-0 pointer-events-none"
+                 style="background:linear-gradient(135deg,rgba(0,210,255,0.06) 0%,transparent 60%);"></div>
+            <div class="flex-shrink-0 w-11 h-11 rounded-xl flex items-center justify-center relative z-10"
+                 style="background:rgba(0,210,255,0.18);border:1px solid rgba(0,210,255,0.35);">
+              <i class="fa-solid fa-medal" style="color:#00D2FF;font-size:1rem;"></i>
+            </div>
+            <div class="text-left relative z-10">
+              <p class="font-black text-white text-sm uppercase tracking-wider">Medalla Metal Macizo</p>
+              <p style="color:rgba(0,210,255,0.7);" class="text-xs mt-0.5 font-medium">
+                Diseño 2 caras · The Iron Series · Ed. Limitada
+              </p>
+            </div>
+            <div class="ml-auto flex-shrink-0 relative z-10">
+              <span class="px-2.5 py-1 rounded-full text-[9px] font-black uppercase tracking-wider"
+                    style="background:rgba(0,210,255,0.15);color:#00D2FF;border:1px solid rgba(0,210,255,0.3);">
+                PREMIUM
+              </span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Separador + CTA -->
+        <div class="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
+          <a href="#registro"
+             class="kit-cta-btn inline-flex items-center gap-2.5 font-black text-sm uppercase tracking-[0.2em] px-8 py-4 rounded-full"
+             style="background:#00D2FF;color:#001E50;">
+            <i class="fa-solid fa-flag-checkered text-xs"></i>
+            Asegurar mi kit
+          </a>
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-circle-check text-xs" style="color:#00D2FF;opacity:0.7;"></i>
+            <span class="text-white/35 text-xs uppercase tracking-[0.2em]">Cupos limitados</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Franja inferior de stats -->
+    <div class="mt-14 pt-8 grid grid-cols-3 gap-4"
+         style="border-top:1px solid rgba(255,255,255,0.06);">
+      <div class="text-center">
+        <p class="font-black italic text-white" style="font-size:clamp(1.4rem,3vw,2rem);color:#00D2FF;">3</p>
+        <p class="text-white/35 text-[9px] uppercase tracking-[0.25em] mt-1">Piezas en el kit</p>
+      </div>
+      <div class="text-center" style="border-left:1px solid rgba(255,255,255,0.07);border-right:1px solid rgba(255,255,255,0.07);">
+        <p class="font-black italic" style="font-size:clamp(1.4rem,3vw,2rem);color:#00D2FF;">100%</p>
+        <p class="text-white/35 text-[9px] uppercase tracking-[0.25em] mt-1">Metal Macizo</p>
+      </div>
+      <div class="text-center">
+        <p class="font-black italic" style="font-size:clamp(1.4rem,3vw,2rem);color:#00D2FF;">2026</p>
+        <p class="text-white/35 text-[9px] uppercase tracking-[0.25em] mt-1">Ed. Limitada</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- ═══════ FIN BANNER KIT ═══════ -->
+
+
 <section id="especial-10k" class="py-24 md:py-32 bg-[#001E50] relative overflow-hidden border-y border-white/5">
 
   <div class="absolute inset-0 opacity-10 pointer-events-none">
