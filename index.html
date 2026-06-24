@@ -162,9 +162,12 @@
     <!-- ================== FIN SPLASH SCREEN =================== -->
 
 
-    <div class="bg-[#001E50] text-white py-2 text-center text-[10px] font-bold uppercase tracking-[0.4em] z-50 relative border-b border-white/10">
-        Tu Ruta. Tu Ritmo. Tu Medalla.
-    </div>
+    <div class="bg-[#00D2FF] text-[#001E50] py-2.5 text-center text-[10px] font-black uppercase tracking-[0.3em] z-50 relative">
+    <i class="fa-solid fa-fire mr-2"></i>
+    Inscripciones 10K Abiertas — Cupos Limitados · 
+    <a href="inscripcion.html?modo=10K" class="underline underline-offset-2 hover:opacity-80 transition-opacity">Reserva el tuyo ahora</a>
+    <i class="fa-solid fa-fire ml-2"></i>
+</div>
 
     <!-- Reemplaza toda la sección <nav> con esta versión -->
 
@@ -292,7 +295,7 @@
   <div class="carousel-progress" id="carouselProgress"></div>
 
   <!-- ===== SLIDE 1: HERO PRINCIPAL ===== -->
-  <div class="hero-slide active" data-slide="0">
+  <div class="hero-slide" data-slide="1">
     <img src="img/fondo1.png" class="absolute inset-0 w-full h-full object-cover opacity-40 grayscale" alt="Runner" loading="eager">
     <div class="absolute inset-0 hero-gradient"></div>
     <div class="relative z-10 h-full flex items-center justify-center text-center px-4">
@@ -319,7 +322,7 @@
   </div>
 
   <!-- ===== SLIDE 2: MEDALLA 10K ===== -->
-  <div class="hero-slide" data-slide="1">
+  <div class="hero-slide active" data-slide="0">
     <div class="absolute inset-0 bg-[#001E50]"></div>
     <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
     <div class="absolute -left-20 top-1/4 w-96 h-96 bg-[#00D2FF]/8 rounded-full blur-[140px]"></div>
@@ -517,6 +520,127 @@ const heroCarousel = (function() {
 })();
 </script>
 <!-- =================== FIN HERO CARRUSEL =================== -->
+
+
+<section id="especial-10k" class="py-24 md:py-32 bg-[#001E50] relative overflow-hidden border-y border-white/5">
+
+  <div class="absolute inset-0 opacity-10 pointer-events-none">
+    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+  </div>
+  <div class="absolute -left-24 top-1/4 w-96 h-96 bg-[#00D2FF]/8 rounded-full blur-[140px] pointer-events-none"></div>
+  <div class="absolute -right-24 bottom-1/4 w-80 h-80 bg-[#00D2FF]/5 rounded-full blur-[120px] pointer-events-none"></div>
+  <div class="shine-dot w-1 h-1 bg-[#00D2FF]/80 top-1/4 left-1/4" style="animation-delay:0s"></div>
+  <div class="shine-dot w-1.5 h-1.5 bg-white/40 top-1/3 right-1/3" style="animation-delay:1.2s"></div>
+  <div class="shine-dot w-1 h-1 bg-[#00D2FF]/60 bottom-1/3 left-2/3" style="animation-delay:.6s"></div>
+
+  <div class="max-w-7xl mx-auto px-4 md:px-12 relative z-10">
+    <div class="flex flex-col lg:flex-row items-center gap-10 lg:gap-14">
+
+      <!-- TEXTO -->
+      <div class="lg:w-3/5 text-center lg:text-left r10k">
+        <div class="inline-flex items-center gap-2 iron-badge px-5 py-2 rounded-full mb-7">
+          <i class="fa-solid fa-shield-halved text-[#00D2FF] text-xs"></i>
+          <span class="text-[#00D2FF] font-black text-[10px] uppercase tracking-[0.5em]">The Iron Series</span>
+        </div>
+
+        <h2 class="text-white font-black uppercase leading-none tracking-tighter mb-5">
+          <span class="block" style="font-size:clamp(2.8rem,7.5vw,5.5rem)">EDICIÓN</span>
+          <span class="block italic text-[#00D2FF]" style="font-size:clamp(3.5rem,10vw,7.5rem)">ESPECIAL</span>
+          <span class="block" style="font-size:clamp(3.5rem,10vw,7.5rem)">10K</span>
+        </h2>
+
+        <div class="flex items-center gap-3 justify-center lg:justify-start mb-7">
+          <div class="h-px w-8 bg-[#00D2FF]/40"></div>
+          <h3 class="text-white/35 font-bold text-sm uppercase tracking-[0.3em]">Forjando Leyendas en el Asfalto</h3>
+          <div class="h-px w-8 bg-[#00D2FF]/40"></div>
+        </div>
+
+        <p class="text-white/65 text-base md:text-lg mb-10 font-light leading-relaxed max-w-xl mx-auto lg:mx-0">
+          Esta no es una pieza más del rompecabezas. Es el desafío máximo del 2026.
+          Una distancia que exige respeto y una <strong class="text-white font-semibold">medalla de metal macizo</strong>
+          forjada para perdurar en el tiempo.
+        </p>
+
+        <div class="grid grid-cols-3 gap-3 mb-10 max-w-lg mx-auto lg:mx-0">
+          <div class="stat-card-10k rounded-2xl p-4 text-center lg:text-left">
+            <span class="grad-text text-2xl md:text-3xl font-black italic leading-none block mb-1">100%</span>
+            <span class="text-white/35 text-[9px] font-bold uppercase tracking-[0.2em]">Metal Macizo</span>
+          </div>
+          <div class="stat-card-10k rounded-2xl p-4 text-center lg:text-left">
+            <span class="grad-text text-2xl md:text-3xl font-black italic leading-none block mb-1">ELITE</span>
+            <span class="text-white/35 text-[9px] font-bold uppercase tracking-[0.2em]">Ranking Oficial</span>
+          </div>
+          <div class="stat-card-10k rounded-2xl p-4 text-center lg:text-left">
+            <span class="grad-text text-2xl md:text-3xl font-black italic leading-none block mb-1">2026</span>
+            <span class="text-white/35 text-[9px] font-bold uppercase tracking-[0.2em]">Ed. Limitada</span>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-4 justify-center lg:justify-start">
+          <a href="#registro" class="inline-flex items-center gap-2 bg-[#00D2FF] text-[#001E50] font-black text-sm uppercase tracking-[0.15em] px-7 py-3.5 rounded-full hover:bg-white transition-colors duration-300">
+            <i class="fa-solid fa-flag-checkered text-xs"></i>
+            Inscribirme
+          </a>
+          <a href="#premios" class="inline-flex items-center gap-2 border border-white/20 text-white/60 font-bold text-sm uppercase tracking-[0.15em] px-7 py-3.5 rounded-full hover:border-[#00D2FF]/50 hover:text-white transition-all duration-300">
+            Ver premios
+            <i class="fa-solid fa-chevron-right text-xs"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- MEDALLA FLIP 3D -->
+      <div class="lg:w-2/5 w-full flex flex-col items-center gap-4 r10k" style="animation-delay:.15s">
+
+        <div class="text-center">
+          <p class="text-white/25 text-[10px] font-bold uppercase tracking-[0.4em] mb-1">Medalla Oficial</p>
+          <p class="text-[#00D2FF]/50 text-[9px] font-bold uppercase tracking-widest">Diseño 2 Caras · Hover para girar</p>
+        </div>
+
+        <div class="medal-flip-container w-full relative" style="max-width:460px;aspect-ratio:1/1.05;"
+             id="medalFlip" onclick="this.classList.toggle('flipped')">
+
+          <div class="medal-glow-ring absolute inset-0 pointer-events-none" style="z-index:0;"></div>
+
+          <div class="medal-flip-inner" style="position:absolute;inset:3px;">
+
+            <!-- CARA FRONTAL -->
+            <div class="medal-face bg-[#001840]">
+              <img src="img/medalla-frente.png"
+                   alt="Medalla Especial 10K cara frontal"
+                   class="w-full h-full object-cover"
+                   width="360" height="378"
+                   loading="lazy" />
+            </div>
+
+            <!-- CARA TRASERA -->
+            <div class="medal-face medal-face-back bg-[#001840]">
+              <img src="img/medalla-trasera.png"
+                   alt="Medalla Especial 10K cara trasera"
+                   class="w-full h-full object-cover"
+                   width="360" height="378"
+                   loading="lazy" />
+            </div>
+
+          </div>
+        </div>
+
+        <div class="flip-hint flex items-center gap-2.5">
+          <div class="w-6 h-6 rounded-full border border-[#00D2FF]/30 flex items-center justify-center">
+            <i class="fa-solid fa-rotate text-[#00D2FF]/50 text-[10px]"></i>
+          </div>
+          <span class="text-white/25 text-[9px] uppercase tracking-[0.3em]">Clic o hover para ver ambas caras</span>
+        </div>
+
+        <div class="stat-card-10k rounded-2xl p-4 w-full max-w-sm text-center">
+          <p class="text-[#00D2FF] font-black text-[10px] uppercase tracking-[0.3em] mb-2">Especificaciones</p>
+          <p class="text-white/40 text-xs leading-relaxed">Metal macizo · Acabado premium<br>Grabado permanente · Ed. limitada 2026</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 
     <!-- ===================== CÓMO FUNCIONA ===================== -->
 <section id="como-funciona" class="py-24 bg-white">
@@ -832,124 +956,7 @@ const heroCarousel = (function() {
 .iron-badge{background:linear-gradient(135deg,rgba(0,210,255,.1),rgba(0,210,255,.02));border:1px solid rgba(0,210,255,.4);box-shadow:0 0 20px rgba(0,210,255,.08),inset 0 1px 0 rgba(255,255,255,.05);}
 </style>
 
-<section id="especial-10k" class="py-24 md:py-32 bg-[#001E50] relative overflow-hidden border-y border-white/5">
 
-  <div class="absolute inset-0 opacity-10 pointer-events-none">
-    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
-  </div>
-  <div class="absolute -left-24 top-1/4 w-96 h-96 bg-[#00D2FF]/8 rounded-full blur-[140px] pointer-events-none"></div>
-  <div class="absolute -right-24 bottom-1/4 w-80 h-80 bg-[#00D2FF]/5 rounded-full blur-[120px] pointer-events-none"></div>
-  <div class="shine-dot w-1 h-1 bg-[#00D2FF]/80 top-1/4 left-1/4" style="animation-delay:0s"></div>
-  <div class="shine-dot w-1.5 h-1.5 bg-white/40 top-1/3 right-1/3" style="animation-delay:1.2s"></div>
-  <div class="shine-dot w-1 h-1 bg-[#00D2FF]/60 bottom-1/3 left-2/3" style="animation-delay:.6s"></div>
-
-  <div class="max-w-7xl mx-auto px-4 md:px-12 relative z-10">
-    <div class="flex flex-col lg:flex-row items-center gap-10 lg:gap-14">
-
-      <!-- TEXTO -->
-      <div class="lg:w-3/5 text-center lg:text-left r10k">
-        <div class="inline-flex items-center gap-2 iron-badge px-5 py-2 rounded-full mb-7">
-          <i class="fa-solid fa-shield-halved text-[#00D2FF] text-xs"></i>
-          <span class="text-[#00D2FF] font-black text-[10px] uppercase tracking-[0.5em]">The Iron Series</span>
-        </div>
-
-        <h2 class="text-white font-black uppercase leading-none tracking-tighter mb-5">
-          <span class="block" style="font-size:clamp(2.8rem,7.5vw,5.5rem)">EDICIÓN</span>
-          <span class="block italic text-[#00D2FF]" style="font-size:clamp(3.5rem,10vw,7.5rem)">ESPECIAL</span>
-          <span class="block" style="font-size:clamp(3.5rem,10vw,7.5rem)">10K</span>
-        </h2>
-
-        <div class="flex items-center gap-3 justify-center lg:justify-start mb-7">
-          <div class="h-px w-8 bg-[#00D2FF]/40"></div>
-          <h3 class="text-white/35 font-bold text-sm uppercase tracking-[0.3em]">Forjando Leyendas en el Asfalto</h3>
-          <div class="h-px w-8 bg-[#00D2FF]/40"></div>
-        </div>
-
-        <p class="text-white/65 text-base md:text-lg mb-10 font-light leading-relaxed max-w-xl mx-auto lg:mx-0">
-          Esta no es una pieza más del rompecabezas. Es el desafío máximo del 2026.
-          Una distancia que exige respeto y una <strong class="text-white font-semibold">medalla de metal macizo</strong>
-          forjada para perdurar en el tiempo.
-        </p>
-
-        <div class="grid grid-cols-3 gap-3 mb-10 max-w-lg mx-auto lg:mx-0">
-          <div class="stat-card-10k rounded-2xl p-4 text-center lg:text-left">
-            <span class="grad-text text-2xl md:text-3xl font-black italic leading-none block mb-1">100%</span>
-            <span class="text-white/35 text-[9px] font-bold uppercase tracking-[0.2em]">Metal Macizo</span>
-          </div>
-          <div class="stat-card-10k rounded-2xl p-4 text-center lg:text-left">
-            <span class="grad-text text-2xl md:text-3xl font-black italic leading-none block mb-1">ELITE</span>
-            <span class="text-white/35 text-[9px] font-bold uppercase tracking-[0.2em]">Ranking Oficial</span>
-          </div>
-          <div class="stat-card-10k rounded-2xl p-4 text-center lg:text-left">
-            <span class="grad-text text-2xl md:text-3xl font-black italic leading-none block mb-1">2026</span>
-            <span class="text-white/35 text-[9px] font-bold uppercase tracking-[0.2em]">Ed. Limitada</span>
-          </div>
-        </div>
-
-        <div class="flex flex-wrap gap-4 justify-center lg:justify-start">
-          <a href="#registro" class="inline-flex items-center gap-2 bg-[#00D2FF] text-[#001E50] font-black text-sm uppercase tracking-[0.15em] px-7 py-3.5 rounded-full hover:bg-white transition-colors duration-300">
-            <i class="fa-solid fa-flag-checkered text-xs"></i>
-            Inscribirme
-          </a>
-          <a href="#premios" class="inline-flex items-center gap-2 border border-white/20 text-white/60 font-bold text-sm uppercase tracking-[0.15em] px-7 py-3.5 rounded-full hover:border-[#00D2FF]/50 hover:text-white transition-all duration-300">
-            Ver premios
-            <i class="fa-solid fa-chevron-right text-xs"></i>
-          </a>
-        </div>
-      </div>
-
-      <!-- MEDALLA FLIP 3D -->
-      <div class="lg:w-2/5 w-full flex flex-col items-center gap-4 r10k" style="animation-delay:.15s">
-
-        <div class="text-center">
-          <p class="text-white/25 text-[10px] font-bold uppercase tracking-[0.4em] mb-1">Medalla Oficial</p>
-          <p class="text-[#00D2FF]/50 text-[9px] font-bold uppercase tracking-widest">Diseño 2 Caras · Hover para girar</p>
-        </div>
-
-        <div class="medal-flip-container w-full relative" style="max-width:460px;aspect-ratio:1/1.05;"
-             id="medalFlip" onclick="this.classList.toggle('flipped')">
-
-          <div class="medal-glow-ring absolute inset-0 pointer-events-none" style="z-index:0;"></div>
-
-          <div class="medal-flip-inner" style="position:absolute;inset:3px;">
-
-            <!-- CARA FRONTAL -->
-            <div class="medal-face bg-[#001840]">
-              <img src="img/medalla-frente.png"
-                   alt="Medalla Especial 10K cara frontal"
-                   class="w-full h-full object-cover"
-                   width="360" height="378"
-                   loading="lazy" />
-            </div>
-
-            <!-- CARA TRASERA -->
-            <div class="medal-face medal-face-back bg-[#001840]">
-              <img src="img/medalla-trasera.png"
-                   alt="Medalla Especial 10K cara trasera"
-                   class="w-full h-full object-cover"
-                   width="360" height="378"
-                   loading="lazy" />
-            </div>
-
-          </div>
-        </div>
-
-        <div class="flip-hint flex items-center gap-2.5">
-          <div class="w-6 h-6 rounded-full border border-[#00D2FF]/30 flex items-center justify-center">
-            <i class="fa-solid fa-rotate text-[#00D2FF]/50 text-[10px]"></i>
-          </div>
-          <span class="text-white/25 text-[9px] uppercase tracking-[0.3em]">Clic o hover para ver ambas caras</span>
-        </div>
-
-        <div class="stat-card-10k rounded-2xl p-4 w-full max-w-sm text-center">
-          <p class="text-[#00D2FF] font-black text-[10px] uppercase tracking-[0.3em] mb-2">Especificaciones</p>
-          <p class="text-white/40 text-xs leading-relaxed">Metal macizo · Acabado premium<br>Grabado permanente · Ed. limitada 2026</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
