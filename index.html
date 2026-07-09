@@ -238,11 +238,11 @@
         <a href="faq.html" class="text-white text-lg font-bold uppercase tracking-widest">Preguntas Frecuentes</a>
         <a href="aliados.html" class="text-white text-lg font-bold uppercase tracking-widest">Aliados</a>
         <a href="tienda.html" class="text-white text-lg font-bold uppercase tracking-widest">Tienda</a>
-        <div class="border-t border-white/20 w-full pt-5 flex flex-col gap-3">
-            <button onclick="activarFlujo('5K')" class="text-white text-lg font-bold uppercase tracking-widest">Segunda Edición 5K</button>
-            <button onclick="activarFlujo('10K')" class="text-white text-lg font-bold uppercase tracking-widest">Edición Especial 10K</button>
-            <button onclick="activarFlujo('ABONO')" class="text-[#00D2FF] text-lg font-bold uppercase tracking-widest">Consultar Saldo / Abonar</button>
-        </div>
+        <div class="border-t border-white/20 w-full pt-5 flex flex-col gap-3 text-center">
+    <a href="inscripcion.html?modo=5K" class="btn-nav-movil text-white text-lg font-bold uppercase tracking-widest hover:text-[#00D2FF] transition-colors">Segunda Edición 5K</a>
+    <a href="inscripcion.html?modo=10K" class="btn-nav-movil text-white text-lg font-bold uppercase tracking-widest hover:text-[#00D2FF] transition-colors">Edición Especial 10K</a>
+    <a href="inscripcion.html?modo=ABONO" class="btn-nav-movil text-white text-lg font-bold uppercase tracking-widest hover:text-white transition-colors">Consultar Saldo / Abonar</a>
+</div>
     </div>
 </div>
     </nav>
@@ -1510,17 +1510,24 @@ window.addEventListener('appinstalled', () => {
 // ========================================================
 
 // 1. Rastrear clic en el botón del MENÚ MÓVIL
-const botonInscribirmeMovil = document.getElementById('btnInscribirmeMovil');
-if (botonInscribirmeMovil) {
-    botonInscribirmeMovil.addEventListener('click', () => {
+// Captura todos los enlaces de inscripción del menú móvil usando la clase
+const botonesInscribirmeMovil = document.querySelectorAll('.btn-nav-movil');
+
+botonesInscribirmeMovil.forEach(enlace => {
+    enlace.addEventListener('click', (e) => {
         if (typeof gtag === 'function') {
+            // Extrae el parámetro (5K, 10K o ABONO) para saber qué le interesa al corredor
+            const urlParams = new URLSearchParams(enlace.getAttribute('href').split('?')[1]);
+            const modoSeleccionado = urlParams.get('modo') || 'General';
+
             gtag('event', 'clic_boton_inscribirme', {
                 'event_category': 'Embudo de Ventas',
-                'ubicacion': 'Menu Movil' 
+                'ubicacion': 'Menu Movil',
+                'modo_seleccionado': modoSeleccionado
             });
         }
     });
-}
+});
 
 // 2. Rastrear clic en el BOTÓN PRINCIPAL (El grande de la página)
 const botonInscribirmePrincipal = document.getElementById('btnInscribirmePrincipal');
