@@ -557,49 +557,67 @@ if (esSolvente || numSaldo <= 0) {
         }
 
         async function validarAtleta() {
-            const btn = document.getElementById('btnVerificar');
-            const ciInput = document.getElementById('cedulaAtleta').value.replace(/\D/g, '').trim();
-            if(ciInput.length < 5) return alert("Ingresa una cédula.");
+    const btn = document.getElementById('btnVerificar');
+    const ciInput = document.getElementById('cedulaAtleta').value.replace(/\D/g, '').trim();
+    if (ciInput.length < 5) return alert("⚠️ Ingresa una cédula válida.");
 
-            btn.innerText = "VERIFICANDO..."; btn.disabled = true;
+    btn.innerText = "VERIFICANDO..."; 
+    btn.disabled = true;
 
-            try {
-                const res = await fetch(urlCSV_Comparacion + "&nocache=" + new Date().getTime());
-                const csvText = await res.text();
-                const filas = csvText.match(/(?:[^\n"]|"(?:\\.|[^"])*")+/g);
+    try {
+        const res = await fetch(urlCSV_Comparacion + "&nocache=" + new Date().getTime());
+        const csvText = await res.text();
+        const filas = csvText.match(/(?:[^\n"]|"(?:\\.|[^"])*")+/g) || [];
 
-                let encontrado = false;
-                if (filas.length > 0) {
-                    const headers = filas[0].split(',').map(h => h.trim().toLowerCase());
-                    const idxCI = headers.findIndex(h => h.includes('cedula') || h.includes('ci'));
-                    const idxNombre = headers.findIndex(h => h.includes('nombre'));
+        let atletaRegistrado = null;
+        if (filas.length > 0) {
+            const headers = filas[0].split(',').map(h => h.trim().toLowerCase());
+            const idxCI = headers.findIndex(h => h.includes('cedula') || h.includes('ci'));
+            const idxNombre = headers.findIndex(h => h.includes('nombre'));
 
-                    for(let i = 1; i < filas.length; i++) {
-                        if(!filas[i].trim()) continue;
-                        const columnas = filas[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c => c.replace(/^"|"$/g, '').trim());
-                        if(columnas[idxCI] && columnas[idxCI].replace(/\D/g, '').trim() === ciInput) {
-                            encontrado = true;
-                            ciValidada = ciInput;
-                            document.getElementById('nombreEnvio').value = columnas[idxNombre] || "";
-                            document.getElementById('cedulaCampos').value = ciInput;
-                            break;
-                        }
-                    }
+            for (let i = 1; i < filas.length; i++) {
+                if (!filas[i].trim()) continue;
+                const columnas = filas[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c => c.replace(/^"|"$/g, '').trim());
+                if (columnas[idxCI] && columnas[idxCI].replace(/\D/g, '').trim() === ciInput) {
+                    atletaRegistrado = {
+                        nombre: columnas[idxNombre] || ""
+                    };
+                    break;
                 }
-                
-                ciValidada = ciInput;
-                document.getElementById('cedulaCampos').value = ciInput;
-                if(!encontrado) document.getElementById('nombreEnvio').value = "";
-
-                document.getElementById('paso-1').classList.add('hidden-step');
-                document.getElementById('paso-fundador').classList.remove('hidden-step');
-                document.getElementById('tituloRuta').innerText = "FORMULARIO 5K";
-                document.getElementById('labelCarreraActual').innerText = "Reportando Pago Regular";
-                actualizarTotal();
-
-            } catch (e) { }
-            finally { btn.innerText = "Verificar Cédula"; btn.disabled = false; }
+            }
         }
+
+        // 🚨 SI EL ATLETA YA EXISTE EN 10K Y ESTÁ TRATANDO DE INSCRIBIRSE OTRA VEZ
+        if (atletaRegistrado && flujoActual === '10K') {
+            alert(`⚠️ Hola, ${atletaRegistrado.nombre.toUpperCase()}.\n\nYa te encuentras registrado/a en la Edición 10K.\nSerás redirigido/a al Portal de Abonos para consultar tu saldo pendiente o estatus.`);
+            
+            // Cambiamos el flujo a ABONO e insertamos su cédula automáticamente
+            document.getElementById('cedulaConsulta').value = ciInput;
+            activarFlujo('ABONO');
+            consultarSaldoServidor();
+            return;
+        }
+
+        // Si es 5K o registro nuevo normal
+        ciValidada = ciInput;
+        document.getElementById('cedulaCampos').value = ciInput;
+        if (atletaRegistrado) {
+            document.getElementById('nombreEnvio').value = atletaRegistrado.nombre;
+        }
+
+        document.getElementById('paso-1').classList.add('hidden-step');
+        document.getElementById('paso-fundador').classList.remove('hidden-step');
+        document.getElementById('tituloRuta').innerText = flujoActual === '5K' ? "FORMULARIO 5K" : "EDICIÓN ESPECIAL 10K";
+        document.getElementById('labelCarreraActual').innerText = "Reportando Registro";
+        actualizarTotal();
+
+    } catch (e) {
+        alert("Error al verificar la cédula.");
+    } finally { 
+        btn.innerText = "Verificar Cédula"; 
+        btn.disabled = false; 
+    }
+}
 
         function procesarInscripcion() {
             const refPago = document.getElementById('numReferenciaPago').value;
