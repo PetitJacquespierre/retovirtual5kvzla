@@ -632,7 +632,10 @@ if (esSolvente || numSaldo <= 0) {
                 estado = document.getElementById('estadoEnvio').value;
                 ciudad = document.getElementById('ciudadEnvio').value;
                 agencia = document.querySelector('input[name="agencia"]:checked').value;
-                direccion = document.getElementById('direccionEnvio').value;
+                direccion = document.getElementById('direccionEnvio').value
+    .replace(/[\r\n]+/g, ' ')  // Elimina saltos de línea (Enters)
+    .replace(/,/g, ' - ')       // Reemplaza comas por guiones para no romper el CSV
+    .trim();
 
                 if(!cedulaFinal || !nombre || !genero || !tel || !estado || !ciudad || !direccion) {
                     return alert("⚠️ Faltan datos obligatorios logísticos.");
