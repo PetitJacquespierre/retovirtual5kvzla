@@ -566,7 +566,7 @@ if (esSolvente || numSaldo <= 0) {
             try {
                 const res = await fetch(urlCSV_Comparacion + "&nocache=" + new Date().getTime());
                 const csvText = await res.text();
-                const filas = csvText.split(/\r?\n/);
+                const filas = csvText.match(/(?:[^\n"]|"(?:\\.|[^"])*")+/g);
 
                 let encontrado = false;
                 if (filas.length > 0) {
