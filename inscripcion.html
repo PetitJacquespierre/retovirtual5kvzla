@@ -270,13 +270,17 @@
             </div>
 
 
-<!-- NUEVO: OPCIONES DE PAGO PARA EL ABONO -->
-            <div id="opciones-pago-abono" class="hidden-step bg-gradient-to-br from-[#00102A] to-slate-900 p-6 rounded-[2rem] text-white mt-6 mb-6 max-w-lg mx-auto">
-                <h3 class="text-[#00D2FF] font-black text-sm uppercase tracking-widest mb-3">¿Cuánto deseas abonar hoy?</h3>
+<!-- OPCIONES DE PAGO PARA EL ABONO MEJORADAS -->
+            <div id="opciones-pago-abono" class="hidden-step bg-gradient-to-br from-[#00102A] to-slate-900 p-6 rounded-[2rem] text-white mt-6 mb-6 max-w-lg mx-auto border border-[#00D2FF]/30">
+                <div class="flex justify-between items-center border-b border-white/10 pb-3 mb-4">
+                    <h3 class="text-[#00D2FF] font-black text-sm uppercase tracking-widest">Estado de Cuenta</h3>
+                    <span class="bg-[#00D2FF]/20 text-[#00D2FF] font-black px-3 py-1 rounded-lg text-xs">Deuda: $<span id="label-deuda-actual">0.00</span></span>
+                </div>
+                <p class="text-[10px] text-white/60 uppercase tracking-widest font-bold mb-3">¿Cuánto deseas abonar hoy?</p>
                 <div class="flex flex-col gap-3">
-                    <label class="cursor-pointer flex items-center gap-3 bg-white/5 border p-3 rounded-xl">
+                    <label id="contenedor-opcion-mitad" class="cursor-pointer flex items-center gap-3 bg-white/5 border p-3 rounded-xl">
                         <input type="radio" name="opcionAbono" value="mitad" onchange="actualizarTotalAbono()" class="w-5 h-5 accent-[#00D2FF]">
-                        <span class="text-xs font-bold">Abonar la Mitad de la Deuda <span id="label-abono-mitad" class="text-[#00D2FF] block font-normal text-[10px]">Calculando...</span></span>
+                        <span class="text-xs font-bold">Abonar una Cuota (Mitad) <span id="label-abono-mitad" class="text-[#00D2FF] block font-normal text-[10px]">Calculando...</span></span>
                     </label>
                     <label class="cursor-pointer flex items-center gap-3 bg-white/5 border p-3 rounded-xl">
                         <input type="radio" name="opcionAbono" value="completo" onchange="actualizarTotalAbono()" checked class="w-5 h-5 accent-[#00D2FF]">
@@ -552,38 +556,22 @@ const opcAbono = document.getElementById('opciones-pago-abono');
                         document.getElementById('opciones-pago-abono').classList.add('hidden-step');
                     } else {
                         deudaActual = numSaldo; // Guardamos la deuda actual
+                        document.getElementById('label-deuda-actual').innerText = deudaActual.toFixed(2); // Mostramos la deuda real en la pantalla
                         document.getElementById('opciones-pago-abono').classList.remove('hidden-step');
-                        actualizarTotalAbono(); // Calculamos la mitad y el completo automáticamente
+                        
+                        // LÓGICA INTELIGENTE: Si debe $15 o menos (ya es su última cuota), no le dejamos pagar "la mitad" de eso.
+                        if (deudaActual <= 15) {
+                            document.getElementById('contenedor-opcion-mitad').style.display = 'none';
+                            document.querySelector('input[name="opcionAbono"][value="completo"]').checked = true;
+                        } else {
+                            document.getElementById('contenedor-opcion-mitad').style.display = 'flex';
+                        }
+                        
+                        actualizarTotalAbono(); // Calculamos y mostramos
                         if (btnEnviar) { btnEnviar.disabled = false; btnEnviar.style.opacity = '1'; btnEnviar.style.cursor = 'pointer'; btnEnviar.innerText = 'ENVIAR REPORTE AL SISTEMA'; }
                     }
 
                     document.getElementById('seccion-busqueda-abono').classList.add('hidden-step');
-                    document.getElementById('paso-fundador').classList.remove('hidden-step');
-
-                    // LA MAGIA: OCULTAR LOGÍSTICA COMPLETA Y MOSTRAR SOLO CAMPOS CORTOS
-                    document.getElementById('seccion-logistica').classList.add('hidden-step');
-                    document.getElementById('campos-abono-solo').classList.remove('hidden-step');
-
-                } else {
-                    alert("❌ Tu cédula no registra saldos pendientes.");
-                }
-            } catch (e) { alert("Error al conectar."); }
-            finally { document.getElementById('loader').classList.add('hidden'); }
-        }
-
-function actualizarTotalAbono() {
-            if (flujoActual !== "ABONO") return;
-            
-            const radioAbono = document.querySelector('input[name="opcionAbono"]:checked');
-            const tipoPago = radioAbono ? radioAbono.value : "completo";
-            let montoAPagar = tipoPago === "mitad" ? (deudaActual / 2) : deudaActual;
-            
-            document.getElementById('label-abono-mitad').innerText = `Pagas $${(deudaActual/2).toFixed(2)} hoy.`;
-            document.getElementById('label-abono-completo').innerText = `Pagas los $${deudaActual.toFixed(2)} totales.`;
-            
-            document.getElementById('total-usd').innerText = `$${montoAPagar.toFixed(2)}`;
-            document.getElementById('total-bs').innerText = (montoAPagar * tasaBCV).toFixed(2) + " Bs.";
-        }
 
         async function validarAtleta() {
             const btn = document.getElementById('btnVerificar');
