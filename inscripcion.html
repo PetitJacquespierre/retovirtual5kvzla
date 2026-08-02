@@ -352,7 +352,7 @@
         let flujoActual = ""; 
         let ciValidada = "";
         let totalDorsalesRegistrados = 22; 
-        let deudaActual = 0; // NUEVO: Para recordar cuánto debe en total 
+        let deudaActual = 0; // NUEVO: Para recordar cuánto debe en total
 
         // CONFIGURACIÓN DE CONEXIONES
         const urlApiDolarBCV = "https://script.google.com/macros/s/AKfycbwsoD8ahtAQUqfY0TQWf3-dDs29HL8kEJa2t-mjDR3PAo3exTTmtSwXqYuNB2ob5dFpgw/exec";
@@ -419,7 +419,7 @@
             // Restablecer vistas lógicas
             document.getElementById('seccion-logistica').classList.remove('hidden-step');
             document.getElementById('campos-abono-solo').classList.add('hidden-step');
-const opcAbono = document.getElementById('opciones-pago-abono');
+            const opcAbono = document.getElementById('opciones-pago-abono');
             if (opcAbono) opcAbono.classList.add('hidden-step');
 
             if (modo === '5K') {
@@ -507,6 +507,21 @@ const opcAbono = document.getElementById('opciones-pago-abono');
             }
         }
 
+        // FUNCION NUEVA PARA CALCULAR LA MITAD O COMPLETO DEL ABONO
+        function actualizarTotalAbono() {
+            if (flujoActual !== "ABONO") return;
+            
+            const radioAbono = document.querySelector('input[name="opcionAbono"]:checked');
+            const tipoPago = radioAbono ? radioAbono.value : "completo";
+            let montoAPagar = tipoPago === "mitad" ? (deudaActual / 2) : deudaActual;
+            
+            document.getElementById('label-abono-mitad').innerText = `Pagas $${(deudaActual/2).toFixed(2)} hoy.`;
+            document.getElementById('label-abono-completo').innerText = `Pagas los $${deudaActual.toFixed(2)} totales.`;
+            
+            document.getElementById('total-usd').innerText = `$${montoAPagar.toFixed(2)}`;
+            document.getElementById('total-bs').innerText = (montoAPagar * tasaBCV).toFixed(2) + " Bs.";
+        }
+
         async function consultarSaldoServidor() {
             const ci = document.getElementById('cedulaConsulta').value.replace(/\D/g, '').trim();
             if (ci.length < 5) return alert("⚠️ Ingresa una cédula válida.");
@@ -572,6 +587,21 @@ const opcAbono = document.getElementById('opciones-pago-abono');
                     }
 
                     document.getElementById('seccion-busqueda-abono').classList.add('hidden-step');
+                    document.getElementById('paso-fundador').classList.remove('hidden-step');
+
+                    // LA MAGIA: OCULTAR LOGÍSTICA COMPLETA Y MOSTRAR SOLO CAMPOS CORTOS
+                    document.getElementById('seccion-logistica').classList.add('hidden-step');
+                    document.getElementById('campos-abono-solo').classList.remove('hidden-step');
+
+                } else {
+                    alert("❌ Tu cédula no registra saldos pendientes.");
+                }
+            } catch (e) { 
+                alert("Error al conectar."); 
+            } finally { 
+                document.getElementById('loader').classList.add('hidden'); 
+            }
+        }
 
         async function validarAtleta() {
             const btn = document.getElementById('btnVerificar');
@@ -702,7 +732,7 @@ const opcAbono = document.getElementById('opciones-pago-abono');
                         saldoText = "0.00"; // Si paga completo, no debe nada
                     }
                 }
-            } // <---- ESTA ERA LA LLAVE QUE FALTABA Y ROMPIÓ TODO EL BOTÓN
+            }
 
             document.getElementById('loader-texto').innerText = "Guardando Reporte...";
             document.getElementById('loader').classList.remove('hidden');
@@ -747,7 +777,7 @@ const opcAbono = document.getElementById('opciones-pago-abono');
                 .catch(() => salirYRedirigir(nombre, totalUSD, refPago, '???'));
             }
 
-        } // ← cierre de procesarInscripcion
+        }
 
         function salirYRedirigir(nombre, total, ref, dorsal) {
             document.getElementById('loader').classList.add('hidden');
