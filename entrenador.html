@@ -169,35 +169,121 @@
             <button onclick="activarFlujo('ABONO')" class="text-[#00D2FF] text-lg font-bold uppercase tracking-widest">Consultar Saldo / Abonar</button>
         </div>
     </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative group">
+                        <button class="border-2 border-white text-white px-5 py-2.5 rounded-full font-black text-[10px] xl:text-xs uppercase tracking-widest hover:bg-white hover:text-[#001E50] transition-all shadow-lg flex items-center gap-2">
+                            INSCRIBIRME <i class="fa-solid fa-chevron-down text-[8px]"></i>
+                        </button>
+                        <div class="absolute right-0 mt-2 w-64 bg-[#001E50] border border-white/10 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                            <div class="p-2 space-y-1">
+    <button onclick="window.location.href='inscripcion.html?modo=5K'" class="w-full flex items-center px-4 py-3 text-xs font-bold text-white/80 hover:text-[#00D2FF] hover:bg-white/5 rounded-lg text-left transition-all">
+        <i class="fa-solid fa-person-running mr-3 text-sm"></i> Segunda Edición 5K
+    </button>
+    <button onclick="window.location.href='inscripcion.html?modo=10K'" class="w-full flex items-center px-4 py-3 text-xs font-bold text-white/80 hover:text-[#00D2FF] hover:bg-white/5 rounded-lg text-left transition-all">
+        <i class="fa-solid fa-medal mr-3 text-sm"></i> Edición Especial 10K
+    </button>
+    <button onclick="window.location.href='inscripcion.html?modo=ABONO'" class="w-full flex items-center px-4 py-3 text-xs font-bold text-[#00D2FF] hover:bg-white/5 rounded-lg text-left transition-all border-t border-white/10 pt-2">
+        <i class="fa-solid fa-money-bill-wave mr-3 text-sm"></i> Consultar Saldo / Abonar
+    </button>
+</div>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="menuToggle" class="lg:hidden text-white text-2xl focus:outline-none z-50">
+                    <i class="fa-solid fa-bars-staggered"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobileMenu" class="fixed inset-0 bg-[#001E50] z-40 transform translate-x-full transition-transform duration-300 lg:hidden">
+    <div class="flex flex-col items-center justify-center h-full space-y-5 px-8">
+        <a href="index.html#ediciones" class="text-white text-lg font-bold uppercase tracking-widest">Calendario</a>
+        <a href="evidencias2.html" class="text-white text-lg font-bold uppercase tracking-widest">Evidencia</a>
+        <a href="resultados.html" class="text-white text-lg font-bold uppercase tracking-widest">Resultados</a>
+        <a href="entrenador.html" class="text-white text-lg font-bold uppercase tracking-widest">Entrenador IA</a>
+        <a href="faq.html" class="text-white text-lg font-bold uppercase tracking-widest">Preguntas Frecuentes</a>
+        <a href="aliados.html" class="text-white text-lg font-bold uppercase tracking-widest">Aliados</a>
+        <a href="tienda.html" class="text-white text-lg font-bold uppercase tracking-widest">Tienda</a>
+        <div class="border-t border-white/20 w-full pt-5 flex flex-col gap-3">
+            <button onclick="activarFlujo('5K')" class="text-white text-lg font-bold uppercase tracking-widest">Segunda Edición 5K</button>
+            <button onclick="activarFlujo('10K')" class="text-white text-lg font-bold uppercase tracking-widest">Edición Especial 10K</button>
+            <button onclick="activarFlujo('ABONO')" class="text-[#00D2FF] text-lg font-bold uppercase tracking-widest">Consultar Saldo / Abonar</button>
+        </div>
+    </div>
 </div>
     </nav>
 
 
 
-    <!-- HERO pequeño -->
-    <!-- HERO pequeño -->
-    <section class="relative py-20 px-4 text-center overflow-hidden">
-        <div class="glow-orb w-96 h-96 bg-[#00D2FF]/15 top-0 right-0"></div>
-        <div class="glow-orb w-72 h-72 bg-purple-500/10 bottom-0 left-0" style="animation-delay:4s"></div>
-        <div class="relative z-10">
-            
-            <!-- Etiqueta de IA Corregida (Una sola vez) -->
-            <div class="inline-flex items-center gap-2 border border-[#00D2FF]/40 bg-[#00D2FF]/5 px-5 py-2 rounded-full mb-6">
-                <i class="fa-solid fa-robot text-[#00D2FF] text-xs"></i>
-                <span class="text-[#00D2FF] font-black text-[10px] uppercase tracking-[0.3em]">Tu Coach Deportivo con IA 24/7</span>
+    <!-- CSS MAGICO 3D -->
+    <style>
+        .hero-3d-bg {
+            perspective: 1000px;
+            overflow: hidden;
+        }
+        .grid-3d {
+            position: absolute;
+            bottom: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background-image: 
+                linear-gradient(to right, rgba(0,210,255,0.2) 1px, transparent 1px),
+                linear-gradient(to top, rgba(0,210,255,0.2) 1px, transparent 1px);
+            background-size: 50px 50px;
+            transform: rotateX(75deg) translateY(100px);
+            transform-origin: top center;
+            animation: grid-move 3s linear infinite;
+            mask-image: radial-gradient(ellipse at top, black 20%, transparent 70%);
+            -webkit-mask-image: radial-gradient(ellipse at top, black 20%, transparent 70%);
+            z-index: 1;
+        }
+        @keyframes grid-move {
+            0% { transform: rotateX(75deg) translateY(0) translateZ(0); }
+            100% { transform: rotateX(75deg) translateY(50px) translateZ(0); }
+        }
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+
+    <!-- HERO IA WOW -->
+    <section class="relative py-32 md:py-48 px-4 text-left bg-[#050510] border-b border-[#00D2FF]/20 overflow-hidden flex items-center min-h-[80vh]">
+        <!-- Robot Image Background -->
+        <div class="absolute inset-0 bg-[url('img/robot_coach.jpg')] bg-cover bg-center md:bg-right bg-no-repeat opacity-80 mix-blend-screen scale-105" style="filter: contrast(1.2) brightness(0.9);"></div>
+        <!-- Gradient Overlay to make text readable -->
+        <div class="absolute inset-0 bg-gradient-to-r from-[#050510] via-[#050510]/80 to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#050510] via-transparent to-[#050510]/50"></div>
+        
+        <!-- Orbes gigantes -->
+        <div class="glow-orb w-[600px] h-[600px] bg-[#00D2FF]/20 top-0 left-0 blur-[150px] z-0"></div>
+        
+        <div class="relative z-10 max-w-2xl ml-4 md:ml-12 lg:ml-24 floating-element">
+            <div class="inline-flex items-center gap-3 border border-[#00D2FF]/50 bg-[#00D2FF]/10 backdrop-blur-md px-8 py-3 rounded-full mb-8 shadow-[0_0_30px_rgba(0,210,255,0.3)]">
+                <i class="fa-solid fa-microchip text-[#00D2FF] text-lg animate-pulse"></i>
+                <span class="text-[#00D2FF] font-black text-xs uppercase tracking-[0.5em]">Motor IA Llama 3.3 (70B)</span>
             </div>
             
-            <h1 class="font-heading text-4xl md:text-6xl font-black uppercase tracking-tighter leading-tight mb-4">
-                Tu Centro de <span class="text-[#00D2FF] italic">Preparación Inteligente</span>
+            <h1 class="font-heading text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter leading-none mb-6 text-white drop-shadow-2xl">
+                INTELIGENCIA <br><span class="chameleon-text drop-shadow-[0_0_20px_rgba(0,210,255,0.8)]">DEPORTIVA</span>
             </h1>
-            <p class="text-white/50 max-w-xl mx-auto text-base font-light">
-                IA optimizada sin bloqueos geográficos para el Reto Virtual VZLA. Planes reales, respuestas reales.
+            <p class="text-white/80 text-lg md:text-xl font-light leading-relaxed drop-shadow-md">
+                El futuro del entrenamiento ya está aquí. Selecciona a tu especialista IA y domina el Reto Virtual VZLA con estrategias en tiempo real.
             </p>
         </div>
     </section>
 
     <!-- MAIN -->
-    <section class="max-w-6xl mx-auto px-4 md:px-8 pb-24">
+    <section class="max-w-4xl mx-auto px-4 md:px-8 pb-32 -mt-12 relative z-20">
 
         <!-- TABS -->
         <div class="flex gap-4 justify-center mb-12 flex-wrap">
@@ -225,7 +311,7 @@
         </div>
 
         <!-- GRID: formulario + resultado -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="flex flex-col gap-8 max-w-2xl mx-auto">
 
             <!-- COLUMNA IZQUIERDA: formularios -->
             <div class="bg-white/5 border border-white/10 rounded-3xl p-8">
@@ -387,7 +473,8 @@
 
             </div>
 
-            <!-- COLUMNA DERECHA: resultado -->
+            <!-- RESULTADO INFERIOR -->
+            <div id="resultado-columna" class="hidden">
             <div class="bg-white/5 border border-white/10 rounded-3xl p-8 flex flex-col">
 
                 <!-- Header resultado -->
@@ -397,7 +484,7 @@
                     </div>
                     <div>
                         <p class="text-white font-black text-sm">Asistente RV VZLA</p>
-                        <p id="estado-ia" class="text-[#00D2FF] text-[10px] uppercase tracking-widest font-bold">● En espera</p>
+                        <p id="estado-ia" class="text-[#00D2FF] text-[10px] uppercase tracking-widest font-bold">â— En espera</p>
                     </div>
                     <button id="btn-copiar" onclick="copiarResultado()"
                             class="ml-auto text-white/20 hover:text-[#00D2FF] text-xs font-bold uppercase tracking-widest transition-all hidden">
@@ -405,17 +492,17 @@
                     </button>
                 </div>
 
-                <!-- Área de resultado -->
+                <!-- Ãrea de resultado -->
                 <div id="resultado-area" class="flex-1 flex flex-col">
 
-                    <!-- Estado vacío -->
+                    <!-- Estado vacÃ­o -->
                     <div id="estado-vacio" class="flex-1 flex flex-col items-center justify-center text-center py-12">
                         <div class="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-4">
                             <i class="fa-solid fa-robot text-white/10 text-3xl"></i>
                         </div>
                         <p class="text-white/50 text-sm font-light">Selecciona un modo y genera tu plan personalizado.</p>
                         <p class="text-[#00D2FF]/40 text-[10px] uppercase tracking-widest mt-2 font-bold">
-                            <i class="fa-solid fa-microchip mr-1"></i>Conectado con Gemini 2.0 via OpenRouter
+                            <i class="fa-solid fa-microchip mr-1"></i>Conectado con Llama 3.3 via Groq
                         </p>
                     </div>
 
