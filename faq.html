@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Centro de Ayuda - Reto Virtual VZLA 2026</title>
-    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="icon" type="image/png" href="img/favicon.webp">
 
 <!-- Google tag (gtag.js) -->
 
@@ -36,6 +36,7 @@
         /* Buscador */
         .search-container input:focus { border-color: #00D2FF; box-shadow: 0 0 15px rgba(0, 210, 255, 0.2); }
     </style>
+    <link rel="stylesheet" href="css/wow-effects.css">
 </head>
 <body class="bg-slate-50 text-slate-900 min-h-screen">
 
@@ -53,10 +54,10 @@
             <div class="flex items-center gap-3 md:gap-5 cursor-pointer group -ml-2 md:-ml-4" onclick="location.href='index.html'">
                 
                 <!-- 📱 Logo para Móvil (Isotipo) -->
-                <img src="img/RV-Isotipo-sinfondo.png" alt="Reto Virtual" class="h-12 w-auto object-contain brightness-125 transition-transform group-hover:scale-105 md:hidden">
+                <img src="img/RV-Isotipo-sinfondo.webp" alt="Reto Virtual" class="h-12 w-auto object-contain brightness-125 transition-transform group-hover:scale-105 md:hidden">
 
                 <!-- 💻 Logo para Laptop (Texto) - ¡TAMAÑO AUMENTADO AQUÍ! (h-16 a h-20) -->
-                <img src="img/RV Texto Sin fondo.png" alt="Reto Virtual" class="hidden md:block h-20 lg:h-28 w-auto object-contain brightness-125 transition-transform group-hover:scale-105">
+                <img src="img/RV Texto Sin fondo.webp" alt="Reto Virtual" class="hidden md:block h-20 lg:h-28 w-auto object-contain brightness-125 transition-transform group-hover:scale-105">
                 
                 <!-- La línea separadora (también la hice un poco más alta para que cuadre) -->
                 <!-- <div class="h-10 md:h-12 lg:h-16 w-[1px] bg-white/20"></div> -->
@@ -246,7 +247,7 @@
     <footer class="bg-[#001E50] py-20 px-4 border-t border-white/5">
     <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-16 text-center md:text-left">
         <div>
-            <img src="img/RV-Isotipo-sinfondo.png" class="h-14 mx-auto md:mx-0 mb-6 grayscale brightness-200 opacity-40">
+            <img src="img/RV-Isotipo-sinfondo.webp" class="h-14 mx-auto md:mx-0 mb-6 grayscale brightness-200 opacity-40">
             <p class="text-white/30 text-[10px] uppercase tracking-[0.4em] leading-relaxed">
                 Reto Virtual VZLA es una producción <br>
             <span class="text-white/60 font-bold">Nacional Independiente</span>. <br>
@@ -271,6 +272,15 @@
             </a>
         </div> -->
     </div>
+        <div class="footer-bottom" style="border: none; padding-top: 1rem; padding-bottom: 1rem; width: 100%; text-align: center;">
+            <div class="flex flex-row items-center justify-center md:justify-end gap-2">
+                <span class="text-[#64748b] text-[13px] font-medium">Desarrollado por</span>
+                <a href="https://growstudioweb.vercel.app/" target="_blank" class="flex items-center gap-2 hover:scale-105 transition-transform cursor-pointer" style="text-decoration: none;">
+                    <img src="img/grow-logo.png" alt="Grow Studio" class="h-6 object-contain drop-shadow-[0_0_5px_rgba(0,210,255,0.5)]" style="height: 24px;">
+                    <span class="chameleon-text font-black text-[15px] tracking-[0.1em]">GROW STUDIO</span>
+                </a>
+            </div>
+        </div>
 </footer>
 
     <script>
@@ -328,3 +338,4 @@
     </script>
 </body>
 </html>
+

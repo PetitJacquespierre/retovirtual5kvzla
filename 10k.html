@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acceso Restringido - Especial 10K</title>
-    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="icon" type="image/png" href="img/favicon.webp">
 
 <!-- Google tag (gtag.js) -->
 
@@ -48,7 +48,7 @@
         .ruido-fondo {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+            background-image: url('https://www.transparenttextures.com/patterns/stardust.webp');
             opacity: 0.15;
             z-index: -1;
             pointer-events: none;
@@ -58,6 +58,7 @@
   window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
+    <link rel="stylesheet" href="css/wow-effects.css">
 </head>
 <body class="min-h-screen flex flex-col relative">
 
@@ -68,7 +69,7 @@
     </a>
 
     <main class="flex-grow flex flex-col items-center justify-center px-4 pt-20 pb-10">
-        <img src="img/RV-Isotipo-sinfondo.png" alt="Logo Oculto" class="h-24 md:h-32 mb-6 opacity-30 grayscale fade-in delay-1" style="filter: brightness(0.4);">
+        <img src="img/RV-Isotipo-sinfondo.webp" alt="Logo Oculto" class="h-24 md:h-32 mb-6 opacity-30 grayscale fade-in delay-1" style="filter: brightness(0.4);">
 
         <p class="font-['Courier_Prime'] text-gray-500 tracking-[0.5em] md:tracking-[1em] text-sm md:text-lg mb-4 fade-in delay-2">
             PRÓXIMAMENTE
@@ -112,7 +113,7 @@
         <div class="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center md:text-left">
             
             <div>
-                <img src="img/RV-Isotipo-sinfondo.png" class="h-8 mx-auto md:mx-0 mb-3 grayscale opacity-20" alt="Logo RV">
+                <img src="img/RV-Isotipo-sinfondo.webp" class="h-8 mx-auto md:mx-0 mb-3 grayscale opacity-20" alt="Logo RV">
                 <p class="font-['Courier_Prime'] text-gray-600 text-[10px] uppercase tracking-widest leading-relaxed">
                     [ SYS_RV_2026_CORE ]<br>
                     © 2026 THE ROAD TO GLORY.
@@ -137,7 +138,17 @@
             </div>
 
         </div>
-    </footer>
+            <div class="footer-bottom" style="border: none; padding-top: 1rem; padding-bottom: 1rem; width: 100%; text-align: center;">
+            <div class="flex flex-row items-center justify-center md:justify-end gap-2">
+                <span class="text-[#64748b] text-[13px] font-medium">Desarrollado por</span>
+                <a href="https://growstudioweb.vercel.app/" target="_blank" class="flex items-center gap-2 hover:scale-105 transition-transform cursor-pointer" style="text-decoration: none;">
+                    <img src="img/grow-logo.png" alt="Grow Studio" class="h-6 object-contain drop-shadow-[0_0_5px_rgba(0,210,255,0.5)]" style="height: 24px;">
+                    <span class="chameleon-text font-black text-[15px] tracking-[0.1em]">GROW STUDIO</span>
+                </a>
+            </div>
+        </div>
+</footer>
 
 </body>
 </html>
+

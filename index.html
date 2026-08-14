@@ -17,11 +17,11 @@
     <meta property="og:title" content="Reto Virtual VZLA 2026 | El Circuito Nacional">
     <meta property="og:description" content="Una Nación, Un Solo Cronómetro. Inscríbete en el circuito de running virtual más grande de Venezuela.">
     <!-- Asumo que tienes una imagen buena para compartir en la carpeta img -->
-    <meta property="og:image" content="https://www.retovirtualvzla.com/img/fondo1.png">
+    <meta property="og:image" content="https://www.retovirtualvzla.com/img/fondo1.webp">
     <meta property="og:url" content="https://www.retovirtualvzla.com/">
     <meta property="og:type" content="website">
 
-<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="icon" type="image/png" href="img/favicon.webp">
 <link rel="manifest" href="manifest.json">
 
 <!-- Google tag (gtag.js) -->
@@ -154,6 +154,7 @@
   window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
+    <link rel="stylesheet" href="css/wow-effects.css">
 </head>
 <body class="bg-white text-slate-900">
 
@@ -168,10 +169,10 @@
                 <div class="particle p9"></div><div class="particle p10"></div>
             </div>
             <div class="rv-logo">
-                <img src="img/RV-Isotipo-sinfondo.png" alt="Reto Virtual VZLA" />
+                <img src="img/RV-Isotipo-sinfondo.webp" alt="Reto Virtual VZLA" />
             </div>
           <!-- <div class="splash-divider"></div>
-            <img class="teamfs-splash" id="teamfs-splash" src="img/teamfslogo.png" alt="Team FS" />
+            <img class="teamfs-splash" id="teamfs-splash" src="img/teamfslogo.webp" alt="Team FS" />
             <div class="collab-text">Reto Virtual VZLA × Team FS</div> -->
         </div>
         <div class="splash-progress"></div>
@@ -193,8 +194,8 @@
             <div class="flex justify-between items-center h-20 md:h-28">
                 
                 <div class="flex items-center gap-3 md:gap-5 cursor-pointer group -ml-2 md:-ml-4" onclick="location.href='index.html'">
-                    <img src="img/RV-Isotipo-sinfondo.png" alt="Reto Virtual" class="h-12 w-auto object-contain brightness-125 md:hidden">
-                    <img src="img/RV Texto Sin fondo.png" alt="Reto Virtual" class="hidden md:block h-20 lg:h-28 w-auto object-contain brightness-125">
+                    <img src="img/RV-Isotipo-sinfondo.webp" alt="Reto Virtual" class="h-12 w-auto object-contain brightness-125 md:hidden">
+                    <img src="img/RV Texto Sin fondo.webp" alt="Reto Virtual" class="hidden md:block h-20 lg:h-28 w-auto object-contain brightness-125">
                 </div>
 
                 <div class="hidden lg:flex items-center space-x-4 xl:space-x-6">
@@ -313,26 +314,39 @@
 
   <!-- ===== SLIDE 1: HERO PRINCIPAL ===== -->
   <div class="hero-slide" data-slide="1">
-    <img src="img/fondo1.png" class="absolute inset-0 w-full h-full object-cover opacity-40 grayscale" alt="Runner" loading="eager">
+    <img src="img/fondo1.webp" class="absolute inset-0 w-full h-full object-cover opacity-40 grayscale" alt="Runner" loading="eager">
     <div class="absolute inset-0 hero-gradient"></div>
-    <div class="relative z-10 h-full flex items-center justify-center text-center px-4">
+    <div class="relative z-10 h-full flex items-center justify-center">
       <div class="max-w-5xl w-full">
-        <h2 class="text-[#00D2FF] font-bold tracking-[0.5em] uppercase text-xs md:text-sm mb-6 animate-pulse">
+        <!-- PRUEBA SOCIAL (Social Proof) -->
+        <div class="inline-flex items-center gap-3 bg-black/40 backdrop-blur-md border border-white/10 px-5 py-2 rounded-full mb-6 shadow-2xl">
+            <div class="flex -space-x-2">
+                <img src="https://i.pravatar.cc/100?img=1" alt="User" class="w-6 h-6 rounded-full border-2 border-[#001E50]">
+                <img src="https://i.pravatar.cc/100?img=33" alt="User" class="w-6 h-6 rounded-full border-2 border-[#001E50]">
+                <img src="https://i.pravatar.cc/100?img=12" alt="User" class="w-6 h-6 rounded-full border-2 border-[#001E50]">
+            </div>
+            <span class="text-white/90 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em]">+5,000 corredores unidos en toda Venezuela</span>
+        </div>
+
+        <h2 class="text-[#00D2FF] font-bold tracking-[0.6em] uppercase text-xs md:text-sm mb-6 animate-pulse drop-shadow-md">
           Una Nación, Un Solo Cronómetro
         </h2>
-        <h1 class="font-heading text-5xl md:text-9xl font-black text-white leading-[0.85] mb-8 tracking-tighter uppercase">
+        <h1 class="font-heading text-5xl md:text-9xl font-black text-white leading-[0.85] mb-8 tracking-tighter uppercase drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]">
           RETO VIRTUAL <br><span class="text-[#00D2FF] italic">VENEZUELA</span>
         </h1>
-        <p class="text-white/80 max-w-2xl mx-auto text-base md:text-xl font-light mb-10 leading-relaxed">
+        <p class="text-white max-w-2xl mx-auto text-base md:text-xl font-light mb-10 leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] tracking-wide">
           4 ediciones. 4 medallas. 1 rompecabezas nacional. El running virtual más exigente de Venezuela.
         </p>
-        <div class="flex flex-col items-center justify-center gap-3">
+        <div class="flex flex-col items-center justify-center gap-3 mt-4">
           <span class="bg-[#00D2FF] text-[#001E50] px-8 py-3 rounded-full text-lg md:text-xl font-black uppercase tracking-widest shadow-[0_0_30px_rgba(0,210,255,0.5)] animate-pulse">
             ¡EVENTO EN CURSO!
           </span>
-          <p class="text-white font-bold mt-2 tracking-[0.3em] uppercase text-xs">
-            <i class="fa-solid fa-fire text-[#00D2FF] mr-2"></i>Acumulando Kilómetros
-          </p>
+          <!-- MICRO TEXTO DE CONFIANZA -->
+          <div class="flex items-center gap-4 text-white/80 font-bold mt-3 tracking-[0.2em] uppercase text-[9px] drop-shadow-md">
+            <span><i class="fa-solid fa-lock text-[#00D2FF] mr-1"></i>Pago Seguro</span>
+            <span class="opacity-50">|</span>
+            <span><i class="fa-solid fa-truck-fast text-[#00D2FF] mr-1"></i>Envíos Nacionales</span>
+          </div>
         </div>
       </div>
     </div>
@@ -341,7 +355,7 @@
   <!-- ===== SLIDE 2: MEDALLA 10K ===== -->
   <div class="hero-slide active" data-slide="0">
     <div class="absolute inset-0 bg-[#001E50]"></div>
-    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
+    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.webp')] opacity-10"></div>
     <div class="absolute -left-20 top-1/4 w-96 h-96 bg-[#00D2FF]/8 rounded-full blur-[140px]"></div>
     <div class="absolute -right-20 bottom-1/4 w-80 h-80 bg-[#00D2FF]/5 rounded-full blur-[120px]"></div>
     <div class="relative z-10 h-full flex items-center justify-center px-4">
@@ -377,11 +391,11 @@
                  style="background:conic-gradient(from 0deg,#00D2FF,#ffffff30,#00D2FF,#ffffff15,#00D2FF);animation:bspin 3s linear infinite;border-radius:2.2rem;"></div>
             <div class="hero-medal-inner" style="position:absolute;inset:3px;">
               <div class="hero-medal-face bg-[#001840]">
-                <img src="img/medalla-frente.png" alt="Medalla 10K frontal"
+                <img src="img/medalla-frente.webp" alt="Medalla 10K frontal"
                      class="w-full h-full object-contain" loading="lazy">
               </div>
               <div class="hero-medal-face hero-medal-back bg-[#001840]">
-                <img src="img/medalla-trasera.png" alt="Medalla 10K trasera"
+                <img src="img/medalla-trasera.webp" alt="Medalla 10K trasera"
                      class="w-full h-full object-contain" loading="lazy">
               </div>
             </div>
@@ -398,7 +412,7 @@
 
   <!-- ===== SLIDE 3: ÚNETE A LA COMUNIDAD ===== -->
 <div class="hero-slide" data-slide="2">
-  <img src="img/fondo1.png" class="absolute inset-0 w-full h-full object-cover opacity-20 grayscale scale-105" alt="Comunidad" loading="lazy">
+  <img src="img/fondo1.webp" class="absolute inset-0 w-full h-full object-cover opacity-20 grayscale scale-105" alt="Comunidad" loading="lazy">
   <div class="absolute inset-0" style="background:linear-gradient(135deg,rgba(0,30,80,.97) 0%,rgba(0,30,80,.75) 50%,rgba(0,20,60,.97) 100%)"></div>
   <div class="relative z-10 h-full flex items-center justify-center px-4">
     <div class="max-w-5xl w-full text-center">
@@ -626,7 +640,7 @@ const heroCarousel = (function() {
 
   <!-- Fondo textura carbon -->
   <div class="absolute inset-0 opacity-10 pointer-events-none"
-       style="background-image:url('https://www.transparenttextures.com/patterns/carbon-fibre.png')"></div>
+       style="background-image:url('https://www.transparenttextures.com/patterns/carbon-fibre.webp')"></div>
 
   <!-- Blobs decorativos -->
   <div class="absolute pointer-events-none"
@@ -674,7 +688,7 @@ const heroCarousel = (function() {
           <div class="kit-photo-glow rounded-3xl overflow-hidden border"
                style="border-color:rgba(0,210,255,0.25);max-width:480px;">
             <img
-              src="img/10k_franela.png"
+              src="img/10k_franela.webp"
               alt="Kit de carrera oficial 10K 2026 — camiseta, dorsal y medalla"
               width="480"
               height="480"
@@ -838,7 +852,7 @@ const heroCarousel = (function() {
 <section id="especial-10k" class="py-24 md:py-32 bg-[#001E50] relative overflow-hidden border-y border-white/5">
 
   <div class="absolute inset-0 opacity-10 pointer-events-none">
-    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.webp')]"></div>
   </div>
   <div class="absolute -left-24 top-1/4 w-96 h-96 bg-[#00D2FF]/8 rounded-full blur-[140px] pointer-events-none"></div>
   <div class="absolute -right-24 bottom-1/4 w-80 h-80 bg-[#00D2FF]/5 rounded-full blur-[120px] pointer-events-none"></div>
@@ -874,15 +888,15 @@ const heroCarousel = (function() {
         </p>
 
         <div class="grid grid-cols-3 gap-3 mb-10 max-w-lg mx-auto lg:mx-0">
-          <div class="stat-card-10k rounded-2xl p-4 text-center lg:text-left">
+          <div class="stat-card-10k glow-card rounded-2xl p-4 text-center lg:text-left">
             <span class="grad-text text-2xl md:text-3xl font-black italic leading-none block mb-1">100%</span>
             <span class="text-white/35 text-[9px] font-bold uppercase tracking-[0.2em]">Metal Macizo</span>
           </div>
-          <div class="stat-card-10k rounded-2xl p-4 text-center lg:text-left">
+          <div class="stat-card-10k glow-card rounded-2xl p-4 text-center lg:text-left">
             <span class="grad-text text-2xl md:text-3xl font-black italic leading-none block mb-1">ELITE</span>
             <span class="text-white/35 text-[9px] font-bold uppercase tracking-[0.2em]">Ranking Oficial</span>
           </div>
-          <div class="stat-card-10k rounded-2xl p-4 text-center lg:text-left">
+          <div class="stat-card-10k glow-card rounded-2xl p-4 text-center lg:text-left">
             <span class="grad-text text-2xl md:text-3xl font-black italic leading-none block mb-1">2026</span>
             <span class="text-white/35 text-[9px] font-bold uppercase tracking-[0.2em]">Ed. Limitada</span>
           </div>
@@ -917,7 +931,7 @@ const heroCarousel = (function() {
 
             <!-- CARA FRONTAL -->
             <div class="medal-face bg-[#001840]">
-              <img src="img/medalla-frente.png"
+              <img src="img/medalla-frente.webp"
                    alt="Medalla Especial 10K cara frontal"
                    class="w-full h-full object-cover"
                    width="360" height="378"
@@ -926,7 +940,7 @@ const heroCarousel = (function() {
 
             <!-- CARA TRASERA -->
             <div class="medal-face medal-face-back bg-[#001840]">
-              <img src="img/medalla-trasera.png"
+              <img src="img/medalla-trasera.webp"
                    alt="Medalla Especial 10K cara trasera"
                    class="w-full h-full object-cover"
                    width="360" height="378"
@@ -943,7 +957,7 @@ const heroCarousel = (function() {
           <span class="text-white/25 text-[9px] uppercase tracking-[0.3em]">Clic o hover para ver ambas caras</span>
         </div>
 
-        <div class="stat-card-10k rounded-2xl p-4 w-full max-w-sm text-center">
+        <div class="stat-card-10k glow-card rounded-2xl p-4 w-full max-w-sm text-center">
           <p class="text-[#00D2FF] font-black text-[10px] uppercase tracking-[0.3em] mb-2">Especificaciones</p>
           <p class="text-white/40 text-xs leading-relaxed">Metal macizo · Acabado premium<br>Grabado permanente · Ed. limitada 2026</p>
         </div>
@@ -955,7 +969,7 @@ const heroCarousel = (function() {
 
 
     <!-- ===================== CÓMO FUNCIONA ===================== -->
-<section id="como-funciona" class="py-24 bg-white">
+<section id="como-funciona" class="py-24 bg-white reveal">
   <div class="max-w-7xl mx-auto px-4 md:px-12">
 
     <div class="text-center mb-14">
@@ -1039,7 +1053,7 @@ const heroCarousel = (function() {
             <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                 <div>
                     <span class="text-[#00D2FF] font-bold text-xs uppercase tracking-widest">Experiencia de Élite</span>
-                    <h2 class="text-white text-4xl md:text-5xl font-black uppercase mt-4 mb-8 leading-tight">
+                    <h2 class="text-white text-4xl md:text-5xl font-black uppercase mt-4 mb-8 leading-tight text-reveal">
                         Más que una medalla, <br> un legado físico.
                     </h2>
                     <p class="text-white text-lg mb-8 leading-relaxed" style="color:rgba(255,255,255,0.80)">
@@ -1061,7 +1075,7 @@ const heroCarousel = (function() {
         </div>
     </section>
 
-    <section id="ediciones" class="py-24 bg-slate-50">
+    <section id="ediciones" class="py-24 bg-slate-50 reveal">
   <div class="max-w-7xl mx-auto px-4 md:px-12">
 
     <!-- Encabezado -->
@@ -1076,7 +1090,7 @@ const heroCarousel = (function() {
 
       <!-- EDICIÓN 1 — Completada -->
       <div class="group relative aspect-[3/4] overflow-hidden rounded-2xl shadow-xl transition-all hover:scale-[1.02]">
-        <img src="img/Medalla1web.png" class="absolute inset-0 w-full h-full object-cover" alt="Medalla Edición 1" loading="lazy">
+        <img src="img/Medalla1web.webp" class="absolute inset-0 w-full h-full object-cover" alt="Medalla Edición 1" loading="lazy">
         <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-black/60"></div>
         <div class="absolute inset-0 flex flex-col items-center justify-center p-6 text-white z-10">
           <div class="mb-3 bg-[#00D2FF]/20 backdrop-blur-sm border border-[#00D2FF] p-2 rounded-full shadow-lg">
@@ -1098,7 +1112,7 @@ const heroCarousel = (function() {
           <p class="text-[#00D2FF] text-[10px] font-bold uppercase tracking-[0.2em] mb-4 italic">Pieza: La Conquista</p>
           <div class="relative w-full flex justify-center items-center py-4 mb-4 group cursor-pointer">
             <div class="absolute w-28 h-28 bg-[#00D2FF]/20 blur-2xl rounded-full group-hover:bg-[#00D2FF]/40 transition-all duration-500"></div>
-            <img src="img/Medalla2web.png"
+            <img src="img/Medalla2web.webp"
                  alt="Medalla La Conquista"
                  class="relative w-36 md:w-44 h-auto object-contain drop-shadow-[0_15px_25px_rgba(0,0,0,0.5)] transform group-hover:scale-110 group-hover:-translate-y-2 transition-all duration-500 z-10"
                  loading="lazy"
@@ -1171,7 +1185,7 @@ const heroCarousel = (function() {
              style="background: linear-gradient(135deg, #001E50 0%, #001840 100%);">
           <div class="absolute w-64 h-64 bg-[#00D2FF]/15 rounded-full blur-[80px]"></div>
           <div class="absolute w-40 h-40 bg-[#00D2FF]/10 rounded-full blur-[60px] translate-x-16 translate-y-8"></div>
-          <img src="img/pieza1-2.png"
+          <img src="img/pieza1-2.webp"
                alt="Rompecabezas Ediciones 1 y 2"
                class="relative z-10 max-w-sm w-full object-contain drop-shadow-[0_20px_40px_rgba(0,210,255,0.3)] hover:scale-105 transition-transform duration-500"
                loading="lazy">
@@ -1231,10 +1245,10 @@ const heroCarousel = (function() {
             <h2 class="text-[#001E50] text-4xl font-black uppercase tracking-tighter mb-4">Galería de Conquistadores</h2>
             <p class="text-slate-500 mb-12 max-w-2xl mx-auto text-sm">Las mejores postales de nuestra comunidad. Cada km cuenta una historia diferente.</p>
             <div class="flex gap-4 pb-10 overflow-x-auto snap-x">
-                <img src="img/tu-foto-1.png" class="flex-none w-72 h-96 object-cover rounded-2xl snap-center shadow-lg" alt="Runner">
-                <img src="img/tu-foto-2.jpg" class="flex-none w-72 h-96 object-cover rounded-2xl snap-center shadow-lg" alt="Runner">
-                <img src="img/tu-foto-3.png" class="flex-none w-72 h-96 object-cover rounded-2xl snap-center shadow-lg" alt="Runner">
-                <img src="img/tu-foto-4.jpg" class="flex-none w-72 h-96 object-cover rounded-2xl snap-center shadow-lg" alt="Runner">
+                <img src="img/tu-foto-1.webp" class="flex-none w-72 h-96 object-cover rounded-2xl snap-center shadow-lg" alt="Runner">
+                <img src="img/tu-foto-2.webp" class="flex-none w-72 h-96 object-cover rounded-2xl snap-center shadow-lg" alt="Runner">
+                <img src="img/tu-foto-3.webp" class="flex-none w-72 h-96 object-cover rounded-2xl snap-center shadow-lg" alt="Runner">
+                <img src="img/tu-foto-4.webp" class="flex-none w-72 h-96 object-cover rounded-2xl snap-center shadow-lg" alt="Runner">
             </div>
             <div class="mt-8">
                 <a href="https://drive.google.com/drive/folders/1aaoaoAIUHxevRezYuz7j0CP_fcOvjOfb?usp=drive_link" target="_blank" class="inline-flex items-center gap-3 bg-slate-100 text-[#001E50] px-8 py-4 rounded-full font-black text-xs uppercase tracking-widest hover:bg-[#00D2FF] hover:text-white transition-all border border-slate-200">
@@ -1281,7 +1295,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-    <section id="aliados" class="py-24 bg-slate-50 border-t border-slate-100">
+    <section id="aliados" class="py-24 bg-slate-50 border-t border-slate-100 reveal">
     <div class="max-w-7xl mx-auto px-4 md:px-12 text-center">
         <span class="text-[#00D2FF] font-black text-[10px] uppercase tracking-[0.5em] mb-4 block">Alianza Estratégica</span>
         <h2 class="text-[#001E50] text-4xl font-black uppercase mb-16 tracking-tighter italic">Nuestros <span class="text-[#00D2FF]">Aliados</span></h2>
@@ -1291,7 +1305,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <p class="text-[10px] text-slate-900 font-black uppercase tracking-[0.4em] mb-6 italic">Presentador Oficial</p>
                 
                 <a href="https://www.instagram.com/team_fs__/" target="_blank" class="block group">
-                    <img src="img/teamfslogo.png" alt="TeamFS Logo" class="h-34 mx-auto object-contain transition-transform group-hover:scale-110">
+                    <img src="img/teamfslogo.webp" alt="TeamFS Logo" class="h-34 mx-auto object-contain transition-transform group-hover:scale-110">
                     
                     <div class="mt-6">
                         <span class="text-slate-900 font-black uppercase text-[11px] tracking-widest group-hover:text-[#00D2FF] transition-colors">Team FS</span>
@@ -1311,7 +1325,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="w-full sm:w-64 bg-white p-8 rounded-3xl border border-slate-100 shadow-sm transition-all hover:shadow-xl hover:-translate-y-2 group">
                 <a href="https://www.instagram.com/laflacapasteles.pf/" target="_blank" class="block">
                     <div class="h-22 flex flex-col items-center justify-center">
-                        <img src="img/laflacalogo.png" alt="La Flaca" class="h-21 w-auto object-contain transition-transform group-hover:scale-110">
+                        <img src="img/laflacalogo.webp" alt="La Flaca" class="h-21 w-auto object-contain transition-transform group-hover:scale-110">
                     </div>
                     <div class="mt-4 text-center">
                         <span class="text-slate-900 font-black uppercase text-[10px] tracking-widest group-hover:text-[#00D2FF] transition-colors">La Flaca</span>
@@ -1323,7 +1337,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="w-full sm:w-64 bg-white p-8 rounded-3xl border border-slate-100 shadow-sm transition-all hover:shadow-xl hover:-translate-y-2 group">
                 <a href="https://www.instagram.com/_jcolina/" target="_blank" class="block">
                     <div class="h-22 flex flex-col items-center justify-center">
-                        <img src="img/JoseColinaCOACHLOGO.jpeg" alt="_JCOLINA" class="h-21 w-auto object-contain transition-transform group-hover:scale-110">
+                        <img src="img/JoseColinaCOACHLOGO.webp" alt="_JCOLINA" class="h-21 w-auto object-contain transition-transform group-hover:scale-110">
                     </div>
                     <div class="mt-4 text-center">
                         <span class="text-slate-900 font-black uppercase text-[10px] tracking-widest group-hover:text-[#00D2FF] transition-colors">José Colina Running Coach</span>
@@ -1361,14 +1375,14 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
             <h2 class="text-white text-4xl md:text-6xl font-black uppercase mb-6 leading-none">Tu próxima meta <br> <span class="text-[#00D2FF] italic">empieza aquí.</span></h2>
             <p class="text-white/70 text-lg mb-10">No dejes para después la medalla que puedes ganar hoy. La Edición 2 de Junio te espera.</p>
-            <a id="btnInscribirmePrincipal" href="inscripcion.html" class="inline-block bg-[#00D2FF] text-[#001E50] px-16 py-5 rounded-full font-black text-lg uppercase tracking-widest hover:scale-110 transition-transform shadow-2xl">¡INSCRIBIRME AHORA!</a>
+            <a id="btnInscribirmePrincipal" href="inscripcion.html" class="btn-magnetic inline-block bg-[#00D2FF] text-[#001E50] px-16 py-5 rounded-full font-black text-lg uppercase tracking-widest shadow-2xl">¡INSCRIBIRME AHORA!</a>
         </div>
     </section>
 
     <footer class="bg-[#001E50] py-20 px-4 border-t border-white/5">
     <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-16 text-center md:text-left">
         <div>
-            <img src="img/RV-Isotipo-sinfondo.png" class="h-14 mx-auto md:mx-0 mb-6 grayscale brightness-200 opacity-40">
+            <img src="img/RV-Isotipo-sinfondo.webp" class="h-14 mx-auto md:mx-0 mb-6 grayscale brightness-200 opacity-40">
             <p class="text-white/30 text-[10px] uppercase tracking-[0.4em] leading-relaxed">
                 Reto Virtual VZLA es una producción <br>
             <span class="text-white/60 font-bold">Nacional Independiente</span>. <br>
@@ -1393,9 +1407,16 @@ document.addEventListener('DOMContentLoaded', function() {
             </a>
         </div> -->
 
-<a href="https://growstudioweb.vercel.app/" target="_blank" class="grow-studio-credit">
-                        GROW STUDIO
+            <div class="footer-bottom" style="border: none; padding-top: 1rem;">
+                <div class="flex flex-row items-center justify-center md:justify-end gap-2">
+                    <span class="text-[#64748b] text-[13px] font-medium">Desarrollado por</span>
+                    <a href="https://growstudioweb.vercel.app/" target="_blank" class="flex items-center gap-2 hover:scale-105 transition-transform cursor-pointer">
+                        <!-- Aquí va el emblema de la G -->
+                        <img src="img/grow-logo.png" alt="Grow Studio" class="h-6 object-contain drop-shadow-[0_0_5px_rgba(0,210,255,0.5)]">
+                        <span class="chameleon-text font-black text-[15px] tracking-[0.1em]">GROW STUDIO</span>
                     </a>
+                </div>
+            </div>
     </div>
 </footer>
 
@@ -1565,5 +1586,8 @@ if (botonInscribirmePrincipal) {
 
 </script>
 
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+    <script src="js/wow-effects.js"></script>
 </body>
 </html>
+

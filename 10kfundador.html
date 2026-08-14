@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscripción 10K Premium - Reto Virtual VZLA</title>
-<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="icon" type="image/png" href="img/favicon.webp">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -25,6 +25,7 @@
   window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
+    <link rel="stylesheet" href="css/wow-effects.css">
 </head>
 <body class="text-slate-900">
 
@@ -58,10 +59,10 @@
             <div class="flex items-center gap-3 md:gap-5 cursor-pointer group -ml-2 md:-ml-4" onclick="location.href='index.html'">
                 
                 <!-- 📱 Logo para Móvil (Isotipo) -->
-                <img src="img/RV-Isotipo-sinfondo.png" alt="Reto Virtual" class="h-12 w-auto object-contain brightness-125 transition-transform group-hover:scale-105 md:hidden">
+                <img src="img/RV-Isotipo-sinfondo.webp" alt="Reto Virtual" class="h-12 w-auto object-contain brightness-125 transition-transform group-hover:scale-105 md:hidden">
 
                 <!-- 💻 Logo para Laptop (Texto) - ¡TAMAÑO AUMENTADO AQUÍ! (h-16 a h-20) -->
-                <img src="img/RV Texto Sin fondo.png" alt="Reto Virtual" class="hidden md:block h-20 lg:h-28 w-auto object-contain brightness-125 transition-transform group-hover:scale-105">
+                <img src="img/RV Texto Sin fondo.webp" alt="Reto Virtual" class="hidden md:block h-20 lg:h-28 w-auto object-contain brightness-125 transition-transform group-hover:scale-105">
                 
                 <!-- La línea separadora (también la hice un poco más alta para que cuadre) -->
                 <div class="h-10 md:h-12 lg:h-16 w-[1px] bg-white/20"></div>
@@ -181,13 +182,13 @@
                 <div class="flex flex-col md:flex-row gap-6 items-center">
                     
                     <div class="w-full md:w-48 h-48 bg-white border-2 border-dashed border-yellow-400 rounded-2xl flex items-center justify-center relative overflow-hidden shrink-0">
-                        <img src="foto_franela_10k.jpg" alt="Franela Oficial 10K" class="w-full h-full object-cover absolute z-10" onerror="this.style.opacity='0'">
+                        <img src="foto_franela_10k.webp" alt="Franela Oficial 10K" class="w-full h-full object-cover absolute z-10" onerror="this.style.opacity='0'">
                         
                         <div class="text-center text-slate-400 z-0 flex flex-col items-center p-4">
                             <i class="fa-solid fa-arrow-down text-xl mb-2 text-yellow-500 animate-bounce"></i>
                             <i class="fa-solid fa-shirt text-4xl mb-2 text-yellow-500/50"></i>
                             <p class="text-[10px] font-bold uppercase text-yellow-600">Sube la foto aquí</p>
-                            <p class="text-[8px] font-bold uppercase mt-1">(nómbrala: foto_franela_10k.jpg)</p>
+                            <p class="text-[8px] font-bold uppercase mt-1">(nómbrala: foto_franela_10k.webp)</p>
                         </div>
                     </div>
 
@@ -318,7 +319,7 @@
     <footer class="bg-[#001E50] py-20 px-4 border-t border-white/5">
         <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-16 text-center md:text-left">
             <div>
-                <img src="img/RV-Isotipo-sinfondo.png" class="h-14 mx-auto md:mx-0 mb-6 grayscale brightness-200 opacity-40">
+                <img src="img/RV-Isotipo-sinfondo.webp" class="h-14 mx-auto md:mx-0 mb-6 grayscale brightness-200 opacity-40">
                 <p class="text-white/30 text-[10px] uppercase tracking-[0.4em] leading-relaxed">
                     Reto Virtual VZLA es una producción de <br>
                     <a href="https://www.instagram.com/team_fs__/" target="_blank" class="text-white/60 hover:text-[#00D2FF] transition-colors font-bold">TeamFS</a>. <br>
@@ -342,7 +343,16 @@
                 </a>
             </div>
         </div>
-    </footer>
+            <div class="footer-bottom" style="border: none; padding-top: 1rem; padding-bottom: 1rem; width: 100%; text-align: center;">
+            <div class="flex flex-row items-center justify-center md:justify-end gap-2">
+                <span class="text-[#64748b] text-[13px] font-medium">Desarrollado por</span>
+                <a href="https://growstudioweb.vercel.app/" target="_blank" class="flex items-center gap-2 hover:scale-105 transition-transform cursor-pointer" style="text-decoration: none;">
+                    <img src="img/grow-logo.png" alt="Grow Studio" class="h-6 object-contain drop-shadow-[0_0_5px_rgba(0,210,255,0.5)]" style="height: 24px;">
+                    <span class="chameleon-text font-black text-[15px] tracking-[0.1em]">GROW STUDIO</span>
+                </a>
+            </div>
+        </div>
+</footer>
 
     <script>
 
@@ -583,3 +593,4 @@
 </body>
 </html>
 </html>
+

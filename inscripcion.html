@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SISTEMA DE INSCRIPCIONES - Reto Virtual VZLA</title>
-    <link type="image/png" href="img/favicon.png" rel="icon">
+    <link type="image/png" href="img/favicon.webp" rel="icon">
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-CQ0KVLFL1W"></script>
     <script>
@@ -30,6 +30,7 @@
         .req { color: #ef4444; font-weight: bold; margin-left: 2px; }
         .loader-overlay { background: rgba(0, 30, 80, 0.9); backdrop-filter: blur(5px); }
     </style>
+    <link rel="stylesheet" href="css/wow-effects.css">
 </head>
 <body class="text-slate-900">
 
@@ -53,8 +54,8 @@
         <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20 md:h-28">
                 <div class="flex items-center gap-3 md:gap-5 cursor-pointer group -ml-2 md:-ml-4" onclick="location.href='index.html'">
-                    <img src="img/RV-Isotipo-sinfondo.png" alt="Reto Virtual" class="h-12 w-auto object-contain brightness-125 md:hidden">
-                    <img src="img/RV Texto Sin fondo.png" alt="Reto Virtual" class="hidden md:block h-20 lg:h-28 w-auto object-contain brightness-125">
+                    <img src="img/RV-Isotipo-sinfondo.webp" alt="Reto Virtual" class="h-12 w-auto object-contain brightness-125 md:hidden">
+                    <img src="img/RV Texto Sin fondo.webp" alt="Reto Virtual" class="hidden md:block h-20 lg:h-28 w-auto object-contain brightness-125">
                 </div>
                 <div class="hidden lg:flex items-center space-x-4 xl:space-x-6">
                     <a href="index.html#ediciones" class="text-white/80 hover:text-[#00D2FF] text-[10px] xl:text-xs font-bold uppercase tracking-widest transition-all">Calendario</a>
@@ -122,7 +123,7 @@
     </nav>
 
     <div class="w-full h-48 md:h-64 relative overflow-hidden bg-[#001E50]">
-        <img src="img/banner_trotando.png" alt="Runners" class="w-full h-full object-cover object-center absolute inset-0">
+        <img src="img/banner_trotando.webp" alt="Runners" class="w-full h-full object-cover object-center absolute inset-0">
         <div class="absolute inset-0 bg-gradient-to-r from-[#001E50]/90 via-[#001E50]/75 to-[#00D2FF]/40 mix-blend-multiply"></div>
         <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-4 z-10">
             <h1 id="textoBannerPrincipal" class="text-white font-black text-2xl md:text-5xl uppercase tracking-tighter italic drop-shadow-md">PORTAL DE INSCRIPCIONES</h1>
@@ -196,7 +197,7 @@
                 <h3 class="text-[#001E50] font-black text-xl mb-6 uppercase italic text-center">Detalles del Kit Oficial</h3>
                 <div class="mb-6 flex flex-col items-center">
                     <button type="button" onclick="abrirModalImagen()" class="rounded-3xl border overflow-hidden max-w-xs h-40 bg-slate-50 flex items-center justify-center">
-                        <img id="imgPrototipo" src="img/10k_franela.png" class="h-full w-full object-cover">
+                        <img id="imgPrototipo" src="img/10k_franela.webp" class="h-full w-full object-cover">
                     </button>
                 </div>
                 <div id="selectorTextil10k" class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-slate-50 p-4 rounded-xl border">
@@ -326,7 +327,7 @@
 <footer class="bg-[#001E50] py-20 px-4 border-t border-white/5">
     <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-16 text-center md:text-left">
         <div>
-            <img src="img/RV-Isotipo-sinfondo.png" class="h-14 mx-auto md:mx-0 mb-6 grayscale brightness-200 opacity-40">
+            <img src="img/RV-Isotipo-sinfondo.webp" class="h-14 mx-auto md:mx-0 mb-6 grayscale brightness-200 opacity-40">
             <p class="text-white/30 text-[10px] uppercase tracking-[0.4em] leading-relaxed">
                 Reto Virtual VZLA es una producción <br>
             <span class="text-white/60 font-bold">Nacional Independiente</span>. <br>
@@ -343,6 +344,15 @@
             </div>
         </div>
     </div>
+        <div class="footer-bottom" style="border: none; padding-top: 1rem; padding-bottom: 1rem; width: 100%; text-align: center;">
+            <div class="flex flex-row items-center justify-center md:justify-end gap-2">
+                <span class="text-[#64748b] text-[13px] font-medium">Desarrollado por</span>
+                <a href="https://growstudioweb.vercel.app/" target="_blank" class="flex items-center gap-2 hover:scale-105 transition-transform cursor-pointer" style="text-decoration: none;">
+                    <img src="img/grow-logo.png" alt="Grow Studio" class="h-6 object-contain drop-shadow-[0_0_5px_rgba(0,210,255,0.5)]" style="height: 24px;">
+                    <span class="chameleon-text font-black text-[15px] tracking-[0.1em]">GROW STUDIO</span>
+                </a>
+            </div>
+        </div>
 </footer>
 
     <script>
@@ -433,7 +443,7 @@
                 document.getElementById('contenedor-visual-kit').classList.remove('hidden-step');
                 document.getElementById('tituloRuta').innerText = "EDICIÓN ESPECIAL 10K";
                 document.getElementById('labelCarreraActual').innerText = "Kit General 10K";
-                document.getElementById('imgPrototipo').src = "img/10k_franela.png";
+                document.getElementById('imgPrototipo').src = "img/10k_franela.webp";
                 document.getElementById('textoBannerPrincipal').innerText = "EDICIÓN ESPECIAL 10K";
                 document.getElementById('textoBannerSecundario').innerText = "Adquiere tu Prenda Oficial y Medalla";
                 actualizarTotal();
@@ -806,3 +816,4 @@
     </script>
 </body>
 </html>
+

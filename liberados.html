@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ACCESO EXCLUSIVO FUNDADORES - Reto Virtual VZLA</title>
-    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="icon" type="image/png" href="img/favicon.webp">
 
 <!-- Google tag (gtag.js) -->
 
@@ -37,6 +37,7 @@
   window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
+    <link rel="stylesheet" href="css/wow-effects.css">
 </head>
 <body class="text-slate-900">
 
@@ -68,10 +69,10 @@
             <div class="flex items-center gap-3 md:gap-5 cursor-pointer group -ml-2 md:-ml-4" onclick="location.href='index.html'">
                 
                 <!-- 📱 Logo para Móvil (Isotipo) -->
-                <img src="img/RV-Isotipo-sinfondo.png" alt="Reto Virtual" class="h-12 w-auto object-contain brightness-125 transition-transform group-hover:scale-105 md:hidden">
+                <img src="img/RV-Isotipo-sinfondo.webp" alt="Reto Virtual" class="h-12 w-auto object-contain brightness-125 transition-transform group-hover:scale-105 md:hidden">
 
                 <!-- 💻 Logo para Laptop (Texto) - ¡TAMAÑO AUMENTADO AQUÍ! (h-16 a h-20) -->
-                <img src="img/RV Texto Sin fondo.png" alt="Reto Virtual" class="hidden md:block h-20 lg:h-28 w-auto object-contain brightness-125 transition-transform group-hover:scale-105">
+                <img src="img/RV Texto Sin fondo.webp" alt="Reto Virtual" class="hidden md:block h-20 lg:h-28 w-auto object-contain brightness-125 transition-transform group-hover:scale-105">
                 
                 <!-- La línea separadora (también la hice un poco más alta para que cuadre) -->
                 <!-- <div class="h-10 md:h-12 lg:h-16 w-[1px] bg-white/20"></div> -->
@@ -167,7 +168,7 @@
     
     <div class="mb-8 flex flex-col items-center">
         <button type="button" onclick="abrirModalImagen()" class="relative group overflow-hidden rounded-3xl border-2 border-slate-200 hover:border-[#00D2FF] hover:shadow-[0_0_20px_rgba(0,210,255,0.2)] transition-all cursor-pointer w-full max-w-sm h-40 bg-slate-50 flex items-center justify-center">
-            <img src="img/franela_prototipo.jpg" alt="Prototipo Franela" class="h-full w-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-transform duration-500">
+            <img src="img/franela_prototipo.webp" alt="Prototipo Franela" class="h-full w-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-transform duration-500">
             <div class="absolute inset-0 bg-[#001E50]/30 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-all backdrop-blur-[2px]">
                 <i class="fa-solid fa-magnifying-glass-plus text-white text-4xl drop-shadow-md"></i>
                 <span class="text-white font-bold text-xs uppercase tracking-widest mt-2">Ampliar Diseño</span>
@@ -421,7 +422,7 @@
 <footer class="bg-[#001E50] py-20 px-4 border-t border-white/5">
     <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-16 text-center md:text-left">
         <div>
-            <img src="img/RV-Isotipo-sinfondo.png" class="h-14 mx-auto md:mx-0 mb-6 grayscale brightness-200 opacity-40">
+            <img src="img/RV-Isotipo-sinfondo.webp" class="h-14 mx-auto md:mx-0 mb-6 grayscale brightness-200 opacity-40">
             <p class="text-white/30 text-[10px] uppercase tracking-[0.4em] leading-relaxed">
                 Reto Virtual VZLA es una producción <br>
             <span class="text-white/60 font-bold">Nacional Independiente</span>. <br>
@@ -446,6 +447,15 @@
             </a>
         </div> -->
     </div>
+        <div class="footer-bottom" style="border: none; padding-top: 1rem; padding-bottom: 1rem; width: 100%; text-align: center;">
+            <div class="flex flex-row items-center justify-center md:justify-end gap-2">
+                <span class="text-[#64748b] text-[13px] font-medium">Desarrollado por</span>
+                <a href="https://growstudioweb.vercel.app/" target="_blank" class="flex items-center gap-2 hover:scale-105 transition-transform cursor-pointer" style="text-decoration: none;">
+                    <img src="img/grow-logo.png" alt="Grow Studio" class="h-6 object-contain drop-shadow-[0_0_5px_rgba(0,210,255,0.5)]" style="height: 24px;">
+                    <span class="chameleon-text font-black text-[15px] tracking-[0.1em]">GROW STUDIO</span>
+                </a>
+            </div>
+        </div>
 </footer>
 
     <script>
@@ -794,9 +804,10 @@ function abrirModalImagen() {
     </script>
 <div id="modal-imagen" class="fixed inset-0 z-[200] bg-black/95 hidden flex-col items-center justify-center p-4 backdrop-blur-sm transition-opacity" onclick="cerrarModalImagen()">
         <button class="absolute top-6 right-6 text-white text-4xl hover:text-[#00D2FF] transition-colors"><i class="fa-solid fa-xmark"></i></button>
-        <img src="img/franela_prototipo.jpg" class="max-w-full max-h-[80vh] object-contain rounded-2xl shadow-[0_0_40px_rgba(0,210,255,0.3)] border border-white/10" onclick="event.stopPropagation()">
+        <img src="img/franela_prototipo.webp" class="max-w-full max-h-[80vh] object-contain rounded-2xl shadow-[0_0_40px_rgba(0,210,255,0.3)] border border-white/10" onclick="event.stopPropagation()">
         <p class="text-white mt-6 font-black tracking-widest uppercase text-sm italic">Diseño Oficial 2da Edición 5K</p>
         <p class="text-slate-400 text-[10px] uppercase mt-2 font-bold tracking-widest">Toca cualquier parte para cerrar</p>
     </div>
 </body>
 </html>
+

@@ -1,5 +1,9 @@
 {
   "type": "module",
   "name": "retovirtual5kvzla",
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "devDependencies": {
+    "sharp": "^0.35.3",
+    "tailwindcss": "^4.3.3"
+  }
 }
