@@ -658,12 +658,11 @@
 
         if (modo === 'estratega') {
             var tiempo      = document.getElementById('est-tiempo').value || '30';
-            var experiencia = document.getElementById('est-experiencia').value; // Aquí lee 5K o 10K
+            var experiencia = document.getElementById('est-experiencia').value;
             var estado      = document.getElementById('est-estado').value;
             var fallo       = document.getElementById('est-fallo').value;
             
-            // Le quitamos el "5K" fijo y le decimos que arme la estrategia por tramos según la distancia.
-            return base + "Actúa como estratega de carrera. El atleta correrá la distancia de: " + experiencia + ". Quiere terminar en " + tiempo + " minutos, su estado físico es " + estado + " y su mayor problema es: " + fallo + ". Define: pace objetivo por km (min/km), estrategia de carrera dividida por tramos (ej: primeros kms conservadores, mitad sostenida, cierre fuerte), cómo resolver su problema principal y 3 tips clave para el día de la carrera.";
+            return base + "ActÃºa como estratega de carrera. El atleta correrÃ¡ la distancia de: " + experiencia + ". Quiere terminar en " + tiempo + " minutos, su estado fÃ­sico es " + estado + " y su mayor problema es: " + fallo + ". Define: pace objetivo por km (min/km), estrategia de carrera dividida por tramos (ej: primeros kms conservadores, mitad sostenida, cierre fuerte), cÃ³mo resolver su problema principal y 3 tips clave para el dÃ­a de la carrera.";
         }
     }
 
@@ -672,10 +671,13 @@
         var prompt = armarPrompt(modo);
 
         // UI: loading
+        document.getElementById('resultado-columna').classList.remove('hidden');
+        document.getElementById('resultado-columna').scrollIntoView({ behavior: 'smooth' });
+        
         document.getElementById('estado-vacio').classList.add('hidden');
         document.getElementById('estado-resultado').classList.add('hidden');
         document.getElementById('estado-loading').classList.remove('hidden');
-        document.getElementById('estado-ia').textContent = '● Analizando...';
+        document.getElementById('estado-ia').textContent = 'â— Analizando...';
         document.getElementById('btn-copiar').classList.add('hidden');
 
         try {
@@ -699,7 +701,7 @@
             // UI: mostrar resultado
             document.getElementById('estado-loading').classList.add('hidden');
             document.getElementById('estado-resultado').classList.remove('hidden');
-            document.getElementById('estado-ia').textContent = '● Plan listo';
+            document.getElementById('estado-ia').textContent = 'â— Plan listo';
             document.getElementById('btn-copiar').classList.remove('hidden');
 
             // Typewriter
