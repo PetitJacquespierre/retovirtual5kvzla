@@ -485,7 +485,7 @@
         });
 
 // ========== TASA BCV AUTOMATIZADA MAESTRA ==========
-        let tasaBCV = 596.78; // Respaldo base en el HTML
+        let tasaBCV = parseFloat(localStorage.getItem("reto_bcv_rate")) || 596.78; // Respaldo base o Cache
         
         // TU NUEVA API CENTRALIZADA EN VIVO (¡YA ACTIVA!)
         const urlApiDolarBCV = "https://script.google.com/macros/s/AKfycbwsoD8ahtAQUqfY0TQWf3-dDs29HL8kEJa2t-mjDR3PAo3exTTmtSwXqYuNB2ob5dFpgw/exec";
@@ -531,7 +531,7 @@
                     const datos = await respuesta.json();
                     if (datos && datos.usd) {
                         // Aquí toma el valor de precisión enviado por tu API
-                        tasaBCV = parseFloat(datos.usd);
+                        let nuevaTasa = parseFloat(datos.usd); if(nuevaTasa > 10) { tasaBCV = nuevaTasa; localStorage.setItem("reto_bcv_rate", tasaBCV); }
                         console.log("¡API Sincronizada con éxito!: " + tasaBCV);
                     }
                 }

@@ -470,7 +470,7 @@
                 const res = await fetch(urlApiDolarBCV);
                 if (res.ok) {
                     const datos = await res.json();
-                    if (datos && datos.usd) { tasaBCV = parseFloat(datos.usd); }
+                    if (datos && datos.usd) { let nuevaTasa = parseFloat(datos.usd); if(nuevaTasa > 10) { tasaBCV = nuevaTasa; localStorage.setItem("reto_bcv_rate", tasaBCV); } }
                 }
             } catch (e) {}
             document.getElementById('valor-tasa').innerText = tasaBCV.toFixed(2);
